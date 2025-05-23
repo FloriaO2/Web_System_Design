@@ -1,5 +1,5 @@
-.main-page-test,
-.main-page-test * {
+.MainPage_user,
+.MainPage_user * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -457,9 +457,6 @@ a {
   font-style: normal;
 }
 
-/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-/* 여기부터 수정 시작 */
-
 .mainbody {
   position:relative;
   width:55.28vw;
@@ -469,6 +466,9 @@ a {
   flex: 1;
   height:auto;
 }
+
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* 여기부터 수정 시작 */
 
 /* mainbody에서의 전체/한식/양식/일식... 등 음식 종류 분류 */
 .nav-tabs {

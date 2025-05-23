@@ -1,5 +1,5 @@
-.MainPage_non-user,
-.MainPage_non-user * {
+.main-page-test,
+.main-page-test * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -118,7 +118,7 @@ a {
 .account {
   position: sticky;
   width: 13.68vw;
-  height: 45.69vh;
+  height: 38.69vh;
   top: 23vh;
   margin-left: 1.84vw;
   background-color: #f1f1ff;
@@ -127,7 +127,7 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap:2vh 0;
+  gap:1.3vh 0;
 }
 
 .div1 {
@@ -311,7 +311,6 @@ a {
   align-self: stretch;
   display: flex;
   align-items: center;
-  /*justify-content: flex-start;*/
   font-style: normal;
   letter-spacing: 0;
   justify-content: space-between;
@@ -349,10 +348,99 @@ a {
 .account-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image.svg);
-  width: 11.11vw;
+  width: 10.11vw;
   height: 20.67vh;
   background-size: cover;
   background-position: 50% 50%;
+}
+
+.account-inf {
+  position: relative;
+  width: 11.11vw;
+  height: 5.46vh;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.95rem;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding:0.5vw;
+  gap:0.5vw;
+}
+
+#grade-img {
+  width:2vw;
+  height:4vh;
+}
+
+.account-description {
+  position: relative;
+  width: 90%;
+  height: 5.4vh;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: var(--body-base-font-family, "Inter", Helvetica);
+  color: #000000;
+  font-size: 0.7rem;
+  text-align: left;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: column;
+  align-items: left;
+  padding:0 0.5vw;
+  gap:0.5vw;
+}
+
+.move-inf {
+  text-decoration: none;
+  color:black;
+}
+
+.view-heart {
+  
+  position: sticky;
+  width: 13.68vw;
+  height: 5vh;
+  top: 63.69vh;
+  margin-left: 1.84vw;
+  background-color: #f1f1ff;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+#heart-img {
+  width:2vw;
+  height:3.5vh;
+}
+
+#heart {
+  position: relative;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.9rem;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding:0.5vw;
+  gap:0.5vw;
+  margin-top:0.2vw;
 }
 
 .div3 {
@@ -365,7 +453,7 @@ a {
   font-size: small;
   text-align: center;
   letter-spacing: 0;
-  line-height: var(139.9999976158142%);
+  line-height: 139.9999976158142%;
   font-style: normal;
 }
 
@@ -382,191 +470,271 @@ a {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
 
-/* mainbody에서의 전체/한식/양식/일식... 등 음식 종류 분류 */
-.nav-tabs {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 1.75vw;
-}
 
-.nav-tabs > li > a {
-  text-decoration: none;
-  color:black;
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin-top: 3vh;
-}
-
-/* mainbody에서의 식당 소개 카드 모음 전체 영역 */
-.div4 {
-  display: flex;
-  flex-direction: column;
-  width:55.28vw;
-  height:auto;
-  align-items: flex-start;
-  gap: 48px;
-  padding: 32px 0px;
-  position: relative;
-  background-color: rgba(255, 255, 255, 1);
-}
-
-/* mainbody에서의 식당 소개 카드 모음 전체 영역 -> 정말로 카드 있는 부분만 */
-.cards {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 0px 7vw;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  min-height: 100%;
-  flex-grow: 1;
-  overflow: auto;
-}
-
-/* mainbody에서의 식당 소개 카드 */
 .card {
-  display: flex;
-  flex-wrap: wrap;
-  min-width: 240px;
-  align-items: center;
-  gap: 24px;
-  padding: 24px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: rgba(68, 68, 68, 1);
-  flex-direction: row !important;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 이미지 영역 */
-.card-image {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 11.11vw;
-  height: 20.67vh;
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
-p {
-  margin:0 !important;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
-.body {
+  background: var(--var-sds-color-background-default-default, #ffffff);
+  border-radius: var(--var-sds-size-radius-200, 8px);
+  border-style: solid;
+  border-color: var(--var-sds-color-border-default-default, #d9d9d9);
+  border-width: 1px;
   display: flex;
   flex-direction: column;
-  min-width: 160px;
+  gap: 0px;
   align-items: flex-start;
-  gap: var(--size-space-400);
+  justify-content: center;
+  width: 49.28vw;
+  height: 50.44vh !important;
+  min-width: 16.67vw;
+  position: relative;
+  margin:5vh 3vw;
+
+}
+.body {
+  padding: 0 3.82vw;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex: 1;
+  min-width: 11.11vw;
+  position: relative;
+}
+.div15 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 13.26vw;
+  height: 23.96vh;
+  position: relative;
+}
+.image2 {
+  background: var(
+    --image-placeholder,
+    linear-gradient(to left, #e3e3e3, #e3e3e3)
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 18.33vh;
+  min-width: 11.11vw;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+}
+.div16 {
+  background: #d4d6ff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 10.83vw;
+  height: 3.63vh;
+  min-width: 5.56vw;
+  position: relative;
+  box-shadow: var(
+    --m3-elevation-light-1-box-shadow,
+    0px 1px 3px 1px rgba(0, 0, 0, 0.15),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.3)
+  );
+  overflow: hidden;
+}
+.state-layer2 {
+  padding: 16px 20px 16px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.icon {
+  flex-shrink: 0;
+  width: 1.67vw;
+  height: 2.5vh;
+  position: relative;
+  overflow: visible;
+}
+.label-text {
+  color: var(--schemes-primary, #65558f);
+  text-align: center;
+  font-family: var(
+    --var-sds-typography-body-font-family,
+    "Inter-Regular",
+    sans-serif
+  );
+  font-size: 15px;
+  line-height: 140%;
+  font-weight: var(--var-sds-typography-body-font-weight-regular, 400);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.div17 {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 30.28vw;
+  position: relative;
+}
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--var-sds-size-space-200, 8px);
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 30.28vw;
+  height: 8.98vh;
+  position: relative;
+}
+.div18 {
+  color: var(--var-sds-color-text-default-default, #1e1e1e);
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: var(--body-base-font-size, 16px);
+  line-height: var(--body-base-line-height, 140%);
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+.input {
+  background: var(--var-sds-color-background-default-default, #ffffff);
+  border-radius: var(--var-sds-size-radius-200, 8px);
+  border-style: solid;
+  border-color: var(--var-sds-color-border-default-default, #d9d9d9);
+  border-width: 1px;
+  padding: var(--var-sds-size-space-300, 12px)
+    var(--var-sds-size-space-400, 16px) var(--var-sds-size-space-300, 12px)
+    var(--var-sds-size-space-400, 16px);
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  min-width: 16.67vw;
+  position: relative;
+  overflow: hidden;
+}
+.div19 {
+  color: #b5b5b5;
+  text-align: left;
+  font-family: var(
+    --single-line-body-base-font-family,
+    "Inter-Regular",
+    sans-serif
+  );
+  font-size: var(--single-line-body-base-font-size, 16px);
+  line-height: var(--single-line-body-base-line-height, 100%);
+  font-weight: 400;
   position: relative;
   flex: 1;
-  flex-grow: 1;
 }
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 전체 영역 */
-.text {
+.id {
+  color: var(--var-sds-color-text-default-default, #1e1e1e);
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: var(--body-base-font-size, 16px);
+  line-height: var(--body-base-line-height, 140%);
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+.password {
+  color: var(--var-sds-color-text-default-default, #1e1e1e);
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: var(--body-base-font-size, 16px);
+  line-height: var(--body-base-line-height, 140%);
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+.hero-basic {
+  padding: 10px var(--var-sds-size-space-1600, 64px) 10px
+    var(--var-sds-size-space-1600, 64px);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 27.85vw;
+  height: 12.21vh;
   position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
+  left: 14.9vw;
+  top: 6.77vh;
 }
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
-.store-name {
-  position: relative;
-  align-self: stretch;
-  margin-top: -1.00px;
-  font-family: var(--heading-font-family, "Inter", Helvetica);
-  font-weight: 600;
-  color: rgba(30, 30, 30, 1);;
-  font-size: 24px;
-  letter-spacing: -0.48px;
-  line-height: 120.00000476837158%;
-  font-style: normal;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 별점 (별 이미지) */
-.rating {
+.text-content-title {
   display: flex;
-  width: 18.32vw;
-  height: 3.75vh;
-  align-items: center !important;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--var-sds-size-space-200, 8px);
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
   position: relative;
 }
-
-.rating2 {
-  display: flex;
-  width: auto;
-  height:100%;
-  align-items: center !important;
-  gap:4px;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 별점 (점수) */
-.element {
-    position: relative;
-  width: 6.8vw;
-  height: 4.27vh;
-  margin-top: -3.50px;
-  margin-bottom: -1.50px;
-  font-weight: var(--subtitle-font-weight);
-  color: #000000;
-  font-size: 1.3rem;
-  line-height: var(--subtitle-line-height);
-  white-space: nowrap;
-  font-family: var(--subtitle-font-family);
-  letter-spacing: var(--subtitle-letter-spacing);
-  font-style: var(--subtitle-font-style);
-  text-align:center;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 */
-.p {
-    position: relative;
+.title4 {
+  color: var(--var-sds-color-text-default-default, #1e1e1e);
+  text-align: center;
+  font-family: var(--subtitle-font-family, "Inter-Regular", sans-serif);
+  font-size: var(--subtitle-font-size, 32px);
+  line-height: var(--subtitle-line-height, 120%);
+  font-weight: var(--subtitle-font-weight, 400);
+  position: relative;
   align-self: stretch;
+}
+.button {
+  background: var(--var-sds-color-background-brand-default, #2c2c2c);
+  border-radius: var(--var-sds-size-radius-200, 8px);
+  border-style: solid;
+  border-color: var(--var-sds-color-border-brand-default, #2c2c2c);
+  border-width: 1px;
+  padding: var(--var-sds-size-space-300, 12px);
+  display: flex;
+  flex-direction: row;
+  gap: var(--var-sds-size-space-200, 8px);
+  align-items: center;
+  justify-content: center;
+  width: 9.51vw;
+  height: 4.98vh;
+  position: relative;
+  left: 43.99vw;
+  overflow: hidden;
+}
+.button2 {
+  color: var(--var-sds-color-text-brand-on-brand, #f5f5f5);
+  text-align: center;
+  font-family: var(
+    --single-line-body-base-font-family,
+    "Inter-Regular",
+    sans-serif
+  );
+  font-size: var(--single-line-body-base-font-size, 16px);
+  line-height: var(--single-line-body-base-line-height, 100%);
   font-weight: 400;
-  color: var(--color-text-default-secondary);
-  font-size: 16px;
-  line-height: 22.4px;
-  font-family: "Inter", Helvetica;
-  letter-spacing: 0;
+  position: relative;
+  flex: 1;
 }
 
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 (종류, 거리, 가격) */
-.store-simple-info {
-    color: #757575;
-  font-family: var(--body-base-font-family, "Inter", Helvetica);
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 139.9999976158142%;
-  font-size: 16px;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 (상세 페이지 이동) */
-.go-to-searchPage {
-    color: #757575;
-  text-decoration: underline;
-  font-family: var(--body-link-font-family, "Inter", Helvetica);
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 400;
-  line-height: 139.9999976158142%;
-  font-size: 16px;
-}
 
 /* 여기까지 수정 완료 */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -574,7 +742,7 @@ p {
 footer {
   position: relative;
   width:55.28vw;
-  height: 35vh;
+  height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: center;
