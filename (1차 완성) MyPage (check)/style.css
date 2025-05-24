@@ -19,7 +19,7 @@ a {
   text-decoration: none;
 }
 
-.main-page-test {
+.MyPage_check {
   background-color: #ffffff;
   min-height: 100vh;
   height:auto;
@@ -505,6 +505,7 @@ a {
   position: relative;
   margin-bottom:2vh;
 }
+
 .account-detail-first-line {
   display: flex;
   flex-direction: row;
@@ -515,6 +516,7 @@ a {
   flex-shrink: 0;
   position: relative;
 }
+
 .account-detail-grade {
   border-radius: 100px;
   flex-shrink: 0;
@@ -523,6 +525,7 @@ a {
   position: relative;
   overflow: visible;
 }
+
 .account-detail-nickname {
   color: #1e1e1e;
   text-align: left;
@@ -535,15 +538,15 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width:6vw;
 }
+
 .account-detail-setting {
   flex-shrink: 0;
-  width: 2.01vw;
-  height: 3.02vh;
   position: relative;
   overflow: visible;
+  margin-left: 1vw;
 }
+
 .account-detail-second-line {
   color:#757575;
   text-align: left;
