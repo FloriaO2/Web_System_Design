@@ -1,5 +1,5 @@
-.MyPage_check,
-.MyPage_check * {
+.MyPage_change,
+.MyPage_change * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -19,7 +19,7 @@ a {
   text-decoration: none;
 }
 
-.MyPage_check {
+.MyPage_change {
   background-color: #ffffff;
   min-height: 100vh;
   height:auto;
@@ -498,280 +498,207 @@ a {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
 
-.account-detail {
-  background: rgb(255,255,255);
-  opacity: 0.8;
-  padding: 3.125vh 2.78vw;
-  display: flex;
-  flex-direction: row;
-  gap: 48px;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  width:55.28vw;
-}
-
-.account-image-big {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image.svg);
-  width: 14.03vw;
-  height: 25.15vh;
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
-.account-detail-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5vh;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 30.56vw;
-  height: 8.12vh;
-  min-width: 20.83vw;
-  position: relative;
-  margin-bottom:2vh;
-}
-
-.account-detail-first-line {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.account-detail-grade {
-  border-radius: 100px;
-  flex-shrink: 0;
-  width: 2.01vw;
-  height: 3.52vh;
-  position: relative;
-  overflow: visible;
-}
-
-.account-detail-nickname {
+.change-title {
+  top: 6.77vh;
+  height: 12.21vh;
   color: #1e1e1e;
-  text-align: left;
-  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
-  font-size: 24px;
-  line-height: 120%;
-  letter-spacing: -0.02em;
-  font-weight: 600;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.account-detail-setting {
-  flex-shrink: 0;
-  position: relative;
-  overflow: visible;
-  margin-left: 1vw;
-}
-
-.account-detail-second-line {
-  color:#757575;
-  text-align: left;
-  font-family: var(--subheading-font-family, "Inter-Regular", sans-serif);
-  font-size: 1rem;
+  text-align: center;
+  font-family: var(--subtitle-font-family, "Inter-Regular", sans-serif);
+  font-size: 32px;
   line-height: 120%;
   font-weight: 400;
   position: relative;
   align-self: stretch;
+}
+
+.change-button {
+  background: #2c2c2c;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #2c2c2c;
+  border-width: 1px;
+  padding: 12px;
   display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 9.51vw;
+  height: 4.98vh;
+  position: relative;
+  left: 43.99vw;
+  overflow: hidden;
+}
+
+.change-button-text {
+  color: #f5f5f5;
+  text-align: center;
+  font-family: var(
+    --single-line-body-base-font-family,
+    "Inter-Regular",
+    sans-serif
+  );
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: 400;
+  position: relative;
+  flex: 1;
+}
+
+.change-body {
+  width: 49.28vw;
+  height: 50.44vh !important;
+  position: relative;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  gap: 3.47vw;
+  flex: 1;
+  margin:5vh 3vw;
+  padding: 11vh 3.82vw;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-width: 1px;
 }
 
-sl-tab-group {
-  width: 100%;
-  max-width: 100%;
+.change-body-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 13.26vw;
+  height: 28.96vh;
+  position: relative;
 }
 
-sl-tab-group::part(nav) {
-  width: 100% !important;
-  background: #fef7ff;
-  border-top:1px solid rgba(0, 0, 0, 0.2);
-}
-
-sl-tab {
-  flex-grow: 1;
-  min-width: 0;
-  text-align: center;
-  white-space: nowrap;
+.account-image-change {
+  background:linear-gradient(to left, #e3e3e3, #e3e3e3);
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  width: 13.11vw;
+  height: 22.33vh;
+  position: relative;
   overflow: hidden;
-  text-overflow: ellipsis;
+  object-fit: cover;
 }
 
-sl-tab-panel::part(base) {
-  padding: 0 !important;
-}
-
-.post-list {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding:2vh 3vw;
-  display:flex;
-}
-
-.post-list:last-child {
-  border-bottom: none;
-}
-
-.post-category {
-  font-weight: 900;
-  width:10vw;
-  font-size:1rem;
-}
-
-.category1 {
-  color:rgb(187, 0, 0);
-}
-
-.category2 {
-  color:rgb(5, 143, 21);
-}
-.category3 {
-  color:rgb(29, 10, 137);
-}
-
-.chat-list {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding:2vh 3vw;
-  display:flex;
-  flex-direction: column;
-}
-
-.chat-list:last-child {
-  border-bottom: none;
-}
-
-.chat-content {
-  padding-bottom:1vh;
-}
-
-.chat-post {
-  display: flex;
-  font-size: 0.7rem;
-}
-
-.post-category-in-chat {
-  font-weight: 900;
-  width:6vw;
-}
-
-.review-list {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding:2vh 3vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.review-list:last-child {
-  border-bottom: none;
-}
-
-.review-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.review-first-line {
+.account-image-change-button {
+  background: #d4d6ff;
+  border-radius: 16px;
   display: flex;
   flex-direction: row;
-  padding-bottom:1vh;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 10.83vw;
+  height: 3.63vh;
+  min-width: 5.56vw;
+  position: relative;
+  box-shadow: var(
+    --m3-elevation-light-1-box-shadow,
+    0px 1px 3px 1px rgba(0, 0, 0, 0.15),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.3)
+  );
+  overflow: hidden;
 }
 
-.review-store {
-  font-weight: 900;
-  width:8vw;
-  font-size:1rem;
+sl-button::part(base) {
+  font-size: 0.7rem;
+  gap:0;
+  color:rgb(119, 0, 119);
 }
 
-.review-star {
+sl-button {
+  --sl-spacing-small: 0.5vw;
+  --sl-spacing-medium: 0.5vw;
+  --sl-spacing-large: 0.5vw;
+}
+
+.change-body-right {
   display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 24.91vw;
+  position: relative;
 }
 
-.review-second-line {
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vh;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 24.91vw;
+  height: 8.98vh;
+  position: relative;
+  margin-bottom:1.5vh;
+}
+
+.nickname-text {
+  color: #1e1e1e;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+
+.id-text {
+  color: #1e1e1e;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+
+.password-text {
+  color: #1e1e1e;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+
+.input {
+  background:#ffffff;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-width: 1px;
+  padding: 1vh 1vw;
   display: flex;
   flex-direction: row;
-  font-size: 0.7rem;
-}
-
-.review-name {
-  font-weight: 900;
-  width:6vw;
-}
-
-.review-content {
+  gap: 0px;
   align-items: center;
-}
-
-.review-image {
-  width:5vw;
-  height:10vh;
-  object-fit: contain;
-}
-
-.love-list {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding:2vh 3vw;
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.love-list:last-child {
-  border-bottom: none;
-}
-
-.love-store {
-  display: flex;
-  align-items: center;
-}
-
-.love-store-name {
-  font-weight: 900;
-  width:7vw;
-  font-size:1rem;
-}
-
-.love-score {
-  width:5vw;
-  height:100%;
-}
-
-.love-store-content {
-  margin-top:0.3vh;
-  color:rgb(0, 0, 0);
-  font-size: 0.7rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.love-store-link {
-  text-decoration: none;
-  color:rgb(132, 132, 132);
-  font-size: 0.7rem;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top:5vh;
-}
-
-.page-link > span, .page-item > a {
-  color:black;
-  text-decoration: none;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  width: 24.67vw;
+  position: relative;
+  overflow: hidden;
+  font-size:0.7rem;
 }
 
 /* 여기까지 수정 완료 */

@@ -258,35 +258,12 @@
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">전체</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">한식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">양식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">일식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">중식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">간편식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">그 외</a>
-            </li>
-          </ul>
-          <div class="div4">
-            <div class="cards">
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
+          <div class="info-up-area">
+            <div class="card">
+              <div class="card-image"></div>
+              <div class="body">
+                <div class="text">
+                  <div class="text-up-area">
                     <div class="store-name">식당 A</div>
                     <div class="rating">
                       <div class="rating2">
@@ -298,81 +275,42 @@
                       </div>
                       <div class="element">4.1</div>
                     </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
                   </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 B</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-58.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">3.2</div>
+                  <div class="p">
+                    <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                    <div class="personal-check">
+                      <button type="button" class="heart-button">
+                        <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
+                        <span id="heart">찜한 가게</span>
+                      </button>
+                      <button type="button" class="bookmark-button">
+                        <img src="../empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
+                        <span id="bookmark">단골 가게</span>
+                      </button>
                     </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 C</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 D</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="info-down-area">
+            <div class="info-tab-list">
+              <div class="tab">
+                <div class="label">정보</div>
+              </div>
+              <div class="tab2">
+                <div class="label2">메뉴</div>
+              </div>
+              <div class="tab2">
+                <div class="label2">리뷰</div>
+              </div>
+            </div>
+            <div class="info-main-content">
+              <div>지도</div>
+            </div>
+          </div>
+
+          
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
