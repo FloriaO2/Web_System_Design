@@ -466,7 +466,7 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: left;
-  padding:0.5vw;
+  padding:0 0.5vw;
   gap:0.5vw;
   margin-top:0.2vw;
 }

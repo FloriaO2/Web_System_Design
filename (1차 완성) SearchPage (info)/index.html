@@ -10,7 +10,7 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
   </head>
   <body>
-    <div class="MainPage_user">
+    <div class="SearchPage_info">
       <div class="entire-area">
 
         <div class="header">
@@ -261,7 +261,7 @@
           <div class="info-up-area">
             <div class="card">
               <div class="card-image"></div>
-              <div class="body">
+              <div class="card-text">
                 <div class="text">
                   <div class="text-up-area">
                     <div class="store-name">식당 A</div>
@@ -296,20 +296,33 @@
           <div class="info-down-area">
             <div class="info-tab-list">
               <div class="tab">
-                <div class="label">정보</div>
+                <a class="label" href="#">정보</a>
               </div>
               <div class="tab2">
-                <div class="label2">메뉴</div>
+                <a class="label2" href="#">메뉴</a>
               </div>
               <div class="tab2">
-                <div class="label2">리뷰</div>
+                <a class="label2" href="#">리뷰</a>
               </div>
             </div>
             <div class="info-main-content">
-              <div>지도</div>
+              <div id="map"></div>
+              <div class="info-right">
+                <div id="info-navigation">
+                  <img class="info-image" src="../navigation.png" />
+                  <a class="info-text" href="#">찾아가는 길</a>
+                </div>
+                <div id="info-time">
+                  <img class="info-image" src="../time.png" />
+                  <div class="info-text">운영 시간</div>
+                </div>
+                <div id="info-etc">
+                  <img class="info-image" src="../information.png" />
+                  <div class="info-text">기타 정보</div>
+                </div>
+              </div>
             </div>
           </div>
-
           
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -347,5 +360,46 @@
         </div>
       </div>
     </div>
+
+    <!-- 카카오 지도 API -->
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
+    <script>
+      var mapContainer = document.getElementById('map'),
+      mapOption = {
+        center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표
+        level: 3
+      };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+
+      // 2. 장소 검색 객체 생성
+      var ps = new kakao.maps.services.Places();
+
+      // 3. 원하는 장소
+      var keyword = "숙명여자대학교";
+
+      // 4. 검색 요청
+      ps.keywordSearch(keyword, function(data, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            // 가장 첫 번째 결과를 사용
+            var place = data[0];
+            var lat = parseFloat(place.y);
+            var lng = parseFloat(place.x);
+
+            var coords = new kakao.maps.LatLng(lat, lng);
+
+            // 마커 표시
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 지도 중심 이동
+            map.setCenter(coords);
+        }
+      });
+    </script>
+
   </body>
 </html>

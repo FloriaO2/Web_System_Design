@@ -10,7 +10,7 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
   </head>
   <body>
-    <div class="SearchPage">
+    <div class="SearchPage_review">
       <div class="entire-area">
 
         <div class="header">
@@ -258,75 +258,12 @@
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-
-          <div class="dropdown-list">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="dropdown-img1" src="../food.png"/>
-                <div class="dropdown-text">음식 종류</div>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">한식</a></li>
-                <li><a class="dropdown-item" href="#">양식</a></li>
-                <li><a class="dropdown-item" href="#">일식</a></li>
-                <li><a class="dropdown-item" href="#">중식</a></li>
-                <li><a class="dropdown-item" href="#">간편식</a></li>
-                <li><a class="dropdown-item" href="#">그 외</a></li>
-              </ul>
-            </div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="dropdown-img2" src="../walk.png"/>
-                <div class="dropdown-text">도보 거리</div>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">2분 이내</a></li>
-                <li><a class="dropdown-item" href="#">5분 이내</a></li>
-                <li><a class="dropdown-item" href="#">7분 이내</a></li>
-                <li><a class="dropdown-item" href="#">10분 이내</a></li>
-                <li><a class="dropdown-item" href="#">13분 이내</a></li>
-                <li><a class="dropdown-item" href="#">16분 이내</a></li>
-                <li><a class="dropdown-item" href="#">16분 초과</a></li>
-              </ul>
-            </div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="dropdown-img3" src="../dollar.png"/>
-                <div class="dropdown-text">가격대</div>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">7천원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1만원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1.2만원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1.4만원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1.4만원 초과</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="search-tag tags-removable">
-            <sl-tag size="medium" removable>양식</sl-tag>
-            <sl-tag size="medium" removable>간편식</sl-tag>
-            <sl-tag size="medium" removable>16분 이내</sl-tag>
-          </div>
-          <div class="div4">
-            <ul class="search-nav nav nav-pills">
-              <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="pill" aria-current="page" href="#">
-                  별점순
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#">리뷰순</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#">단골순</a>
-              </li>
-            </ul>
-            <div class="cards">
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
+          <div class="info-up-area">
+            <div class="card">
+              <div class="card-image"></div>
+              <div class="card-text">
+                <div class="text">
+                  <div class="text-up-area">
                     <div class="store-name">식당 A</div>
                     <div class="rating">
                       <div class="rating2">
@@ -338,81 +275,52 @@
                       </div>
                       <div class="element">4.1</div>
                     </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
                   </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 B</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-58.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">3.2</div>
+                  <div class="p">
+                    <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                    <div class="personal-check">
+                      <button type="button" class="heart-button">
+                        <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
+                        <span id="heart">찜한 가게</span>
+                      </button>
+                      <button type="button" class="bookmark-button">
+                        <img src="../empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
+                        <span id="bookmark">단골 가게</span>
+                      </button>
                     </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 C</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 D</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="info-down-area">
+            <div class="info-tab-list">
+              <div class="tab2">
+                <a class="label2" href="#">정보</a>
+              </div>
+              <div class="tab2">
+                <a class="label2" href="#">메뉴</a>
+              </div>
+              <div class="tab">
+                <a class="label" href="#">리뷰</a>
+              </div>
+            </div>
+            <div class="review-main-content">
+              <button type="button" class="review-upload-button btn btn-dark">
+            <div class="review-upload-button-text">수정 완료</div>
+          </button>
+              <div class="menu-card">
+                <div class="menu-left">
+                  <div class="menu-image"></div>
+                  <div class="menu-text">메뉴 이름 1</div>
+                </div>
+                <div class="menu-right">
+                  <div class="menu-price">가격</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
@@ -449,5 +357,46 @@
         </div>
       </div>
     </div>
+
+    <!-- 카카오 지도 API -->
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
+    <script>
+      var mapContainer = document.getElementById('map'),
+      mapOption = {
+        center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표
+        level: 3
+      };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+
+      // 2. 장소 검색 객체 생성
+      var ps = new kakao.maps.services.Places();
+
+      // 3. 원하는 장소
+      var keyword = "숙명여자대학교";
+
+      // 4. 검색 요청
+      ps.keywordSearch(keyword, function(data, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            // 가장 첫 번째 결과를 사용
+            var place = data[0];
+            var lat = parseFloat(place.y);
+            var lng = parseFloat(place.x);
+
+            var coords = new kakao.maps.LatLng(lat, lng);
+
+            // 마커 표시
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 지도 중심 이동
+            map.setCenter(coords);
+        }
+      });
+    </script>
+
   </body>
 </html>

@@ -461,7 +461,7 @@ a {
   flex-wrap: wrap;
   min-width: 240px;
   align-items: center;
-  gap: 24px;
+  gap: 3vw;
   padding: 24px;
   position: relative;
   align-self: stretch;
