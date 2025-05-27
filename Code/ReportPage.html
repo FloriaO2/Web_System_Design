@@ -3,19 +3,19 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="ReportPage.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
   </head>
   <body>
-    <div class="SearchPage_info">
+    <div class="ReportPage">
       <div class="entire-area">
 
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="../(1차 완성) MainPage (user)/index.html">웹사이트 이름</a>
+            <a class="web-name" href="#">웹사이트 이름</a>
           </div>
           <div class="bottom-app-bar">
             <img id="search-img" src="../search.png" />
@@ -258,68 +258,63 @@
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-          <div class="info-up-area">
-            <div class="card">
-              <div class="card-image"></div>
-              <div class="card-text">
-                <div class="text">
-                  <div class="text-up-area">
-                    <div class="store-name">식당 A</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">4.1</div>
-                    </div>
-                  </div>
-                  <div class="p">
-                    <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
-                    <div class="personal-check">
-                      <button type="button" class="heart-button">
-                        <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
-                        <span id="heart">찜한 가게</span>
-                      </button>
-                      <button type="button" class="bookmark-button">
-                        <img src="../empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
-                        <span id="bookmark">단골 가게</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+
+          <div class="user-report-title">악성 유저 신고</div>
+          <button type="button" class="user-report-button btn btn-dark">
+            <div class="user-report-button-text">양식 제출</div>
+          </button>
+          
+          <div class="user-report-body">
+            <div class="notice-area">
+              <div class="notice-area-text">필수 사항</div>
+            </div>
+            <div>
+              <div class="input-field">
+                <div class="report-link">&nbsp;신고 링크</div>
+                <input type="text" class="input" placeholder="신고 대상을 확인할 수 있는 링크를 첨부하세요." aria-label="report-link" aria-describedby="report-link" />
+              </div>
+              <div class="input-field">
+                <div class="report-reason">&nbsp;신고 사유</div>
+                <select id="report-reason-select">
+                  <option selected>--&nbsp;&nbsp;신고 사유를 선택하세요&nbsp;&nbsp;--</option>
+                  <option value="1">과도한 욕설 사용 및 시비성 댓글 작성</option>
+                  <option value="2">무분별한 도배</option>
+                  <option value="3">게시판에 맞지 않는 글 작성</option>
+                  <option value="4">저작권 침해</option>
+                  <option value="5">그 외 (선택 사항 - 신고 사유 양식에 작성해주세요.)</option>
+                </select>
               </div>
             </div>
           </div>
-          <div class="info-down-area">
-            <div class="info-tab-list">
-              <div class="tab">
-                <a class="label" href="index.html">정보</a>
-              </div>
-              <div class="tab2">
-                <a class="label2" href="../(1차 완성) SearchPage (menu)/index.html">메뉴</a>
-              </div>
-              <div class="tab2">
-                <a class="label2" href="../(1차 완성) SearchPage (review)/index.html">리뷰</a>
-              </div>
+
+          <div class="user-report-body margin-bottom-body">
+            <div class="notice-area">
+              <div class="notice-area-text">선택 사항</div>
             </div>
-            <div class="info-main-content">
-              <div id="map"></div>
-              <div class="info-right">
-                <div id="info-navigation">
-                  <img class="info-image" src="../navigation.png" />
-                  <a class="info-text" href="#">찾아가는 길</a>
+            <div class="review-upload-body-down">
+              <div class="review-upload-body-left">
+                <div id="preview-area"></div>
+                <input type="file" class="form-control" id="image-upload" multiple accept="image/*" style="display: none;" />
+                <div id="review-upload-img">
+                  <img src="https://c.animaapp.com/kjYfscdy/img/image.svg" alt="이미지 업로드" />
                 </div>
-                <div id="info-time">
-                  <img class="info-image" src="../time.png" />
-                  <div class="info-text">운영 시간</div>
+
+                <!-- 미리보기 캐러셀 (초기에는 숨김) -->
+                <div id="carousel-container">
+                  <div id="carouselPreview" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="carousel-inner"></div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselPreview" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" style="background-color: rgba(0,0,0,0.5); border-radius: 50%;"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselPreview" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" style="background-color: rgba(0,0,0,0.5); border-radius: 50%;"></span>
+                    </button>
+                  </div>
                 </div>
-                <div id="info-etc">
-                  <img class="info-image" src="../information.png" />
-                  <div class="info-text">기타 정보</div>
-                </div>
+              </div>
+              <div class="review-upload-body-right">
+                <div class="report-reason">&nbsp;신고 사유</div>
+                <textarea class="input-area" placeholder="신고 대상과 관련한 이미지 파일이 있다면&#10;좌측 이미지 클릭 후 첨부해주시고,&#10;그 외의 내용은 이곳에 기재 부탁드립니다." aria-label="report-form"></textarea>
               </div>
             </div>
           </div>
@@ -361,42 +356,63 @@
       </div>
     </div>
 
-    <!-- 카카오 지도 API -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
+    <!-- 이미지 업로드와 관련한 자바 스크립트 -->
     <script>
-      var mapContainer = document.getElementById('map'),
-      mapOption = {
-        center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표
-        level: 3
-      };
+      const fileInput = document.getElementById("image-upload");
+      const uploadTrigger = document.getElementById("review-upload-img");
+      const carouselContainer = document.getElementById("carousel-container");
+      const carouselInner = document.getElementById("carousel-inner");
 
-      var map = new kakao.maps.Map(mapContainer, mapOption);
+      // 1) 업로드 이미지 버튼 클릭하면 파일 선택창 열기
+      uploadTrigger.addEventListener("click", () => {
+        fileInput.click();
+      });
 
-      // 2. 장소 검색 객체 생성
-      var ps = new kakao.maps.services.Places();
-
-      // 3. 원하는 장소
-      var keyword = "숙명여자대학교";
-
-      // 4. 검색 요청
-      ps.keywordSearch(keyword, function(data, status) {
-        if (status === kakao.maps.services.Status.OK) {
-            // 가장 첫 번째 결과를 사용
-            var place = data[0];
-            var lat = parseFloat(place.y);
-            var lng = parseFloat(place.x);
-
-            var coords = new kakao.maps.LatLng(lat, lng);
-
-            // 마커 표시
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: coords
-            });
-
-            // 지도 중심 이동
-            map.setCenter(coords);
+      // 2) 캐러셀 영역 클릭 시 (화살표 제외) 파일 선택창 열기
+      carouselContainer.addEventListener("click", (e) => {
+        // 화살표 버튼 영역인지 체크
+        const isArrow = e.target.closest(".carousel-control-prev, .carousel-control-next");
+        if (!isArrow) {
+          fileInput.click();
         }
+      });
+
+      // 3) 파일 선택 후 처리
+      fileInput.addEventListener("change", () => {
+        // 파일 없으면 초기 상태 복귀
+        if (fileInput.files.length === 0) {
+          uploadTrigger.style.display = "block";
+          carouselContainer.style.display = "none";
+          carouselInner.innerHTML = "";
+          return;
+        }
+
+        // 캐러셀 초기화
+        carouselInner.innerHTML = "";
+        const files = Array.from(fileInput.files);
+
+        // 각 파일 읽어서 캐러셀 아이템 생성
+        files.forEach((file, index) => {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const div = document.createElement("div");
+            div.className = "carousel-item" + (index === 0 ? " active" : "");
+
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.className = "d-block w-100";
+            img.style.height = "150px";
+            img.style.objectFit = "contain";
+
+            div.appendChild(img);
+            carouselInner.appendChild(div);
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // UI 전환: 버튼 숨기고 캐러셀 보이기
+        uploadTrigger.style.display = "none";
+        carouselContainer.style.display = "block";
       });
     </script>
 

@@ -3,19 +3,19 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="SearchPage (menu).css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
   </head>
   <body>
-    <div class="MainPage_non-user">
+    <div class="SearchPage_menu">
       <div class="entire-area">
 
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="index.html">웹사이트 이름</a>
+            <a class="web-name" href="../(1차 완성) MainPage (user)/index.html">웹사이트 이름</a>
           </div>
           <div class="bottom-app-bar">
             <img id="search-img" src="../search.png" />
@@ -31,13 +31,20 @@
   
         <div class="aside">
           <div class="account">
-            <div>
-              <div class="account-image"></div>
-              <br />
-              <div class="div3">비회원 접속 중입니다.</div>
+            <div class="account-image"></div>
+            <div class="account-inf">
+                <img src="../avatar.png" alt="등급" id="grade-img"/>
+                <span id="nickname">닉네임</span>
+              </div>
+            <div class="account-description">
+              <div><a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=post">내게시물</a> | <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=chat">내댓글</a> | <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=review">내리뷰</a></div>
+              <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html">내정보 확인</a>
             </div>
-            <button type="button" class="button btn btn-dark">로그인/회원가입</button>
           </div>
+          <a class="view-heart" href="../(1차 완성) MyPage (check)/index.html?tab=wishlist">
+            <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
+            <span id="heart">찜한 가게</span>
+          </a>
         </div>
 
         <div class="aside2">
@@ -106,6 +113,7 @@
                         <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
                         <span>&nbsp;5.0</span>
                       </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -245,41 +253,17 @@
             </div>
           </div>
         </div>
-        </div>
         <div class="mainbody">
         <!-- 여기까지는 고정 -->
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#">전체</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">한식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">양식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">일식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">중식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">간편식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">그 외</a>
-            </li>
-          </ul>
-          <div class="div4">
-            <div class="cards">
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
+          <div class="info-up-area">
+            <div class="card">
+              <div class="card-image"></div>
+              <div class="card-text">
+                <div class="text">
+                  <div class="text-up-area">
                     <div class="store-name">식당 A</div>
                     <div class="rating">
                       <div class="rating2">
@@ -291,82 +275,86 @@
                       </div>
                       <div class="element">4.1</div>
                     </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
                   </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 B</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-58.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">3.2</div>
+                  <div class="p">
+                    <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                    <div class="personal-check">
+                      <button type="button" class="heart-button">
+                        <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
+                        <span id="heart">찜한 가게</span>
+                      </button>
+                      <button type="button" class="bookmark-button">
+                        <img src="../empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
+                        <span id="bookmark">단골 가게</span>
+                      </button>
                     </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 C</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 D</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-            <!-- 여기까지 수정 완료 -->
+          <div class="info-down-area">
+            <div class="info-tab-list">
+              <div class="tab2">
+                <a class="label2" href="../(1차 완성) SearchPage (info)/index.html">정보</a>
+              </div>
+              <div class="tab">
+                <a class="label" href="index.html">메뉴</a>
+              </div>
+              <div class="tab2">
+                <a class="label2" href="../(1차 완성) SearchPage (review)/index.html">리뷰</a>
+              </div>
+            </div>
+            <div class="menu-main-content">
+              <div class="menu-card">
+                <div class="menu-left">
+                  <div class="menu-image"></div>
+                  <div class="menu-text">메뉴 이름 1</div>
+                </div>
+                <div class="menu-right">
+                  <div class="menu-price">가격</div>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-left">
+                  <div class="menu-image"></div>
+                  <div class="menu-text">메뉴 이름 2</div>
+                </div>
+                <div class="menu-right">
+                  <div class="menu-price">가격</div>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-left">
+                  <div class="menu-image"></div>
+                  <div class="menu-text">메뉴 이름 3</div>
+                </div>
+                <div class="menu-right">
+                  <div class="menu-price">가격</div>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-left">
+                  <div class="menu-image"></div>
+                  <div class="menu-text">메뉴 이름 4</div>
+                </div>
+                <div class="menu-right">
+                  <div class="menu-price">가격</div>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-left">
+                  <div class="menu-image"></div>
+                  <div class="menu-text">메뉴 이름 5</div>
+                </div>
+                <div class="menu-right">
+                  <div class="menu-price">가격</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
           <!-- 여기부터는 고정 -->
@@ -402,5 +390,60 @@
         </div>
       </div>
     </div>
+
+    <!-- 카카오 지도 API -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
+    <script>
+      var mapContainer = document.getElementById('map'),
+      mapOption = {
+        center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표
+        level: 3
+      };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+
+      // 2. 장소 검색 객체 생성
+      var ps = new kakao.maps.services.Places();
+
+      // 3. 원하는 장소
+      var keyword = "숙명여자대학교";
+
+      // 4. 검색 요청
+      ps.keywordSearch(keyword, function(data, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            // 가장 첫 번째 결과를 사용
+            var place = data[0];
+            var lat = parseFloat(place.y);
+            var lng = parseFloat(place.x);
+
+            var coords = new kakao.maps.LatLng(lat, lng);
+
+            // 마커 표시
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 지도 중심 이동
+            map.setCenter(coords);
+        }
+      });
+    </script>
+
+    <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabToShow = urlParams.get("tab");
+
+        if (tabToShow) {
+          const tabGroup = document.querySelector("sl-tab-group");
+          if (tabGroup) {
+            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
+          }
+        }
+      });
+    </script>
+
   </body>
 </html>

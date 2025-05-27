@@ -3,16 +3,19 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style-커뮤니티.css" />
+    <link rel="stylesheet" href="SearchPage (info).css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
   </head>
   <body>
-    <div class="main-page-test">
+    <div class="SearchPage_info">
       <div class="entire-area">
 
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="#">웹사이트 이름</a>
+            <a class="web-name" href="../(1차 완성) MainPage (user)/index.html">웹사이트 이름</a>
           </div>
           <div class="bottom-app-bar">
             <img id="search-img" src="../search.png" />
@@ -34,11 +37,11 @@
                 <span id="nickname">닉네임</span>
               </div>
             <div class="account-description">
-              <div><a class="move-inf" href="#">내게시물</a> | <a class="move-inf" href="#">내댓글</a> | <a class="move-inf" href="#">내리뷰</a></div>
-              <a class="move-inf" href="#">내게시물</a>
+              <div><a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=post">내게시물</a> | <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=chat">내댓글</a> | <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=review">내리뷰</a></div>
+              <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html">내정보 확인</a>
             </div>
           </div>
-          <a class="view-heart" href="#">
+          <a class="view-heart" href="../(1차 완성) MyPage (check)/index.html?tab=wishlist">
             <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
             <span id="heart">찜한 가게</span>
           </a>
@@ -255,140 +258,71 @@
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-           <div id="notice">
-            <img src="공지사항.jpg"> 이곳은 커뮤니티 페이지입니다. 악성 게시물은 신고될 수 있습니다.</div>
-
-            <div id="button-container">
-              <button id="write" class="button">글 작성</button>
-            <div id="search-box">
-              <input type="text" placeholder="검색어를 입력하세요" id="search-input"></input>
-               <img src="../search.png" alt="검색" id="search-icon">
-
-            </div>
-            
-          </div>
-          
-          
-            <!-- 게시글 목록이 여기에 동적으로 추가됩니다. -->
-             <div id="post-container">
-              <table id="post-table" border="1" cellspacing="0" cellpadding="5" style="width:100%; border-collapse: collapse;">
-                <thead>
-                  <tr>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성일</th>
-                  </tr>
-                </thead>
-                <tbody id="post-list">
-
-                </tbody>
-                 
-              </table>
-
-              <div id="pagination" style="margin-top: 10px; text-align:center;">
-                <!-- 페이지네이션 버튼들 여기 생성 -->
+          <div class="info-up-area">
+            <div class="card">
+              <div class="card-image"></div>
+              <div class="card-text">
+                <div class="text">
+                  <div class="text-up-area">
+                    <div class="store-name">식당 A</div>
+                    <div class="rating">
+                      <div class="rating2">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
+                      </div>
+                      <div class="element">4.1</div>
+                    </div>
+                  </div>
+                  <div class="p">
+                    <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                    <div class="personal-check">
+                      <button type="button" class="heart-button">
+                        <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
+                        <span id="heart">찜한 가게</span>
+                      </button>
+                      <button type="button" class="bookmark-button">
+                        <img src="../empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
+                        <span id="bookmark">단골 가게</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-
-          <script>
-            // 게시글 목록 보여주기
-            document.addEventListener("DOMContentLoaded", () => {
-            const posts = JSON.parse(localStorage.getItem("posts")) || [];
-            const container = document.getElementById("post-list"); // 게시글 목록 담을 요소
-            const pagination = document.getElementById("pagination");
-
-            const itemsPerPage = 5;
-            let currentPage = 1;
-            const totalPages = Math.ceil(posts.length / itemsPerPage);
-
-            function renderPage(page) {
-            container.innerHTML = "";
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const pageItems = posts.slice().reverse().slice(start, end);
-
-
-            if (pageItems.length === 0) {
-              container.innerHTML = `<tr><td colspan="3">게시글이 없습니다.</td></tr>`;
-              return;
-            }
-          
-
-            // 최신 글이 위에 오도록 역순으로 보여줌
-            pageItems.forEach(post => {
-              const tr = document.createElement("tr");
-
-              const tdCategory = document.createElement("td");
-              tdCategory.textContent = post.category;
-
-              const tdTitle = document.createElement("td");
-              const link = document.createElement("a");
-              link.textContent = post.title;
-              link.href = `게시글열람.html?id=${post.id}`; // 상세 페이지로 이동할 링크
-              link.style.textDecoration = "none";  // 필요시 스타일
-              link.style.color = "black";           // 필요시 스타일
-              tdTitle.appendChild(link);
-
-              const tdDate = document.createElement("td");
-              tdDate.textContent = new Date(post.createdAt).toLocaleString();
-
-              tr.appendChild(tdCategory);
-              tr.appendChild(tdTitle);
-              tr.appendChild(tdDate);
-
-              container.appendChild(tr);
-            });
-          }
-
-          function renderPagination() {
-            pagination.innerHTML = "";
-
-            for (let i = 1; i <= totalPages; i++) {
-              const btn = document.createElement("button");
-              btn.textContent = i;
-              if (i === currentPage) {
-                btn.disabled = true;
-                btn.style.fontWeight = "bold";
-              }
-              btn.addEventListener("click", () => {
-                currentPage = i;
-                renderPage(currentPage);
-                renderPagination();
-              });
-              pagination.appendChild(btn);
-            }
-          }
-
-          renderPage(currentPage);
-          renderPagination();
-          });
-
-
-
-
-
-
-            // 작성화면으로 이동
-            document.getElementById("write").addEventListener("click", function () {
-              window.location.href = "게시글업로드.html"
-            });
-
-           //검색결과 화면으로 이동
-      
-            document.getElementById("search-icon").addEventListener("click", function () {
-              const searchQuery = document.querySelector('input[placeholder="검색어를 입력하세요"]').value;
-              // 검색어가 있으면 검색 결과 페이지로 이동 (검색어 전달도 필요하면 쿼리스트링에 추가 가능)
-              if (searchQuery.trim() !== "") {
-                window.location.href = "게시글검색.html?query=" + encodeURIComponent(searchQuery);
-              } else {
-                alert("검색어를 입력하세요");
-              }
-            });
-
-            
-
-          </script>
+          </div>
+          <div class="info-down-area">
+            <div class="info-tab-list">
+              <div class="tab">
+                <a class="label" href="index.html">정보</a>
+              </div>
+              <div class="tab2">
+                <a class="label2" href="../(1차 완성) SearchPage (menu)/index.html">메뉴</a>
+              </div>
+              <div class="tab2">
+                <a class="label2" href="../(1차 완성) SearchPage (review)/index.html">리뷰</a>
+              </div>
+            </div>
+            <div class="info-main-content">
+              <div id="map"></div>
+              <div class="info-right">
+                <div id="info-navigation">
+                  <img class="info-image" src="../navigation.png" />
+                  <a class="info-text" href="#">찾아가는 길</a>
+                </div>
+                <div id="info-time">
+                  <img class="info-image" src="../time.png" />
+                  <div class="info-text">운영 시간</div>
+                </div>
+                <div id="info-etc">
+                  <img class="info-image" src="../information.png" />
+                  <div class="info-text">기타 정보</div>
+                </div>
+              </div>
+            </div>
+          </div>
           
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -426,5 +360,60 @@
         </div>
       </div>
     </div>
+
+    <!-- 카카오 지도 API -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
+    <script>
+      var mapContainer = document.getElementById('map'),
+      mapOption = {
+        center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표
+        level: 3
+      };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+
+      // 2. 장소 검색 객체 생성
+      var ps = new kakao.maps.services.Places();
+
+      // 3. 원하는 장소
+      var keyword = "숙명여자대학교";
+
+      // 4. 검색 요청
+      ps.keywordSearch(keyword, function(data, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            // 가장 첫 번째 결과를 사용
+            var place = data[0];
+            var lat = parseFloat(place.y);
+            var lng = parseFloat(place.x);
+
+            var coords = new kakao.maps.LatLng(lat, lng);
+
+            // 마커 표시
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 지도 중심 이동
+            map.setCenter(coords);
+        }
+      });
+    </script>
+
+    <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabToShow = urlParams.get("tab");
+
+        if (tabToShow) {
+          const tabGroup = document.querySelector("sl-tab-group");
+          if (tabGroup) {
+            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
+          }
+        }
+      });
+    </script>
+
   </body>
 </html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="MyPage (check).css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
+  </head>
+  <body>
+    <div class="MyPage_check">
+      <div class="entire-area">
+
+        <div class="header">
+          <div class="div1">
+            <a class="web-name" href="../(1차 완성) MainPage (user)/index.html">웹사이트 이름</a>
+          </div>
+          <div class="bottom-app-bar">
+            <img id="search-img" src="../search.png" />
+            <input type="text" id="search-form" aria-label="research" aria-describedby="research popup">
+            <button type="button" class="btn btn-dark" id="search-btn">검색</button>
+          </div>
+          <div class="button-group">
+            <button type="button" class="btn btn-light">커뮤니티</button>
+            <button type="button" class="btn btn-light">랭킹</button>
+            <button type="button" class="btn btn-light">로그인/회원가입</button>
+          </div>
+        </div>
+  
+        <div class="aside">
+          <div class="account">
+            <div class="account-image"></div>
+            <div class="account-inf">
+                <img src="../avatar.png" alt="등급" id="grade-img"/>
+                <span id="nickname">닉네임</span>
+              </div>
+            <div class="account-description">
+              <div><a class="move-inf" href="index.html?tab=post">내게시물</a> | <a class="move-inf" href="index.html?tab=chat">내댓글</a> | <a class="move-inf" href="index.html?tab=review">내리뷰</a></div>
+              <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html">내정보 확인</a>
+            </div>
+          </div>
+          <a class="view-heart" href="index.html?tab=wishlist">
+            <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
+            <span id="heart">찜한 가게</span>
+          </a>
+        </div>
+
+        <div class="aside2">
+          <div class="simple-ranking">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="pill" aria-current="page" href="#">
+                  별점순
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#">리뷰순</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#">단골순</a>
+              </li>
+            </ul>
+            <div class="div2">
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">1</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 1&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">2</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 2&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">3</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 3&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">4</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 4&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">5</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 5&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">6</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 6&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">7</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 7&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">8</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 8&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">9</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 9&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="horizontal-full">
+                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
+              </div>
+              <div class="list-item">
+                <div class="state-layer">
+                  <div class="grade">
+                    <div class="grade-circle"><div class="grade-number">10</div></div>
+                  </div>
+                  <div class="content">
+                    <div class="headline">
+                      <span>식당 10&nbsp;&nbsp;</span>
+                      <span class="star-score">
+                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                        <span>&nbsp;5.0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mainbody">
+        <!-- 여기까지는 고정 -->
+
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+          <!-- 여기부터 수정 시작 -->
+          
+          <div class="account-detail">
+            <div class="account-image-big"></div>
+            <div class="account-detail-text">
+              <div class="account-detail-first-line">
+                <img class="account-detail-grade" src="../avatar.png" />
+                <div class="account-detail-nickname">닉네임</div>
+                <sl-icon-button class="account-detail-setting" name="gear" label="Settings" href="../(1차 완성) MyPage (change)/index.html" target="_blank"></sl-icon-button>
+              </div>
+              <div class="account-detail-second-line">
+                작성게시물 개수 | 작성댓글 개수 | 작성리뷰 개수
+              </div>
+            </div>
+          </div>
+          
+          <sl-tab-group>
+            <sl-tab slot="nav" panel="post">작성 게시물</sl-tab>
+            <sl-tab slot="nav" panel="chat">작성 댓글</sl-tab>
+            <sl-tab slot="nav" panel="review">작성 리뷰</sl-tab>
+            <sl-tab slot="nav" panel="wishlist">찜한 가게</sl-tab>
+
+            <sl-tab-panel name="post">
+              <div class="post-list">
+                <div class="post-category category1">[카테고리 1]</div>
+                <div class="post-name">게시물 제목 1</div>
+              </div>
+              <div class="post-list">
+                <span class="post-category category1">[카테고리 1]</span>
+                <span class="post-name">게시물 제목 2</span>
+              </div>
+              <div class="post-list">
+                <span class="post-category category2">[카테고리 2]</span>
+                <span class="post-name">게시물 제목 3</span>
+              </div>
+              <div class="post-list">
+                <span class="post-category category3">[카테고리 3]</span>
+                <span class="post-name">게시물 제목 4</span>
+              </div>
+              <div class="post-list">
+                <span class="post-category category2">[카테고리 2]</span>
+                <span class="post-name">게시물 제목 5</span>
+              </div>
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </sl-tab-panel>
+
+            <sl-tab-panel name="chat">
+              <div class="chat-list">
+                <div class="chat-content">댓글 내용 1</div>
+                <div class="chat-post">
+                  <div class="post-category-in-chat category1">[카테고리 1]</div>
+                  <div class="post-name-in-chat">게시물 제목 1</div>
+                </div>
+              </div>
+              <div class="chat-list">
+                <div class="chat-content">댓글 내용 2</div>
+                <div class="chat-post">
+                  <div class="post-category-in-chat category1">[카테고리 1]</div>
+                  <div class="post-name-in-chat">게시물 제목 2</div>
+                </div>
+              </div>
+              <div class="chat-list">
+                <div class="chat-content">댓글 내용 3</div>
+                <div class="chat-post">
+                  <div class="post-category-in-chat category2">[카테고리 2]</div>
+                  <div class="post-name-in-chat">게시물 제목 3</div>
+                </div>
+              </div>
+              <div class="chat-list">
+                <div class="chat-content">댓글 내용 4</div>
+                <div class="chat-post">
+                  <div class="post-category-in-chat category3">[카테고리 3]</div>
+                  <div class="post-name-in-chat">게시물 제목 4</div>
+                </div>
+              </div>
+              <div class="chat-list">
+                <div class="chat-content">댓글 내용 5</div>
+                <div class="chat-post">
+                  <div class="post-category-in-chat category1">[카테고리 1]</div>
+                  <div class="post-name-in-chat">게시물 제목 5</div>
+                </div>
+              </div>
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </sl-tab-panel>
+
+            <sl-tab-panel name="review">
+              <div class="review-list">
+                <div class="review-text">
+                  <div class="review-first-line">
+                    <div class="review-store">[식당 A]</div>
+                    <div class="review-star">
+                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                      <span>&nbsp;5.0</span>
+                    </div>
+                  </div>
+                  <div class="review-second-line">
+                    <div class="review-name">[제목 1]</div>
+                    <div class="review-content">내용 1</div>
+                  </div>
+                </div>
+                <div class="review-image-list">
+                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
+                </div>
+              </div>
+              <div class="review-list">
+                <div class="review-text">
+                  <div class="review-first-line">
+                    <div class="review-store">[식당 B]</div>
+                    <div class="review-star">
+                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                      <span>&nbsp;3.0</span>
+                    </div>
+                  </div>
+                  <div class="review-second-line">
+                    <div class="review-name">[제목 2]</div>
+                    <div class="review-content">내용 2</div>
+                  </div>
+                </div>
+                <div class="review-image-list">
+                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
+                </div>
+              </div>
+              <div class="review-list">
+                <div class="review-text">
+                  <div class="review-first-line">
+                    <div class="review-store">[식당 C]</div>
+                    <div class="review-star">
+                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                      <span>&nbsp;4.0</span>
+                    </div>
+                  </div>
+                  <div class="review-second-line">
+                    <div class="review-name">[제목 3]</div>
+                    <div class="review-content">내용 3</div>
+                  </div>
+                </div>
+                <div class="review-image-list">
+                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
+                </div>
+              </div>
+              <div class="review-list">
+                <div class="review-text">
+                  <div class="review-first-line">
+                    <div class="review-store">[식당 D]</div>
+                    <div class="review-star">
+                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                      <span>&nbsp;4.5</span>
+                    </div>
+                  </div>
+                  <div class="review-second-line">
+                    <div class="review-name">[제목 4]</div>
+                    <div class="review-content">내용 4</div>
+                  </div>
+                </div>
+                <div class="review-image-list">
+                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
+                </div>
+              </div>
+              <div class="review-list">
+                <div class="review-text">
+                  <div class="review-first-line">
+                    <div class="review-store">[식당 E]</div>
+                    <div class="review-star">
+                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                      <span>&nbsp;1.0</span>
+                    </div>
+                  </div>
+                  <div class="review-second-line">
+                    <div class="review-name">[제목 5]</div>
+                    <div class="review-content">내용 5</div>
+                  </div>
+                </div>
+                <div class="review-image-list">
+                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
+                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
+                </div>
+              </div>
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </sl-tab-panel>
+
+            <sl-tab-panel name="wishlist">
+              <div class="love-list">
+                <div class="love-store">
+                  <div class="love-store-name">[식당 1]</div>
+                  <div class="love-score">
+                    <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                    <span>5.0</span>
+                  </div>
+                  <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                </div>
+                <a class="love-store-link" href="../(1차 완성) SearchPage (info)/index.html">상세정보 보기 ▶</a>
+              </div>
+              <div class="love-list">
+                <div class="love-store">
+                  <div class="love-store-name">[식당 2]</div>
+                  <div class="love-score">
+                    <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                    <span>4.9</span>
+                  </div>
+                  <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                </div>
+                <a class="love-store-link" href="../(1차 완성) SearchPage (info)/index.html">상세정보 보기 ▶</a>
+              </div>
+              <div class="love-list">
+                <div class="love-store">
+                  <div class="love-store-name">[식당 3]</div>
+                  <div class="love-score">
+                    <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
+                    <span>4.3</span>
+                  </div>
+                  <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                </div>
+                <a class="love-store-link" href="../(1차 완성) SearchPage (info)/index.html">상세정보 보기 ▶</a>
+              </div>
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </sl-tab-panel>
+          </sl-tab-group>
+
+          <!-- 여기까지 수정 완료 -->
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+
+          <!-- 여기부터는 고정 -->
+          <footer>
+            <div class="text-link-list">
+              <div class="top-area-in-footer">
+                <div class="text-strong">
+                  <div class="text-strong2">Web assistant</div>
+                </div>
+              </div>
+              <div class="text-link-list-item">
+                <div class="list-item2">개발자 정보</div>
+              </div>
+              <div class="text-link-list-item">
+                <div class="list-item2">웹사이트 이용 방법</div>
+              </div>
+              <div class="text-link-list-item">
+                <div class="list-item2">악성 유저 신고</div>
+              </div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="text-link-list">
+              <div class="top-area-in-footer">
+                <div class="text-strong">
+                  <div class="text-strong2">Sookmyung University</div>
+                </div>
+              </div>
+              <a class="text-link-list-item" href="https://www.sookmyung.ac.kr/kr/index.do">숙명여자대학교 홈페이지</a>
+              <a class="text-link-list-item" href="https://snowboard.sookmyung.ac.kr/login/index.php">스노우보드</a>
+              <a class="text-link-list-item" href="https://portal.sookmyung.ac.kr/irj/portal">숙명포털</a>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+    
+    <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabToShow = urlParams.get("tab");
+
+        if (tabToShow) {
+          const tabGroup = document.querySelector("sl-tab-group");
+          if (tabGroup) {
+            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
+          }
+        }
+      });
+    </script>
+
+  </body>
+</html>
