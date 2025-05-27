@@ -814,13 +814,13 @@ p {
   flex: 1;
 }
 
-.menu-card {
+.review-card {
   display: flex;
   flex-wrap: wrap;
   width:40vw;
   align-items: center;
   gap: 24px;
-  padding: 1.2vh 1.5vw;
+  padding: 3.5vh 1.5vw;
   position: relative;
   align-self: stretch;
   flex: 0 0 auto;
@@ -832,37 +832,70 @@ p {
   justify-content: space-between;
 }
 
-.menu-left {
-  display: flex;
-}
-
-.menu-image {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 8.11vw;
-  height: 9.67vh;
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
-.menu-text {
+.review-left {
   display: flex;
   flex-direction: column;
+}
+
+.review-left-up {
+  display: flex;
+  height:4vh;
+}
+
+.review-text {
+  display: flex;
   min-width: 160px;
-  align-items: flex-start;
-  gap: var(--size-space-400);
+  height:100%;
+  align-items: center;
+  justify-content: flex-start;
   position: relative;
   flex: 1;
   flex-grow: 1;
-  margin-left:1.5vw;
-  justify-content: center;
+  margin-left:1vw;
+  margin-top:0.2vh;
   font-family: var(--heading-font-family, "Inter", Helvetica);
+  font-size: 1.2rem;
   font-weight: 600;
+  line-height: 1;
 }
 
-.menu-price {
-  color:rgba(0, 0, 0, 0.5);
-  font-size:0.8rem;
+.small-rating {
+  display: flex;
+  width: auto;
+  height:100%;
+  align-items: center !important;
+  gap:0.1vw;
+}
+
+.small-star {
+  position: relative;
+  width:auto;
+  min-width: 0;
+  height:100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+#review-writer {
+  font-family: var(--heading-font-family, "Inter", Helvetica);
+  color:rgb(113, 112, 112);
+  font-size:0.7rem;
+  margin-top:1vh;
+  margin-left:0.3vw;
+}
+
+.review-right {
+  display: flex;
+  gap:0.5vw;
+}
+
+.review-image {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
+  width: 4.11vw;
+  height: 8.67vh;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 /* 여기까지 수정 완료 */
