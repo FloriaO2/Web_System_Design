@@ -51,217 +51,34 @@
           <div class="simple-ranking">
             <ul class="nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link active"  data-bs-toggle="pill" aria-current="page" href="#">
+                <a class="nav-link active"  data-bs-toggle="pill" aria-current="page" href="#" onclick="handleSortAside('rating')">
                   별점순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#">리뷰순</a>
+                <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('favorites')">단골순</a>
               </li>
               
             </ul>
             <ul id="itemList">
-
             </ul>
 
 
 
-            <!--하드코딩-->
-          
-            <div class="div2">
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">1</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 1&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">2</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 2&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">3</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 3&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">4</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 4&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">5</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 5&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">6</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 6&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">7</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 7&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">8</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 8&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">9</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 9&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="horizontal-full">
-                <img class="divider" src="https://c.animaapp.com/kjYfscdy/img/divider.svg" />
-              </div>
-              <div class="list-item">
-                <div class="state-layer">
-                  <div class="grade">
-                    <div class="grade-circle"><div class="grade-number">10</div></div>
-                  </div>
-                  <div class="content">
-                    <div class="headline">
-                      <span>식당 10&nbsp;&nbsp;</span>
-                      <span class="star-score">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                        <span>&nbsp;5.0</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div id="store-sort"><!--여기에 간단 랭킹 정렬해서 삽입-->
+
             </div>
+
+
+            
           </div>
+
         </div>
-        
+
+          
+      
 
         <div class="mainbody">
         <!-- 여기까지는 고정 -->
@@ -270,26 +87,31 @@
           <!-- 여기부터 수정 시작 -->
           <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="sortStores('rating')">별점순</a>
+              <a class="nav-link" href="#" onclick="handleSortMain('rating')">별점순</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="sortStores('reviews')">리뷰순</a>
+              <a class="nav-link" href="#" onclick="handleSortMain('reviews')">리뷰순</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="sortStores('favorites')">단골순</a>
+              <a class="nav-link" href="#" onclick="handleSortMain('favorites')">단골순</a>
             </li>
           </ul>
           <div class="div4">
             <div class="cards" id="cards-container"></div>
+            </div>
              
 
       <script>
-       
+       ///////////메인바디 정렬함수//////////////
         const stores = [
           { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
           { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
           { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
           { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
+          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
+          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
+          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
+          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
         ];
 
        //이미지삽입
@@ -300,11 +122,40 @@
           ).join("");
         }
 
-        //카드 렌더링
+        function renderMainbody(sortedArray) {
+          renderCards(sortedArray);
+        }
+        function handleSortMain(criteria) {
+          const sorted = getSortedStores(criteria);
+          renderMainbody(sorted);
+        }
+
+
+        function renderAside(sortedArray) {
+          const top7 = sortedArray.slice(0, 7);
+          renderAsideStores(top7);
+        }
+        function handleSortAside(criteria) {
+          const sorted = getSortedStores(criteria);
+          renderAside(sorted);
+        }
+
+         //sort 함수(aside2/mainbody)
+        function getSortedStores(criteria = "rating") {
+        return [...stores].sort((a, b) => {
+          if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
+
+          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
+          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          return 0;
+        });
+      }
+
+        //렌더링함수(mainbody)
         function renderCards(list) {
           const box = document.getElementById("cards-container");
           box.innerHTML = "";                       // 기존 카드 제거
-
           list.forEach(store => {
             box.insertAdjacentHTML("beforeend", `
               <div class="card">
@@ -326,68 +177,29 @@
             `);
           });
         }
+         //asdide렌더링
 
-        
-        //정렬 후 갱신
-        function sortStores(criteria = "rating") {
-          stores.sort((a, b) => {
-            if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
+        function renderAsideStores(sortedArray) {
+        const top7 = sortedArray.slice(0, 7);
+        const asideEl = document.getElementById("store-sort");
 
-            // 2·3순위 정렬
-            if (criteria === "rating")   return b.reviews - a.reviews || b.favorites - a.favorites;
-            if (criteria === "reviews")  return b.rating  - a.rating  || b.favorites - a.favorites;
-            if (criteria === "favorites")return b.rating  - a.rating  || b.reviews  - a.reviews;
-            return 0;
-          });
+        asideEl.innerHTML = `
+          <ul>
+            ${top7.map(store => `
+              <li>${store.name} <span style="color:gold;">⭐ ${store.rating.toFixed(1)}</span></li>
+            `).join('')}
+          </ul>
+        `;
+      }
 
-          renderCards(stores);
-        }
-        window.onload = () => sortStores("rating");   // 기본: 별점순 정렬
+          window.onload = () => {
+          const sorted = getSortedStores("rating");
+          renderCards(sorted);
+          renderAsideStores(sorted); 
+        };
 
-        ////////////asdie2 동적렌더링///////////////
-        const itemsData = [
-            { name: "가게1", rating: 4.5, review: 200, regular: 50 },
-            { name: "가게2", rating: 4.9, review: 150, regular: 70 },
-            { name: "가게3", rating: 4.2, review: 300, regular: 30 }
-          ];
+              
 
-          const list = document.getElementById('aside2 itemList');
-          const links = document.querySelectorAll('#aside2 .sort-link');
-
-          // 아이템 렌더 함수
-          function renderItems(items) {
-            list.innerHTML = "";  // 초기화
-            items.forEach(item => {
-              const li = document.createElement('li');
-              li.textContent = `${item.name} - 별점: ${item.rating}, 리뷰: ${item.review}, 단골: ${item.regular}`;
-              list.appendChild(li);
-            });
-          }
-
-          // 초기 렌더 - 별점순으로 정렬해서 보여주기
-          renderItems(itemsData.sort((a, b) => b.rating - a.rating));
-
-          // 정렬 클릭 이벤트
-          links.forEach(link => {
-            link.addEventListener('click', e => {
-              e.preventDefault();
-
-              // active 클래스 토글
-              links.forEach(l => l.classList.remove('active'));
-              link.classList.add('active');
-
-              const sortKey = link.dataset.sort;
-
-              // itemsData 복사해서 정렬
-              const sortedItems = [...itemsData].sort((a, b) => b[sortKey] - a[sortKey]);
-
-              // 다시 렌더
-              renderItems(sortedItems);
-            });
-          });
-
-
-                
          </script>
 
 
