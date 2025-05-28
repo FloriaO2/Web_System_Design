@@ -502,40 +502,122 @@ a {
   flex-direction: column;
   flex: 1;
   height:auto;
+  align-items: center;
 }
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
 
-  #button-container {
+  #notice{
+  background: #a9b5ef;
+  border-radius: 4px;
+  padding: 1vh 2vw;
+  margin-top:3vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 7vh;
+  position: relative;
+  box-shadow: var(
+    --m3-elevation-light-3-box-shadow,
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15)
+  );
+}
+
+#notice img {
+    width: auto;  /* 원하는 크기로 조절 가능 */
+    height: 5vh;
+    vertical-align: middle;
+    margin-right: 1vw;
+  }
+
+#notice-text {
+  height:100%;
+  display:flex;
+  align-items: center;
+  color: #ffffff;
+  text-align: left;
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
+  font-size: 1.2rem;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  position: relative;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+#button-container {
+  position:relative;
   display: flex;
   justify-content: space-between;
   width: 100%; /* 전체 너비 차지 */
   align-items: center;
   gap: 12px;
+  padding: 4vh 4vw;
 }
 
-
-#notice{
-  background-color: rgb(198, 173, 213);
+#write {
+  width:7vw;
+  height:5vh;
+  background-color: white;
+  color:black;
+  padding:1vh 0 !important;
 }
-#notice img {
-    width: 40px;  /* 원하는 크기로 조절 가능 */
-    height: auto;
-    vertical-align: middle;
-    margin-right: 8px;
-  }
 
- #back-to-list,#write {
-    padding: 10px 15px;
+#postlist{
+  width:7vw;
+  height:5vh;
+  background-color: rgb(229, 194, 245);
+  color:black;
+  padding:1vh 0 !important;
+}
+
+#search-box {
+  display: flex;
+  position:relative;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1vh 1vw;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  width: 20vw;
+  height:6vh;
+  box-sizing: border-box;
+  margin-right: 8px;
+  background: rgba(210, 213, 255, 0.66);
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+#search-icon {
+  vertical-align: middle;
+  width: 3vw;
+  height: 5vh;
+  vertical-align: middle;
+  cursor: pointer;
+ }
+
+  
+  #search-input {
+    padding-left:1vw;
     font-size: 16px;
-    border-radius: 25px;
+    border:none;
     outline: none;
     width: 250px;
     box-sizing: border-box;
     margin-right: 8px;
-    
+    background: rgba(210, 213, 255, 0.06);
   }
+  
+
+
+
 
   #post-detail-container {
       width: 80%;
