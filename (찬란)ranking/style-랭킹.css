@@ -206,12 +206,54 @@ a {
   margin:0 0.2vw;
 }
 
-/* 간단랭킹 별점순/리뷰순/단골순 이랑 mainbody에서의 전체/한식/양식/일식... a 태그에 해당 */
-.nav-link {
-  border:1vw solid black;
-  background-color:rgb(201, 201, 201);
-  /* 선택되지 않은 상태의 버튼들 테두리 그리고 싶었는데 실패 ... */
+
+
+
+
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+
+.nav-pills .nav-link {
+  border:0.1vw solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.537);
+  color: #000;
+  border-radius: 5px;
+  margin-right: 4px;
 }
+
+
+/* 마우스를 갖다 댔을 때의 a 태그 */
+.nav-pills .nav-link:hover {
+  background-color: #a389ff41;
+  color: #000;
+}
+
+/* 활성화된 상태의 버튼 */
+.nav-pills .nav-link.active {
+  position: relative;
+  padding-left: 1.3vw !important;
+  background-color: #000 !important;
+}
+
+/* 활성화된 상태의 버튼에 체크 이미지 추가 */
+.nav-pills .nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0.2vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.7vw;
+  height: 2.5vh;
+  background-image: url('../check.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+
 
 .div2 {
   display: flex;

@@ -266,19 +266,35 @@
           
           <div id="post-detail-container" style="width: 80%; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
 
-          <!-- 🟡 상단: 카테고리, 제목 -->
+          <!-- 상단: 카테고리, 제목 -->
           <div id="post-header" style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 20px;">
             <div id="post-category" style="color: gray; font-size: 0.9em;"></div>
-            <h2 id="post-title" style="margin: 5px 0;"></h2>
+            <h3 id="post-title" style="margin: 5px 0;"></h3>
+            <img src="../avatar.png" alt="작성자 프로필 이미지" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
+            <span id="post-author" style="font-weight: bold;">닉네임</span>
+
           </div>
 
-          <!-- 🔵 하단: 게시물 내용 + 댓글 -->
+          <!-- 하단: 게시물 내용 + 댓글 -->
           <div id="post-body">
             <div id="post-content" style="margin-bottom: 30px; white-space: pre-line;"></div>
+            
+            <div id="comment-section" style="border-top: 1px solid #ccc; padding-top: 20px;">
+            <h5>댓글</h5>
+            <ul id="comment-list" style="list-style: none; padding: 0;"></ul>
+
+            <div style="margin-bottom: 10px;">
+              <input type="text" id="nickname-input" placeholder="닉네임" style="margin-bottom: 5px; width: 200px; padding: 5px;">
+              <br>
+              <textarea id="comment-input" placeholder="댓글을 입력하세요" rows="3" style="width: 100%; padding: 5px;"></textarea>
+              <button id="submit-comment" style="margin-top: 5px;">등록하기</button>
+            </div>
+
+            
 
           </div>
-
         </div>  
+      </div>
         
           <script>
           
@@ -299,42 +315,82 @@
               return;
             }
             
-            
-
-
+          
             // 게시글 내용 출력
             document.getElementById("post-category").textContent = `[${post.category}]`;
             document.getElementById("post-title").textContent = post.title;
-        
             document.getElementById("post-content").textContent = post.content;
 
-            // 댓글 불러오기
-           
 
-            // 댓글 작성
-            document.getElementById("submit-comment").addEventListener("click", () => {
-              const input = document.getElementById("comment-input");
-              const nickname = document.getElementById("nickname-input").value.trim();
-              const text = input.value.trim();
 
-              if (text === "") {
-                alert("댓글을 입력하세요.");
-                return;
+            //댓글 로직 시작
+
+            const commentKey = `comments_${postId}`;
+              let comments = JSON.parse(localStorage.getItem(commentKey)) || [];
+
+              function renderComments() {
+                const list = document.getElementById("comment-list");
+                list.innerHTML = "";
+
+                if (comments.length === 0) {
+                  list.innerHTML = "<li>아직 댓글이 없습니다.</li>";
+                  return;
+                }
+
+                comments.forEach(comment => {
+                  const li = document.createElement("li");
+                  li.style.borderBottom = "1px solid #eee";
+                  li.style.padding = "10px 0";
+                  li.innerHTML = `
+                    <strong>${comment.user}</strong>
+                    <span style="font-size: 0.8em; color: gray;">
+                      (${new Date(comment.createdAt).toLocaleString()})
+                    </span><br>
+                    ${comment.text}
+                  `;
+                  list.appendChild(li);
+                });
               }
 
-              const newComment = {
-                user: nickname || "익명",
-                text: text,
-                createdAt: new Date().toISOString()
-              };
+              document.getElementById("submit-comment").addEventListener("click", () => {
+                const input = document.getElementById("comment-input");
+                const nickname = document.getElementById("nickname-input").value.trim();
+                const text = input.value.trim();
 
-              comments.push(newComment);
-              localStorage.setItem(commentKey, JSON.stringify(comments));
-              input.value = "";
-              document.getElementById("nickname-input").value = "";
-              renderComments();
+                if (text === "") {
+                  alert("댓글을 입력하세요.");
+                  return;
+                }
+
+                const newComment = {
+                  user: nickname || "익명",
+                  text: text,
+                  createdAt: new Date().toISOString()
+                };
+
+                comments.push(newComment);
+                localStorage.setItem(commentKey, JSON.stringify(comments));
+
+                input.value = "";
+                document.getElementById("nickname-input").value = "";
+
+                renderComments();
+              });
+
+              renderComments(); // 페이지 로드 시 댓글 표시
             });
-          });
+
+
+
+
+
+
+
+
+
+
+
+
 
           // 글 작성 버튼 이동
             document.getElementById("write").addEventListener("click", () => {

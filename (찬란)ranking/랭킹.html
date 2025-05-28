@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style-랭킹.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
@@ -48,16 +48,25 @@
           <div class="simple-ranking">
             <ul class="nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  <img src="../check.png" alt="활성화됨" />별점순</a>
+                <a class="nav-link active"  data-bs-toggle="pill" aria-current="page" href="#">
+                  별점순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">리뷰순</a>
+                <a class="nav-link" data-bs-toggle="pill" href="#">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#">단골순</a>
               </li>
+              
             </ul>
+            <ul id="itemList">
+
+            </ul>
+
+
+
+            <!--하드코딩-->
+          
             <div class="div2">
               <div class="list-item">
                 <div class="state-layer">
@@ -249,6 +258,8 @@
             </div>
           </div>
         </div>
+        
+
         <div class="mainbody">
         <!-- 여기까지는 고정 -->
 
@@ -256,110 +267,127 @@
           <!-- 여기부터 수정 시작 -->
           <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">전체</a>
+              <a class="nav-link" href="#" onclick="sortStores('rating')">별점순</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">별점순</a>
+              <a class="nav-link" href="#" onclick="sortStores('reviews')">리뷰순</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">리뷰순</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">단골순</a>
+              <a class="nav-link" href="#" onclick="sortStores('favorites')">단골순</a>
             </li>
           </ul>
           <div class="div4">
-            <div class="cards">
+            <div class="cards" id="cards-container"></div>
+             
+
+      <script>
+       
+        const stores = [
+          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
+          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
+          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
+          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
+        ];
+
+       //이미지삽입
+        function makeStars(rating) {
+          const full = Math.round(rating);          // 반올림 기준
+          return Array.from({ length: 5 }, (_, i) =>
+            `<img class="star" src="https://c.animaapp.com/kjYfscdy/img/${i < full ? "star-60" : "star-59"}.svg">`
+          ).join("");
+        }
+
+        //카드 렌더링
+        function renderCards(list) {
+          const box = document.getElementById("cards-container");
+          box.innerHTML = "";                       // 기존 카드 제거
+
+          list.forEach(store => {
+            box.insertAdjacentHTML("beforeend", `
               <div class="card">
                 <div class="card-image"></div>
                 <div class="body">
                   <div class="text">
-                    <div class="store-name">식당 A</div>
+                    <div class="store-name">${store.name}</div>
                     <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">4.1</div>
+                      <div class="rating2">${makeStars(store.rating)}</div>
+                      <div class="element">${store.rating.toFixed(1)}</div>
                     </div>
                     <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
+                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br><br></span>
                       <a class="go-to-searchPage" href="#">상세정보 보기</a>
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 B</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-58.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">3.2</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 C</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 D</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            `);
+          });
+        }
+
+        
+        //정렬 후 갱신
+        function sortStores(criteria = "rating") {
+          stores.sort((a, b) => {
+            if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
+
+            // 2·3순위 정렬
+            if (criteria === "rating")   return b.reviews - a.reviews || b.favorites - a.favorites;
+            if (criteria === "reviews")  return b.rating  - a.rating  || b.favorites - a.favorites;
+            if (criteria === "favorites")return b.rating  - a.rating  || b.reviews  - a.reviews;
+            return 0;
+          });
+
+          renderCards(stores);
+        }
+        window.onload = () => sortStores("rating");   // 기본: 별점순 정렬
+
+        ////////////asdie2 동적렌더링///////////////
+        const itemsData = [
+            { name: "가게1", rating: 4.5, review: 200, regular: 50 },
+            { name: "가게2", rating: 4.9, review: 150, regular: 70 },
+            { name: "가게3", rating: 4.2, review: 300, regular: 30 }
+          ];
+
+          const list = document.getElementById('aside2 itemList');
+          const links = document.querySelectorAll('#aside2 .sort-link');
+
+          // 아이템 렌더 함수
+          function renderItems(items) {
+            list.innerHTML = "";  // 초기화
+            items.forEach(item => {
+              const li = document.createElement('li');
+              li.textContent = `${item.name} - 별점: ${item.rating}, 리뷰: ${item.review}, 단골: ${item.regular}`;
+              list.appendChild(li);
+            });
+          }
+
+          // 초기 렌더 - 별점순으로 정렬해서 보여주기
+          renderItems(itemsData.sort((a, b) => b.rating - a.rating));
+
+          // 정렬 클릭 이벤트
+          links.forEach(link => {
+            link.addEventListener('click', e => {
+              e.preventDefault();
+
+              // active 클래스 토글
+              links.forEach(l => l.classList.remove('active'));
+              link.classList.add('active');
+
+              const sortKey = link.dataset.sort;
+
+              // itemsData 복사해서 정렬
+              const sortedItems = [...itemsData].sort((a, b) => b[sortKey] - a[sortKey]);
+
+              // 다시 렌더
+              renderItems(sortedItems);
+            });
+          });
+
+
+                
+         </script>
+
+
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
