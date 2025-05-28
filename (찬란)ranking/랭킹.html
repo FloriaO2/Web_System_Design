@@ -64,17 +64,9 @@
             </ul>
             <ul id="itemList">
             </ul>
-
-
-
-            <div id="store-sort"><!--여기에 간단 랭킹 정렬해서 삽입-->
-
+            <div id="store-sort"> <!--여기에 간단 랭킹 정렬해서 삽입-->
             </div>
-
-
-            
           </div>
-
         </div>
 
           
@@ -102,7 +94,7 @@
              
 
       <script>
-       ///////////메인바디 정렬함수//////////////
+        ///////////여기부터 심플랭킹 js////////////////////
         const stores = [
           { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
           { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
@@ -114,23 +106,7 @@
           { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
         ];
 
-       //이미지삽입
-        function makeStars(rating) {
-          const full = Math.round(rating);          // 반올림 기준
-          return Array.from({ length: 5 }, (_, i) =>
-            `<img class="star" src="https://c.animaapp.com/kjYfscdy/img/${i < full ? "star-60" : "star-59"}.svg">`
-          ).join("");
-        }
-
-        function renderMainbody(sortedArray) {
-          renderCards(sortedArray);
-        }
-        function handleSortMain(criteria) {
-          const sorted = getSortedStores(criteria);
-          renderMainbody(sorted);
-        }
-
-
+       
         function renderAside(sortedArray) {
           const top7 = sortedArray.slice(0, 7);
           renderAsideStores(top7);
@@ -140,7 +116,7 @@
           renderAside(sorted);
         }
 
-         //sort 함수(aside2/mainbody)
+         //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
         return [...stores].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
@@ -152,7 +128,45 @@
         });
       }
 
-        //렌더링함수(mainbody)
+      //asdide렌더링
+        function renderAsideStores(sortedArray) {
+        const top7 = sortedArray.slice(0, 7);
+        const asideEl = document.getElementById("store-sort");
+
+        asideEl.innerHTML = `
+        <ul class="store-list">
+          ${top7.map((store, index) => `
+            <li class="store-item">
+              <div class="store-rank-name">
+                <div class="rank-circle">${index + 1}</div>
+                <span class="store-name">${store.name}</span>
+              </div>
+              <span class="store-rating">⭐ ${store.rating.toFixed(1)}</span>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    }
+    ///////////////여기까지가 심플랭킹함수 js///////////////////
+
+
+      function renderMainbody(sortedArray) {
+          renderCards(sortedArray);
+        }
+        function handleSortMain(criteria) {
+          const sorted = getSortedStores(criteria);
+          renderMainbody(sorted);
+        }
+      //이미지삽입
+        function makeStars(rating) {
+          const full = Math.round(rating);          
+          return Array.from({ length: 5 }, (_, i) =>
+            `<img class="star" src="https://c.animaapp.com/kjYfscdy/img/${i < full ? "star-60" : "star-59"}.svg">`
+          ).join("");
+        }
+
+
+        // mainbody 렌더링함수
         function renderCards(list) {
           const box = document.getElementById("cards-container");
           box.innerHTML = "";                       // 기존 카드 제거
@@ -177,21 +191,8 @@
             `);
           });
         }
-         //asdide렌더링
 
-        function renderAsideStores(sortedArray) {
-        const top7 = sortedArray.slice(0, 7);
-        const asideEl = document.getElementById("store-sort");
-
-        asideEl.innerHTML = `
-          <ul>
-            ${top7.map(store => `
-              <li>${store.name} <span style="color:gold;">⭐ ${store.rating.toFixed(1)}</span></li>
-            `).join('')}
-          </ul>
-        `;
-      }
-
+         
           window.onload = () => {
           const sorted = getSortedStores("rating");
           renderCards(sorted);
