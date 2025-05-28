@@ -256,13 +256,13 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
           
-          <div id="uplode-notice">
-            <h1>게시글 업로드</h2>
-            <h3>다음 등급까지 필요한 게시글 수: N</h3>
+          <div class="user-report-title">게시글 업로드</div>
+          <div id="support-text">등업까지 남은 게시글 수:N</div>
+          <button type="button" class="user-report-button btn btn-dark">
+            <div class="user-report-button-text">업로드</div>
+          </button>
 
-            <div id="upload-button">
-              <button class="button" id="upload-btn">게시글 업로드</button>
-          </div>
+
 
             <div id="upload-box">
               <div id="upload-top">
@@ -285,11 +285,7 @@
               </div>
             </div>
           </div>
-        </div>
-
-
-
-
+      
 
         <script>  
             document.getElementById("upload-btn").addEventListener("click", () => {
