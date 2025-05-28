@@ -75,53 +75,114 @@
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
+
         <div class="center-page">
-          <div class="box" id="signupBox">
-            <div class="tabs">
-                <span onclick="switchToLogin()">로그인</span>
-                <span class="active">회원가입</span>
-            </div>
-
-            <form onsubmit="handleSignup(event)">
-                <div class="form-group">
-                <label for="nickname">Nickname</label>
-                <input id="nickname" type="text" placeholder="닉네임" required>
-                </div>
-                <div class="form-group">
-                <label for="signupId">ID</label>
-                <input id="signupId" type="text" placeholder="아이디" required>
-                </div>
-                <div class="form-group">
-                <label for="signupPw">Password</label>
-                <input id="signupPw" type="password" placeholder="비밀번호" required>
-                </div>
-                <button type="submit" class="button">회원가입</button>
-            </form>
+    <!-- 회원가입 박스 -->
+    <div class="box" id="signupBox">
+      <div class="tabs">
+        <span id="toLogin">로그인</span>
+        <span class="active">회원가입</span>
+      </div>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="my_nickname">Nickname</label>
+          <input id="my_nickname" type="text" placeholder="닉네임" required>
         </div>
-
-        <!-- 로그인 화면 -->
-        <div class="box hidden" id="loginBox">
-        <div class="tabs">
-            <span class="active">로그인</span>
-            <span onclick="switchToSignup()">회원가입</span>
+        <div class="form-group">
+          <label for="signupId">ID</label>
+          <input id="signupId" type="text" placeholder="아이디" required>
         </div>
-
-        <form onsubmit="handleLogin(event)" id="loginForm">
-            <div class="form-group">
-            <label for="loginId">ID</label>
-            <input id="loginId" type="text" placeholder="아이디" required>
-            </div>
-            <div class="form-group">
-            <label for="loginPw">Password</label>
-            <input id="loginPw" type="password" placeholder="비밀번호" required>
-            </div>
-            <button type="submit" class="button">로그인</button>
-        </form>
+        <div class="form-group">
+          <label for="signupPw">Password</label>
+          <input id="signupPw" type="password" placeholder="비밀번호" required>
         </div>
-        </div>
+        <button type="submit" class="button">회원가입</button>
+      </form>
+    </div>
 
-        
-        <script>
+    <!-- 로그인 박스 -->
+    <div class="box hidden" id="loginBox">
+      <div class="tabs">
+        <span class="active">로그인</span>
+        <span id="toSignup">회원가입</span>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginId">ID</label>
+          <input id="loginId" type="text" placeholder="아이디" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPw">Password</label>
+          <input id="loginPw" type="password" placeholder="비밀번호" required>
+        </div>
+        <button type="submit" class="button">로그인</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const signupBox = document.getElementById("signupBox");
+      const loginBox = document.getElementById("loginBox");
+
+      // 탭 전환 버튼
+      document.getElementById("toLogin").addEventListener("click", () => {
+        signupBox.classList.add("hidden");
+        loginBox.classList.remove("hidden");
+      });
+
+      document.getElementById("toSignup").addEventListener("click", () => {
+        loginBox.classList.add("hidden");
+        signupBox.classList.remove("hidden");
+      });
+
+      // 회원가입
+      document.getElementById("signupForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const nickname = document.getElementById("my_nickname").value.trim();
+        const id = document.getElementById("signupId").value.trim();
+        const password = document.getElementById("signupPw").value.trim();
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        if (users.find(user => user.id === id)) {
+          alert("이미 사용 중인 아이디입니다.");
+          return;
+        }
+
+        const newUser = { nickname, id, password };
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+        console.log(localStorage.getItem("users"));// 디버깅용
+
+        alert("회원가입 완료!");
+        window.location.href = "signup_done.html";
+      });
+
+      // 로그인
+      document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const loginId = document.getElementById("loginId").value.trim();
+        const loginPw = document.getElementById("loginPw").value.trim();
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const matchedUser = users.find(user => user.id === loginId && user.password === loginPw);
+
+        if (matchedUser) {
+          localStorage.setItem("currentUser", JSON.stringify({ id: matchedUser.id, nickname: matchedUser.nickname }));
+          console.log(localStorage.getItem("users")); // 디버깅용
+          window.location.href = "Mainpage (user).html";
+        } else {
+          alert("아이디 또는 비밀번호가 틀렸습니다.");
+        }
+      });
+    });
+  </script>
+
+
+
+
+        <script>// asdie2 랭킹 관련 자바스크립트
           const stores = [
           { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
           { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
@@ -178,63 +239,9 @@
           const sorted = getSortedStores("rating");
           renderAsideStores(sorted); 
         };///////////////여기까지복붙
+  </script>
 
 
-        const signupBox = document.getElementById("signupBox");
-        const loginBox = document.getElementById("loginBox");
-        
-        function switchToLogin() {
-            signupBox.classList.add("hidden");
-            loginBox.classList.remove("hidden");
-        }
-
-        function switchToSignup() {
-            loginBox.classList.add("hidden");
-            signupBox.classList.remove("hidden");
-        }
-
-        function handleSignup(e) {
-          e.preventDefault();
-          const nickname = document.getElementById("nickname").value.trim();
-          const id = document.getElementById("signupId").value.trim();
-          const password = document.getElementById("signupPw").value.trim();
-
-          const users = JSON.parse(localStorage.getItem("users")) || [];
-
-          // 중복 ID 확인
-          if (users.find(user => user.id === id)) {
-            alert("이미 사용 중인 아이디입니다.");
-            return;
-          }
-
-          const newUser = { nickname, id, password };
-          users.push(newUser);
-          localStorage.setItem("users", JSON.stringify(users));
-
-          alert("회원가입 완료");
-          window.location.href = "signup_done.html";
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const loginId = document.getElementById("loginId").value.trim();
-            const loginPw = document.getElementById("loginPw").value.trim();
-
-            const users = JSON.parse(localStorage.getItem("users")) || [];
-            const matchedUser = users.find(user => user.id === loginId && user.password === loginPw);
-
-            if (matchedUser) {
-              // 닉네임 저장
-              localStorage.setItem("currentUser", JSON.stringify({ nickname: matchedUser.nickname }));
-              
-              // 로그인 후 페이지 이동
-              window.location.href = "Mainpage (user).html"; //여기에 로그인 후 이동할 페이지
-            } else {
-              alert("아이디 또는 비밀번호가 틀렸습니다.");
-            }
-          }   
-          
-        </script>
           
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
