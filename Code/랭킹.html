@@ -3,14 +3,14 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style-게시글열람.css" />
+    <link rel="stylesheet" href="style-랭킹.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
   </head>
   <body>
-    <div class="CommunityPage_view">
+    <div class="main-page-test">
       <div class="entire-area">
 
         <div class="header">
@@ -47,7 +47,6 @@
           </a>
         </div>
 
-       <!--여기부터 복붙시작-->
         <div class="aside2">
           <div class="simple-ranking">
             <ul class="nav nav-pills">
@@ -69,166 +68,34 @@
             </div>
           </div>
         </div>
-        <!--여기까지 복붙완료-->
 
+          
+      
 
         <div class="mainbody">
         <!-- 여기까지는 고정 -->
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-           <div id="notice">
-            <img src="../notice.jpg">
-            <div id="notice-text">이곳은 커뮤니티 페이지입니다. 악성 게시물은 신고될 수 있습니다.</div>
-          </div>
-
-          <div id="button-container">
-            <button id="write" class="button">
-              <img src="../write.png" style="height:100%; width:auto;">
-              글 작성
-            </button>
-            <div id="search-box2">
-              <button id="postlist" class="button">
-              <img src="../postlist.png" style="height:100%; width:auto;">
-              게시물 목록
-            </button>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="handleSortMain('rating')">별점순</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="handleSortMain('reviews')">리뷰순</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="handleSortMain('favorites')">단골순</a>
+            </li>
+          </ul>
+          <div class="div4">
+            <div class="cards" id="cards-container"></div>
             </div>
-          </div>
-            
-          
-          <div id="post-detail-container" style="width: 80%; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
-
-          <!-- 상단: 카테고리, 제목 -->
-          <div id="post-header" style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 20px;">
-            <div id="post-category" style="color: gray; font-size: 0.9em;"></div>
-            <h3 id="post-title" style="margin: 5px 0;"></h3>
-            <img src="../avatar.png" alt="작성자 프로필 이미지" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
-            <span id="post-author" style="font-weight: bold;">닉네임</span>
-
-          </div>
-
-          <!-- 하단: 게시물 내용 + 댓글 -->
-          <div id="post-body">
-            <div id="post-content" style="margin-bottom: 30px; white-space: pre-line;"></div>
-            
-            <div id="comment-section" style="border-top: 1px solid #ccc; padding-top: 20px;">
-            <h5>댓글</h5>
-            <ul id="comment-list" style="list-style: none; padding: 0;"></ul>
-
-            <div style="margin-bottom: 10px;">
-              <textarea id="comment-input" placeholder="댓글을 입력하세요" rows="3" style="width: 100%; padding: 5px;"></textarea>
-              <button id="submit-comment" style="margin-top: 5px;">등록하기</button>
-            </div>
-
-            
-
-          </div>
-        </div>  
-      </div>
-        
+             
 
       <script>
-          
-          document.addEventListener("DOMContentLoaded", () => {
-            const params = new URLSearchParams(window.location.search);
-            const postId = params.get("id");
-            console.log("받은 postId:", postId);
-
-
-            const posts = JSON.parse(localStorage.getItem("posts")) || [];
-            console.log("posts 배열:", posts);
-
-            const post = posts.find(p => String(p.id) === postId);
-            console.log("찾은 post:", post);
-
-            if (!post) {
-              document.getElementById("post-detail-container").innerHTML = "<p>게시글을 찾을 수 없습니다.</p>";
-              return;
-            }
-            
-          
-            // 게시글 내용 출력
-            document.getElementById("post-category").textContent = `[${post.category}]`;
-            document.getElementById("post-title").textContent = post.title;
-            document.getElementById("post-content").textContent = post.content;
-            document.getElementById("post-author").textContent = post.nickname;
-
-
-
-
-            // 댓글 로직 시작
-        const commentKey = `comments_${postId}`;
-        let comments = JSON.parse(localStorage.getItem(commentKey)) || [];
-
-        function renderComments() {
-          const list = document.getElementById("comment-list");
-          list.innerHTML = "";
-
-          if (comments.length === 0) {
-            list.innerHTML = "<li>아직 댓글이 없습니다.</li>";
-            return;
-          }
-
-          comments.forEach(comment => {
-            const li = document.createElement("li");
-            li.style.borderBottom = "1px solid #eee";
-            li.style.padding = "10px 0";
-            li.innerHTML = `
-              <strong>${comment.user}</strong>
-              <span style="font-size: 0.8em; color: gray;">
-                (${new Date(comment.createdAt).toLocaleString()})
-              </span><br>
-              ${comment.text}
-            `;
-            list.appendChild(li);
-          });
-        }
-
-        document.getElementById("submit-comment").addEventListener("click", () => {
-          const input = document.getElementById("comment-input");
-          const text = input.value.trim();
-
-          if (text === "") {
-            alert("댓글을 입력하세요.");
-            return;
-          }
-
-          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-          if (!currentUser) {
-            alert("로그인이 필요합니다!");
-            return;
-          }
-
-          const newComment = {
-            user: currentUser.nickname,
-            text: text,
-            createdAt: new Date().toISOString()
-          };
-
-          comments.push(newComment);
-          localStorage.setItem(commentKey, JSON.stringify(comments));
-
-          input.value = "";
-          renderComments();
-        });
-
-        renderComments(); // 페이지 로드 시 댓글 표시
-
-          // 글 작성 버튼 이동
-            document.getElementById("write").addEventListener("click", () => {
-              window.location.href = "게시글업로드.html";
-            });
-            // 게시물 목록 버튼 이동 (커뮤니티 메인 페이지로)
-            document.getElementById("postlist").addEventListener("click", () => {
-              window.location.href = "커뮤니티.html"; // 커뮤니티 메인 페이지 주소로 변경
-            });
-
-          
-
-
-
-      
-          const stores = [
+        ///////////여기부터 심플랭킹 js////////////////////
+        const stores = [
           { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
           { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
           { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
@@ -244,7 +111,10 @@
           const top7 = sortedArray.slice(0, 7);
           renderAsideStores(top7);
         }
-        
+        function handleSortAside(criteria) {
+          const sorted = getSortedStores(criteria);
+          renderAside(sorted);
+        }
 
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
@@ -257,10 +127,6 @@
           return 0;
         });
       }
-      function handleSortAside(criteria) {
-          const sorted = getSortedStores(criteria);
-          renderAside(sorted);
-        }
 
       //asdide렌더링
         function renderAsideStores(sortedArray) {
@@ -281,18 +147,63 @@
         </ul>
       `;
     }
-    
-  window.onload = () => {
-    const sorted = getSortedStores("rating");
-    renderAsideStores(sorted); 
-  };///////////////여기까지복붙
-});
+    ///////////////여기까지가 심플랭킹함수 js///////////////////
 
 
-    </script>
+      function renderMainbody(sortedArray) {
+          renderCards(sortedArray);
+        }
+        function handleSortMain(criteria) {
+          const sorted = getSortedStores(criteria);
+          renderMainbody(sorted);
+        }
+      //이미지삽입
+        function makeStars(rating) {
+          const full = Math.round(rating);          
+          return Array.from({ length: 5 }, (_, i) =>
+            `<img class="star" src="https://c.animaapp.com/kjYfscdy/img/${i < full ? "star-60" : "star-59"}.svg">`
+          ).join("");
+        }
 
 
-          
+        // mainbody 렌더링함수
+        function renderCards(list) {
+          const box = document.getElementById("cards-container");
+          box.innerHTML = "";                       // 기존 카드 제거
+          list.forEach(store => {
+            box.insertAdjacentHTML("beforeend", `
+              <div class="card">
+                <div class="card-image"></div>
+                <div class="body">
+                  <div class="text">
+                    <div class="store-name">${store.name}</div>
+                    <div class="rating">
+                      <div class="rating2">${makeStars(store.rating)}</div>
+                      <div class="element">${store.rating.toFixed(1)}</div>
+                    </div>
+                    <p class="p">
+                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br><br></span>
+                      <a class="go-to-searchPage" href="#">상세정보 보기</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            `);
+          });
+        }
+
+         
+          window.onload = () => {
+          const sorted = getSortedStores("rating");
+          renderCards(sorted);
+          renderAsideStores(sorted); 
+        };
+
+              
+
+         </script>
+
+
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
