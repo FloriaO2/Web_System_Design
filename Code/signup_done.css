@@ -243,9 +243,17 @@ a {
 }
 
 .store-name {
-  font-weight: 600;
   font-size:18px !important;
-  
+  position: relative;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: var(--heading-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: rgba(30, 30, 30, 1);;
+  /*font-size: 24px;*/
+  letter-spacing: -0.48px;
+  line-height: 120.00000476837158%;
+  font-style: normal;
 }
 
 .store-rating {
