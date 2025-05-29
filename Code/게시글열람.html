@@ -29,7 +29,7 @@
           </div>
         </div>
   
-        <div class="aside">
+       <div class="aside"> <!--내페이지 이동-->
           <div class="account">
             <div class="account-image"></div>
             <div class="account-inf">
@@ -37,16 +37,15 @@
                 <span id="nickname">닉네임</span>
               </div>
             <div class="account-description">
-              <div><a class="move-inf" href="#">내게시물</a> | <a class="move-inf" href="#">내댓글</a> | <a class="move-inf" href="#">내리뷰</a></div>
-              <a class="move-inf" href="#">내게시물</a>
+              <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
+              <a class="move-inf" href="">내 정보 수정</a>
             </div>
           </div>
-          <a class="view-heart" href="#">
+          <a class="view-heart" href="MyPage (check).html?tab=wishlist">
             <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
-            <span id="heart">찜한 가게</span>
+           <span id="heart" >찜한가게</span>
           </a>
         </div>
-
        <!--여기부터 복붙시작-->
         <div class="aside2">
           <div class="simple-ranking">
@@ -128,13 +127,52 @@
         
 
       <script>
-          
+
+      function renderComments() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const postId = urlParams.get('id');
+
+          if (!postId) return;
+
+          const allComments = JSON.parse(localStorage.getItem('comments')) || [];
+
+          const commentsForThisPost = allComments.filter(comment => String(comment.postID) === String(postId));
+
+          const container = document.querySelector("#comment-list");
+          if (!container) return;
+
+          container.innerHTML = "";
+
+          if (commentsForThisPost.length === 0) {
+            container.innerHTML = '<p>댓글이 없습니다.</p>';
+            return;
+          }
+
+        commentsForThisPost.forEach(comment => {
+            const commentDiv = document.createElement("div");
+            commentDiv.classList.add("comment-list");
+
+            const authorTag = document.createElement("p");
+            authorTag.classList.add("comment-author");
+            authorTag.textContent = comment.user;
+
+            const contentTag = document.createElement("p");
+            contentTag.classList.add("comment-content");
+            contentTag.textContent = comment.content;
+
+            commentDiv.appendChild(authorTag);   //  닉네임 추가
+            commentDiv.appendChild(contentTag);
+            container.appendChild(commentDiv);
+        });
+    }
+
+                  
           document.addEventListener("DOMContentLoaded", () => {
             const params = new URLSearchParams(window.location.search);
             const postId = params.get("id");
             console.log("받은 postId:", postId);
 
-
+         
             const posts = JSON.parse(localStorage.getItem("posts")) || [];
             console.log("posts 배열:", posts);
 
@@ -152,39 +190,12 @@
             document.getElementById("post-title").textContent = post.title;
             document.getElementById("post-content").textContent = post.content;
             document.getElementById("post-author").textContent = post.nickname;
+            renderComments();
 
 
 
 
-            // 댓글 로직 시작
-        const commentKey = `comments_${postId}`;
-        let comments = JSON.parse(localStorage.getItem(commentKey)) || [];
-
-        function renderComments() {
-          const list = document.getElementById("comment-list");
-          list.innerHTML = "";
-
-          if (comments.length === 0) {
-            list.innerHTML = "<li>아직 댓글이 없습니다.</li>";
-            return;
-          }
-
-          comments.forEach(comment => {
-            const li = document.createElement("li");
-            li.style.borderBottom = "1px solid #eee";
-            li.style.padding = "10px 0";
-            li.innerHTML = `
-              <strong>${comment.user}</strong>
-              <span style="font-size: 0.8em; color: gray;">
-                (${new Date(comment.createdAt).toLocaleString()})
-              </span><br>
-              ${comment.text}
-            `;
-            list.appendChild(li);
-          });
-        }
-
-        document.getElementById("submit-comment").addEventListener("click", () => {
+          document.getElementById("submit-comment").addEventListener("click", () => {
           const input = document.getElementById("comment-input");
           const text = input.value.trim();
 
@@ -198,21 +209,33 @@
             alert("로그인이 필요합니다!");
             return;
           }
+          const urlParams = new URLSearchParams(window.location.search);
+          const post_id = urlParams.get('id');  // "123" 이런 값
 
           const newComment = {
+            id: Date.now(),
+            postID: post_id,
             user: currentUser.nickname,
-            text: text,
-            createdAt: new Date().toISOString()
+            authorID: currentUser.id,
+            content: text,
+            createdAt: new Date().toISOString(),
           };
 
+          const comments = JSON.parse(localStorage.getItem("comments")) || [];
           comments.push(newComment);
-          localStorage.setItem(commentKey, JSON.stringify(comments));
+          localStorage.setItem("comments", JSON.stringify(comments));
 
           input.value = "";
           renderComments();
+
+          
+
+
+
         });
 
-        renderComments(); // 페이지 로드 시 댓글 표시
+
+        
 
           // 글 작성 버튼 이동
             document.getElementById("write").addEventListener("click", () => {

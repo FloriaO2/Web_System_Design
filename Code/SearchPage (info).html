@@ -37,11 +37,11 @@
                 <span id="nickname">닉네임</span>
               </div>
             <div class="account-description">
-              <div><a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=post">내게시물</a> | <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=chat">내댓글</a> | <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html?tab=review">내리뷰</a></div>
+              <div><a class="move-inf" href=" MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
               <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html">내정보 확인</a>
             </div>
           </div>
-          <a class="view-heart" href="../(1차 완성) MyPage (check)/index.html?tab=wishlist">
+          <a class="view-heart" href=" MyPage (check).html?tab=wishlist">
             <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
             <span id="heart">찜한 가게</span>
           </a>
@@ -96,9 +96,9 @@
                   <div class="p">
                     <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
                     <div class="personal-check">
-                      <button type="button" class="heart-button">
-                        <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
-                        <span id="heart">찜한 가게</span>
+                      <button type="button" class="heart-button" >
+                        <img src="../heart.png" alt="찜한 가게" id="heart-img-btn"/>
+                        <span>찜한 가게</span>
                       </button>
                       <button type="button" class="bookmark-button">
                         <img src="../empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
@@ -116,10 +116,10 @@
                 <a class="label" href="index.html">정보</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="../(1차 완성) SearchPage (menu)/index.html">메뉴</a>
+                <a class="label2" href="SearchPage (menu).html">메뉴</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="../(1차 완성) SearchPage (review)/index.html">리뷰</a>
+                <a class="label2" href="SearchPage (review).html">리뷰</a>
               </div>
             </div>
             <div class="info-main-content">
@@ -219,7 +219,104 @@
 
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>
-      const stores = [
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabToShow = urlParams.get("tab");
+
+        if (tabToShow) {
+          const tabGroup = document.querySelector("sl-tab-group");
+          if (tabGroup) {
+            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
+          }
+        }
+      });
+    </script>
+
+    <script>
+      // 찜한 가게 배열 불러오기 (없으면 빈 배열)
+    
+    function getFavorites() {
+      const fav = localStorage.getItem('favorites');
+      return fav ? JSON.parse(fav) : [];
+    }
+
+    // 찜한 가게 배열 저장하기
+    function saveFavorites(favorites) {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+
+    // 클릭 시 가게를 찜 목록에 추가하는 함수
+    function addFavorite(store) {
+      const favorites = getFavorites();
+
+    if (!favorites.some(fav => fav.id === store.id)) {
+    favorites.push(store);
+    saveFavorites(favorites);
+    alert('찜한 가게에 추가되었습니다.');
+  } else {
+    alert('이미 찜한 가게입니다.');
+  }
+}
+
+    // 이벤트 리스너 등록
+    document.querySelector('.heart-button').addEventListener('click', () => {
+      console.log('찜 버튼 클릭됨');
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      // 예시로 storeId를 'store123'이라고 가정
+      const store = {
+        id: 'store123',
+        name: '맛있는 김밥집',
+        address: '서울시 강남구',
+        authorID: currentUser.id, // 현재 로그인한 사용자의 ID
+        // 필요한 다른 정보들 추가 가능
+      };
+      addFavorite(store);
+    });
+
+    </script>
+
+    <script>
+     
+  // 단골 가게 배열 불러오기 (없으면 빈 배열)
+  function getBookmarks() {
+    const bookmarks = localStorage.getItem('bookmarks');
+    return bookmarks ? JSON.parse(bookmarks) : [];
+  }
+
+  // 단골 가게 배열 저장하기
+  function saveBookmarks(bookmarks) {
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }
+
+  // 클릭 시 가게를 단골 목록에 추가하는 함수
+  function addBookmark(storeId) {
+    const bookmarks = getBookmarks();
+    if (!bookmarks.includes(storeId)) {
+      bookmarks.push(storeId);
+      saveBookmarks(bookmarks);
+      alert('단골 가게에 추가되었습니다.');
+    } else {
+      alert('이미 단골 가게입니다.');
+    }
+  }
+
+  // 이벤트 리스너 등록
+  document.getElementById('bookmark').addEventListener('click', () => {
+    // 예시로 storeId를 'store456'이라고 가정
+    const storeId = 'store456';
+    addBookmark(storeId);
+  });
+</script>
+
+
+
+    
+
+
+
+    <script>
+       const stores = [
           { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
           { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
           { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
@@ -275,17 +372,7 @@
           const sorted = getSortedStores("rating");
           renderAsideStores(sorted); 
         };///////////////여기까지복붙
-      window.addEventListener("DOMContentLoaded", () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabToShow = urlParams.get("tab");
 
-        if (tabToShow) {
-          const tabGroup = document.querySelector("sl-tab-group");
-          if (tabGroup) {
-            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
-          }
-        }
-      });
     </script>
 
   </body>
