@@ -250,6 +250,8 @@ a {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+
 /* aside 2 랭킹정렬 관련 css 추가. 여기부터 추가 전까지 복붙하면돼여*/
 .store-list {
   list-style: none;

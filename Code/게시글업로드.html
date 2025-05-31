@@ -72,7 +72,7 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
-        <div class="aside">
+        <div class="aside"> <!--내페이지 이동-->
           <div class="account">
             <div class="account-image"></div>
             <div class="account-inf">
@@ -80,13 +80,13 @@
                 <span id="nickname">닉네임</span>
               </div>
             <div class="account-description">
-              <div><a class="move-inf" href="#">내게시물</a> | <a class="move-inf" href="#">내댓글</a> | <a class="move-inf" href="#">내리뷰</a></div>
-              <a class="move-inf" href="#">내게시물</a>
+              <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
+              <a class="move-inf" href="">내게시물</a>
             </div>
           </div>
-          <a class="view-heart" href="#">
+          <a class="view-heart" href="MyPage (check).html?tab=wishlist">
             <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
-            <span id="heart">찜한 가게</span>
+           <span id="heart" >찜한가게</span>
           </a>
         </div>
 
@@ -190,7 +190,9 @@
 
         </script>        
         
-         <script> 
+
+
+         <script> //aside2랭킹 관련
         const stores = [
           { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
           { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },

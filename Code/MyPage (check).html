@@ -135,267 +135,33 @@
             </div>
           </div>
           
+          
           <sl-tab-group>
-            <sl-tab slot="nav" panel="post">작성 게시물</sl-tab>
-            <sl-tab slot="nav" panel="chat">작성 댓글</sl-tab>
-            <sl-tab slot="nav" panel="review">작성 리뷰</sl-tab>
-            <sl-tab slot="nav" panel="wishlist">찜한 가게</sl-tab>
+          <sl-tab slot="nav" panel="post">작성 게시물</sl-tab>
+          <sl-tab slot="nav" panel="chat">작성 댓글</sl-tab>
+          <sl-tab slot="nav" panel="review">작성 리뷰</sl-tab>
+          <sl-tab slot="nav" panel="wishlist">찜한 가게</sl-tab>
 
-            <sl-tab-panel name="post">
-              <div class="post-list">
-                <div class="post-category category1">[카테고리 1]</div>
-                <div class="post-name">게시물 제목 1</div>
-              </div>
-              <div class="post-list">
-                <span class="post-category category1">[카테고리 1]</span>
-                <span class="post-name">게시물 제목 2</span>
-              </div>
-              <div class="post-list">
-                <span class="post-category category2">[카테고리 2]</span>
-                <span class="post-name">게시물 제목 3</span>
-              </div>
-              <div class="post-list">
-                <span class="post-category category3">[카테고리 3]</span>
-                <span class="post-name">게시물 제목 4</span>
-              </div>
-              <div class="post-list">
-                <span class="post-category category2">[카테고리 2]</span>
-                <span class="post-name">게시물 제목 5</span>
-              </div>
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </sl-tab-panel>
+          <sl-tab-panel name="post">
+            <div class="post-list-container"></div>
+            <div class="pagination post-pagination"></div> <!-- ✅ 여기에 페이지네이션 넣기 -->
+          </sl-tab-panel>
 
-            <sl-tab-panel name="chat">
-              <div class="chat-list">
-                <div class="chat-content">댓글 내용 1</div>
-                <div class="chat-post">
-                  <div class="post-category-in-chat category1">[카테고리 1]</div>
-                  <div class="post-name-in-chat">게시물 제목 1</div>
-                </div>
-              </div>
-              <div class="chat-list">
-                <div class="chat-content">댓글 내용 2</div>
-                <div class="chat-post">
-                  <div class="post-category-in-chat category1">[카테고리 1]</div>
-                  <div class="post-name-in-chat">게시물 제목 2</div>
-                </div>
-              </div>
-              <div class="chat-list">
-                <div class="chat-content">댓글 내용 3</div>
-                <div class="chat-post">
-                  <div class="post-category-in-chat category2">[카테고리 2]</div>
-                  <div class="post-name-in-chat">게시물 제목 3</div>
-                </div>
-              </div>
-              <div class="chat-list">
-                <div class="chat-content">댓글 내용 4</div>
-                <div class="chat-post">
-                  <div class="post-category-in-chat category3">[카테고리 3]</div>
-                  <div class="post-name-in-chat">게시물 제목 4</div>
-                </div>
-              </div>
-              <div class="chat-list">
-                <div class="chat-content">댓글 내용 5</div>
-                <div class="chat-post">
-                  <div class="post-category-in-chat category1">[카테고리 1]</div>
-                  <div class="post-name-in-chat">게시물 제목 5</div>
-                </div>
-              </div>
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </sl-tab-panel>
+          <sl-tab-panel name="chat">
+            <div class="comment-list-container"></div>
+            <div class="pagination chat-pagination"></div> <!-- ✅ 여기에 페이지네이션 넣기 -->
+          </sl-tab-panel>
 
-            <sl-tab-panel name="review">
-              <div class="review-list">
-                <div class="review-text">
-                  <div class="review-first-line">
-                    <div class="review-store">[식당 A]</div>
-                    <div class="review-star">
-                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                      <span>&nbsp;5.0</span>
-                    </div>
-                  </div>
-                  <div class="review-second-line">
-                    <div class="review-name">[제목 1]</div>
-                    <div class="review-content">내용 1</div>
-                  </div>
-                </div>
-                <div class="review-image-list">
-                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
-                </div>
-              </div>
-              <div class="review-list">
-                <div class="review-text">
-                  <div class="review-first-line">
-                    <div class="review-store">[식당 B]</div>
-                    <div class="review-star">
-                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                      <span>&nbsp;3.0</span>
-                    </div>
-                  </div>
-                  <div class="review-second-line">
-                    <div class="review-name">[제목 2]</div>
-                    <div class="review-content">내용 2</div>
-                  </div>
-                </div>
-                <div class="review-image-list">
-                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
-                </div>
-              </div>
-              <div class="review-list">
-                <div class="review-text">
-                  <div class="review-first-line">
-                    <div class="review-store">[식당 C]</div>
-                    <div class="review-star">
-                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                      <span>&nbsp;4.0</span>
-                    </div>
-                  </div>
-                  <div class="review-second-line">
-                    <div class="review-name">[제목 3]</div>
-                    <div class="review-content">내용 3</div>
-                  </div>
-                </div>
-                <div class="review-image-list">
-                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
-                </div>
-              </div>
-              <div class="review-list">
-                <div class="review-text">
-                  <div class="review-first-line">
-                    <div class="review-store">[식당 D]</div>
-                    <div class="review-star">
-                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                      <span>&nbsp;4.5</span>
-                    </div>
-                  </div>
-                  <div class="review-second-line">
-                    <div class="review-name">[제목 4]</div>
-                    <div class="review-content">내용 4</div>
-                  </div>
-                </div>
-                <div class="review-image-list">
-                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
-                </div>
-              </div>
-              <div class="review-list">
-                <div class="review-text">
-                  <div class="review-first-line">
-                    <div class="review-store">[식당 E]</div>
-                    <div class="review-star">
-                      <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                      <span>&nbsp;1.0</span>
-                    </div>
-                  </div>
-                  <div class="review-second-line">
-                    <div class="review-name">[제목 5]</div>
-                    <div class="review-content">내용 5</div>
-                  </div>
-                </div>
-                <div class="review-image-list">
-                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
-                  <img class="review-image" src="https://c.animaapp.com/kjYfscdy/img/image-1.svg" />
-                </div>
-              </div>
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </sl-tab-panel>
+          <sl-tab-panel name="review">
+            <div class="review-list-container"></div>
+            <div class="pagination review-pagination"></div> <!-- ✅ 여기에 페이지네이션 넣기 -->
+          </sl-tab-panel>
 
-            <sl-tab-panel name="wishlist">
-              <div class="love-list">
-                <div class="love-store">
-                  <div class="love-store-name">[식당 1]</div>
-                  <div class="love-score">
-                    <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                    <span>5.0</span>
-                  </div>
-                  <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
-                </div>
-                <a class="love-store-link" href="SearchPage (info).html">상세정보 보기 ▶</a>
-              </div>
-              <div class="love-list">
-                <div class="love-store">
-                  <div class="love-store-name">[식당 2]</div>
-                  <div class="love-score">
-                    <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                    <span>4.9</span>
-                  </div>
-                  <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
-                </div>
-                <a class="love-store-link" href="SearchPage (info).html">상세정보 보기 ▶</a>
-              </div>
-              <div class="love-list">
-                <div class="love-store">
-                  <div class="love-store-name">[식당 3]</div>
-                  <div class="love-score">
-                    <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star.svg" />
-                    <span>4.3</span>
-                  </div>
-                  <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
-                </div>
-                <a class="love-store-link" href="SearchPage (info).html">상세정보 보기 ▶</a>
-              </div>
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </sl-tab-panel>
-          </sl-tab-group>
+          <sl-tab-panel name="wishlist">
+            <div class="wishlist-list-container"></div>
+            <div class="pagination wishlist-pagination"></div> <!-- ✅ 여기에 페이지네이션 넣기 -->
+          </sl-tab-panel>
+        </sl-tab-group>
 
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -436,6 +202,105 @@
     
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabToShow = urlParams.get("tab");
+
+        if (tabToShow) {
+          const tabGroup = document.querySelector("sl-tab-group");
+          if (tabGroup) {
+            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
+          }
+        }
+      });
+      </script>
+
+
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (currentUser && currentUser.nickname) {
+          const nicknameDiv = document.querySelector(".account-detail-nickname");
+          if (nicknameDiv) {
+            nicknameDiv.textContent = currentUser.nickname;
+          }
+        } else {
+          console.log("로그인된 사용자 정보가 없습니다.");
+          // 필요하면 로그인 페이지로 리다이렉트
+          // window.location.href = "login.html";
+        }
+      });
+</script>
+
+
+
+  <script>/////////내 게시물 불러오기////////////
+  document.addEventListener("DOMContentLoaded", () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser) {
+    console.log("로그인된 사용자가 없습니다.");
+    return;
+  }
+
+  function loadItems(storageKey, listContainerClass, createItem) {
+    const allItems = JSON.parse(localStorage.getItem(storageKey)) || [];
+    const myItems = allItems.filter(item => String(item.authorID) === String(currentUser.id));
+    const container = document.querySelector(listContainerClass);
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    if (myItems.length === 0) {
+      container.innerHTML = `<p>작성한 ${storageKey}가 없습니다.</p>`;
+      return;
+    }
+
+    myItems.forEach(item => {
+      const el = createItem(item);
+      container.appendChild(el);
+    });
+  }
+
+  // 게시물
+  loadItems("posts", ".post-list-container", (post) => {
+    const div = document.createElement("div");
+    div.classList.add("post-list");
+    div.textContent = `[${post.category || "카테고리"}] ${post.title}`;
+    return div;
+  });
+
+  // 댓글
+  loadItems("comments", ".comment-list-container", (comment) => {
+    const div = document.createElement("div");
+    div.classList.add("comment-list");
+    div.textContent = comment.content;
+    return div;
+  });
+
+  // 리뷰
+  loadItems("reviews", ".review-list-container", (review) => {
+    const div = document.createElement("div");
+    div.classList.add("review-list");
+    div.textContent = `${review.title} - ⭐${review.rating || 0}\n${review.content}`;
+    return div;
+  });
+
+  // 찜한 가게
+  loadItems("favorites", ".wishlist-list-container", (item) => {
+    const div = document.createElement("div");
+    div.classList.add("wishlist-list");
+    div.textContent = item.name || "찜한 가게";
+    return div;
+  });
+});
+
+
+
+  // 페이지네이션 관련 코드는 따로 구현하거나, 기존 nav 유지*/
+</script>
+     
+
+      <script>///////////aside2랭킹/////
       const stores = [
           { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
           { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
@@ -488,22 +353,11 @@
         </ul>
       `;
     }
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
-
-      window.addEventListener("DOMContentLoaded", () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabToShow = urlParams.get("tab");
-
-        if (tabToShow) {
-          const tabGroup = document.querySelector("sl-tab-group");
-          if (tabGroup) {
-            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
-          }
-        }
-      });
+    window.onload = () => {
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted); 
+    };///////////////여기까지복붙
+    
     </script>
 
   </body>

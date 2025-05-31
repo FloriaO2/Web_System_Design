@@ -196,9 +196,11 @@
         const newUser = { nickname, id, password };
         users.push(newUser);
         localStorage.setItem("users", JSON.stringify(users));
-        console.log(localStorage.getItem("users"));// 디버깅용
+        
 
         alert("회원가입 완료!");
+        localStorage.setItem("currentUser", JSON.stringify({ id: newUser.id, nickname: newUser.nickname }));
+
         window.location.href = "signup_done.html";
       });
 
@@ -213,7 +215,6 @@
 
         if (matchedUser) {
           localStorage.setItem("currentUser", JSON.stringify({ id: matchedUser.id, nickname: matchedUser.nickname }));
-          console.log(localStorage.getItem("users")); // 디버깅용
           window.location.href = "Mainpage (user).html";
         } else {
           alert("아이디 또는 비밀번호가 틀렸습니다.");

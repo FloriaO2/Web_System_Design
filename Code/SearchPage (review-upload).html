@@ -124,7 +124,7 @@
 
           <div class="review-upload-title">리뷰 업로드</div>
           <div id="next-grade">다음 등급까지 필요한 게시글 수 :&nbsp;<span>N</span></div>
-          <button type="button" class="review-upload-button btn btn-dark">
+          <button type="button" class="review-upload-button btn btn-dark" id="saveReviewBtn">
             <div class="review-upload-button-text">리뷰 업로드</div>
           </button>
 
@@ -172,11 +172,11 @@
               <div class="review-upload-body-right">
                 <div class="input-field">
                   <div class="review-title-text">&nbsp;리뷰 제목</div>
-                  <input type="text" class="input" placeholder="제목을 입력하세요." aria-label="review-title" aria-describedby="review-title" />
+                  <input type="text" class="input" id="review-title" placeholder="제목을 입력하세요." aria-label="review-title" aria-describedby="review-title" />
                 </div>
                 <div class="input-field">
                   <div class="review-content-text">&nbsp;리뷰 내용</div>
-                  <textarea class="input" placeholder="내용을 입력하세요." aria-label="review-content"></textarea>
+                  <textarea class="input" id="review-content" placeholder="내용을 입력하세요." aria-label="review-content"></textarea>
                 </div>
               </div>
             </div>
@@ -278,6 +278,55 @@
         };///////////////여기까지복붙
 
     </script>
+
+        <script>///////리뷰 업로드 로컬스토리지
+            const saveBtn = document.getElementById('saveReviewBtn');
+            saveBtn.addEventListener('click', () => {
+            const title = document.getElementById('review-title').value.trim();
+            const content = document.getElementById('review-content').value.trim();
+          
+            if (!title || !content ) {
+              alert('제목과 내용 입력해주세요.');
+              return;
+            }
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          if (!currentUser || !currentUser.id || !currentUser.nickname) {
+            alert('사용자 정보가 없습니다.');
+            return;
+          }
+
+          const reviewObj = {
+            id: Date.now(),
+            title,
+            content,
+            rating: document.querySelector('sl-rating').value, // sl-rating 컴포넌트에서 별점 값 가져오기
+            storeName: '식당 A', // 실제로는 선택된 식당 이름을 가져와야 함
+            nickname: currentUser.nickname,
+            authorID: currentUser.id,
+          };
+
+          let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+          reviews.push(reviewObj);
+          localStorage.setItem('reviews', JSON.stringify(reviews));
+
+
+            alert('리뷰가 저장되었습니다.');
+
+            // 입력 필드 초기화
+            document.getElementById('review-title').value = '';
+            document.getElementById('review-content').value = '';
+           
+          });
+
+      </script>
+
+
+
+
+
+
+
+
     <!-- 이미지 업로드와 관련한 자바 스크립트 -->
     <script>
       const fileInput = document.getElementById("image-upload");
