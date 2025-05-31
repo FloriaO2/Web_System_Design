@@ -151,6 +151,7 @@ a {
 .web-name {
   text-decoration: none;
   color:black;
+  font-size:1.5vw;
 }
 
 .button {
@@ -668,6 +669,14 @@ footer {
   display:flex;
   width: 0.05vw !important;
   height: 21vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.horizontal-line {
+  display:flex;
+  width: 80vw !important;
+  height: 0.05vh;
   background-color: rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }

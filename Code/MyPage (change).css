@@ -151,6 +151,7 @@ a {
 .web-name {
   text-decoration: none;
   color:black;
+  font-size:1.5vw;
 }
 
 .button {
@@ -587,6 +588,7 @@ a {
   flex-direction: column;
   flex: 1;
   height:auto;
+  align-items: center;
 }
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -611,16 +613,17 @@ a {
   border-style: solid;
   border-color: #2c2c2c;
   border-width: 1px;
-  padding: 12px;
+  margin-top: 20px !important;
   display: flex;
   flex-direction: row;
   gap: 8px;
   align-items: center;
   justify-content: center;
+  min-width:100px;
   width: 9.51vw;
-  height: 4.98vh;
+  height: 6.98vh;
   position: relative;
-  left: 43.99vw;
+  left: 18.99vw;
   overflow: hidden;
 }
 
@@ -878,6 +881,14 @@ footer {
   display:flex;
   width: 0.05vw !important;
   height: 21vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.horizontal-line {
+  display:flex;
+  width: 80vw !important;
+  height: 0.05vh;
   background-color: rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }
@@ -1423,6 +1434,16 @@ footer {
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
+
+@media (max-width: 500px){
+
+}
+@media (min-width: 500px) and (max-width: 768px){
+
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
 
 /* 여기까지 수정 완료 */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */

@@ -151,6 +151,7 @@ a {
 .web-name {
   text-decoration: none;
   color:black;
+  font-size:1.5vw;
 }
 
 .button {
@@ -622,7 +623,7 @@ a {
   justify-content: flex-start;
   flex-shrink: 0;
   width: 30.56vw;
-  height: 8.12vh;
+  height: auto;
   min-width: 20.83vw;
   position: relative;
   margin-bottom:2vh;
@@ -673,7 +674,7 @@ a {
   color:#757575;
   text-align: left;
   font-family: var(--subheading-font-family, "Inter-Regular", sans-serif);
-  font-size: 1rem;
+  font-size: 1.5vw;
   line-height: 120%;
   font-weight: 400;
   position: relative;
@@ -951,6 +952,14 @@ footer {
   display:flex;
   width: 0.05vw !important;
   height: 21vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.horizontal-line {
+  display:flex;
+  width: 80vw !important;
+  height: 0.05vh;
   background-color: rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }
@@ -1495,6 +1504,310 @@ footer {
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
+@media (max-width: 500px){
+.account-detail {
+  background: rgb(255,255,255);
+  opacity: 0.8;
+  padding: 3.125vh 9vw;
+  display: flex;
+  flex-direction: row;
+  gap: 6vw;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  width:100vw;
+}
+.account-image-big {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image.svg);
+  min-width: 70px;
+  width: 32.15vh;
+  height: 32.15vh;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.account-detail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vh;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 60%;
+  height: auto;
+  min-width: 20.83vw;
+  position: relative;
+  margin-bottom:2vh;
+}
+.account-detail-first-line {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.account-detail-grade {
+  border-radius: 100px;
+  flex-shrink: 0;
+  width: 5.5vh;
+  height: 5.5vh;
+  position: relative;
+  overflow: visible;
+}
+.account-detail-nickname {
+  color: #1e1e1e;
+  text-align: left;
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
+  font-size: 15px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.account-detail-setting {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+  margin-left: 0;
+}
+.account-detail-second-line {
+  color:#757575;
+  text-align: left;
+  font-family: var(--subheading-font-family, "Inter-Regular", sans-serif);
+  font-size: 10px;
+  line-height: 120%;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+}
+@media (min-width: 500px) and (max-width: 768px){
+.account-detail {
+  background: rgb(255,255,255);
+  opacity: 0.8;
+  padding: 3.125vh 9vw;
+  display: flex;
+  flex-direction: row;
+  gap: 6vw;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  width:100vw;
+}
+
+.account-image-big {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image.svg);
+  min-width: 70px;
+  width: 32.15vh;
+  height: 32.15vh;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.account-detail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vh;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  min-width: 20.83vw;
+  position: relative;
+  margin-bottom:2vh;
+}
+
+.account-detail-first-line {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.account-detail-grade {
+  border-radius: 100px;
+  flex-shrink: 0;
+  width: 5.5vh;
+  height: 5.5vh;
+  position: relative;
+  overflow: visible;
+}
+
+.account-detail-nickname {
+  color: #1e1e1e;
+  text-align: left;
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
+  font-size: 3vw;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.account-detail-setting {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+  margin-left: 0;
+}
+
+.account-detail-second-line {
+  color:#757575;
+  text-align: left;
+  font-family: var(--subheading-font-family, "Inter-Regular", sans-serif);
+  font-size: 2vw;
+  line-height: 120%;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+.account-detail {
+  background: rgb(255,255,255);
+  opacity: 0.8;
+  padding: 3.125vh 9vw;
+  display: flex;
+  flex-direction: row;
+  gap: 6vw;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  width:100vw;
+}
+
+.account-image-big {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image.svg);
+  width: 32.15vh;
+  height: 32.15vh;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.account-detail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vh;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  min-width: 20.83vw;
+  position: relative;
+  margin-bottom:2vh;
+}
+
+.account-detail-first-line {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.account-detail-grade {
+  border-radius: 100px;
+  flex-shrink: 0;
+  width: 5.5vh;
+  height: 5.5vh;
+  position: relative;
+  overflow: visible;
+}
+
+.account-detail-nickname {
+  color: #1e1e1e;
+  text-align: left;
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.account-detail-setting {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+  margin-left: 0;
+}
+
+.account-detail-second-line {
+  color:#757575;
+  text-align: left;
+  font-family: var(--subheading-font-family, "Inter-Regular", sans-serif);
+  font-size: 1rem;
+  line-height: 120%;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+}
+
+@media (max-width: 768px){
+sl-tab::part(base) {
+  font-size: 10px;
+}
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+sl-tab-group::part(nav) {
+  width: 100% !important;
+  background: #fef7ff;
+  border-top:1px solid rgba(0, 0, 0, 0.2);
+  padding:0 5vw;
+  z-index: 1;
+  position:relative;
+}
+sl-tab-group::part(nav)::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+sl-tab-group::part(scroll-button) {
+  display: none !important;
+}
+sl-tab::part(base) {
+  font-size: 1.5vw;
+}
+}
 
 /* 여기까지 수정 완료 */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
