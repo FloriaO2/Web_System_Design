@@ -12,10 +12,9 @@
   <body>
     <div class="MyPage_check">
       <div class="entire-area">
-
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="../(1차 완성) MainPage (user)/index.html">웹사이트 이름</a>
+            <a class="web-name" href="MainPage (user).html">웹사이트 이름</a>
           </div>
           <div class="bottom-app-bar">
             <img id="search-img" src="../search.png" />
@@ -27,6 +26,49 @@
             <button type="button" class="btn btn-light">랭킹</button>
             <button type="button" class="btn btn-light">로그인/회원가입</button>
           </div>
+
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+          <div class="mobile-button-group">
+            <!-- 햄버거 버튼 -->
+            <button class="mobile-button btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+              <div class="navbar-toggler-icon"></div>
+            </button>
+
+            <!-- Offcanvas 메뉴 -->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+              <div class="offcanvas-close-area">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-header">
+                <div class="offcanvas-title" id="mobileMenuLabel">
+                  <a class="account-inf-mobile" href="#">
+                    <img src="../avatar.png" alt="등급" id="grade-img-mobile"/>
+                    <div id="nickname">닉네임&nbsp;</div>
+                    <img id="move-to-account-inf" src="../parentheses.png">
+                  </a>
+                </div>
+              </div>
+              
+              <div class="offcanvas-body">
+                <ul class="list-unstyled">
+                  <hr/>
+                  <li><a href="#">커뮤니티</a></li>
+                  <hr/>
+                  <li><a href="#">랭킹</a></li>
+                  <hr/>
+                  <li><a href="#">찜한 가게</a></li>
+                  <hr/>
+                </ul>
+              </div>
+              <div style="text-align: right;">
+                <button id="logout-button" class="button">
+                  <img class="logout-img" src="../logout.png">
+                  <span class="logout-text">로그아웃</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
         <div class="aside">
@@ -37,11 +79,11 @@
                 <span id="nickname">닉네임</span>
               </div>
             <div class="account-description">
-              <div><a class="move-inf" href="index.html?tab=post">내게시물</a> | <a class="move-inf" href="index.html?tab=chat">내댓글</a> | <a class="move-inf" href="index.html?tab=review">내리뷰</a></div>
-              <a class="move-inf" href="../(1차 완성) MyPage (check)/index.html">내정보 확인</a>
+              <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
+              <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
             </div>
           </div>
-          <a class="view-heart" href="index.html?tab=wishlist">
+          <a class="view-heart" href="MyPage (check).html?tab=wishlist">
             <img src="../heart.png" alt="찜한 가게" id="heart-img"/>
             <span id="heart">찜한 가게</span>
           </a>
@@ -85,7 +127,7 @@
               <div class="account-detail-first-line">
                 <img class="account-detail-grade" src="../avatar.png" />
                 <div class="account-detail-nickname">닉네임</div>
-                <sl-icon-button class="account-detail-setting" name="gear" label="Settings" href="../(1차 완성) MyPage (change)/index.html" target="_blank"></sl-icon-button>
+                <sl-icon-button class="account-detail-setting" name="gear" label="Settings" href="MyPage (change).html" target="_blank"></sl-icon-button>
               </div>
               <div class="account-detail-second-line">
                 작성게시물 개수 | 작성댓글 개수 | 작성리뷰 개수
@@ -312,7 +354,7 @@
                   </div>
                   <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
                 </div>
-                <a class="love-store-link" href="../(1차 완성) SearchPage (info)/index.html">상세정보 보기 ▶</a>
+                <a class="love-store-link" href="SearchPage (info).html">상세정보 보기 ▶</a>
               </div>
               <div class="love-list">
                 <div class="love-store">
@@ -323,7 +365,7 @@
                   </div>
                   <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
                 </div>
-                <a class="love-store-link" href="../(1차 완성) SearchPage (info)/index.html">상세정보 보기 ▶</a>
+                <a class="love-store-link" href="SearchPage (info).html">상세정보 보기 ▶</a>
               </div>
               <div class="love-list">
                 <div class="love-store">
@@ -334,7 +376,7 @@
                   </div>
                   <div class="love-store-content">음식 종류 | 학교 기준 도보거리 | 가격대</div>
                 </div>
-                <a class="love-store-link" href="../(1차 완성) SearchPage (info)/index.html">상세정보 보기 ▶</a>
+                <a class="love-store-link" href="SearchPage (info).html">상세정보 보기 ▶</a>
               </div>
               <nav aria-label="Page navigation">
                 <ul class="pagination">

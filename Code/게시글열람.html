@@ -27,6 +27,50 @@
             <button type="button" class="btn btn-light">랭킹</button>
             <button type="button" class="btn btn-light">로그인/회원가입</button>
           </div>
+
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+          <div class="mobile-button-group">
+            <!-- 햄버거 버튼 -->
+            <button class="mobile-button btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+              <div class="navbar-toggler-icon"></div>
+            </button>
+
+            <!-- Offcanvas 메뉴 -->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+              <div class="offcanvas-close-area">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-header">
+                <div class="offcanvas-title" id="mobileMenuLabel">
+                  <a class="account-inf-mobile" href="#">
+                    <img src="../avatar.png" alt="등급" id="grade-img-mobile"/>
+                    <div id="nickname">닉네임&nbsp;</div>
+                    <img id="move-to-account-inf" src="../parentheses.png">
+                  </a>
+                </div>
+              </div>
+              
+              <div class="offcanvas-body">
+                <ul class="list-unstyled">
+                  <hr/>
+                  <li><a href="#">커뮤니티</a></li>
+                  <hr/>
+                  <li><a href="#">랭킹</a></li>
+                  <hr/>
+                  <li><a href="#">찜한 가게</a></li>
+                  <hr/>
+                </ul>
+              </div>
+              <div style="text-align: right;">
+                <button id="logout-button" class="button">
+                  <img class="logout-img" src="../logout.png">
+                  <span class="logout-text">로그아웃</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
         <div class="aside">
