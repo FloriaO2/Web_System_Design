@@ -23,10 +23,44 @@
             <button type="button" class="btn btn-dark" id="search-btn">검색</button>
           </div>
           <div class="button-group">
-            <button type="button" class="btn btn-light">커뮤니티</button>
-            <button type="button" class="btn btn-light">랭킹</button>
-            <button type="button" class="btn btn-light">로그인/회원가입</button>
+            <button type="button" class="btn btn-light" onclick="location.href='커뮤니티.html'">커뮤니티</button>
+            <button type="button" class="btn btn-light" onclick="location.href='랭킹.html'">랭킹</button>
+            <button type="button" class="btn btn-light" onclick="location.href='signup.html'">로그인/회원가입</button>
           </div>
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+          <div class="mobile-button-group">
+            <!-- 햄버거 버튼 -->
+            <button class="mobile-button btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+              <div class="navbar-toggler-icon"></div>
+            </button>
+
+            <!-- Offcanvas 메뉴 -->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+              <div class="offcanvas-close-area">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-header">
+                <div class="offcanvas-title" id="mobileMenuLabel">
+                  <a class="account-inf-mobile" href="signup.html">
+                    <div id="nickname">로그인 / 회원가입 하러 가기&nbsp;</div>
+                    <!-- 아이디랑 클래스명 일단 안 바꿨음 ... -->
+                    <img id="move-to-account-inf" src="../parentheses.png">
+                  </a>
+                </div>
+              </div>
+              
+              <div class="offcanvas-body">
+                <ul class="list-unstyled">
+                  <hr/>
+                  <li><a href="커뮤니티.html">커뮤니티</a></li>
+                  <hr/>
+                  <li><a href="랭킹.html">랭킹</a></li>
+                  <hr/>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
         <div class="aside">
@@ -36,7 +70,7 @@
               <br />
               <div class="div3">비회원 접속 중입니다.</div>
             </div>
-            <button type="button" class="button btn btn-dark">로그인/회원가입</button>
+            <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
           </div>
         </div>
 

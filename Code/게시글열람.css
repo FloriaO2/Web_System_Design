@@ -1,5 +1,5 @@
-.main-page-test,
-.main-page-test * {
+.CommunityPage_view,
+.CommunityPage_view * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -23,7 +23,7 @@ a {
   box-sizing: border-box;
 }
 
-.main-page-test {
+.CommunityPage_view {
   position:relative;
   background-color: #ffffff;
   min-height: 100vh;
@@ -73,6 +73,7 @@ a {
   align-items: flex-start;
   gap: 8px;
   position: relative;
+  margin-right:1vw;
 }
 
 .bottom-app-bar {
@@ -212,14 +213,11 @@ a {
   margin:0 0.2vw;
 }
 
-
-
-
-
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
+/* 간단랭킹 별점순/리뷰순/단골순 이랑 mainbody에서의 전체/한식/양식/일식... a 태그에 해당 */
 .nav-pills .nav-link {
   border:0.1vw solid rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.537);
@@ -227,7 +225,6 @@ a {
   border-radius: 5px;
   margin-right: 4px;
 }
-
 
 /* 마우스를 갖다 댔을 때의 a 태그 */
 .nav-pills .nav-link:hover {
@@ -255,9 +252,6 @@ a {
   background-repeat: no-repeat;
   background-size: contain;
 }
-
-
-
 
 
 /* aside 2 랭킹정렬 관련 css 추가. 여기부터 추가 전까지 복붙하면돼여*/
@@ -298,21 +292,26 @@ a {
 }
 
 .store-name {
-  font-weight: 500;
   font-size:18px !important;
-  
+  position: relative;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: var(--heading-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: rgba(30, 30, 30, 1);;
+  /*font-size: 24px;*/
+  letter-spacing: -0.48px;
+  line-height: 120.00000476837158%;
+  font-style: normal;
 }
 
 .store-rating {
   color: black;
   font-weight: bold;
 }
-
-
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-
 
 .div2 {
   display: flex;
@@ -558,9 +557,6 @@ a {
   font-style: normal;
 }
 
-/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-/* 여기부터 수정 시작 */
-
 .mainbody {
   position:relative;
   width:55.28vw;
@@ -569,195 +565,159 @@ a {
   flex-direction: column;
   flex: 1;
   height:auto;
-}
-
-/* mainbody에서의 전체/한식/양식/일식... 등 음식 종류 분류 */
-.nav-tabs {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 1.75vw;
-}
-
-.nav-tabs > li > a {
-  text-decoration: none;
-  color:black;
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin-top: 3vh;
-}
-
-/* mainbody에서의 식당 소개 카드 모음 전체 영역 */
-.div4 {
-  display: flex;
-  flex-direction: column;
-  width:55.28vw;
-  height:auto;
-  align-items: flex-start;
-  gap: 48px;
-  padding: 32px 0px;
-  position: relative;
-  background-color: rgba(255, 255, 255, 1);
-}
-
-/* mainbody에서의 식당 소개 카드 모음 전체 영역 -> 정말로 카드 있는 부분만 */
-.cards {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 0px 7vw;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  min-height: 100%;
-  flex-grow: 1;
-  overflow: auto;
-}
-
-/* mainbody에서의 식당 소개 카드 */
-.card {
-  display: flex;
-  flex-wrap: wrap;
-  min-width: 240px;
   align-items: center;
-  gap: 24px;
-  padding: 24px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: rgba(68, 68, 68, 1);
-  flex-direction: row !important;
 }
 
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 이미지 영역 */
-.card-image {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 11.11vw;
-  height: 20.67vh;
-  background-size: cover;
-  background-position: 50% 50%;
-}
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* 여기부터 수정 시작 */
 
-p {
-  margin:0 !important;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
-.body {
+  #notice{
+  background: #a9b5ef;
+  border-radius: 4px;
+  padding: 1vh 2vw;
+  margin-top:3vh;
   display: flex;
-  flex-direction: column;
-  min-width: 160px;
-  align-items: flex-start;
-  gap: var(--size-space-400);
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 7vh;
+  position: relative;
+  box-shadow: var(
+    --m3-elevation-light-3-box-shadow,
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3),
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15)
+  );
+}
+
+#notice img {
+    width: auto;  /* 원하는 크기로 조절 가능 */
+    height: 5vh;
+    vertical-align: middle;
+    margin-right: 1vw;
+  }
+
+#notice-text {
+  height:100%;
+  display:flex;
+  align-items: center;
+  color: #ffffff;
+  text-align: left;
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
+  font-size: 1.2rem;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  font-weight: 600;
   position: relative;
   flex: 1;
-  flex-grow: 1;
+  justify-content: flex-start;
 }
 
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 전체 영역 */
-.text {
+#button-container {
+  position:relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
-.store-name {
-  position: relative;
-  align-self: stretch;
-  margin-top: -1.00px;
-  font-family: var(--heading-font-family, "Inter", Helvetica);
-  font-weight: 600;
-  color: rgba(30, 30, 30, 1);;
-  font-size: 24px;
-  letter-spacing: -0.48px;
-  line-height: 120.00000476837158%;
-  font-style: normal;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 별점 (별 이미지) */
-.rating {
-  display: flex;
-  width: 18.32vw;
-  height: 3.75vh;
-  align-items: center !important;
   justify-content: space-between;
-  position: relative;
+  width: 100%; /* 전체 너비 차지 */
+  align-items: center;
+  gap: 12px;
+  padding: 4vh 4vw;
 }
 
-.rating2 {
+#write {
+  width:7vw;
+  height:5vh;
+  background-color: white;
+  color:black;
+  padding:1vh 0 !important;
+}
+
+#postlist{
+  width:7vw;
+  height:5vh;
+  background-color: rgb(229, 194, 245);
+  color:black;
+  padding:1vh 0 !important;
+}
+
+#search-box {
   display: flex;
-  width: auto;
-  height:100%;
-  align-items: center !important;
-  gap:4px;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 별점 (점수) */
-.element {
-  position: relative;
-  width: 6.8vw;
-  height: 4.27vh;
-  margin-top: -3.50px;
-  margin-bottom: -1.50px;
-  font-weight: var(--subtitle-font-weight);
-  color: #000000;
-  font-size: 1.3rem;
-  line-height: var(--subtitle-line-height);
-  white-space: nowrap;
-  font-family: var(--subtitle-font-family);
-  letter-spacing: var(--subtitle-letter-spacing);
-  font-style: var(--subtitle-font-style);
-  text-align:center;
-  align-self:center;
-}
-
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 */
-.p {
-    position: relative;
-  align-self: stretch;
-  font-weight: 400;
-  color: var(--color-text-default-secondary);
+  position:relative;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1vh 1vw;
   font-size: 16px;
-  line-height: 22.4px;
-  font-family: "Inter", Helvetica;
-  letter-spacing: 0;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  width: 20vw;
+  height:6vh;
+  box-sizing: border-box;
+  margin-right: 8px;
+  background: rgba(210, 213, 255, 0.66);
+  border-radius: 28px;
+  overflow: hidden;
 }
 
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 (종류, 거리, 가격) */
-.store-simple-info {
-    color: #757575;
-  font-family: var(--body-base-font-family, "Inter", Helvetica);
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 139.9999976158142%;
-  font-size: 16px;
-}
+#search-icon {
+  vertical-align: middle;
+  width: 3vw;
+  height: 5vh;
+  vertical-align: middle;
+  cursor: pointer;
+ }
 
-/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 (상세 페이지 이동) */
-.go-to-searchPage {
-    color: #757575;
-  text-decoration: underline;
-  font-family: var(--body-link-font-family, "Inter", Helvetica);
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 400;
-  line-height: 139.9999976158142%;
-  font-size: 16px;
-}
+  
+  #search-input {
+    padding-left:1vw;
+    font-size: 16px;
+    border:none;
+    outline: none;
+    width: 250px;
+    box-sizing: border-box;
+    margin-right: 8px;
+    background: rgba(210, 213, 255, 0.06);
+  }
+  
 
+
+
+
+  #post-detail-container {
+      width: 80%;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-family: sans-serif;
+    }
+    #post-header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    #post-content {
+      margin-bottom: 30px;
+      white-space: pre-line;
+    }
+    #comments-section {
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    .comment {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 5px;
+      padding: 8px 14px;
+    }
 /* 여기까지 수정 완료 */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
@@ -857,8 +817,6 @@ footer {
 
 
 
-
-
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■추가 시작■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -875,7 +833,7 @@ footer {
 .aside2 {
   display: none !important;
 }
-.MainPage_user {
+.CommunityPage_view {
   background-color: #ffffff;
   min-height: 100vh;
   height:auto;

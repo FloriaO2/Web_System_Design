@@ -73,6 +73,7 @@ a {
   align-items: flex-start;
   gap: 8px;
   position: relative;
+  margin-right:1vw;
 }
 
 .bottom-app-bar {
@@ -790,7 +791,7 @@ footer {
 .aside2 {
   display: none !important;
 }
-.MainPage_user {
+.main-page-test {
   background-color: #ffffff;
   min-height: 100vh;
   height:auto;

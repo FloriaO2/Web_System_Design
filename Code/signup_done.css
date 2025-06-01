@@ -73,6 +73,7 @@ a {
   align-items: flex-start;
   gap: 8px;
   position: relative;
+  margin-right:1vw;
 }
 
 .bottom-app-bar {
@@ -555,36 +556,59 @@ a {
   font-style: normal;
 }
 
-/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-/* 여기부터 수정 시작 */
-h2{
-  font-weight:bold !important;
-}
-#welcomeText{
-  width:500px;
-  height:590px;
-  padding:20px;
-  margin-top: 80px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-#welcomeText .button{
-  font-size:20px !important;
-}
 .mainbody {
   position:relative;
-  justify-content: center;
-  align-items: center;
   width:55.28vw;
   left: 17.36vw;
   display:flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   flex: 1;
   height:auto;
 }
 
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* 여기부터 수정 시작 */
 
+.welcome {
+  position: relative;
+  width:55vw;
+  height:auto;
+  margin-top: 9vh;
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome > img {
+  margin-bottom:5vh;
+}
+
+.welcome-text {
+  font-size:1.5vw;
+  font-weight:600;
+  font-family: var(
+    --var-sds-typography-heading-font-family,
+    "Inter-SemiBold",
+    sans-serif
+  );
+  line-height: 200%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom:5vh;
+}
+
+.welcome .button{
+  margin-top:5vh;
+  margin-bottom:10vh;
+  padding:1vh 1vw !important;
+  font-size:1.2vw !important;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.75);
+}
 
 /* 여기까지 수정 완료 */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -1220,6 +1244,212 @@ footer {
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
+
+@media (max-width: 300px){
+.welcome {
+  position: relative;
+  width:auto;
+  height:auto;
+  margin-top: 9vh;
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-up > img {
+  margin-bottom:5vh;
+  width:60vw;
+  height:auto;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size:11px;
+  font-weight:600;
+  font-family: var(
+    --var-sds-typography-heading-font-family,
+    "Inter-SemiBold",
+    sans-serif
+  );
+  line-height: 200%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom:5vh;
+  margin-left:3vw;
+}
+
+.welcome .button{
+  margin-top:5vh;
+  margin-bottom:10vh;
+  padding:1vh 1vw !important;
+  font-size:9px !important;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+}
+@media (min-width: 300px) and (max-width: 450px){
+.welcome {
+  position: relative;
+  width:auto;
+  height:auto;
+  margin-top: 9vh;
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-up > img {
+  margin-bottom:5vh;
+  width:50vw;
+  height:auto;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size:3.7vw;
+  font-weight:600;
+  font-family: var(
+    --var-sds-typography-heading-font-family,
+    "Inter-SemiBold",
+    sans-serif
+  );
+  line-height: 200%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom:5vh;
+  margin-left:3vw;
+}
+
+.welcome .button{
+  margin-top:5vh;
+  margin-bottom:10vh;
+  padding:1vh 1vw !important;
+  font-size:3vw !important;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+}
+@media (min-width: 450px) and (max-width: 768px){
+.welcome {
+  position: relative;
+  width:auto;
+  height:auto;
+  margin-top: 9vh;
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-up {
+  display: flex;
+}
+
+.welcome-up > img {
+  margin-bottom:5vh;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size:15px;
+  font-weight:600;
+  font-family: var(
+    --var-sds-typography-heading-font-family,
+    "Inter-SemiBold",
+    sans-serif
+  );
+  line-height: 200%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom:5vh;
+  margin-left:3vw;
+}
+
+.welcome .button{
+  margin-top:5vh;
+  margin-bottom:10vh;
+  padding:1vh 1vw !important;
+  font-size:12px !important;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+.welcome {
+  position: relative;
+  width:auto;
+  height:auto;
+  margin-top: 9vh;
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-up {
+  display: flex;
+}
+
+.welcome-up > img {
+  margin-bottom:5vh;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size:15px;
+  font-weight:600;
+  font-family: var(
+    --var-sds-typography-heading-font-family,
+    "Inter-SemiBold",
+    sans-serif
+  );
+  line-height: 200%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom:5vh;
+  margin-left:3vw;
+}
+
+.welcome .button{
+  margin-top:5vh;
+  margin-bottom:10vh;
+  padding:1vh 1vw !important;
+  font-size:12px !important;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+}
 
 /* 여기까지 수정 완료 */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */

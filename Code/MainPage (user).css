@@ -1,3 +1,7 @@
+/*font-family: var(--m3-title-medium-font-family, "Roboto-Medium", sans-serif);
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);*/
+
 .MainPage_user,
 .MainPage_user * {
   -webkit-font-smoothing: antialiased;
@@ -73,6 +77,7 @@ a {
   align-items: flex-start;
   gap: 8px;
   position: relative;
+  margin-right:1vw;
 }
 
 .bottom-app-bar {
