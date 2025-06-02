@@ -727,8 +727,13 @@ sl-tab-panel::part(base) {
 
 .post-category {
   font-weight: 900;
-  width:10vw;
+  width:15vw;
+  margin-right:3vw;
   font-size:1rem;
+}
+
+.category0 {
+  color:rgb(0, 0, 0);
 }
 
 .category1 {
@@ -755,6 +760,7 @@ sl-tab-panel::part(base) {
 
 .chat-content {
   padding-bottom:1vh;
+  font-weight: 600;
 }
 
 .chat-post {
@@ -764,7 +770,7 @@ sl-tab-panel::part(base) {
 
 .post-category-in-chat {
   font-weight: 900;
-  width:6vw;
+  width:10vw;
 }
 
 .review-list {
@@ -774,14 +780,15 @@ sl-tab-panel::part(base) {
   justify-content: space-between;
 }
 
-.review-list:last-child {
+/*.review-list:last-child {
   border-bottom: none;
-}
+}*/
 
 .review-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height:10vh;
 }
 
 .review-first-line {
@@ -808,7 +815,8 @@ sl-tab-panel::part(base) {
 
 .review-name {
   font-weight: 900;
-  width:6vw;
+  width:auto;
+  margin-right:3vw;
 }
 
 .review-content {
@@ -819,6 +827,7 @@ sl-tab-panel::part(base) {
   width:5vw;
   height:10vh;
   object-fit: contain;
+  margin-left:5px;
 }
 
 .love-list {
@@ -840,12 +849,14 @@ sl-tab-panel::part(base) {
 
 .love-store-name {
   font-weight: 900;
-  width:7vw;
+  width:auto;
+  margin-right:3vw;
   font-size:1rem;
 }
 
 .love-score {
-  width:5vw;
+  width:auto;
+  margin-right:3vw;
   height:100%;
 }
 

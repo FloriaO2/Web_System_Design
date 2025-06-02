@@ -142,7 +142,7 @@
                     <div class="personal-check">
                       <button type="button" class="heart-button" >
                         <img src="image/heart.png" alt="찜한 가게" id="heart-img-btn"/>
-                        <span>찜한 가게</span>
+                        <span id="heart">찜한 가게</span>
                       </button>
                       <button type="button" class="bookmark-button">
                         <img src="image/empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
@@ -315,6 +315,11 @@
         address: '서울시 강남구',
         authorID: currentUser.id, // 현재 로그인한 사용자의 ID
         // 필요한 다른 정보들 추가 가능
+        // 밑에 새로 추가
+        rating: 4.5, // 별점
+        category: '분식', // 음식 종류
+        distance: '5분',  // 도보 거리
+        priceRange: '₩₩'  // 가격대
       };
       addFavorite(store);
     });

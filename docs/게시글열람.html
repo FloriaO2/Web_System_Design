@@ -264,6 +264,9 @@
             authorID: currentUser.id,
             content: text,
             createdAt: new Date().toISOString(),
+            // 수정본
+            chatPostTitle: posts.find(post => String(post.id) === String(post_id)).title,
+            chatPostCategory: posts.find(post => String(post.id) === String(post_id)).category
           };
 
           const comments = JSON.parse(localStorage.getItem("comments")) || [];

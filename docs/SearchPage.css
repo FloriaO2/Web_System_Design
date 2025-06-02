@@ -692,7 +692,7 @@ sl-tag::part(base) {
 .search-nav {
   display: flex;
   justify-content: flex-end;
-  padding-right:3vw;
+  padding-right:3vh;
 }
 
 .search-nav > li > a {
@@ -1055,6 +1055,7 @@ footer {
   width:100%;
   display:flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
   height:auto;
   left:0 !important;
@@ -1465,6 +1466,10 @@ footer {
 @media (min-width: 1024px) {
 .nav {
   padding:1vh 0 !important;
+}
+
+.search-nav {
+  padding:2.5vh 3vw !important;
 }
 }
 

@@ -573,6 +573,7 @@ a {
   flex: 1;
   height:auto;
   align-items: center;
+  justify-content: center;
 }
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -677,8 +678,16 @@ a {
     background: rgba(210, 213, 255, 0.06);
   }
   
+  #post-container {
+    width:55vw;
+    display: flex;
+    justify-content: center;
+  }
 
-
+  #post-table {
+    margin-top:2vh;
+    margin-bottom:5vh;
+  }
 
 
 /* 여기까지 수정 완료 */

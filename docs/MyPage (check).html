@@ -264,36 +264,213 @@
   }
 
   // 게시물
-  loadItems("posts", ".post-list-container", (post) => {
+  /*loadItems("posts", ".post-list-container", (post) => {
     const div = document.createElement("div");
     div.classList.add("post-list");
     div.textContent = `[${post.category || "카테고리"}] ${post.title}`;
     return div;
-  });
+  });*/
+
+  const categoryMap = {
+  "기타": 0,
+  "정보글": 1,
+  "눈송이 밥친구": 2,
+  "질문글": 3};
+
+  loadItems("posts", ".post-list-container", (post) => {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("post-list");
+
+  const categoryDiv = document.createElement("div");
+
+  const categoryName = post.category || "기타";
+  const categoryNum = categoryMap[categoryName] || 0;
+
+  categoryDiv.classList.add("post-category", `category${categoryNum}`);
+  categoryDiv.textContent = `[${categoryName}]`;
+
+  const titleDiv = document.createElement("div");
+  titleDiv.classList.add("post-name");
+  titleDiv.textContent = post.title;
+
+  wrapper.appendChild(categoryDiv);
+  wrapper.appendChild(titleDiv);
+
+  return wrapper;
+});
 
   // 댓글
-  loadItems("comments", ".comment-list-container", (comment) => {
+  /*loadItems("comments", ".comment-list-container", (comment) => {
     const div = document.createElement("div");
     div.classList.add("comment-list");
     div.textContent = comment.content;
     return div;
-  });
+  });*/
+  loadItems("comments", ".comment-list-container", (comment) => {
+  const chatListDiv = document.createElement("div");
+  chatListDiv.classList.add("chat-list");
+
+  const chatContentDiv = document.createElement("div");
+  chatContentDiv.classList.add("chat-content");
+  chatContentDiv.textContent = comment.content;
+
+  const chatPostDiv = document.createElement("div");
+  chatPostDiv.classList.add("chat-post");
+
+  const categoryDiv = document.createElement("div");
+  categoryDiv.classList.add("post-category-in-chat");
+
+  const categoryName = comment.chatPostCategory || "기타";
+  const categoryNum = categoryMap[categoryName] || 0;
+
+  categoryDiv.classList.add(`category${categoryNum}`);
+  categoryDiv.textContent = `[${categoryName}]`;
+
+  const postNameDiv = document.createElement("div");
+  postNameDiv.classList.add("post-name-in-chat");
+  postNameDiv.textContent = comment.chatPostTitle || "게시물 제목";
+
+  chatPostDiv.appendChild(categoryDiv);
+  chatPostDiv.appendChild(postNameDiv);
+
+  chatListDiv.appendChild(chatContentDiv);
+  chatListDiv.appendChild(chatPostDiv);
+
+  return chatListDiv;
+});
 
   // 리뷰
-  loadItems("reviews", ".review-list-container", (review) => {
+  /*loadItems("reviews", ".review-list-container", (review) => {
     const div = document.createElement("div");
     div.classList.add("review-list");
     div.textContent = `${review.title} - ⭐${review.rating || 0}\n${review.content}`;
     return div;
-  });
+  });*/
+  loadItems("reviews", ".review-list-container", (review) => {
+  const reviewDiv = document.createElement("div");
+  reviewDiv.classList.add("review-list");
+
+  const reviewTextDiv = document.createElement("div");
+  reviewTextDiv.classList.add("review-text");
+
+  // 첫 줄: 식당명 + 별점
+  const firstLine = document.createElement("div");
+  firstLine.classList.add("review-first-line");
+
+  const storeDiv = document.createElement("div");
+  storeDiv.classList.add("review-store");
+  storeDiv.textContent = `[${review.storeName}]`;
+
+  const starDiv = document.createElement("div");
+  starDiv.classList.add("review-star");
+
+  // Shoelace의 sl-rating 엘리먼트 생성
+  const slRating = document.createElement("sl-rating");
+  slRating.value = parseFloat(review.rating) || 0; // 별점 값 동적 설정
+  slRating.setAttribute("readonly", "");           // 읽기 전용으로 설정
+
+  starDiv.appendChild(slRating);
+
+  // 숫자 점수도 같이 보여주고 싶으면 아래 주석 해제
+  const starSpan = document.createElement("span");
+  starSpan.textContent = ` ${parseFloat(review.rating).toFixed(1) || 0}`;
+  starDiv.appendChild(starSpan);
+
+  firstLine.appendChild(storeDiv);
+  firstLine.appendChild(starDiv);
+  reviewTextDiv.appendChild(firstLine);
+
+  // 두 번째 줄: 제목 + 내용 (둘 중 하나라도 있으면 보여줌)
+  if (review.title || review.content) {
+    const secondLine = document.createElement("div");
+    secondLine.classList.add("review-second-line");
+
+    if (review.title) {
+      const titleDiv = document.createElement("div");
+      titleDiv.classList.add("review-name");
+      titleDiv.textContent = `[${review.title}]`;
+      secondLine.appendChild(titleDiv);
+    }
+
+    if (review.content) {
+      const contentDiv = document.createElement("div");
+      contentDiv.classList.add("review-content");
+      contentDiv.textContent = review.content;
+      secondLine.appendChild(contentDiv);
+    }
+
+    reviewTextDiv.appendChild(secondLine);
+  }
+
+  reviewDiv.appendChild(reviewTextDiv);
+
+  // 이미지 처리
+  const imageListDiv = document.createElement("div");
+  imageListDiv.classList.add("review-image-list");
+
+  if (Array.isArray(review.images)) {
+    review.images.forEach(src => {
+      const img = document.createElement("img");
+      img.className = "review-image";
+      img.src = src;
+      imageListDiv.appendChild(img);
+    });
+  }
+
+  reviewDiv.appendChild(imageListDiv);
+
+  return reviewDiv;
+});
 
   // 찜한 가게
-  loadItems("favorites", ".wishlist-list-container", (item) => {
+  /*loadItems("favorites", ".wishlist-list-container", (item) => {
     const div = document.createElement("div");
     div.classList.add("wishlist-list");
     div.textContent = item.name || "찜한 가게";
     return div;
-  });
+  });*/
+  loadItems("favorites", ".wishlist-list-container", (store) => {
+  const loveListDiv = document.createElement("div");
+  loveListDiv.classList.add("love-list");
+
+  const loveStoreDiv = document.createElement("div");
+  loveStoreDiv.classList.add("love-store");
+
+  const nameDiv = document.createElement("div");
+  nameDiv.classList.add("love-store-name");
+  nameDiv.textContent = `[${store.name}]`;
+
+  const scoreDiv = document.createElement("div");
+  scoreDiv.classList.add("love-score");
+
+  const starImg = document.createElement("img");
+  starImg.classList.add("star");
+  starImg.src = "https://c.animaapp.com/kjYfscdy/img/star.svg";
+
+  const scoreSpan = document.createElement("span");
+  scoreSpan.textContent = `${store.rating || "0.0"} 점`;
+
+  scoreDiv.appendChild(starImg);
+  scoreDiv.appendChild(scoreSpan);
+
+  const contentDiv = document.createElement("div");
+  contentDiv.classList.add("love-store-content");
+  contentDiv.textContent = `${store.category || "음식"} | ${store.distance || "거리"} | ${store.priceRange || "가격대"}`;
+
+  loveStoreDiv.appendChild(nameDiv);
+  loveStoreDiv.appendChild(scoreDiv);
+  loveStoreDiv.appendChild(contentDiv);
+
+  const link = document.createElement("a");
+  link.classList.add("love-store-link");
+  link.href = `store-detail.html?id=${store.id}`; // 상세 페이지가 있다면
+  link.textContent = "상세정보 보기 ▶";
+
+  loveListDiv.appendChild(loveStoreDiv);
+  loveListDiv.appendChild(link);
+
+  return loveListDiv;
+});
 });
 
 

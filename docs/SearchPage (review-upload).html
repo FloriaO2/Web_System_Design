@@ -282,7 +282,7 @@
     </script>
 
         <script>///////리뷰 업로드 로컬스토리지
-            const saveBtn = document.getElementById('saveReviewBtn');
+            /*const saveBtn = document.getElementById('saveReviewBtn');
             saveBtn.addEventListener('click', () => {
             const title = document.getElementById('review-title').value.trim();
             const content = document.getElementById('review-content').value.trim();
@@ -318,8 +318,69 @@
             document.getElementById('review-title').value = '';
             document.getElementById('review-content').value = '';
            
-          });
+          });*/
+          const saveBtn = document.getElementById('saveReviewBtn');
+saveBtn.addEventListener('click', async () => {
+  const title = document.getElementById('review-title').value.trim();
+  const content = document.getElementById('review-content').value.trim();
 
+  /*if (!title || !content) {
+    alert('제목과 내용 입력해주세요.');
+    return;
+  }*/
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (!currentUser || !currentUser.id || !currentUser.nickname) {
+    alert('사용자 정보가 없습니다.');
+    return;
+  }
+
+  const fileInput = document.getElementById("image-upload");
+  const files = Array.from(fileInput.files);
+
+  // 이미지들을 base64로 변환하는 Promise 배열
+  const imagePromises = files.map(file => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = e => resolve(e.target.result); // base64 문자열
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  });
+
+  // 모든 이미지 읽기 완료되면 저장 진행
+  const imageDataUrls = await Promise.all(imagePromises);
+
+  const reviewObj = {
+    id: Date.now(),
+    title,
+    content,
+    rating: document.querySelector('sl-rating').value,
+    storeName: '식당 A',
+    nickname: currentUser.nickname,
+    authorID: currentUser.id,
+    images: imageDataUrls, // 이미지 추가
+  };
+
+  let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+  reviews.push(reviewObj);
+  localStorage.setItem('reviews', JSON.stringify(reviews));
+
+  alert('리뷰가 저장되었습니다.');
+
+  // 입력 필드 초기화
+  document.getElementById('review-title').value = '';
+  document.getElementById('review-content').value = '';
+  fileInput.value = ''; // 이미지도 초기화
+
+  // 캐러셀 초기화 (만약 있다면)
+  const carouselInner = document.getElementById("carousel-inner");
+  const carouselContainer = document.getElementById("carousel-container");
+  const uploadTrigger = document.getElementById("review-upload-img");
+  if (carouselInner) carouselInner.innerHTML = '';
+  if (carouselContainer) carouselContainer.style.display = 'none';
+  if (uploadTrigger) uploadTrigger.style.display = 'block';
+});
       </script>
 
 
