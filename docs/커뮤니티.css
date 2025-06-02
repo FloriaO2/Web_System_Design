@@ -248,7 +248,7 @@ a {
   transform: translateY(-50%);
   width: 1.7vw;
   height: 2.5vh;
-  background-image: url('../check.png');
+  background-image: url('image/check.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -875,7 +875,7 @@ footer {
 }
 .navbar-toggler-icon {
   background-color:rgba(216, 223, 255, 1) !important;
-  background-image: url('../menu.png') !important;
+  background-image: url('image/menu.png') !important;
   background-size:5vw 2vh;
   border-radius: 0 !important;
   width:5vw;
@@ -893,7 +893,7 @@ footer {
 }
 .navbar-toggler-icon {
   background-color:rgba(216, 223, 255, 1) !important;
-  background-image: url('../menu.png') !important;
+  background-image: url('image/menu.png') !important;
   background-size:5vw 2vh;
   border-radius: 0 !important;
   width:30px !important;
@@ -911,7 +911,7 @@ footer {
 }
 .navbar-toggler-icon {
   background-color:rgba(216, 223, 255, 1) !important;
-  background-image: url('../menu.png') !important;
+  background-image: url('image/menu.png') !important;
   background-size:5vw 2vh;
   border-radius: 0 !important;
   width:4.5vw !important;
