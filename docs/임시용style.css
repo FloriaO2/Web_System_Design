@@ -51,6 +51,7 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 90vw;
+  min-height:60px;
   height: 19.17vh;
   top: 0;
   left: 0;
@@ -694,7 +695,8 @@ footer {
   align-items: center;
   width: 100% !important; 
   margin:0 !important; 
-  overflow-x: hidden !important;
+  /* overflow-x: hidden; sticky 작동하려면 overflow:visible로 덮어씌워야 함..?*/
+  overflow: visible !important;
 }
 .header {
   position: sticky;

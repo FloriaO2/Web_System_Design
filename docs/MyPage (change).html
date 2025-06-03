@@ -122,16 +122,21 @@
           <!-- 여기부터 수정 시작 -->
 
           <div class="change-title">내정보 수정</div>
-          <button type="button" class="change-button btn btn-dark">
+          <!--<button type="button" class="change-button btn btn-dark">
             <div class="change-button-text">수정 완료</div>
+          </button>-->
+          <button type="button" class="change-button btn btn-dark">
+            수정 완료
           </button>
           <div class="change-body">
             <div class="change-body-left">
-              <img class="account-image-change" src="https://c.animaapp.com/kjYfscdy/img/image.svg" />
-              <div class="account-image-change-button">
+              <div class="account-image-area">
+                <img class="account-image-change" src="https://c.animaapp.com/kjYfscdy/img/image.svg" />
+              </div>
+                <div class="account-image-change-button">
                 <sl-button variant="text">
-                  <sl-icon name="pencil" slot="prefix"></sl-icon>
-                  <span>프로필 사진 변경</span>
+                  <sl-icon name="pencil" slot="prefix" id="account-image-change-icon"></sl-icon>
+                  <span id="account-image-change-text">프로필 사진 변경</span>
                 </sl-button>
               </div>
             </div>
