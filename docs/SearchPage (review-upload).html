@@ -320,6 +320,22 @@
            
           });*/
           const saveBtn = document.getElementById('saveReviewBtn');
+
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const storeNameFromURL = params.get("storeName") || "식당 A"; // 없으면 기본값
+  
+  // 식당 이름을 input 요소에 넣어주거나 변수로 저장
+  const storeNameInput = document.getElementById("storeNameInput");
+  if (storeNameInput) {
+    storeNameInput.value = storeNameFromURL;
+  }
+
+  // 이후에 리뷰 저장할 때 storeNameFromURL 사용
+  window.storeNameForReview = storeNameFromURL;
+});
+
+
 saveBtn.addEventListener('click', async () => {
   const title = document.getElementById('review-title').value.trim();
   const content = document.getElementById('review-content').value.trim();
@@ -356,7 +372,7 @@ saveBtn.addEventListener('click', async () => {
     title,
     content,
     rating: document.querySelector('sl-rating').value,
-    storeName: '식당 A',
+    storeName: window.storeNameForReview, // URL에서 가져온 식당 이름 사용
     nickname: currentUser.nickname,
     authorID: currentUser.id,
     images: imageDataUrls, // 이미지 추가
@@ -367,6 +383,8 @@ saveBtn.addEventListener('click', async () => {
   localStorage.setItem('reviews', JSON.stringify(reviews));
 
   alert('리뷰가 저장되었습니다.');
+  // 리뷰 업로드 후, 식당 리뷰페이지로이동
+  window.location.href = `SearchPage (review).html?tab=review&storeName=${encodeURIComponent(storeName)}`;
 
   // 입력 필드 초기화
   document.getElementById('review-title').value = '';
