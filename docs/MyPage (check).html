@@ -77,7 +77,7 @@
             <div class="account-image"></div>
             <div class="account-inf">
                 <img src="image/avatar.png" alt="등급" id="grade-img"/>
-                <span id="nickname">닉네임</span>
+                <span class="account-detail-nickname">닉네임</span>
               </div>
             <div class="account-description">
               <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
@@ -232,7 +232,7 @@
           // window.location.href = "login.html";
         }
       });
-</script>
+      </script>
 
 
 
@@ -353,6 +353,7 @@
   return chatListDiv;
 },item => String(item.authorID) === String(currentUser.id));
 
+
   // 리뷰
   /*loadItems("reviews", ".review-list-container", (review) => {
     const div = document.createElement("div");
@@ -439,8 +440,10 @@
     window.location.href = `SearchPage (review).html?id=${review.id}`;
   });
 
-  return reviewDiv;
-});
+  return reviewDiv
+},
+  item => String(item.authorID) === String(currentUser.id)  // 여기에 필터 추가
+);
 
   // 찜한 가게
   /*loadItems("favorites", ".wishlist-list-container", (item) => {

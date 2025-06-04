@@ -291,18 +291,26 @@
       localStorage.setItem('favorites', JSON.stringify(favorites));
     }
 
-    // 클릭 시 가게를 찜 목록에 추가하는 함수
-    function addFavorite(store) {
-      const favorites = getFavorites();
+   // 찜 추가/제거 함수
+  function toggleFavorite(store, userId) {
+    const favorites = getFavorites();
 
-    if (!favorites.some(fav => fav.id === store.id)) {
-    favorites.push(store);
-    saveFavorites(favorites);
-    alert('찜한 가게에 추가되었습니다.');
-  } else {
-    alert('이미 찜한 가게입니다.');
+    const existsIndex = favorites.findIndex(
+      fav => fav.id === store.id && fav.userId === userId
+    );
+
+    if (existsIndex === -1) {
+      // 찜 추가
+      favorites.push({ ...store, userId }); // store 객체에 userId 포함시킴
+      saveFavorites(favorites);
+      alert('찜한 가게에 추가되었습니다.');
+    } else {
+      // 찜 제거
+      favorites.splice(existsIndex, 1);
+      saveFavorites(favorites);
+      alert('찜이 취소되었습니다.');
+    }
   }
-}
 
     // 이벤트 리스너 등록
     document.querySelector('.heart-button').addEventListener('click', () => {
@@ -321,7 +329,7 @@
         distance: '5분',  // 도보 거리
         priceRange: '₩₩'  // 가격대
       };
-      addFavorite(store);
+      toggleFavorite(store, currentUser.id);
     });
 
     </script>
