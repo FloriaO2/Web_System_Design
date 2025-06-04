@@ -244,9 +244,9 @@
     return;
   }
 
-  function loadItems(storageKey, listContainerClass, createItem) {
+  function loadItems(storageKey, listContainerClass, createItem,filterFn = null) {
     const allItems = JSON.parse(localStorage.getItem(storageKey)) || [];
-    const myItems = allItems.filter(item => String(item.authorID) === String(currentUser.id));
+    const myItems = filterFn? allItems.filter(filterFn) : allItems;
     const container = document.querySelector(listContainerClass);
     if (!container) return;
 
@@ -280,6 +280,7 @@
   loadItems("posts", ".post-list-container", (post) => {
   const wrapper = document.createElement("div");
   wrapper.classList.add("post-list");
+  wrapper.style.cursor = "pointer";  // 클릭 가능하다는 걸 보여주기 위해
 
   const categoryDiv = document.createElement("div");
 
@@ -295,9 +296,17 @@
 
   wrapper.appendChild(categoryDiv);
   wrapper.appendChild(titleDiv);
+  // 클릭 이벤트 추가 (상세 페이지로 이동)
+  wrapper.addEventListener("click", () => {
+    window.location.href = `게시글열람.html?id=${post.id}`;
+  });
 
   return wrapper;
-});
+  }, item=>String(item.authorID)===String(currentUser.id));
+
+
+
+
 
   // 댓글
   /*loadItems("comments", ".comment-list-container", (comment) => {
@@ -309,6 +318,7 @@
   loadItems("comments", ".comment-list-container", (comment) => {
   const chatListDiv = document.createElement("div");
   chatListDiv.classList.add("chat-list");
+  chatListDiv.style.cursor = "pointer";  // 클릭 가능 표시
 
   const chatContentDiv = document.createElement("div");
   chatContentDiv.classList.add("chat-content");
@@ -335,9 +345,13 @@
 
   chatListDiv.appendChild(chatContentDiv);
   chatListDiv.appendChild(chatPostDiv);
+  chatListDiv.addEventListener("click", () => {
+    window.location.href = `게시글열람.html?id=${comment.id}`;
+  });
+
 
   return chatListDiv;
-});
+},item => String(item.authorID) === String(currentUser.id));
 
   // 리뷰
   /*loadItems("reviews", ".review-list-container", (review) => {
@@ -349,6 +363,8 @@
   loadItems("reviews", ".review-list-container", (review) => {
   const reviewDiv = document.createElement("div");
   reviewDiv.classList.add("review-list");
+  reviewDiv.style.cursor = "pointer"; // 클릭 가능 표시
+
 
   const reviewTextDiv = document.createElement("div");
   reviewTextDiv.classList.add("review-text");
@@ -418,6 +434,10 @@
   }
 
   reviewDiv.appendChild(imageListDiv);
+  // 클릭 시 리뷰 상세 페이지로 이동
+  reviewDiv.addEventListener("click", () => {
+    window.location.href = `SearchPage (review).html?id=${review.id}`;
+  });
 
   return reviewDiv;
 });
@@ -429,6 +449,7 @@
     div.textContent = item.name || "찜한 가게";
     return div;
   });*/
+
   loadItems("favorites", ".wishlist-list-container", (store) => {
   const loveListDiv = document.createElement("div");
   loveListDiv.classList.add("love-list");
@@ -463,14 +484,15 @@
 
   const link = document.createElement("a");
   link.classList.add("love-store-link");
-  link.href = `store-detail.html?id=${store.id}`; // 상세 페이지가 있다면
+  link.href = `SearchPage (info).html?id=${store.id}`; // 상세 페이지가 있다면
   link.textContent = "상세정보 보기 ▶";
 
   loveListDiv.appendChild(loveStoreDiv);
   loveListDiv.appendChild(link);
+ 
 
   return loveListDiv;
-});
+},item => String(item.favoritedBy) === String(currentUser.id));
 });
 
 

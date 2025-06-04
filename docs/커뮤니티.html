@@ -143,6 +143,7 @@
           
           
             <!-- 게시글 목록이 여기에 동적으로 추가됩니다. -->
+           
              <div id="post-container">
               <table id="post-table" border="1" cellspacing="0" cellpadding="5" style="min-width:50vw; border-collapse: collapse;">
                 <thead>
@@ -162,6 +163,7 @@
                 <!-- 페이지네이션 버튼들 여기 생성 -->
               </div>
             </div>
+           
 
 
           <script>
@@ -308,7 +310,7 @@
            //검색결과 화면으로 이동
       
             document.getElementById("search-icon").addEventListener("click", function () {
-              const searchQuery = document.querySelector('input[placeholder="검색어를 입력하세요"]').value;
+              const searchQuery = document.querySelector('#search-input').value;
               // 검색어가 있으면 검색 결과 페이지로 이동 (검색어 전달도 필요하면 쿼리스트링에 추가 가능)
               if (searchQuery.trim() !== "") {
                 window.location.href = "게시글검색.html?query=" + encodeURIComponent(searchQuery);
