@@ -77,9 +77,9 @@
           <div class="account">
             <div class="account-image"></div>
             <div class="account-inf">
-                <img src="image/avatar.png" alt="등급" id="grade-img"/>
-                <span id="nickname">닉네임</span>
-              </div>
+              <img src="image/avatar.png" alt="등급" id="grade-img"/>
+              <span id="nickname">닉네임</span>
+            </div>
             <div class="account-description">
               <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
               <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
@@ -200,9 +200,9 @@
               <div class="text-link-list-item">
                 <div class="list-item2">웹사이트 이용 방법</div>
               </div>
-              <div class="text-link-list-item">
+              <a class="text-link-list-item" href="ReportPage.html">
                 <div class="list-item2">악성 유저 신고</div>
-              </div>
+              </a>
             </div>
             <div class="vertical-line"></div>
             <div class="horizontal-line"></div>
@@ -281,53 +281,16 @@
 
     </script>
 
-        <script>///////리뷰 업로드 로컬스토리지
-            /*const saveBtn = document.getElementById('saveReviewBtn');
-            saveBtn.addEventListener('click', () => {
-            const title = document.getElementById('review-title').value.trim();
-            const content = document.getElementById('review-content').value.trim();
-          
-            if (!title || !content ) {
-              alert('제목과 내용 입력해주세요.');
-              return;
-            }
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          if (!currentUser || !currentUser.id || !currentUser.nickname) {
-            alert('사용자 정보가 없습니다.');
-            return;
-          }
-
-          const reviewObj = {
-            id: Date.now(),
-            title,
-            content,
-            rating: document.querySelector('sl-rating').value, // sl-rating 컴포넌트에서 별점 값 가져오기
-            storeName: '식당 A', // 실제로는 선택된 식당 이름을 가져와야 함
-            nickname: currentUser.nickname,
-            authorID: currentUser.id,
-          };
-
-          let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
-          reviews.push(reviewObj);
-          localStorage.setItem('reviews', JSON.stringify(reviews));
 
 
-            alert('리뷰가 저장되었습니다.');
-
-            // 입력 필드 초기화
-            document.getElementById('review-title').value = '';
-            document.getElementById('review-content').value = '';
-           
-          });*/
+<!--
+확정
+<script>///////리뷰 업로드 로컬스토리지
+            
           const saveBtn = document.getElementById('saveReviewBtn');
 saveBtn.addEventListener('click', async () => {
   const title = document.getElementById('review-title').value.trim();
   const content = document.getElementById('review-content').value.trim();
-
-  /*if (!title || !content) {
-    alert('제목과 내용 입력해주세요.');
-    return;
-  }*/
 
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   if (!currentUser || !currentUser.id || !currentUser.nickname) {
@@ -350,6 +313,12 @@ saveBtn.addEventListener('click', async () => {
 
   // 모든 이미지 읽기 완료되면 저장 진행
   const imageDataUrls = await Promise.all(imagePromises);
+
+  const rating = document.querySelector('sl-rating').value;
+if (!rating || parseFloat(rating) === 0) {
+  alert('별점을 입력해주세요.');
+  return;
+}
 
   const reviewObj = {
     id: Date.now(),
@@ -383,14 +352,7 @@ saveBtn.addEventListener('click', async () => {
 });
       </script>
 
-
-
-
-
-
-
-
-    <!-- 이미지 업로드와 관련한 자바 스크립트 -->
+    <!- 이미지 업로드와 관련한 자바 스크립트 ->
     <script>
       const fileInput = document.getElementById("image-upload");
       const uploadTrigger = document.getElementById("review-upload-img");
@@ -413,6 +375,11 @@ saveBtn.addEventListener('click', async () => {
 
       // 3) 파일 선택 후 처리
       fileInput.addEventListener("change", () => {
+              if (files.length > 3) {
+              alert("이미지는 최대 3장까지만 업로드 가능합니다.");
+              fileInput.value = "";
+              return;
+              }//추가한버전
         // 파일 없으면 초기 상태 복귀
         if (fileInput.files.length === 0) {
           uploadTrigger.style.display = "block";
@@ -449,6 +416,171 @@ saveBtn.addEventListener('click', async () => {
         carouselContainer.style.display = "block";
       });
     </script>
+-->
+
+
+
+
+
+
+
+
+<script>
+  const fileInput = document.getElementById("image-upload");
+  const uploadTrigger = document.getElementById("review-upload-img");
+  const carouselContainer = document.getElementById("carousel-container");
+  const carouselInner = document.getElementById("carousel-inner");
+
+  // IndexedDB 초기화
+  let db;
+  const request = indexedDB.open("ReviewDB", 1);
+
+  request.onerror = () => alert("IndexedDB 초기화 실패");
+
+  request.onsuccess = (event) => {
+    db = event.target.result;
+  };
+
+  request.onupgradeneeded = (event) => {
+    const db = event.target.result;
+    db.createObjectStore("reviews", { keyPath: "id" });
+  };
+
+  uploadTrigger.addEventListener("click", () => fileInput.click());
+
+  carouselContainer.addEventListener("click", (e) => {
+    const isArrow = e.target.closest(".carousel-control-prev, .carousel-control-next");
+    if (!isArrow) fileInput.click();
+  });
+
+  fileInput.addEventListener("change", () => {
+    const files = Array.from(fileInput.files);
+    if (files.length === 0) {
+      uploadTrigger.style.display = "block";
+      carouselContainer.style.display = "none";
+      carouselInner.innerHTML = "";
+      return;
+    }
+    if (files.length > 3) {
+      alert("이미지는 최대 3장까지만 업로드 가능합니다.");
+      fileInput.value = "";
+      return;
+    }
+
+    /*const estimatedBase64Size = files.reduce((sum, file) => sum + Math.ceil(file.size * 1.37), 0);
+    if (estimatedBase64Size > 4000000) {
+      alert("이미지 총 용량이 너무 큽니다.\n4MB 이하로 줄여주세요.");
+      fileInput.value = "";
+      uploadTrigger.style.display = "block";
+      carouselContainer.style.display = "none";
+      carouselInner.innerHTML = "";
+      return;
+    }*/
+
+    carouselInner.innerHTML = "";
+    files.forEach((file, index) => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const div = document.createElement("div");
+        div.className = "carousel-item" + (index === 0 ? " active" : "");
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.className = "d-block w-100";
+        img.style.height = "150px";
+        img.style.objectFit = "contain";
+
+        div.appendChild(img);
+        carouselInner.appendChild(div);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    uploadTrigger.style.display = "none";
+    carouselContainer.style.display = "block";
+  });
+
+  const saveBtn = document.getElementById('saveReviewBtn');
+  saveBtn.addEventListener('click', async () => {
+    const title = document.getElementById('review-title').value.trim();
+    const content = document.getElementById('review-content').value.trim();
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser || !currentUser.id || !currentUser.nickname) {
+      alert('사용자 정보가 없습니다.');
+      return;
+    }
+
+    const files = Array.from(fileInput.files);
+    const imagePromises = files.map(file => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = e => resolve(e.target.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    }));
+
+    let imageDataUrls = [];
+    try {
+      imageDataUrls = await Promise.all(imagePromises);
+    } catch (e) {
+      alert("이미지를 불러오는 중 문제가 발생했습니다.");
+      return;
+    }
+
+    const rating = document.querySelector('sl-rating').value;
+    if (!rating || parseFloat(rating) === 0) {
+      alert('별점을 입력해주세요.');
+      return;
+    }
+
+    const reviewObj = {
+      id: Date.now(),
+      title,
+      content,
+      rating,
+      storeName: '식당 A',
+      nickname: currentUser.nickname,
+      authorID: currentUser.id,
+      images: imageDataUrls
+    };
+
+    if (!db) {
+      alert("리뷰 저장소가 초기화되지 않았습니다.");
+      return;
+    }
+
+    const tx = db.transaction("reviews", "readwrite");
+    const store = tx.objectStore("reviews");
+
+    const addRequest = store.add(reviewObj);
+    addRequest.onsuccess = () =>
+    {
+      alert("리뷰가 저장되었습니다.");
+      location.href = 'SearchPage (review).html';
+    }
+
+    addRequest.onerror = () => alert("리뷰 저장에 실패했습니다.");
+
+    document.getElementById('review-title').value = '';
+    document.getElementById('review-content').value = '';
+    fileInput.value = '';
+    if (carouselInner) carouselInner.innerHTML = '';
+    if (carouselContainer) carouselContainer.style.display = 'none';
+    if (uploadTrigger) uploadTrigger.style.display = 'block';
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>

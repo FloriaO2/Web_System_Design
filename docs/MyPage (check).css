@@ -486,10 +486,11 @@ a {
   background-position: 50% 50%;
 }
 
+/* ---------------------------------- */
 .account-inf {
   position: relative;
   width: 11.11vw;
-  height: 5.46vh;
+  height: 20px;
   font-family: var(--body-strong-font-family, "Inter", Helvetica);
   font-weight: 600;
   color: #000000;
@@ -502,19 +503,19 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: left;
-  padding:0.5vw;
+  padding:0.1vh 0.5vw;
   gap:0.5vw;
 }
 
 #grade-img {
-  width:2vw;
-  height:4vh;
+  width:20px;
+  height:20px;
 }
 
 .account-description {
   position: relative;
   width: 90%;
-  height: 5.4vh;
+  height: 7vh;
   font-family: var(--body-strong-font-family, "Inter", Helvetica);
   font-weight: var(--body-base-font-family, "Inter", Helvetica);
   color: #000000;
@@ -526,9 +527,10 @@ a {
   display:flex;
   flex-direction: column;
   align-items: left;
-  padding:0 0.5vw;
+  padding-left: 1.1vw;
   gap:0.5vw;
 }
+/* ---------------------------------- */
 
 .move-inf {
   text-decoration: none;
@@ -550,10 +552,12 @@ a {
   text-decoration: none;
 }
 
+/* ---------------------------------- */
 #heart-img {
-  width:2vw;
-  height:3.5vh;
+  width:16px;
+  height:2.6vh;
 }
+/* ---------------------------------- */
 
 #heart {
   position: relative;
@@ -701,6 +705,10 @@ sl-tab-group::part(nav) {
   width: 100% !important;
   background: #fef7ff;
   border-top:1px solid rgba(0, 0, 0, 0.2);
+}
+
+sl-tab-group::part(scroll-button) {
+  display: none !important;
 }
 
 sl-tab {

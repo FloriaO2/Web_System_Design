@@ -76,9 +76,9 @@
           <div class="account">
             <div class="account-image"></div>
             <div class="account-inf">
-                <img src="image/avatar.png" alt="등급" id="grade-img"/>
-                <span id="nickname">닉네임</span>
-              </div>
+              <img src="image/avatar.png" alt="등급" id="grade-img"/>
+              <span id="nickname">닉네임</span>
+            </div>
             <div class="account-description">
               <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
               <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
@@ -181,9 +181,9 @@
               <div class="text-link-list-item">
                 <div class="list-item2">웹사이트 이용 방법</div>
               </div>
-              <div class="text-link-list-item">
+              <a class="text-link-list-item" href="ReportPage.html">
                 <div class="list-item2">악성 유저 신고</div>
-              </div>
+              </a>
             </div>
             <div class="vertical-line"></div>
             <div class="horizontal-line"></div>
@@ -346,81 +346,120 @@
     div.textContent = `${review.title} - ⭐${review.rating || 0}\n${review.content}`;
     return div;
   });*/
-  loadItems("reviews", ".review-list-container", (review) => {
-  const reviewDiv = document.createElement("div");
-  reviewDiv.classList.add("review-list");
+  // IndexedDB 초기화 및 객체 저장소 열기
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open('ReviewDB', 1);
 
-  const reviewTextDiv = document.createElement("div");
-  reviewTextDiv.classList.add("review-text");
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains('reviews')) {
+          db.createObjectStore('reviews', { keyPath: 'id' });
+        }
+      };
 
-  // 첫 줄: 식당명 + 별점
-  const firstLine = document.createElement("div");
-  firstLine.classList.add("review-first-line");
-
-  const storeDiv = document.createElement("div");
-  storeDiv.classList.add("review-store");
-  storeDiv.textContent = `[${review.storeName}]`;
-
-  const starDiv = document.createElement("div");
-  starDiv.classList.add("review-star");
-
-  // Shoelace의 sl-rating 엘리먼트 생성
-  const slRating = document.createElement("sl-rating");
-  slRating.value = parseFloat(review.rating) || 0; // 별점 값 동적 설정
-  slRating.setAttribute("readonly", "");           // 읽기 전용으로 설정
-
-  starDiv.appendChild(slRating);
-
-  // 숫자 점수도 같이 보여주고 싶으면 아래 주석 해제
-  const starSpan = document.createElement("span");
-  starSpan.textContent = ` ${parseFloat(review.rating).toFixed(1) || 0}`;
-  starDiv.appendChild(starSpan);
-
-  firstLine.appendChild(storeDiv);
-  firstLine.appendChild(starDiv);
-  reviewTextDiv.appendChild(firstLine);
-
-  // 두 번째 줄: 제목 + 내용 (둘 중 하나라도 있으면 보여줌)
-  if (review.title || review.content) {
-    const secondLine = document.createElement("div");
-    secondLine.classList.add("review-second-line");
-
-    if (review.title) {
-      const titleDiv = document.createElement("div");
-      titleDiv.classList.add("review-name");
-      titleDiv.textContent = `[${review.title}]`;
-      secondLine.appendChild(titleDiv);
-    }
-
-    if (review.content) {
-      const contentDiv = document.createElement("div");
-      contentDiv.classList.add("review-content");
-      contentDiv.textContent = review.content;
-      secondLine.appendChild(contentDiv);
-    }
-
-    reviewTextDiv.appendChild(secondLine);
-  }
-
-  reviewDiv.appendChild(reviewTextDiv);
-
-  // 이미지 처리
-  const imageListDiv = document.createElement("div");
-  imageListDiv.classList.add("review-image-list");
-
-  if (Array.isArray(review.images)) {
-    review.images.forEach(src => {
-      const img = document.createElement("img");
-      img.className = "review-image";
-      img.src = src;
-      imageListDiv.appendChild(img);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
     });
   }
 
-  reviewDiv.appendChild(imageListDiv);
+  // IndexedDB에서 리뷰 불러오기 + 그려주는 함수 (기존 스타일 유지)
+  async function loadItems(storeName, containerSelector, renderFn) {
+    const db = await openDB();
+    const tx = db.transaction(storeName, 'readonly');
+    const store = tx.objectStore(storeName);
+    const request = store.getAll();
 
-  return reviewDiv;
-});
+    request.onsuccess = () => {
+      const container = document.querySelector(containerSelector);
+      container.innerHTML = ''; // 초기화
+
+      request.result.forEach(item => {
+        const element = renderFn(item);
+        container.appendChild(element);
+      });
+    };
+
+    request.onerror = () => {
+      console.error('리뷰 불러오기 실패:', request.error);
+    };
+  }
+
+  // 페이지 로드 시 자동으로 리뷰 표시
+  window.addEventListener("DOMContentLoaded", () => {
+    loadItems("reviews", ".review-list-container", (review) => {
+      const reviewDiv = document.createElement("div");
+      reviewDiv.classList.add("review-list");
+
+      const reviewTextDiv = document.createElement("div");
+      reviewTextDiv.classList.add("review-text");
+
+      // 첫 줄: 식당명 + 별점
+      const firstLine = document.createElement("div");
+      firstLine.classList.add("review-first-line");
+
+      const storeDiv = document.createElement("div");
+      storeDiv.classList.add("review-store");
+      storeDiv.textContent = `[${review.storeName}]`;
+
+      const starDiv = document.createElement("div");
+      starDiv.classList.add("review-star");
+
+      const slRating = document.createElement("sl-rating");
+      slRating.value = parseFloat(review.rating) || 0;
+      slRating.setAttribute("readonly", "");
+      starDiv.appendChild(slRating);
+
+      const starSpan = document.createElement("span");
+      starSpan.textContent = ` ${parseFloat(review.rating).toFixed(1) || 0}`;
+      starDiv.appendChild(starSpan);
+
+      firstLine.appendChild(storeDiv);
+      firstLine.appendChild(starDiv);
+      reviewTextDiv.appendChild(firstLine);
+
+      // 두 번째 줄: 제목 + 내용
+      if (review.title || review.content) {
+        const secondLine = document.createElement("div");
+        secondLine.classList.add("review-second-line");
+
+        if (review.title) {
+          const titleDiv = document.createElement("div");
+          titleDiv.classList.add("review-name");
+          titleDiv.textContent = `[${review.title}]`;
+          secondLine.appendChild(titleDiv);
+        }
+
+        if (review.content) {
+          const contentDiv = document.createElement("div");
+          contentDiv.classList.add("review-content");
+          contentDiv.textContent = review.content;
+          secondLine.appendChild(contentDiv);
+        }
+
+        reviewTextDiv.appendChild(secondLine);
+      }
+
+      reviewDiv.appendChild(reviewTextDiv);
+
+      // 이미지 표시
+      const imageListDiv = document.createElement("div");
+      imageListDiv.classList.add("review-image-list");
+
+      if (Array.isArray(review.images)) {
+        review.images.forEach(src => {
+          const img = document.createElement("img");
+          img.className = "review-image";
+          img.src = src;
+          imageListDiv.appendChild(img);
+        });
+      }
+
+      reviewDiv.appendChild(imageListDiv);
+
+      return reviewDiv;
+    });
+  });
 
   // 찜한 가게
   /*loadItems("favorites", ".wishlist-list-container", (item) => {
