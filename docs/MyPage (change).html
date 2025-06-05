@@ -257,17 +257,7 @@
 
     <script>
        ////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////
-      document.addEventListener("DOMContentLoaded", () => {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser && currentUser.nickname) {
-        const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
-        nicknameDivs.forEach(nicknameDiv => {
-          nicknameDiv.textContent = currentUser.nickname;
-        });
-      } else {
-        console.log("로그인된 사용자 정보가 없습니다.");
-      }
-    });///////////
+       ///////////
 
      
       const stores = [
