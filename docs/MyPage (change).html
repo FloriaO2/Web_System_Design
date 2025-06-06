@@ -334,10 +334,10 @@
 
     <script>////////회원/비회원 전환///////////////////////
       function logout() {
-      localStorage.removeItem("currentUser");
-      updateAsideToGuest();
-      renderButtonGroup(); // 버튼 그룹도 업데이트
-    }
+        localStorage.removeItem("currentUser");
+        updateAsideToGuest();
+        renderButtonGroup(); // 버튼 그룹도 업데이트
+      }
 
       // 회원 UI
       function updateAsideToMember(currentUser) {
@@ -373,7 +373,7 @@
       if (!aside) return;
       aside.innerHTML = `
         <div class="account">
-          <div>
+          <div style="display:flex; flex-direction:column; align-items: center;">
             <div class="account-image"></div>
             <br />
             <div class="div3">비회원 접속 중입니다.</div>

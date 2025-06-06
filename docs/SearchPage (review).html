@@ -121,10 +121,10 @@
                   </div>
                   <div class="p">
                     <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
-                    <div class="personal-check">
+                    <div class="personal-check search-margin-bottom">
                       <button type="button" class="heart-button">
-                        <img src="image/heart.png" alt="찜한 가게" id="heart-img"/>
-                        <span id="heart">찜한 가게</span>
+                        <img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>
+                        <span id="personal-heart">찜한 가게</span>
                       </button>
                       <button type="button" class="bookmark-button">
                         <img src="image/empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
@@ -329,7 +329,7 @@
       if (!aside) return;
       aside.innerHTML = `
         <div class="account">
-          <div>
+          <div style="display:flex; flex-direction:column; align-items: center;">
             <div class="account-image"></div>
             <br />
             <div class="div3">비회원 접속 중입니다.</div>
@@ -525,7 +525,6 @@
         }
       });
     </script>
-    
-
+  
   </body>
 </html>
