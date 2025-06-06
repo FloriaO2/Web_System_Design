@@ -44,7 +44,7 @@
                 <div class="offcanvas-title" id="mobileMenuLabel">
                   <a class="account-inf-mobile" href="MyPage (check).html">
                     <img src="image/avatar.png" alt="등급" id="grade-img-mobile"/>
-                    <div id="nickname">닉네임&nbsp;</div>
+                    <div class="account-detail-nickname">닉네임&nbsp;</div>
                     <img id="move-to-account-inf" src="image/parentheses.png">
                   </a>
                 </div>
@@ -76,9 +76,9 @@
           <div class="account">
             <div class="account-image"></div>
             <div class="account-inf">
-              <img src="image/avatar.png" alt="등급" id="grade-img"/>
-              <span id="nickname">닉네임</span>
-            </div>
+                <img src="image/avatar.png" alt="등급" id="grade-img"/>
+                <span class="account-detail-nickname">닉네임</span>
+              </div>
             <div class="account-description">
               <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
               <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
@@ -218,21 +218,20 @@
       </script>
 
 
-      <script>
+      <script>////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////
       document.addEventListener("DOMContentLoaded", () => {
-        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-        if (currentUser && currentUser.nickname) {
-          const nicknameDiv = document.querySelector(".account-detail-nickname");
-          if (nicknameDiv) {
-            nicknameDiv.textContent = currentUser.nickname;
-          }
-        } else {
-          console.log("로그인된 사용자 정보가 없습니다.");
-          // 필요하면 로그인 페이지로 리다이렉트
-          // window.location.href = "login.html";
-        }
-      });
-</script>
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser && currentUser.nickname) {
+        const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
+        nicknameDivs.forEach(nicknameDiv => {
+          nicknameDiv.textContent = currentUser.nickname;
+        });
+      } else {
+        console.log("로그인된 사용자 정보가 없습니다.");
+      }
+    });
+
+      </script>
 
 
 
@@ -353,6 +352,7 @@
   return chatListDiv;
 },item => String(item.authorID) === String(currentUser.id));
 
+
   // 리뷰
   /*loadItems("reviews", ".review-list-container", (review) => {
     const div = document.createElement("div");
@@ -471,9 +471,10 @@
 
       reviewDiv.appendChild(imageListDiv);
 
-      return reviewDiv;
-    });
-  });
+  return reviewDiv
+},
+  item => String(item.authorID) === String(currentUser.id)  // 여기에 필터 추가
+);
 
   // 찜한 가게
   /*loadItems("favorites", ".wishlist-list-container", (item) => {
@@ -527,9 +528,7 @@
   return loveListDiv;
 },item => String(item.favoritedBy) === String(currentUser.id));
 });
-
-
-
+  }); // 추가..
   // 페이지네이션 관련 코드는 따로 구현하거나, 기존 nav 유지*/
 </script>
      
@@ -593,6 +592,5 @@
     };///////////////여기까지복붙
     
     </script>
-
   </body>
 </html>

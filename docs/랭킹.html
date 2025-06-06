@@ -45,7 +45,7 @@
                 <div class="offcanvas-title" id="mobileMenuLabel">
                   <a class="account-inf-mobile" href="MyPage (check).html">
                     <img src="image/avatar.png" alt="등급" id="grade-img-mobile"/>
-                    <div id="nickname">닉네임&nbsp;</div>
+                    <div class="account-detail-nickname">닉네임&nbsp;</div>
                     <img id="move-to-account-inf" src="image/parentheses.png">
                   </a>
                 </div>
@@ -77,9 +77,9 @@
           <div class="account">
             <div class="account-image"></div>
             <div class="account-inf">
-              <img src="image/avatar.png" alt="등급" id="grade-img"/>
-              <span id="nickname">닉네임</span>
-            </div>
+                <img src="image/avatar.png" alt="등급" id="grade-img"/>
+                <span class="account-detail-nickname">닉네임</span>
+              </div>
             <div class="account-description">
               <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
               <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
@@ -242,10 +242,21 @@
           renderCards(sorted);
           renderAsideStores(sorted); 
         };
-
-              
-
          </script>
+
+          <script>////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////
+          document.addEventListener("DOMContentLoaded", () => {
+          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+          if (currentUser && currentUser.nickname) {
+            const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
+            nicknameDivs.forEach(nicknameDiv => {
+              nicknameDiv.textContent = currentUser.nickname;
+            });
+          } else {
+            console.log("로그인된 사용자 정보가 없습니다.");
+          }
+        });
+      </script>
 
 
           <!-- 여기까지 수정 완료 -->

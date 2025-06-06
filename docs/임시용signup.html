@@ -44,7 +44,7 @@
                 <div class="offcanvas-title" id="mobileMenuLabel">
                   <a class="account-inf-mobile" href="MyPage (check).html">
                     <img src="image/avatar.png" alt="등급" id="grade-img-mobile"/>
-                    <div id="nickname">닉네임&nbsp;</div>
+                    <div class="account-detail-nickname">닉네임&nbsp;</div>
                     <img id="move-to-account-inf" src="image/parentheses.png">
                   </a>
                 </div>
@@ -76,9 +76,9 @@
           <div class="account">
             <div class="account-image"></div>
             <div class="account-inf">
-              <img src="image/avatar.png" alt="등급" id="grade-img"/>
-              <span id="nickname">닉네임</span>
-            </div>
+                <img src="image/avatar.png" alt="등급" id="grade-img"/>
+                <span class="account-detail-nickname">닉네임</span>
+              </div>
             <div class="account-description">
               <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
               <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
@@ -310,7 +310,7 @@
         <form onsubmit="handleSignup(event)">
             <div class="form-group">
             <label for="nickname">Nickname</label>
-            <input id="nickname" type="text" placeholder="닉네임" required>
+            <input class="account-detail-nickname" type="text" placeholder="닉네임" required>
             </div>
             <div class="form-group">
             <label for="signupId">ID</label>
