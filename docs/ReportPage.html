@@ -22,12 +22,7 @@
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
             <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
           </div>
-          <div class="button-group">
-            <button type="button" class="btn btn-light" onclick="location.href='커뮤니티.html'">커뮤니티</button>
-            <button type="button" class="btn btn-light" onclick="location.href='랭킹.html'">랭킹</button>
-            <button type="button" class="btn btn-light" onclick="location.href='MyPage (check).html?tab=wishlist'">찜</button>
-            <button type="button" class="btn btn-light">로그아웃</button>
-          </div>
+          <div class="button-group" id="buttonGroup"></div>
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <div class="mobile-button-group">
@@ -74,21 +69,7 @@
         </div>
   
         <div class="aside">
-          <div class="account">
-            <div class="account-image"></div>
-            <div class="account-inf">
-                <img src="image/avatar.png" alt="등급" id="grade-img"/>
-                <span class="account-detail-nickname">닉네임</span>
-              </div>
-            <div class="account-description">
-              <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
-              <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
-            </div>
-          </div>
-          <a class="view-heart" href="MyPage (check).html?tab=wishlist">
-            <img src="image/heart.png" alt="찜한 가게" id="heart-img"/>
-            <span id="heart">찜한 가게</span>
-          </a>
+         
         </div>
 
        <!--여기부터 복붙시작-->
@@ -351,19 +332,93 @@
     </script>
 
      <script>////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////
-      document.addEventListener("DOMContentLoaded", () => {
+       
+    </script>
+
+    <script>////////회원/비회원 전환///////////////////////
+      function logout() {
+      localStorage.removeItem("currentUser");
+      updateAsideToGuest();
+      renderButtonGroup(); // 버튼 그룹도 업데이트
+    }
+
+      // 회원 UI
+      function updateAsideToMember(currentUser) {
+        const aside = document.querySelector(".aside");
+        if (!aside) return;
+
+        aside.innerHTML = `
+          <div class="account">
+            <div class="account-image"></div>
+            <div class="account-inf">
+                <img src="image/avatar.png" alt="등급" id="grade-img"/>
+                <span class="account-detail-nickname">${currentUser.nickname}</span>
+            </div>
+            <div class="account-description">
+              <div>
+                <a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | 
+                <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | 
+                <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a>
+              </div>
+              <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
+            </div>
+          </div>
+          <a class="view-heart" href="MyPage (check).html?tab=wishlist">
+            <img src="image/heart.png" alt="찜한 가게" id="heart-img"/>
+            <span id="heart">찜한가게</span>
+          </a>
+        `;
+      }
+
+      // 비회원 aside UI
+      function updateAsideToGuest() {
+      const aside = document.querySelector(".aside");
+      if (!aside) return;
+      aside.innerHTML = `
+        <div class="account">
+          <div>
+            <div class="account-image"></div>
+            <br />
+            <div class="div3">비회원 접속 중입니다.</div>
+          </div>
+          <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
+        </div>
+      `;
+    }
+
+      function renderButtonGroup() {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      const buttonGroup = document.getElementById("buttonGroup");
+      if (!buttonGroup) return;
+
+      if (currentUser && currentUser.nickname) {
+        buttonGroup.innerHTML = `
+          <button type="button" class="btn btn-light" onclick="location.href='커뮤니티.html'">커뮤니티</button>
+          <button type="button" class="btn btn-light" onclick="location.href='랭킹.html'">랭킹</button>
+          <button type="button" class="btn btn-light" onclick="location.href='MyPage (check).html?tab=wishlist'">찜</button>
+          <button type="button" class="btn btn-light" onclick="logout()">로그아웃</button>
+        `;
+      } else {
+        buttonGroup.innerHTML = `
+          <button type="button" class="btn btn-light" onclick="location.href='커뮤니티.html'">커뮤니티</button>
+          <button type="button" class="btn btn-light" onclick="location.href='랭킹.html'">랭킹</button>
+          <button type="button" class="btn btn-light" onclick="location.href='signup.html'">로그인/회원가입</button>
+        `;
+      }
+    }
+
+    // 페이지 로드 시 UI 초기화
+    document.addEventListener("DOMContentLoaded", () => {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
       if (currentUser && currentUser.nickname) {
-        const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
-        nicknameDivs.forEach(nicknameDiv => {
-          nicknameDiv.textContent = currentUser.nickname;
-        });
+        updateAsideToMember(currentUser);
       } else {
-        console.log("로그인된 사용자 정보가 없습니다.");
+        updateAsideToGuest();
       }
+      renderButtonGroup(); // 버튼도 렌더링
     });
+    </script>
 
-      </script>
 
   </body>
 </html>

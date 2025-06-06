@@ -22,7 +22,7 @@
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
             <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
           </div>
-          <div class="button-group">
+          <div class="button-group" id="buttonGroup">
             <button type="button" class="btn btn-light">커뮤니티</button>
             <button type="button" class="btn btn-light">랭킹</button>
             <button type="button" class="btn btn-light" onclick="location.href='signup.html'">로그인/회원가입</button>
@@ -72,23 +72,7 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
-        <div class="aside">
-          <div class="account">
-            <div class="account-image"></div>
-            <div class="account-inf">
-                <img src="image/avatar.png" alt="등급" id="grade-img"/>
-                <span class="account-detail-nickname">닉네임</span>
-              </div>
-            <div class="account-description">
-              <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
-              <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
-            </div>
-          </div>
-          <a class="view-heart" href="MyPage (check).html?tab=wishlist">
-            <img src="image/heart.png" alt="찜한 가게" id="heart-img"/>
-            <span id="heart">찜한 가게</span>
-          </a>
-        </div>
+        <div class="aside"></div>
 
          <!--여기부터 복붙시작-->
         <div class="aside2">
@@ -194,17 +178,7 @@
   </script>
 
    <script>////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////
-      document.addEventListener("DOMContentLoaded", () => {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser && currentUser.nickname) {
-        const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
-        nicknameDivs.forEach(nicknameDiv => {
-          nicknameDiv.textContent = currentUser.nickname;
-        });
-      } else {
-        console.log("로그인된 사용자 정보가 없습니다.");
-      }
-    });
+       
     </script>
             
         

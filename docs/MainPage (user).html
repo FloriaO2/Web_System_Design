@@ -23,12 +23,7 @@
             <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
           </div>
           
-          <div class="button-group">
-            <button type="button" class="btn btn-light" onclick="location.href='커뮤니티.html'">커뮤니티</button>
-            <button type="button" class="btn btn-light" onclick="location.href='랭킹.html'">랭킹</button>
-            <button type="button" class="btn btn-light" onclick="location.href='MyPage (check).html?tab=wishlist'">찜</button>
-            <button type="button" class="btn btn-light">로그아웃</button>
-          </div>
+          <div class="button-group" id="buttonGroup"></div>
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <div class="mobile-button-group">
@@ -278,17 +273,7 @@
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>
      ////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////
-      document.addEventListener("DOMContentLoaded", () => {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser && currentUser.nickname) {
-        const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
-        nicknameDivs.forEach(nicknameDiv => {
-          nicknameDiv.textContent = currentUser.nickname;
-        });
-      } else {
-        console.log("로그인된 사용자 정보가 없습니다.");
-      }
-    });
+       
 
     
        const stores = [
