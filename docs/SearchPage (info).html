@@ -451,7 +451,16 @@
 
 
     <script>
-       
+       const stores = [
+          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
+          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
+          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
+          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
+          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
+          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
+          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
+          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
+        ];
         function renderAside(sortedArray) {
           const top7 = sortedArray.slice(0, 7);
           renderAsideStores(top7);

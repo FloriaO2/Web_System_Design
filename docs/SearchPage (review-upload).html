@@ -433,7 +433,6 @@ if (!rating || parseFloat(rating) === 0) {
   if (!storeId) {
     alert("식당 ID가 없습니다.");
   }
-  // 수정
 
   const fileInput = document.getElementById("image-upload");
   const uploadTrigger = document.getElementById("review-upload-img");
@@ -537,7 +536,7 @@ if (!rating || parseFloat(rating) === 0) {
       title,
       content,
       rating,
-      storeId, // 수정
+      storeId: store001, // 임시 수정 store001
       nickname: currentUser.nickname,
       authorID: currentUser.id,
       images: imageDataUrls

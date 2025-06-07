@@ -219,16 +219,54 @@
 
           <script>
             document.addEventListener('DOMContentLoaded', () => {
-            // URL에서 storeName 파라미터 받아오기
+    const params = new URLSearchParams(window.location.search);
+    const storeId = params.get('storeId');
+
+    const container = document.querySelector('.review-main-content');
+    const uploadButton = container.querySelector('.review-upload-button');
+    container.innerHTML = '';
+    container.appendChild(uploadButton);
+
+    const request = indexedDB.open("ReviewDB", 1);
+
+    request.onerror = () => alert("리뷰 데이터베이스 로드 실패");
+
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      const tx = db.transaction("reviews", "readonly");
+      const store = tx.objectStore("reviews");
+      const getAllRequest = store.getAll();
+
+      getAllRequest.onsuccess = () => {
+        let reviews = getAllRequest.result;
+
+        // ✅ 기존 리뷰 카드만 제거 (업로드 버튼은 유지)
+      const reviewCards = container.querySelectorAll('.review-card');
+      reviewCards.forEach(card => card.remove());
+
+        // storeId 필터링
+        if (storeId) {
+          reviews = reviews.filter(review => review.storeId === storeId);
+        }
+
+        reviews.forEach(review => {
+          const card = createReviewCard(review);
+          container.appendChild(card);
+        });
+      };
+    };
+            /*document.addEventListener('DOMContentLoaded', () => {
+            // URL에서 storeId 파라미터 받아오기
             const params = new URLSearchParams(window.location.search);
-            const storeName = params.get('storeName');
+            const storeId = params.get('storeId');
+            // storeName -> storeId
 
             // 로컬스토리지에서 리뷰 가져오기
             let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
 
             // 특정 식당 리뷰만 필터링 (storeName이 있으면)
-            if (storeName) {
-              reviews = reviews.filter(review => review.storeName === storeName);
+            if (storeId) {
+              reviews = reviews.filter(review => review.storeId === storeId);
             }
 
             const container = document.querySelector('.review-main-content');
@@ -237,6 +275,7 @@
             const uploadButton = container.querySelector('.review-upload-button');
             container.innerHTML = '';
             container.appendChild(uploadButton);
+            */
 
             // 리뷰 카드 생성 함수
             function createReviewCard(review) {
@@ -277,11 +316,12 @@
               return card;
             }
 
+            /*
             // 리뷰 카드들 생성 및 추가
             reviews.forEach(review => {
               const card = createReviewCard(review);
               container.appendChild(card);
-            });
+            });*/
           });
 
           </script>

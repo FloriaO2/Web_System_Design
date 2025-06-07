@@ -883,7 +883,7 @@ p {
   align-items: center;
   justify-content: center;
   width: 9.51vw;
-  height: 4.98vh;
+  height: auto;
   position: relative;
   left: 16.99vw;
   overflow: hidden;
@@ -934,7 +934,7 @@ p {
 
 .review-text {
   display: flex;
-  min-width: 160px;
+  width:auto;
   height:100%;
   align-items: center;
   justify-content: flex-start;
@@ -976,16 +976,21 @@ p {
 
 .review-right {
   display: flex;
-  gap:0.5vw;
+  gap:5px;
 }
 
 .review-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 4.11vw;
-  height: 8.67vh;
+  width: 45px;
+  height: 45px;
   background-size: cover;
   background-position: 50% 50%;
+}
+
+.review-image > img {
+  width: 45px;
+  height: 45px;
 }
 
 /* 여기까지 수정 완료 */
@@ -1626,14 +1631,426 @@ footer {
 
 @media (max-width: 659.98px){
 .search-margin-bottom {
-  margin-bottom:3vh;
+  margin-bottom:1vh;
 }
 }
 
-@media (max-width: 599.98px) {
-
+@media (max-width: 659.98px) {
+.info-up-area {
+  display: flex;
+  width:70.28vw;
+  height:auto;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 5vh 3vw;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
 }
-@media (min-width: 600px) and (max-width: 767.98px) {
+
+/* mainbody에서의 식당 소개 카드 */
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 240px;
+  align-items: center;
+  gap: 3.5vw;
+  padding: 2vh 3.5vw;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: rgba(68, 68, 68, 1);
+  flex-direction: column !important;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 이미지 영역 */
+.card-image {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
+  width: 130px;
+  height: 130px;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+p {
+  margin:0 !important;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
+.card-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  align-items: flex-start;
+  gap: var(--size-space-400);
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 전체 영역 */
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2vh;
+  position: relative;
+  /*align-self: stretch;*/
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
+.store-name {
+  position: relative;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: var(--heading-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: rgba(30, 30, 30, 1);;
+  font-size: clamp(15px, 3vw, 24px) !important;
+  letter-spacing: -0.48px;
+  line-height: 120.00000476837158%;
+  font-style: normal;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 별점 (별 이미지) */
+.rating {
+  display: flex;
+  width: 18.32vw;
+  height: 3.75vh;
+  align-items: center !important;
+  justify-content: space-between;
+  position: relative;
+}
+
+.rating2 {
+  display: flex;
+  width: auto;
+  min-height:17px;
+  height:100%;
+  align-items: center !important;
+  gap:4px;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 별점 (점수) */
+.element {
+  position: relative;
+  width: 6.8vw;
+  height: auto;
+  margin-top: -3.50px;
+  margin-bottom: -1.50px;
+  font-weight: var(--subtitle-font-weight);
+  color: #000000;
+  font-size: clamp(14px, 2.5vw, 20px);
+  line-height: var(--subtitle-line-height);
+  white-space: nowrap;
+  font-family: var(--subtitle-font-family);
+  letter-spacing: var(--subtitle-letter-spacing);
+  font-style: var(--subtitle-font-style);
+  text-align:center;
+  align-self:center;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 */
+.p {
+  position: relative;
+  /*align-self: stretch;*/
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  color: var(--color-text-default-secondary);
+  font-size: 16px;
+  line-height: 0;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+  gap:2.5vh;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 (종류, 거리, 가격) */
+.store-simple-info {
+  color: #757575;
+  font-family: var(--body-base-font-family, "Inter", Helvetica);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-size: clamp(10px, 2.08vw, 20px);
+}
+
+.personal-check {
+  display: flex;
+  gap:3.5vw;
+}
+
+.heart-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#personal-heart-img {
+  width:19px;
+  height:19px;
+}
+
+#personal-heart {
+  font-size: clamp(12px, 2vw, 20px);
+}
+
+.bookmark-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#bookmark-img {
+  width:15px;
+  height:17px;
+}
+
+#bookmark {
+  position: relative;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: #000000;
+  font-size: clamp(12px, 2vw, 20px);
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding:0 0.5vw;
+  gap:0.5vw;
+  margin-top:0.2vw;
+  margin-left:0.1vw;
+}
+
+.info-down-area {
+  display: flex;
+  flex-direction: column;
+  width:64.28vw;
+  height:auto;
+  justify-content: center;
+  align-items: center;
+  /*align-self: stretch;*/
+  gap: 0px;
+  margin: 0 auto;
+  margin-bottom: 5vh;
+  flex: 0 0 auto;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+  overflow: hidden;
+}
+
+.info-tab-list {
+  display: flex;
+  width:100%;
+}
+
+/* 선택된 메뉴의 영역 */
+.tab {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+/* 선택된 메뉴의 텍스트 */
+.label {
+  color: #303030;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
+
+/* 선택되지 않은 메뉴의 영역 */
+.tab2 {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* 선택되지 않은 메뉴의 텍스트 */
+.label2 {
+  color: #767676;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
+
+.review-main-content {
+  width:64.28vw;
+  height:100%;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-top:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-upload-button {
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #2c2c2c;
+  border-width: 1px;
+  padding: 1vh 1vw;
+  margin-bottom:2vh;
+  margin-left:auto;
+  margin-right:18vw;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 4.98vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.review-upload-button-text {
+  color: #f5f5f5;
+  text-align: center;
+  font-family: var(
+    --single-line-body-base-font-family,
+    "Inter-Regular",
+    sans-serif
+  );
+  font-size: 8.58px;
+  line-height: 100%;
+  font-weight: 400;
+  position: relative;
+  flex: 1;
+}
+
+.review-card {
+  display: flex;
+  flex-wrap: wrap;
+  width:55vw;
+  gap: 10px;
+  padding: 3.5vh 1.5vw;
+  margin: 0 auto;
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: rgba(0,0,0,0.15);
+  flex-direction: column-reverse !important;
+  align-items: flex-start;
+  justify-content: left;
+}
+
+.review-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-left-up {
+  display: flex;
+  height:4vh;
+}
+
+.review-text {
+  display: flex;
+  width:auto;
+  height:100%;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+  margin-left:1vw;
+  margin-top:0.2vh;
+  font-family: var(--heading-font-family, "Inter", Helvetica);
+  font-size: clamp(10px, 1.875vw, 20px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.small-rating {
+  display: flex;
+  width: auto;
+  height:100%;
+  align-items: center !important;
+  gap:0.1vw;
+}
+
+.small-star {
+  position: relative;
+  width:auto;
+  min-width: 0;
+  height:100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+#review-writer {
+  font-family: var(--heading-font-family, "Inter", Helvetica);
+  color:rgb(113, 112, 112);
+  font-size:0.7rem;
+  margin-top:1vh;
+  margin-left:0.3vw;
+}
+
+.review-right {
+  display: flex;
+  gap:7px;
+}
+
+.review-right:empty {
+  display: none;
+}
+
+.review-image {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
+  min-width:45px;
+  width: 13vw;
+  min-height:45px;
+  height: 13vw;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.review-image > img {
+  min-width:45px;
+  width: 13vw;
+  min-height:45px;
+  height: 13vw;
+}
+}
+@media (min-width: 660px) and (max-width: 767.98px) {
 .info-up-area {
   display: flex;
   width:70.28vw;
@@ -1949,7 +2366,7 @@ p {
 .review-card {
   display: flex;
   flex-wrap: wrap;
-  width:50vw;
+  width:55vw;
   align-items: center;
   gap: 24px;
   padding: 3.5vh 1.5vw;
@@ -1977,7 +2394,7 @@ p {
 
 .review-text {
   display: flex;
-  min-width: 160px;
+  width:auto;
   height:100%;
   align-items: center;
   justify-content: flex-start;
@@ -2019,14 +2436,14 @@ p {
 
 .review-right {
   display: flex;
-  gap:0.5vw;
+  gap:5px;
 }
 
 .review-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 4.11vw;
-  height: 8.67vh;
+  width: 45px;
+  height: 45px;
   background-size: cover;
   background-position: 50% 50%;
 }
@@ -2347,7 +2764,7 @@ p {
 .review-card {
   display: flex;
   flex-wrap: wrap;
-  width:50vw;
+  width:55vw;
   align-items: center;
   gap: 24px;
   padding: 3.5vh 1.5vw;
@@ -2375,7 +2792,7 @@ p {
 
 .review-text {
   display: flex;
-  min-width: 160px;
+  width:auto;
   height:100%;
   align-items: center;
   justify-content: flex-start;
@@ -2417,14 +2834,14 @@ p {
 
 .review-right {
   display: flex;
-  gap:0.5vw;
+  gap:5px;
 }
 
 .review-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 4.11vw;
-  height: 8.67vh;
+  width: 45px;
+  height: 45px;
   background-size: cover;
   background-position: 50% 50%;
 }

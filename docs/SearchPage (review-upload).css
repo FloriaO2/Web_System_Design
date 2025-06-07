@@ -614,9 +614,9 @@ a {
   align-items: center;
   justify-content: center;
   width: auto;
-  height: 4.98vh;
+  height: auto;
   position: relative;
-  left: 40.99vw;
+  left: 18vw;
   overflow: hidden;
   margin-top:3vh;
   margin-bottom: 2vh;
