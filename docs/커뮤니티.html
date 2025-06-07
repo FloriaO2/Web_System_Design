@@ -191,7 +191,7 @@
             <li class="store-item">
               <div class="store-rank-name">
                 <div class="rank-circle">${index + 1}</div>
-                <span class="store-name">${store.name}</span>
+                <span class="store-name-aside">${store.name}</span>
               </div>
               <span class="store-rating">⭐ ${store.rating.toFixed(1)}</span>
             </li>
@@ -332,7 +332,7 @@
         if (!aside) return;
 
         aside.innerHTML = `
-          <div class="account">
+          <div class="account" style="height: 38.69vh;">
             <div class="account-image"></div>
             <div class="account-inf">
                 <img src="image/avatar.png" alt="등급" id="grade-img"/>
@@ -349,7 +349,7 @@
           </div>
           <a class="view-heart" href="MyPage (check).html?tab=wishlist">
             <img src="image/heart.png" alt="찜한 가게" id="heart-img"/>
-            <span id="heart">찜한가게</span>
+            <span id="heart">찜한 가게</span>
           </a>
         `;
       }
@@ -359,7 +359,7 @@
       const aside = document.querySelector(".aside");
       if (!aside) return;
       aside.innerHTML = `
-        <div class="account">
+        <div class="account" style="height: 45.69vh;">
           <div style="display:flex; flex-direction:column; align-items: center;">
             <div class="account-image"></div>
             <br />

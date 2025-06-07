@@ -74,7 +74,6 @@ a {
   align-items: flex-start;
   gap: 8px;
   position: relative;
-  margin-right:1vw;
 }
 
 .bottom-app-bar {
@@ -131,7 +130,7 @@ a {
 .account {
   position: sticky;
   width: 13.68vw;
-  height: 38.69vh;
+  /*height: 38.69vh;*/
   top: 23vh;
   margin-left: 1.84vw;
   background-color: #f1f1ff;
@@ -227,12 +226,22 @@ a {
 }
 
 .store-item {
+  /*
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #f1f1ff;
   border-radius: 8px;
   padding: 8px 12px;
+  margin-bottom: 8px;
+  */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1f1ff;
+  border-radius: 8px;
+  padding: 0.5vh 0.3vw !important;
   margin-bottom: 8px;
 }
 
@@ -268,6 +277,11 @@ a {
   letter-spacing: -0.48px;
   line-height: 120.00000476837158%;
   font-style: normal;
+}
+
+.store-name-aside {
+  font-weight: 600;
+  font-size:18px !important;
 }
 
 .store-rating {

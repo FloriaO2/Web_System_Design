@@ -266,12 +266,22 @@ a {
 }
 
 .store-item {
+  /*
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #f1f1ff;
   border-radius: 8px;
   padding: 8px 12px;
+  margin-bottom: 8px;
+  */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1f1ff;
+  border-radius: 8px;
+  padding: 0.5vh 0.3vw !important;
   margin-bottom: 8px;
 }
 
@@ -295,10 +305,9 @@ a {
   font-weight: bold;
 }
 
-.store-name {
+.store-name-aside {
   font-weight: 600;
   font-size:18px !important;
-  
 }
 
 .store-rating {
