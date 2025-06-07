@@ -427,6 +427,14 @@ if (!rating || parseFloat(rating) === 0) {
 
 
 <script>
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const storeId = urlParams.get('id');
+  if (!storeId) {
+    alert("식당 ID가 없습니다.");
+  }
+  // 수정
+
   const fileInput = document.getElementById("image-upload");
   const uploadTrigger = document.getElementById("review-upload-img");
   const carouselContainer = document.getElementById("carousel-container");
@@ -467,16 +475,6 @@ if (!rating || parseFloat(rating) === 0) {
       fileInput.value = "";
       return;
     }
-
-    /*const estimatedBase64Size = files.reduce((sum, file) => sum + Math.ceil(file.size * 1.37), 0);
-    if (estimatedBase64Size > 4000000) {
-      alert("이미지 총 용량이 너무 큽니다.\n4MB 이하로 줄여주세요.");
-      fileInput.value = "";
-      uploadTrigger.style.display = "block";
-      carouselContainer.style.display = "none";
-      carouselInner.innerHTML = "";
-      return;
-    }*/
 
     carouselInner.innerHTML = "";
     files.forEach((file, index) => {
@@ -539,7 +537,7 @@ if (!rating || parseFloat(rating) === 0) {
       title,
       content,
       rating,
-      storeName: '식당 A',
+      storeId, // 수정
       nickname: currentUser.nickname,
       authorID: currentUser.id,
       images: imageDataUrls
@@ -557,8 +555,9 @@ if (!rating || parseFloat(rating) === 0) {
     addRequest.onsuccess = () =>
     {
       alert("리뷰가 저장되었습니다.");
-      location.href = 'SearchPage (review).html';
+      location.href = 'SearchPage (review).html?$id=store001';
     }
+    // 임시 수정 store001
 
     addRequest.onerror = () => alert("리뷰 저장에 실패했습니다.");
 

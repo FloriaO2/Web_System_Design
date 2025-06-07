@@ -613,7 +613,7 @@ a {
   gap: 8px;
   align-items: center;
   justify-content: center;
-  width: 9.51vw;
+  width: auto;
   height: 4.98vh;
   position: relative;
   left: 40.99vw;

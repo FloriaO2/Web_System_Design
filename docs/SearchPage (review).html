@@ -139,19 +139,21 @@
           <div class="info-down-area">
             <div class="info-tab-list">
               <div class="tab2">
-                <a class="label2" href="SearchPage (info).html">정보</a>
+                <a class="label2" href="SearchPage (info).html?id=store001">정보</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="SearchPage (menu).html">메뉴</a>
+                <a class="label2" href="SearchPage (menu).html?id=store001">메뉴</a>
               </div>
               <div class="tab">
-                <a class="label" href="SearchPage (review).html">리뷰</a>
+                <a class="label" href="SearchPage (review).html?id=store001">리뷰</a>
               </div>
+              <!-- 임시 수정 store001 -->
             </div>
             <div class="review-main-content">
               <button type="button" class="review-upload-button btn btn-dark">
-                <div class="review-upload-button-text" onclick="location.href='SearchPage (review-upload).html'">리뷰 업로드</div>
+                <div class="review-upload-button-text" onclick="location.href='SearchPage (review-upload).html?id=store001'">리뷰 업로드</div>
               </button>
+              <!-- 임시 수정 store001 (리뷰 업로드 버튼 클릭시 store001로 이동) -->
               <div class="review-card">
                 <div class="review-left">
                   <div class="review-left-up">
@@ -524,6 +526,77 @@
           }
         }
       });
+    </script>
+
+    <script>//해당 식당의 정보 보여주기
+      const store_mainbody = [
+      // 임시 수정 store001
+      { id: "store001",name: "카페 A", rating: 4.7, reviews: 102, favorites: 320, type: "한식", distance: 5, price: 10000 },
+      { id: "store002",name: "카페 B", rating: 1.9, reviews: 85, favorites: 410, type: "양식", distance: 2, price: 12000 },
+      { id: "store003",name: "카페 C", rating: 4.7, reviews: 102, favorites: 295, type: "중식", distance: 7, price: 14000 },
+      { id: "store004",name: "카페 D", rating: 4.5, reviews: 200, favorites: 300, type: "일식", distance: 10, price: 7000 },
+      { id: "store005",name: "카페 E", rating: 2.7, reviews: 102, favorites: 320, type: "간편식", distance: 13, price: 8000 },
+      { id: "store006",name: "카페 F", rating: 2.9, reviews: 85, favorites: 410, type: "양식", distance: 16, price: 11000 },
+      { id: "store007",name: "카페 G", rating: 3.7, reviews: 102, favorites: 295, type: "그 외", distance: 17, price: 15000 },
+      { id: "store008",name: "카페 H", rating: 3.5, reviews: 200, favorites: 300, type: "한식", distance: 4, price: 7000 }
+    ];
+    window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const storeId = urlParams.get('id');
+    console.log('storeId:', storeId);  // 여기 꼭 찍어봐야 함
+    const store = store_mainbody.find(s => s.id === storeId);
+    // 임시 수정 store001
+    console.log('store:', store);
+
+    if (!store) {
+      alert("해당 가게를 찾을 수 없습니다.");
+    }
+
+
+
+
+
+    function renderStars(rating) {
+    const fullStar = 'https://c.animaapp.com/kjYfscdy/img/star-63.svg';
+    const halfStar = 'https://c.animaapp.com/kjYfscdy/img/star-61.svg'; // 반별 아이콘 예시 (없으면 그냥 fullStar 대체 가능)
+    const emptyStar = 'https://c.animaapp.com/kjYfscdy/img/star-59.svg';
+
+    const starsContainer = document.querySelector('.rating2');
+    starsContainer.innerHTML = ''; // 기존 별 제거
+
+    const fullCount = Math.floor(rating);
+    const hasHalf = rating - fullCount >= 0.5;
+    const emptyCount = 5 - fullCount - (hasHalf ? 1 : 0);
+
+    for (let i = 0; i < fullCount; i++) {
+      const img = document.createElement('img');
+      img.className = 'star';
+      img.src = fullStar;
+      starsContainer.appendChild(img);
+    }
+    if (hasHalf) {
+      const img = document.createElement('img');
+      img.className = 'star';
+      img.src = halfStar;
+      starsContainer.appendChild(img);
+    }
+    for (let i = 0; i < emptyCount; i++) {
+      const img = document.createElement('img');
+      img.className = 'star';
+      img.src = emptyStar;
+      starsContainer.appendChild(img);
+    }
+  }
+
+  if (store) {
+    document.querySelector('.store-name').textContent = store.name;
+    document.querySelector('.element').textContent = store.rating.toFixed(1);
+    document.querySelector('.store-simple-info').textContent =
+      `${store.type} | 학교 기준 ${store.distance}분| ${store.price.toLocaleString()}원`;
+
+    renderStars(store.rating);
+  }
+});
     </script>
   
   </body>

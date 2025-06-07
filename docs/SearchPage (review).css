@@ -1777,7 +1777,7 @@ p {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 139.9999976158142%;
-  font-size: 16px;
+  font-size: 2.08vw;
 }
 
 .personal-check {
@@ -1925,7 +1925,7 @@ p {
   gap: 8px;
   align-items: center;
   justify-content: center;
-  width: 9.51vw;
+  width: auto;
   height: 4.98vh;
   position: relative;
   overflow: hidden;
@@ -1987,7 +1987,7 @@ p {
   margin-left:1vw;
   margin-top:0.2vh;
   font-family: var(--heading-font-family, "Inter", Helvetica);
-  font-size: 1.2rem;
+  font-size: 1.875vw;
   font-weight: 600;
   line-height: 1;
 }
@@ -2323,7 +2323,7 @@ p {
   gap: 8px;
   align-items: center;
   justify-content: center;
-  width: 9.51vw;
+  width: auto;
   height: 4.98vh;
   position: relative;
   overflow: hidden;
@@ -2385,7 +2385,7 @@ p {
   margin-left:1vw;
   margin-top:0.2vh;
   font-family: var(--heading-font-family, "Inter", Helvetica);
-  font-size: 1.2rem;
+  font-size: 1.875vw;
   font-weight: 600;
   line-height: 1;
 }
