@@ -545,7 +545,10 @@
                 <div class="rank-circle">${index + 1}</div>
                 <span class="store-name-aside">${store.name}</span>
               </div>
-              <span class="store-rating">⭐ ${store.rating.toFixed(1)}</span>
+              <span class="store-rating">
+                <img src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" style="width:20px; height:100%; margin-bottom:3px;" />
+                ${store.rating.toFixed(1)}
+              </span>
             </li>
           `).join('')}
         </ul>

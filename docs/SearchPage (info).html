@@ -138,15 +138,14 @@
           <div class="info-down-area">
             <div class="info-tab-list">
               <div class="tab">
-                <a class="label" href="SearchPage (info).html?id=store001">정보</a>
+                <a class="label" href="SearchPage (info).html">정보</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="SearchPage (menu).html?id=store001">메뉴</a>
+                <a class="label2" href="SearchPage (menu).html">메뉴</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="SearchPage (review).html?id=store001">리뷰</a>
+                <a class="label2" href="SearchPage (review).html">리뷰</a>
               </div>
-              <!-- 임시 수정 store001 -->
             </div>
             <div class="info-main-content">
               <div id="map"></div>
@@ -273,7 +272,7 @@
 
     <script>//해당 식당의 정보 보여주기
       const store_mainbody = [
-      // 임시 수정 store001
+      // 임시 수정 store001 (store_mainbody)
       { id: "store001",name: "카페 A", rating: 4.7, reviews: 102, favorites: 320, type: "한식", distance: 5, price: 10000 },
       { id: "store002",name: "카페 B", rating: 1.9, reviews: 85, favorites: 410, type: "양식", distance: 2, price: 12000 },
       { id: "store003",name: "카페 C", rating: 4.7, reviews: 102, favorites: 295, type: "중식", distance: 7, price: 14000 },
@@ -288,7 +287,7 @@
     const storeId = urlParams.get('id');
     console.log('storeId:', storeId);  // 여기 꼭 찍어봐야 함
     const store = store_mainbody.find(s => s.id === storeId);
-    // 임시 수정 store001
+    // 임시 수정 store001 (store_mainbody)
     console.log('store:', store);
 
     if (!store) {
@@ -495,7 +494,10 @@
                 <div class="rank-circle">${index + 1}</div>
                 <span class="store-name-aside">${store.name}</span>
               </div>
-              <span class="store-rating">⭐ ${store.rating.toFixed(1)}</span>
+              <span class="store-rating">
+                <img src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" style="width:20px; height:100%; margin-bottom:3px;" />
+                ${store.rating.toFixed(1)}
+              </span>
             </li>
           `).join('')}
         </ul>
