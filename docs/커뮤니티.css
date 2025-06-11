@@ -631,7 +631,7 @@ a {
   color: #ffffff;
   text-align: left;
   font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
-  font-size: 1.2rem;
+  font-size: 1.3vw;
   line-height: 120%;
   letter-spacing: -0.02em;
   font-weight: 600;
@@ -647,7 +647,7 @@ a {
   width: 100%; /* 전체 너비 차지 */
   align-items: center;
   gap: 12px;
-  padding: 4vh 4vw;
+  padding: 4vh 3vw;
 }
 
 #write {
@@ -662,7 +662,7 @@ a {
   display: flex;
   position:relative;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 1vh 1vw;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -683,31 +683,128 @@ a {
   height: 5vh;
   vertical-align: middle;
   cursor: pointer;
+  margin-right:1vw;
  }
 
-  
-  #search-input {
-    padding-left:1vw;
-    font-size: 16px;
-    border:none;
-    outline: none;
-    width: 250px;
-    box-sizing: border-box;
-    margin-right: 8px;
-    background: rgba(210, 213, 255, 0.06);
-  }
-  
-  #post-container {
-    width:55vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+#search-input {
+  padding-left:1vw;
+  font-size: 16px;
+  border:none;
+  outline: none;
+  width: 15.5vw;
+  box-sizing: border-box;
+  background: rgba(210, 213, 255, 0.06);
+}
 
-  #post-table {
-    margin-top:2vh;
-    margin-bottom:5vh;
-  }
+#search-input::placeholder {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.1vw;
+  color: rgba(0, 0, 0, 0.4);
+  margin-bottom:3vw;
+}
+
+#search-input:-webkit-autofill,
+#search-input:-webkit-autofill:hover,
+#search-input:-webkit-autofill:focus,
+#search-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: black !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+  
+#post-container {
+  min-width:50vw;
+  width:80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 2px;
+  border:1px solid rgba(0, 0, 0, 0.15);
+  margin:0 5vw;
+}
+
+#post-table {
+  /*margin-top:2vh;
+  margin-bottom:5vh;*/
+  min-width:50vw;
+  width:100%;
+  /*border-collapse: collapse;*/
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+#post-table > thead > tr > th {
+  font-weight:700;
+}
+
+#post-table th,
+#post-table td {
+  padding: 7px;
+  border:1px solid rgba(0, 0, 0, 0.15);
+}
+
+table > thead {
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
+}
+
+.pagination-button {
+  border: 1px solid rgba(0, 0, 0, 0.0);
+  border-radius: 6px;
+  background-color: white;
+  color: black;
+  padding: 0.07vw 0.8vw;
+  margin: 0 0.4vw;
+  cursor: pointer;
+}
+
+/* 선택된 상태의 페이지 네비게이션 */
+.pagination-button:disabled {
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.07vw 0.8vw;
+  margin: 0 0.4vw;
+  cursor: default;
+  font-weight: bold;
+}
+
+.prenext-button {
+  padding: 0.5em 1em;
+  margin: 0 0.25em;
+  border: 1px solid white !important;
+  background-color: white;
+  color: #333;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 활성화된 버튼 호버 시 */
+.prenext-button:hover:not(:disabled) {
+  background-color: red !important;
+} /*이거 왜 작동을 안 함?*/
+
+/* 비활성 상태 */
+.prenext-button:disabled {
+  color:rgba(0, 0, 0, 0.2) !important;
+  cursor: not-allowed;
+}
+
+.category0 {
+  color:rgb(0, 0, 0);
+}
+
+.category1 {
+  color:rgb(187, 0, 0);
+}
+
+.category2 {
+  color:rgb(5, 143, 21);
+}
+.category3 {
+  color:rgb(29, 10, 137);
+}
 
 
 /* 여기까지 수정 완료 */

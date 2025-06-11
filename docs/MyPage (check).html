@@ -318,6 +318,7 @@
 },item => String(item.authorID) === String(currentUser.id));
 
 
+
   // 리뷰
   /*loadItems("reviews", ".review-list-container", (review) => {
     const div = document.createElement("div");
@@ -343,7 +344,7 @@
   }
 
   // IndexedDB에서 리뷰 불러오기 + 그려주는 함수 (기존 스타일 유지)
-  async function loadItems(storeName, containerSelector, renderFn) {
+  async function loadDBItems(storeName, containerSelector, renderFn) {
     const db = await openDB();
     const tx = db.transaction(storeName, 'readonly');
     const store = tx.objectStore(storeName);
@@ -366,7 +367,7 @@
 
   // 페이지 로드 시 자동으로 리뷰 표시
   window.addEventListener("DOMContentLoaded", () => {
-    loadItems("reviews", ".review-list-container", (review) => {
+    loadDBItems("reviews", ".review-list-container", (review) => {
       const reviewDiv = document.createElement("div");
       reviewDiv.classList.add("review-list");
 
