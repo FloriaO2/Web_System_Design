@@ -278,8 +278,9 @@
       const comment_block = document.querySelector(".comment-write-area");
       if (!comment_block) return;
       comment_block.innerHTML = `
-        <div class="account" style="height: 45.69vh;">
-          비회원은 댓글을 작성할 수 없습니다.
+        <div class="nonuser-comment-input" style="width:100%;">
+          <div>비회원은 댓글을 작성할 수 없습니다.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          <button type="button" class="nonuser-comment-input-button btn btn-light" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
     }
