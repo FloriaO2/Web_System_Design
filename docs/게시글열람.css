@@ -714,7 +714,7 @@ a {
   justify-content: flex-start;
   gap: 2vh;
   flex: 1;
-  margin:0vh 3vw 6vh 3vw;
+  margin:0vh 3vw 3vh 3vw;
   padding: 3vh 2vw 4vh 2vw;
   border-radius: 8px;
   border-style: solid;
@@ -942,7 +942,7 @@ textarea {
   justify-content: flex-start;
   gap: 2vh;
   flex: 1;
-  margin:3vh 3vw 6vh 3vw;
+  margin:0 3vw 6vh 3vw;
   padding: 3vh 2vw 1vh 2vw;
   border-radius: 8px;
   border-style: solid;
