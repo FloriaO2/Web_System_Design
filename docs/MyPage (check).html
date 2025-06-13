@@ -10,7 +10,7 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
   </head>
   <body>
-    <div class="MyPage_check">
+    <div class="MyPage_check invisible" id="page-wrapper">
       <div class="entire-area">
         <div class="header">
           <div class="div1">
@@ -40,7 +40,7 @@
                   <a class="account-inf-mobile" href="MyPage (check).html">
                     <img src="image/avatar.png" alt="등급" id="grade-img-mobile"/>
                     <div class="account-detail-nickname">닉네임&nbsp;</div>
-                    <img id="move-to-account-inf" src="image/parentheses.png">
+                    <div>&nbsp;&gt;</div>
                   </a>
                 </div>
               </div>
@@ -217,7 +217,12 @@
     container.innerHTML = "";
 
     if (myItems.length === 0) {
-      container.innerHTML = `<p>작성한 ${storageKey}가 없습니다.</p>`;
+      let keyword="";
+      if (storageKey == "posts") keyword="작성한 게시글이"
+      else if (storageKey == "comments") keyword="작성한 댓글이"
+      else if (storageKey == "reviews") keyword="작성한 리뷰가"
+      else if (storageKey == "favorites") keyword="찜한 가게가"
+      container.innerHTML = `<p class="error-message">${keyword} 없습니다.</p>`;
       return;
     }
 
@@ -228,12 +233,6 @@
   }
 
   // 게시물
-  /*loadItems("posts", ".post-list-container", (post) => {
-    const div = document.createElement("div");
-    div.classList.add("post-list");
-    div.textContent = `[${post.category || "카테고리"}] ${post.title}`;
-    return div;
-  });*/
 
   const categoryMap = {
   "기타": 0,
@@ -252,7 +251,7 @@
   const categoryNum = categoryMap[categoryName] || 0;
 
   categoryDiv.classList.add("post-category", `category${categoryNum}`);
-  categoryDiv.textContent = `[${categoryName}]`;
+  categoryDiv.textContent = `${categoryName}`;
 
   const titleDiv = document.createElement("div");
   titleDiv.classList.add("post-name");
@@ -266,19 +265,13 @@
   });
 
   return wrapper;
-  }, item=>String(item.authorID)===String(currentUser.id));
+  },item=>String(item.authorID)===String(currentUser.id));
 
 
 
 
 
   // 댓글
-  /*loadItems("comments", ".comment-list-container", (comment) => {
-    const div = document.createElement("div");
-    div.classList.add("comment-list");
-    div.textContent = comment.content;
-    return div;
-  });*/
   loadItems("comments", ".comment-list-container", (comment) => {
   const chatListDiv = document.createElement("div");
   chatListDiv.classList.add("chat-list");
@@ -298,7 +291,7 @@
   const categoryNum = categoryMap[categoryName] || 0;
 
   categoryDiv.classList.add(`category${categoryNum}`);
-  categoryDiv.textContent = `[${categoryName}]`;
+  categoryDiv.textContent = `${categoryName}`;
 
   const postNameDiv = document.createElement("div");
   postNameDiv.classList.add("post-name-in-chat");
@@ -320,135 +313,158 @@
 
 
   // 리뷰
-  /*loadItems("reviews", ".review-list-container", (review) => {
-    const div = document.createElement("div");
-    div.classList.add("review-list");
-    div.textContent = `${review.title} - ⭐${review.rating || 0}\n${review.content}`;
-    return div;
-  });*/
-  // IndexedDB 초기화 및 객체 저장소 열기
   function openDB() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open('ReviewDB', 1);
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open('ReviewDB', 1);
 
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-        if (!db.objectStoreNames.contains('reviews')) {
-          db.createObjectStore('reviews', { keyPath: 'id' });
-        }
-      };
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains('reviews')) {
+        db.createObjectStore('reviews', { keyPath: 'id' });
+      }
+    };
 
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function loadDBItems(storeName, containerSelector, renderFn, filterFn = null) {
+  const db = await openDB();
+  const tx = db.transaction(storeName, 'readonly');
+  const store = tx.objectStore(storeName);
+  const request = store.getAll();
+
+  request.onsuccess = () => {
+    const container = document.querySelector(containerSelector);
+    container.innerHTML = '';
+
+    let items = request.result;
+    if (typeof filterFn === 'function') {
+      items = items.filter(filterFn);
+    }
+
+    items.forEach(item => {
+      renderFn(item, container);
     });
-  }
+  };
 
-  // IndexedDB에서 리뷰 불러오기 + 그려주는 함수 (기존 스타일 유지)
-  async function loadDBItems(storeName, containerSelector, renderFn) {
-    const db = await openDB();
-    const tx = db.transaction(storeName, 'readonly');
-    const store = tx.objectStore(storeName);
-    const request = store.getAll();
+  request.onerror = () => {
+    console.error('리뷰 불러오기 실패:', request.error);
+  };
+}
 
-    request.onsuccess = () => {
-      const container = document.querySelector(containerSelector);
-      container.innerHTML = ''; // 초기화
+function createReviewElement(review, finalContainer) {
+  // [1] 먼저 storeDiv만 측정하기 위한 임시 요소 생성
+  const tempMeasure = document.createElement("div");
+  tempMeasure.style.position = "absolute";
+  tempMeasure.style.visibility = "hidden";
+  tempMeasure.style.whiteSpace = "nowrap"; // 줄바꿈 금지
+  tempMeasure.className = "review-store";
+  tempMeasure.textContent = `[${review.storeName}]`;
 
-      request.result.forEach(item => {
-        const element = renderFn(item);
-        container.appendChild(element);
+  document.body.appendChild(tempMeasure);
+
+  // [2] 렌더링 완료될 때까지 기다렸다가 width 측정
+  requestAnimationFrame(() => {
+    const storeWidth = tempMeasure.getBoundingClientRect().width;
+    document.body.removeChild(tempMeasure);
+
+    // [3] 본격적인 리뷰 구성
+    const reviewDiv = document.createElement("div");
+    reviewDiv.classList.add("review-list");
+
+    const reviewTextDiv = document.createElement("div");
+    reviewTextDiv.classList.add("review-text");
+
+    // 첫 줄
+    const firstLine = document.createElement("div");
+    firstLine.classList.add("review-first-line");
+
+    const storeDiv = document.createElement("div");
+    storeDiv.classList.add("review-store");
+    storeDiv.textContent = `[${review.storeName}]`;
+
+    const starDiv = document.createElement("div");
+    starDiv.classList.add("review-star");
+
+    const slRating = document.createElement("sl-rating");
+    slRating.value = parseFloat(review.rating) || 0;
+    slRating.setAttribute("readonly", "");
+    starDiv.appendChild(slRating);
+
+    const starSpan = document.createElement("span");
+    starSpan.textContent = ` ${parseFloat(review.rating).toFixed(1) || 0}`;
+    starDiv.appendChild(starSpan);
+
+    firstLine.appendChild(storeDiv);
+    firstLine.appendChild(starDiv);
+    reviewTextDiv.appendChild(firstLine);
+
+    // 두 번째 줄
+    if (review.title || review.content) {
+      const secondLine = document.createElement("div");
+      secondLine.classList.add("review-second-line");
+
+      if (review.title) {
+        const titleDiv = document.createElement("div");
+        titleDiv.classList.add("review-name");
+        titleDiv.textContent = `[${review.title}]`;
+        secondLine.appendChild(titleDiv);
+      }
+
+      if (review.content) {
+        // 제목 없고 내용만 있을 경우 내용이 별점 바로 아래 위치에 존재하도록 margin 조정
+        if (!review.title) {
+          const nonDiv = document.createElement("div");
+          nonDiv.classList.add("empty-space");
+          nonDiv.style.width = `${storeWidth + window.innerWidth * 0.023}px`;
+          secondLine.appendChild(nonDiv);
+        }
+
+        const contentDiv = document.createElement("div");
+        contentDiv.classList.add("review-content");
+        contentDiv.textContent = review.content;
+        secondLine.appendChild(contentDiv);
+      }
+
+      reviewTextDiv.appendChild(secondLine);
+    }
+
+    reviewDiv.appendChild(reviewTextDiv);
+
+    // 이미지
+    const imageListDiv = document.createElement("div");
+    imageListDiv.classList.add("review-image-list");
+
+    if (Array.isArray(review.images)) {
+      review.images.forEach(src => {
+        const img = document.createElement("img");
+        img.className = "review-image";
+        img.src = src;
+        imageListDiv.appendChild(img);
       });
-    };
+    }
 
-    request.onerror = () => {
-      console.error('리뷰 불러오기 실패:', request.error);
-    };
-  }
+    reviewDiv.appendChild(imageListDiv);
+    finalContainer.appendChild(reviewDiv);
+  });
+}
 
-  // 페이지 로드 시 자동으로 리뷰 표시
-  window.addEventListener("DOMContentLoaded", () => {
-    loadDBItems("reviews", ".review-list-container", (review) => {
-      const reviewDiv = document.createElement("div");
-      reviewDiv.classList.add("review-list");
+// 페이지 로드 시 실행
+window.addEventListener("DOMContentLoaded", () => {
+  const containerSelector = ".review-list-container";
+  const container = document.querySelector(containerSelector);
 
-      const reviewTextDiv = document.createElement("div");
-      reviewTextDiv.classList.add("review-text");
-
-      // 첫 줄: 식당명 + 별점
-      const firstLine = document.createElement("div");
-      firstLine.classList.add("review-first-line");
-
-      const storeDiv = document.createElement("div");
-      storeDiv.classList.add("review-store");
-      storeDiv.textContent = `[${review.storeName}]`;
-
-      const starDiv = document.createElement("div");
-      starDiv.classList.add("review-star");
-
-      const slRating = document.createElement("sl-rating");
-      slRating.value = parseFloat(review.rating) || 0;
-      slRating.setAttribute("readonly", "");
-      starDiv.appendChild(slRating);
-
-      const starSpan = document.createElement("span");
-      starSpan.textContent = ` ${parseFloat(review.rating).toFixed(1) || 0}`;
-      starDiv.appendChild(starSpan);
-
-      firstLine.appendChild(storeDiv);
-      firstLine.appendChild(starDiv);
-      reviewTextDiv.appendChild(firstLine);
-
-      // 두 번째 줄: 제목 + 내용
-      if (review.title || review.content) {
-        const secondLine = document.createElement("div");
-        secondLine.classList.add("review-second-line");
-
-        if (review.title) {
-          const titleDiv = document.createElement("div");
-          titleDiv.classList.add("review-name");
-          titleDiv.textContent = `[${review.title}]`;
-          secondLine.appendChild(titleDiv);
-        }
-
-        if (review.content) {
-          const contentDiv = document.createElement("div");
-          contentDiv.classList.add("review-content");
-          contentDiv.textContent = review.content;
-          secondLine.appendChild(contentDiv);
-        }
-
-        reviewTextDiv.appendChild(secondLine);
-      }
-
-      reviewDiv.appendChild(reviewTextDiv);
-
-      // 이미지 표시
-      const imageListDiv = document.createElement("div");
-      imageListDiv.classList.add("review-image-list");
-
-      if (Array.isArray(review.images)) {
-        review.images.forEach(src => {
-          const img = document.createElement("img");
-          img.className = "review-image";
-          img.src = src;
-          imageListDiv.appendChild(img);
-        });
-      }
-
-      reviewDiv.appendChild(imageListDiv);
-
-  return reviewDiv
-},
-  item => String(item.authorID) === String(currentUser.id)  // 여기에 필터 추가
-);
+  loadDBItems(
+    "reviews",
+    containerSelector,
+    (review, _) => createReviewElement(review, container),
+    item => String(item.authorID) === String(currentUser.id)
+  );
+});
 
   // 찜한 가게
-  /*loadItems("favorites", ".wishlist-list-container", (item) => {
-    const div = document.createElement("div");
-    div.classList.add("wishlist-list");
-    div.textContent = item.name || "찜한 가게";
-    return div;
-  });*/
 
   loadItems("favorites", ".wishlist-list-container", (store) => {
   const loveListDiv = document.createElement("div");
@@ -494,7 +510,7 @@
   return loveListDiv;
 },item => String(item.favoritedBy) === String(currentUser.id));
 });
-  }); // 추가..
+
   // 페이지네이션 관련 코드는 따로 구현하거나, 기존 nav 유지*/
 </script>
      
@@ -646,6 +662,20 @@
     });
     </script>
 
+<script type="module">
+  window.addEventListener('DOMContentLoaded', async () => {
+    // Shoelace의 defineCustomElements가 끝날 때까지 대기
+    // (Shoelace가 이미 import되어 있다고 가정)
+    await Promise.all([
+  customElements.whenDefined('sl-tab'),
+  customElements.whenDefined('sl-tab-panel'),
+  customElements.whenDefined('sl-tab-group')
+]);
 
+    // 모든 Shoelace 컴포넌트가 로딩 완료되면 표시
+    document.getElementById('page-wrapper').classList.remove('invisible');
+    document.getElementById('page-wrapper').classList.add('visible');
+  });
+</script>
   </body>
 </html>

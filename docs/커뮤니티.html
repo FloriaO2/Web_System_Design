@@ -41,7 +41,7 @@
                   <a class="account-inf-mobile" href="MyPage (check).html">
                     <img src="image/avatar.png" alt="등급" id="grade-img-mobile"/>
                     <div class="account-detail-nickname">닉네임&nbsp;</div>
-                    <img id="move-to-account-inf" src="image/parentheses.png">
+                    <div>&nbsp;&gt;</div>
                   </a>
                 </div>
               </div>
@@ -124,7 +124,7 @@
           
             <!-- 게시글 목록이 여기에 동적으로 추가됩니다. -->
            
-             <div id="post-container">
+            <div id="post-container">
               <table id="post-table">
                 <colgroup>
                   <col style="width: 25%;">
@@ -138,8 +138,7 @@
                     <th>작성일</th>
                   </tr>
                 </thead>
-                <tbody id="post-list">
-                </tbody>
+                <tbody id="post-list"></tbody>
               </table>
             </div>
             <div id="pagination" style="margin-top: 3vh; margin-bottom: 3vh; text-align:center;">
@@ -210,151 +209,184 @@
         };///////////////여기까지복붙
 
 
-            // 게시글 목록 보여주기
-            document.addEventListener("DOMContentLoaded", () => {
-            const posts = JSON.parse(localStorage.getItem("posts")) || [];
-            const container = document.getElementById("post-list"); // 게시글 목록 담을 요소
-            const pagination = document.getElementById("pagination");
+        // 게시글 목록 보여주기
+        document.addEventListener("DOMContentLoaded", () => {
+        const posts = JSON.parse(localStorage.getItem("posts")) || [];
+        const container = document.getElementById("post-list"); // 게시글 목록 담을 요소
+        const pagination = document.getElementById("pagination");
 
-            const itemsPerPage = 10;
-            let currentPage = 1;
-            const totalPages = Math.ceil(posts.length / itemsPerPage);
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        const totalPages = Math.ceil(posts.length / itemsPerPage);
 
-            function renderPage(page) {
-            container.innerHTML = "";
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const pageItems = posts.slice().reverse().slice(start, end);
+        function renderPage(page) {
+        container.innerHTML = "";
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = posts.slice().reverse().slice(start, end);
 
-            if (pageItems.length === 0) {
-              container.innerHTML = `<tr><td colspan="3">게시글이 없습니다.</td></tr>`;
-              return;
-            }
+        if (pageItems.length === 0) {
+          container.innerHTML = `<tr><td colspan="3">게시글이 없습니다.</td></tr>`;
+          return;
+        }
           
-            const categoryMap = {
-              "기타": 0,
-              "정보글": 1,
-              "눈송이 밥친구": 2,
-              "질문글": 3
-            };
+        const categoryMap = {
+          "기타": 0,
+          "정보글": 1,
+          "눈송이 밥친구": 2,
+          "질문글": 3
+        };
 
-            // 최신 글이 위에 오도록 역순으로 보여줌
-            pageItems.forEach(post => {
-              const tr = document.createElement("tr");
+        // 댓글 불러오기 및 댓글 수 집계
+        const allComments = JSON.parse(localStorage.getItem("comments")) || [];
+        const commentCountMap = {};
+        allComments.forEach(comment => {
+          if (comment.postID in commentCountMap) {
+            commentCountMap[comment.postID]++;
+          } else {
+            commentCountMap[comment.postID] = 1;
+          }
+        });
 
-              const tdCategory = document.createElement("td");
-              const categoryName = post.category || "기타";
-              const categoryNum = categoryMap[categoryName] || 0;
-              tdCategory.textContent = categoryName;
-              tdCategory.classList.add(`category${categoryNum}`);
-              tdCategory.style.fontSize="1.45vw";
-              tdCategory.style.paddingLeft="1vw";
-              tdCategory.style.fontWeight = "600";
-              tdCategory.style.textAlign = "center";
+        // 최신 글이 위에 오도록 역순으로 보여줌
+        pageItems.forEach(post => {
+          const tr = document.createElement("tr");
 
-              const tdTitle = document.createElement("td");
-              const link = document.createElement("a");
-              link.textContent = post.title;
-              link.href = `게시글열람.html?id=${post.id}`; // 상세 페이지로 이동할 링크
-              link.style.textDecoration = "none";  // 필요시 스타일
-              link.style.color = "black";           // 필요시 스타일
-              link.style.whiteSpace = "nowrap";      // 한 줄로 유지
-              link.style.overflow = "hidden";        // 넘치는 부분 숨김
-              link.style.textOverflow = "ellipsis";  // 넘치는 텍스트는 '...' 으로 표시
-              link.style.display = "block";           
-              tdTitle.appendChild(link);
-              tdTitle.style.fontSize="1.3vw";
-              tdTitle.style.paddingLeft="1vw";
-              tdTitle.style.fontWeight="300";
-            
+          const tdCategory = document.createElement("td");
+          const categoryName = post.category || "기타";
+          const categoryNum = categoryMap[categoryName] || 0;
+          tdCategory.textContent = categoryName;
+          tdCategory.classList.add(`category${categoryNum}`);
+          tdCategory.style.fontSize="1.2vw";
+          tdCategory.style.paddingLeft="1vw";
+          tdCategory.style.fontWeight = "600";
+          tdCategory.style.textAlign = "center";
 
-              const tdDate = document.createElement("td");
-              //tdDate.textContent = new Date(post.createdAt).toLocaleString();
-              tdDate.textContent = new Date(post.createdAt).toLocaleString("ko-KR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true // 오전/오후 표기
-              });
-              tdDate.style.fontSize="1.2vw";
-              tdDate.style.textAlign="center";
-              tdDate.style.fontWeight="100";
+          const tdTitle = document.createElement("td");
+          // 제목 a 태그
+          const titleLink = document.createElement("a");
+          titleLink.textContent = post.title;
+          titleLink.href = `게시글열람.html?id=${post.id}`;
+          titleLink.style.textDecoration = "none";
+          titleLink.style.color = "black";
+          titleLink.style.whiteSpace = "nowrap";
+          titleLink.style.overflow = "hidden";
+          titleLink.style.textOverflow = "ellipsis";
+          titleLink.style.display = "inline-block";
+          titleLink.style.maxWidth = "100%"; // 댓글수 태그때문에 조정
+          titleLink.style.verticalAlign = "middle";
 
-              tr.appendChild(tdCategory);
-              tr.appendChild(tdTitle);
-              tr.appendChild(tdDate);
-
-              container.appendChild(tr);
-            });
+          // 댓글 수 a 태그 (있는 경우만)
+          const commentCount = commentCountMap[post.id] || 0;
+          let commentLink;
+          if (commentCount > 0) {
+            titleLink.style.maxWidth = "85%";
+            commentLink = document.createElement("a");
+            commentLink.textContent = ` (${commentCount})`;
+            commentLink.href = `게시글열람.html?id=${post.id}#comments`;
+            commentLink.style.textDecoration = "none";
+            commentLink.style.color = "gray";
+            commentLink.style.marginLeft = "0.5vw";
+            commentLink.style.verticalAlign = "middle";
+            commentLink.style.width="auto";
           }
 
-          function renderPagination() {
-            pagination.innerHTML = "";
+          tdTitle.style.fontSize="1.1vw";
+          tdTitle.style.paddingLeft="1vw";
+          tdTitle.style.fontWeight="300";
 
-  const maxVisibleButtons = 7;
-  const half = Math.floor(maxVisibleButtons / 2);
+          tdTitle.appendChild(titleLink);
+          if (commentLink) tdTitle.appendChild(commentLink);
+            
 
-  let startPage = Math.max(1, currentPage - half);
-  let endPage = startPage + maxVisibleButtons - 1;
+          const tdDate = document.createElement("td");
+          //tdDate.textContent = new Date(post.createdAt).toLocaleString();
+          tdDate.textContent = new Date(post.createdAt).toLocaleString("ko-KR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true // 오전/오후 표기
+          });
+          tdDate.style.fontSize="1vw";
+          tdDate.style.textAlign="center";
+          tdDate.style.fontWeight="100";
 
-  if (endPage > totalPages) {
-    endPage = totalPages;
-    startPage = Math.max(1, endPage - maxVisibleButtons + 1);
-  }
+          tr.appendChild(tdCategory);
+          tr.appendChild(tdTitle);
+          tr.appendChild(tdDate);
 
-  // 🔸 항상 있는 Previous 버튼
-  const prevBtn = document.createElement("button");
-  prevBtn.textContent = "◀ Previous";
-  prevBtn.classList.add("prenext-button");
-  prevBtn.disabled = currentPage === 1; // 첫 페이지면 비활성화
-  prevBtn.style.marginRight="1.3vw";
-  prevBtn.addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      renderPage(currentPage);
-      renderPagination();
-    }
-  });
-  pagination.appendChild(prevBtn);
+          container.appendChild(tr);
+        });
+      }
 
-  // 🔸 페이지 번호 버튼들
-  for (let i = startPage; i <= endPage; i++) {
-    const btn = document.createElement("button");
-    btn.classList.add("pagination-button");
-    btn.textContent = i;
-    if (i === currentPage) {
-      btn.disabled = true;
-      btn.style.fontWeight = "bold";
-    }
-    btn.addEventListener("click", () => {
-      currentPage = i;
+      function renderPagination() {
+        pagination.innerHTML = "";
+
+        const maxVisibleButtons = 7;
+        const half = Math.floor(maxVisibleButtons / 2);
+
+        let startPage = Math.max(1, currentPage - half);
+        let endPage = startPage + maxVisibleButtons - 1;
+
+        if (endPage > totalPages) {
+          endPage = totalPages;
+          startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+        }
+
+        // Previous 버튼
+        const prevBtn = document.createElement("button");
+        prevBtn.textContent = "◀ Previous";
+        prevBtn.classList.add("prenext-button");
+        prevBtn.disabled = currentPage === 1; // 첫 페이지면 비활성화
+        prevBtn.style.marginRight="1.3vw";
+        prevBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderPage(currentPage);
+            renderPagination();
+          }
+        });
+        pagination.appendChild(prevBtn);
+
+        // 페이지 번호 버튼들
+        for (let i = startPage; i <= endPage; i++) {
+          const btn = document.createElement("button");
+          btn.classList.add("pagination-button");
+          btn.textContent = i;
+          if (i === currentPage) {
+            btn.disabled = true;
+            btn.style.fontWeight = "bold";
+          }
+          btn.addEventListener("click", () => {
+            currentPage = i;
+            renderPage(currentPage);
+            renderPagination();
+          });
+          pagination.appendChild(btn);
+        }
+
+        // Next 버튼
+        const nextBtn = document.createElement("button");
+        nextBtn.textContent = "Next ▶";
+        nextBtn.classList.add("prenext-button");
+        nextBtn.disabled = currentPage === totalPages; // 마지막 페이지면 비활성화
+        nextBtn.style.marginLeft="1.3vw";
+        nextBtn.addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderPage(currentPage);
+            renderPagination();
+          }
+        });
+        pagination.appendChild(nextBtn);
+      }
+
       renderPage(currentPage);
       renderPagination();
     });
-    pagination.appendChild(btn);
-  }
 
-  // 🔸 항상 있는 Next 버튼
-  const nextBtn = document.createElement("button");
-  nextBtn.textContent = "Next ▶";
-  nextBtn.classList.add("prenext-button");
-  nextBtn.disabled = currentPage === totalPages; // 마지막 페이지면 비활성화
-  nextBtn.style.marginLeft="1.3vw";
-  nextBtn.addEventListener("click", () => {
-    if (currentPage < totalPages) {
-      currentPage++;
-      renderPage(currentPage);
-      renderPagination();
-    }
-  });
-  pagination.appendChild(nextBtn);
-}
-
-          renderPage(currentPage);
-          renderPagination();
-          });
 
 
 

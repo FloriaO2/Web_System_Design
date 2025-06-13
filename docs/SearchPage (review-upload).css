@@ -121,7 +121,7 @@ a {
 .aside {
   position: absolute;
   width: 17.36vw;
-  height: 100%;
+  height: calc(100% - 19.17vh);
   top: 19.17vh;
   left: 0;
   background-color: #d8dfff;
@@ -182,7 +182,7 @@ a {
 .aside2 {
   position: absolute;
   width: 17.36vw;
-  height:100%;
+  height:calc(100% - 19.17vh);
   top: 19.17vh;
   left: 72.64vw;
   background-color: #d8dfff;
@@ -621,7 +621,7 @@ a {
   border-style: solid;
   border-color: #2c2c2c;
   border-width: 1px;
-  padding: 12px;
+  padding: 8px 12px !important;
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -1289,27 +1289,6 @@ footer {
   display: flex;
   font-size:1.4rem;
   margin-right:0.8vw;
-}
-}
-
-/* 모바일 계정 정보 바로가기 */
-@media  (max-width: 500px){
-#move-to-account-inf {
-  height:100%;
-  width:auto;
-}
-}
-@media (min-width: 500px) and (max-width: 767.98px){
-#move-to-account-inf {
-  height:2.6vw;
-  width:auto;
-}
-}
-@media (min-width: 768px) and (max-width: 1024.98px) {
-#move-to-account-inf {
-  width:auto;
-  height:20px;
-  margin-bottom:5px;
 }
 }
 

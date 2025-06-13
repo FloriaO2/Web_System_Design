@@ -121,7 +121,7 @@ a {
 .aside {
   position: absolute;
   width: 17.36vw;
-  height: 100%;
+  height: calc(100% - 19.17vh);
   top: 19.17vh;
   left: 0;
   background-color: #d8dfff;
@@ -182,7 +182,7 @@ a {
 .aside2 {
   position: absolute;
   width: 17.36vw;
-  height:100%;
+  height:calc(100% - 19.17vh);
   top: 19.17vh;
   left: 72.64vw;
   background-color: #d8dfff;
@@ -586,14 +586,14 @@ a {
   left: 17.36vw;
   display:flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
   height:auto;
-  padding-top: 1px;
 }
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
-.user-report-title {
+.post-upload-title {
   top: 6.77vh;
   height: 12.21vh;
   color: #1e1e1e;
@@ -605,42 +605,38 @@ a {
   position: relative;
   align-self: stretch;
 }
-#support-text{
-  top: 6.77vh;
-  height: 12.21vh;
-  color: gray;
-  text-align: center;
-  font-family: var(--subtitle-font-family, "Inter-Regular", sans-serif);
-  font-size: 22px;
-  line-height: 120%;
-  font-weight: 400;
-  position: relative;
-  align-self: stretch;
 
+#next-grade {
+  display: flex;
+  justify-content: center;
+  font-family: var(--subtitle-font-family, "Inter-Regular", sans-serif);
+  font-size:0.9rem;
+  color:rgba(0, 0, 0, 0.5);
+  padding-top:2.5vh;
 }
 
-.user-report-button {
+#post-upload-button {
   background: #2c2c2c;
   border-radius: 8px;
   border-style: solid;
   border-color: #2c2c2c;
   border-width: 1px;
-  padding: 12px;
+  padding: 8px 12px !important;
   display: flex;
   flex-direction: row;
   gap: 8px;
   align-items: center;
   justify-content: center;
-  width: 9.51vw;
-  height: 4.98vh;
+  width: auto;
+  height: auto;
   position: relative;
-  left: 40.99vw;
+  left: 18vw;
   overflow: hidden;
   margin-top:3vh;
   margin-bottom: 2vh;
 }
 
-.user-report-button-text {
+.post-upload-button-text {
   color: #f5f5f5;
   text-align: center;
   font-family: var(
@@ -660,19 +656,21 @@ a {
 
 /* 전체 박스 스타일 */
 #upload-box {
-  width:90%;
-  border: 2px solid #999;
-  border-radius: 20px;
-  padding: 20px;
-  margin-top: 50px;
-  background-color: #f9f9f9;
+  width: 49.28vw;
+  height: auto;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  box-sizing: border-box;
-  margin-left: 55px;
-  
- 
+  align-items: left;
+  justify-content: flex-start;
+  gap: 2vh;
+  flex: 1;
+  margin:3vh 3vw 6vh 3vw;
+  padding: 3vh 2vw 4vh 2vw;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-width: 1px;
 }
 h1,h3{
     text-align: center;
@@ -686,13 +684,21 @@ h3{
 #upload-top {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  height:auto;
+  margin-top:2vh;
+  margin-bottom:1.5vh;
+  gap:1.2vw;
 }
 
-#upload-button {
+#category {
+  width:auto;
+  padding-right:3vw;
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-width: 1px;
 }
 /* 드롭다운 */
 .select-box select {
@@ -702,26 +708,36 @@ h3{
   width: 200px;
 }
 
+.title-box {
+  width:100%;
+}
+
 /* 제목 입력 */
 .title-box input {
   padding: 8px;
   justify-content: flex-end;
-  border-radius: 6px;
   font-size: 14px;
   flex: 1;
   width: 100%;
   margin-right: 100px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-width: 1px;
 }
 
 /* 내용 입력창 (하단) */
 #upload-bottom textarea {
   width: 100%;
   padding: 10px;
-  border-radius: 6px;
   font-size: 14px;
   resize: vertical;
   min-height: 500px;
   box-sizing: border-box;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-width: 1px;
 }
 
   
@@ -1148,27 +1164,6 @@ footer {
   display: flex;
   font-size:1.4rem;
   margin-right:0.8vw;
-}
-}
-
-/* 모바일 계정 정보 바로가기 */
-@media  (max-width: 500px){
-#move-to-account-inf {
-  height:100%;
-  width:auto;
-}
-}
-@media (min-width: 500px) and (max-width: 767.98px){
-#move-to-account-inf {
-  height:2.6vw;
-  width:auto;
-}
-}
-@media (min-width: 768px) and (max-width: 1024.98px) {
-#move-to-account-inf {
-  width:auto;
-  height:20px;
-  margin-bottom:5px;
 }
 }
 

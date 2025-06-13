@@ -121,7 +121,7 @@ a {
 .aside {
   position: absolute;
   width: 17.36vw;
-  height: 100%;
+  height: calc(100% - 19.17vh);
   top: 19.17vh;
   left: 0;
   background-color: #d8dfff;
@@ -182,7 +182,7 @@ a {
 .aside2 {
   position: absolute;
   width: 17.36vw;
-  height:100%;
+  height:calc(100% - 19.17vh);
   top: 19.17vh;
   left: 72.64vw;
   background-color: #d8dfff;
@@ -596,7 +596,7 @@ a {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
 
-  #notice{
+#notice{
   background: #a9b5ef;
   border-radius: 4px;
   padding: 1vh 2vw;
@@ -657,9 +657,10 @@ a {
 }
 
 #postlist{
-  width:7vw;
+  width:8.2vw;
   height:5vh;
   background-color: rgb(229, 194, 245);
+  border-color: rgba(0, 0, 0, 0.1);
   color:black;
   padding:1vh 0 !important;
 }
@@ -703,45 +704,286 @@ a {
   }
   
 
+#post-detail-container {
+  width: 49.28vw;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: flex-start;
+  gap: 2vh;
+  flex: 1;
+  margin:0vh 3vw 6vh 3vw;
+  padding: 3vh 2vw 4vh 2vw;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-width: 1px;
+}
+#post-header {
+  padding:3vh 1vw;
+}
 
+#post-category {
+  text-align: center;
+  font-family: var(--body-strong-font-family, "Inter-Regular", sans-serif);
+  font-size: 1.1vw;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  display: flex;
+  align-items: center;
 
+}
 
-  #post-detail-container {
-      width: 80%;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-family: sans-serif;
-    }
-    #post-header {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-    #post-content {
-      margin-bottom: 30px;
-      white-space: pre-line;
-    }
-    #comments-section {
-      border-top: 1px solid #eee;
-      padding-top: 20px;
-    }
-    .comment {
-      background: #f9f9f9;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-    }
-    textarea {
-      width: 100%;
-      padding: 10px;
-      resize: vertical;
-    }
-    button {
-      margin-top: 5px;
-      padding: 8px 14px;
-    }
+.category0 {
+  color:rgb(0, 0, 0);
+}
+
+.category1 {
+  color:rgb(187, 0, 0);
+}
+
+.category2 {
+  color:rgb(5, 143, 21);
+}
+.category3 {
+  color:rgb(29, 10, 137);
+}
+
+#post-title {
+  color: var(--schemes-on-surface-variant, #49454f);
+  text-align: left;
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
+  font-size: 2vw;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+}
+
+#post-content {
+  white-space: pre-line;
+  border-top:1px solid rgba(0, 0, 0, 0.2);
+  padding:5vh 2vw;
+  padding-bottom:5vh;
+}
+
+#post-account-img {
+  width: 1.3vw;
+  height: 1.3vw;
+  border-radius: 50%;
+  margin-right: 0.2vw;
+}
+
+#post-author {
+  font-family: "Inter-Light", sans-serif;
+  line-height: 140%;
+  font-size:1.1vw;
+}
+.comment-section {
+  padding-top: 0;
+}
+
+#comment-notice{
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 1vh 2vw;
+  margin-top:3vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 45vw;
+  height: 5vh;
+  position: relative;
+}
+
+#comment-notice img {
+    width: auto;  /* 원하는 크기로 조절 가능 */
+    height: 3vh;
+    vertical-align: middle;
+    margin-right: 1vw;
+  }
+
+#comment-notice-text {
+  height:100%;
+  display:flex;
+  align-items: center;
+  color: #ffffff;
+  text-align: left;
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
+  font-size: 1.1vw;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  position: relative;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.comment-list {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 1.2vw;
+}
+
+/* 마지막 요소의 border 제거 */
+.comment-list:last-child {
+  border-bottom: none;
+  margin-bottom:5vh;
+}
+
+.comment-content {
+  padding:0 2vw;
+  color: rgba(0, 0, 0, 0.7);
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 1.2vw;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.comment {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 3vh;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-width: 1px;
+  margin-bottom:0;
+}
+
+#submit-comment {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  border-style: solid;
+  border-color: #2c2c2c;
+  border-width: 1px;
+  padding: 6px 8px !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  margin-top:1vh;
+  margin-bottom: 2vh;
+}
+
+#submit-comment-text {
+  color: #f5f5f5;
+  text-align: center;
+  font-family: var(
+    --single-line-body-base-font-family,
+    "Inter-Regular",
+    sans-serif
+  );
+  font-size: 1.2vw;
+  line-height: 100%;
+  font-weight: 400;
+  position: relative;
+  flex: 1;
+}
+
+#post-simple-container {
+  width: 49.28vw;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: flex-start;
+  gap: 2vh;
+  flex: 1;
+  margin:3vh 3vw 6vh 3vw;
+  padding: 3vh 2vw 1vh 2vw;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-width: 1px;
+}
+
+.list-area-text {
+  width:6vw;
+  color: var(--var-sds-color-text-neutral-tertiary, #767676);
+  text-align: left;
+  font-family: var(
+    --var-sds-typography-subtitle-font-family,
+    "Inter-SemiBold",
+    sans-serif
+  );
+  font-size: 1.5vw;
+  line-height: 120%;
+  font-weight: 600;
+  position: relative;
+  padding-bottom:0.7vh;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+#post-container {
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top:1vh;
+  margin-bottom:1vh;
+}
+
+#post-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+#post-table th,
+#post-table td {
+  border: none; /* 기본적으로 모든 선 제거 */
+  text-align: center;
+  padding: 1vh 0;
+}
+
+/* tr 사이에 가로줄만 표시 */
+#post-table tr:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 테두리와 세로줄 제거를 확실히 보장 */
+#post-table thead tr,
+#post-table tbody tr {
+  border-left: none;
+  border-right: none;
+}
+
+#post-table td:nth-child(2) {
+  text-align: left;
+  margin-left:3vw;
+}
+
 /* 여기까지 수정 완료 */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
@@ -1163,27 +1405,6 @@ footer {
   display: flex;
   font-size:1.4rem;
   margin-right:0.8vw;
-}
-}
-
-/* 모바일 계정 정보 바로가기 */
-@media  (max-width: 500px){
-#move-to-account-inf {
-  height:100%;
-  width:auto;
-}
-}
-@media (min-width: 500px) and (max-width: 767.98px){
-#move-to-account-inf {
-  height:2.6vw;
-  width:auto;
-}
-}
-@media (min-width: 768px) and (max-width: 1024.98px) {
-#move-to-account-inf {
-  width:auto;
-  height:20px;
-  margin-bottom:5px;
 }
 }
 

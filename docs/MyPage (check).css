@@ -23,6 +23,14 @@ a {
   box-sizing: border-box;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
 .MyPage_check {
   position:relative;
   background-color: #ffffff;
@@ -121,7 +129,7 @@ a {
 .aside {
   position: absolute;
   width: 17.36vw;
-  height: 100%;
+  height: calc(100% - 19.17vh);
   top: 19.17vh;
   left: 0;
   background-color: #d8dfff;
@@ -182,7 +190,7 @@ a {
 .aside2 {
   position: absolute;
   width: 17.36vw;
-  height:100%;
+  height:calc(100% - 19.17vh);
   top: 19.17vh;
   left: 72.64vw;
   background-color: #d8dfff;
@@ -738,6 +746,11 @@ sl-tab-panel::part(base) {
   padding: 0 !important;
 }
 
+.error-message {
+  font-family: var(--body-base-font-family, "Inter", Helvetica);
+  margin:5vh 3vw;
+}
+
 .post-list {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding:2vh 3vw;
@@ -750,9 +763,17 @@ sl-tab-panel::part(base) {
 
 .post-category {
   font-weight: 900;
-  width:15vw;
-  margin-right:3vw;
+  min-width:10vw;
+  width:10vw;
+  margin-right:1vw;
   font-size:1rem;
+}
+
+.post-name {
+  white-space: nowrap;      /* 한 줄로 유지 */
+  overflow: hidden;         /* 넘치는 부분 숨김 */
+  text-overflow: ellipsis;  /* 넘치는 텍스트는 '...'로 표시 */
+  max-width: 100%;          /* 부모 너비 안에서 최대한 */
 }
 
 .category0 {
@@ -793,7 +814,7 @@ sl-tab-panel::part(base) {
 
 .post-category-in-chat {
   font-weight: 900;
-  width:10vw;
+  width:7vw;
 }
 
 .review-list {
@@ -837,10 +858,15 @@ sl-tab-panel::part(base) {
   font-size: 0.7rem;
 }
 
+.empty-space {
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
 .review-name {
   font-weight: 900;
   width:auto;
-  margin-right:3vw;
+  margin-right:1.5vw;
 }
 
 .review-content {
@@ -1332,27 +1358,6 @@ footer {
   display: flex;
   font-size:1.4rem;
   margin-right:0.8vw;
-}
-}
-
-/* 모바일 계정 정보 바로가기 */
-@media  (max-width: 500px){
-#move-to-account-inf {
-  height:100%;
-  width:auto;
-}
-}
-@media (min-width: 500px) and (max-width: 767.98px){
-#move-to-account-inf {
-  height:2.6vw;
-  width:auto;
-}
-}
-@media (min-width: 768px) and (max-width: 1024.98px) {
-#move-to-account-inf {
-  width:auto;
-  height:20px;
-  margin-bottom:5px;
 }
 }
 
