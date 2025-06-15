@@ -303,17 +303,25 @@
     </div>
 
     
-    <script>//필터링 및 렌더링
-      const stores = [
-      { id: "store001", name: "카페 A", rating: 4.7, reviews: 102, favorites: 320, type: "한식", distance: 5, price: 10000 },
-      { id: "store002",name: "카페 B", rating: 1.9, reviews: 85, favorites: 410, type: "양식", distance: 2, price: 12000 },
-      { id: "store003",name: "카페 C", rating: 4.7, reviews: 102, favorites: 295, type: "중식", distance: 7, price: 14000 },
-      { id: "store004",name: "카페 D", rating: 4.5, reviews: 200, favorites: 300, type: "일식", distance: 10, price: 7000 },
-      { id: "store005",name: "카페 E", rating: 2.7, reviews: 102, favorites: 320, type: "간편식", distance: 13, price: 8000 },
-      { id: "store006",name: "카페 F", rating: 2.9, reviews: 85, favorites: 410, type: "양식", distance: 16, price: 11000 },
-      { id: "store007",name: "카페 G", rating: 3.7, reviews: 102, favorites: 295, type: "그 외", distance: 17, price: 15000 },
-      { id: "store008",name: "카페 H", rating: 3.5, reviews: 200, favorites: 300, type: "한식", distance: 4, price: 7000 }
-    ];
+    <script>//json파일 불러오기 
+    let stores = []; // 전역 변수로 선언
+     fetch('stores.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('JSON 파일을 불러오지 못했어요.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      stores = data; // 전역 변수에 데이터 저장
+      console.log(stores); // 디버깅용
+      renderStores(); // 초기 렌더링 호출
+    })
+    .catch(error => {
+      console.error('에러 발생:', error);
+    });
+
+
 
 let selectedFilters = {
   type: [],
@@ -498,12 +506,7 @@ document.querySelectorAll(".search-nav .nav-link").forEach(link => {
 
 // 초기 렌더링
 renderStores();
-
-
-
-
-
-    </script>
+</script>
 
     <script>//aside2
         function renderAside(sortedArray) {

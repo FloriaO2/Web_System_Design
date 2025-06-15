@@ -1,0 +1,141 @@
+
+
+[
+  {
+    "id": "store001",
+    "name": "숙대소반",
+    "rating": 4.7,
+    "reviews": 102,
+    "favorites": 320,
+    "type": "한식",
+    "distance": 5,
+    "price": 10000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  },
+
+  {
+    "id": "store002",
+    "name": "아리랑컵밥",
+    "rating": 1.9,
+    "reviews": 85,
+    "favorites": 410,
+    "type": "한식",
+    "distance": 2,
+    "price": 12000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  },
+  {
+    "id": "store003",
+    "name": "마시앤바시",
+    "rating": 4.7,
+    "reviews": 102,
+    "favorites": 295,
+    "type": "양식",
+    "distance": 7,
+    "price": 14000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  },
+  {
+    "id": "store004",
+    "name": "돈카춘",
+    "rating": 4.5,
+    "reviews": 200,
+    "favorites": 300,
+    "type": "일식",
+    "distance": 10,
+    "price": 7000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  },
+  {
+    "id": "store005",
+    "name": "탕화쿵푸",
+    "rating": 2.7,
+    "reviews": 102,
+    "favorites": 320,
+    "type": "중식",
+    "distance": 13,
+    "price": 8000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  },
+  {
+    "id": "store006",
+    "name": "버거리",
+    "rating": 2.9,
+    "reviews": 85,
+    "favorites": 410,
+    "type": "간편식",
+    "distance": 16,
+    "price": 11000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  },
+  {
+    "id": "store007",
+    "name": "리또리또",
+    "rating": 3.7,
+    "reviews": 102,
+    "favorites": 295,
+    "type": "그 외",
+    "distance": 17,
+    "price": 15000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  },
+  {
+    "id": "store008",
+    "name": "김밥천국",
+    "rating": 3.5,
+    "reviews": 200,
+    "favorites": 300,
+    "type": "한식",
+    "distance": 4,
+    "price": 7000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 7000 },
+      { "name": "돈까스", "price": 7500 },
+      { "name": "치즈알밥", "price": 8500 }
+    ],
+    "time": "10:00 ~ 22:00",
+    "etc": "혼밥하기 좋은 곳"
+  }
+]

@@ -118,17 +118,7 @@
 
           <script>
 
-          const stores = [
-          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
-          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
-          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
-          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
-          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
-          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
-          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
-          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
-        ];
-
+        let store_aside2=[];
        
         function renderAside(sortedArray) {
           const top7 = sortedArray.slice(0, 7);
@@ -141,7 +131,7 @@
 
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
+        return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
           if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
@@ -174,10 +164,16 @@
       `;
     }
     
-  window.onload = () => {
-    const sorted = getSortedStores("rating");
-    renderAsideStores(sorted); 
-  };///////////////여기까지복붙
+   window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+  fetch('stores.json')       
+    .then(res => res.json())
+    .then(data => {
+      store_aside2= data;
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted);
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});/////////////aside2수정완료///////////////
   </script>
 
    <script>////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////

@@ -131,8 +131,35 @@
           </div>
       
 
-       
-        <script>
+       <script>
+        window.addEventListener('DOMContentLoaded', () => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) return;
+
+        const postCount = currentUser.postCount || 0;
+        let nextLevelThreshold;
+
+        if (postCount < 10) nextLevelThreshold = 10;
+        else if (postCount < 25) nextLevelThreshold = 25;
+        else if (postCount < 40) nextLevelThreshold = 40;
+        else nextLevelThreshold = null;
+
+        const nextGradeDiv = document.getElementById('next-grade');
+
+        if (nextLevelThreshold) {
+          const remaining = nextLevelThreshold - postCount;
+          nextGradeDiv.textContent = `다음 등급까지 남은 게시글 수:${remaining}`;
+        } else {
+          nextGradeDiv.textContent = `최고 등급`;
+        }
+      });
+       </script>
+
+
+
+
+
+       <script>
           const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
             document.getElementById("post-upload-button").addEventListener("click", () => {
@@ -161,7 +188,21 @@
 
               // 저장
               localStorage.setItem("posts", JSON.stringify(existing));
+              // 업로드 성공 시
+              let users = JSON.parse(localStorage.getItem('users')) || [];
 
+              // 3. 해당 유저 찾아서 postCount 증가
+              currentUser.postCount = (currentUser.postCount || 0) + 1;
+              users = users.map(user => {
+                if (user.id === currentUser.id) {
+                  return { ...user, postCount: currentUser.postCount };
+                }
+                return user;
+              });
+
+              // 4. localStorage에 업데이트
+              localStorage.setItem('currentUser', JSON.stringify(currentUser));
+              localStorage.setItem('users', JSON.stringify(users));
               // 글 목록 페이지로 이동
               console.log("저장됨:", post); //디버깅용
               window.location.href = "커뮤니티.html";
@@ -172,16 +213,7 @@
 
 
          <script> //aside2랭킹 관련
-        const stores = [
-          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
-          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
-          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
-          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
-          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
-          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
-          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
-          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
-        ];
+        let store_aside2=[];
 
        
         function renderAside(sortedArray) {
@@ -195,7 +227,7 @@
 
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
+        return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
           if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
@@ -227,10 +259,16 @@
         </ul>
       `;
       }
-      window.onload = () => {
-        const sorted = getSortedStores("rating");
-        renderAsideStores(sorted); 
-      };///////////////여기까지복붙
+     window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+  fetch('stores.json')       
+    .then(res => res.json())
+    .then(data => {
+      store_aside2= data;
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted);
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});/////////////aside2수정완료///////////////
       </script>
 
          
