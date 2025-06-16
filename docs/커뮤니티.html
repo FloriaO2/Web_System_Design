@@ -20,7 +20,7 @@
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-            <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
+             <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
           </div>
           <div class="button-group" id="buttonGroup"></div>
 
@@ -509,6 +509,18 @@
       renderButtonGroup(); // 버튼도 렌더링
     });
     </script>
+
+
+<script>//////////////검색 키워드 전달///////////
+document.getElementById("search-btn").addEventListener("click", () => {
+  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
+  if (keyword) {
+    location.href = `SearchPage.html?keyword=${keyword}`;
+  } else {
+    alert("검색어를 입력하세요.");
+  }
+});
+</script>
 
      
 

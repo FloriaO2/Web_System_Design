@@ -20,7 +20,7 @@
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-            <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
+            <button type="button" class="btn btn-dark" id="search-btn">검색</button>
           </div>
           <div class="button-group" id="buttonGroup"></div>
 
@@ -303,23 +303,36 @@
     </div>
 
     
-    <script>//json파일 불러오기 
-    let stores = []; // 전역 변수로 선언
-     fetch('stores.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('JSON 파일을 불러오지 못했어요.');
-      }
-      return response.json();
-    })
-    .then(data => {
-      stores = data; // 전역 변수에 데이터 저장
-      console.log(stores); // 디버깅용
-      renderStores(); // 초기 렌더링 호출
-    })
-    .catch(error => {
-      console.error('에러 발생:', error);
-    });
+    <script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchKeyword = urlParams.get("keyword")?.toLowerCase() || "";
+
+    
+    document.getElementById("search-form")
+  .addEventListener("input", function () {
+    searchKeyword = this.value.trim().toLowerCase(); // 검색어 저장
+    console.log("검색어:", searchKeyword);
+    renderStores(); //함수실행
+  });
+
+
+  let stores = []; ////////////검색결과렌더링
+    fetch('stores.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('JSON 파일을 불러오지 못했어요.');
+    }
+    return response.json();
+  })
+  .then(data => {
+    stores = data; // 전역 변수에 데이터 저장
+    console.log(stores); // 디버깅용
+    renderStores(); // 초기 렌더링 호출
+  })
+  .catch(error => {
+    console.error('에러 발생:', error);
+  });
 
 
 
@@ -328,6 +341,7 @@ let selectedFilters = {
   distance: null,
   price: null
 };
+
 
 let currentSort = "rating";
 
@@ -378,6 +392,15 @@ function renderStores() {
       filtered = filtered.filter(store => store.price <= selectedFilters.price);
     }
   }
+
+  /* 🔍 검색어 필터 추가 ------------------------------ */
+  if (searchKeyword) {
+    filtered = filtered.filter(store =>
+      store.name.toLowerCase().includes(searchKeyword) ||
+      (store.menu?.some(m => m.name.toLowerCase().includes(searchKeyword)))
+    );
+  }
+  /* ------------------------------------------------ */
 
   // 정렬 적용
   filtered.sort((a, b) => {
