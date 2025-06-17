@@ -20,7 +20,7 @@
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-            <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
+             <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
           </div>
           <div class="button-group" id="buttonGroup"></div>
 
@@ -139,18 +139,18 @@
           <div class="info-down-area">
             <div class="info-tab-list">
               <div class="tab2">
-                <a class="label2" href="SearchPage (info).html">정보</a>
+                <a class="label2" id="go-to-info" href="SearchPage (info).html">정보</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="SearchPage (menu).html">메뉴</a>
+                <a class="label2" id="go-to-menu" href="SearchPage (menu).html">메뉴</a>
               </div>
               <div class="tab">
-                <a class="label" href="SearchPage (review).html">리뷰</a>
+                <a class="label" id="go-to-review" href="SearchPage (review).html">리뷰</a>
               </div>
             </div>
             <div class="review-main-content">
               <button type="button" class="review-upload-button btn btn-dark">
-                <div class="review-upload-button-text" onclick="location.href='SearchPage (review-upload).html'">리뷰 업로드</div>
+                <div class="review-upload-button-text" id="review-link" >리뷰 업로드</div>
               </button>
               <div class="review-card">
                 <div class="review-left">
@@ -215,11 +215,59 @@
             </div>
           </div>
 
-          <script>
-            document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const storeId = params.get('storeId');
 
+
+
+          
+    <script>////해당식당 불러오기///
+    let store_mainbody =[];
+
+    window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const storeId = urlParams.get('id');
+    /* 2) 여기서 JSON을 읽어‑온 뒤 기존 로직을 그대로 돌린다 */
+  fetch('stores.json')
+    .then(res => res.json())
+    .then(data => {
+      store_mainbody = data;                       
+      const store = store_mainbody.find(s => s.id === storeId);
+
+      if (!store) { alert('해당 가게를 찾을 수 없습니다.'); return; }
+
+      // ─── 기존 코드 그대로 유지 ───
+      document.querySelector('#go-to-info').href = `SearchPage (info).html?id=${storeId}`;
+      document.querySelector('#go-to-menu').href = `SearchPage (menu).html?id=${storeId}`;
+      document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
+      
+
+      document.querySelector('.store-name').textContent      = store.name;
+      document.querySelector('.element').textContent         = store.rating.toFixed(1);
+      document.querySelector('.store-simple-info').textContent =
+        `${store.type} | 학교 기준 ${store.distance}분 | ${store.price.toLocaleString()}원`;
+
+      renderStars(store.rating);        
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+    
+});
+const reviewLink = document.getElementById('review-link');
+const urlParams = new URLSearchParams(window.location.search);
+const storeId = urlParams.get('id');
+
+reviewLink.addEventListener('click', () => {
+  if (storeId) {
+    window.location.href = `SearchPage (review-upload).html?id=${storeId}`;
+  } else {
+    alert('식당 ID가 없습니다.');
+  }
+});
+
+
+
+
+
+            
+   ////////지원님 코드/////////
     const container = document.querySelector('.review-main-content');
     const uploadButton = container.querySelector('.review-upload-button');
     container.innerHTML = '';
@@ -253,7 +301,7 @@
         });
       };
     };
-            /*document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('DOMContentLoaded', () => {
             // URL에서 storeId 파라미터 받아오기
             const params = new URLSearchParams(window.location.search);
             const storeId = params.get('storeId');
@@ -273,7 +321,7 @@
             const uploadButton = container.querySelector('.review-upload-button');
             container.innerHTML = '';
             container.appendChild(uploadButton);
-            */
+            
 
             // 리뷰 카드 생성 함수
             function createReviewCard(review) {
@@ -314,19 +362,19 @@
               return card;
             }
 
-            /*
+            
             // 리뷰 카드들 생성 및 추가
             reviews.forEach(review => {
               const card = createReviewCard(review);
               container.appendChild(card);
-            });*/
+            });
           });
+        
+          
 
           </script>
 
-      <script>////////이부분  복붙하고 aside에있는 span id 말고 class 로쓰면됨..aside에 닉네임뜸/////
-       
-    </script>
+     
 
     <script>////////회원/비회원 전환///////////////////////
       function logout() {
@@ -377,7 +425,24 @@
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -452,69 +517,7 @@
       </div>
     </div>
 
-    <script>
-      const stores = [
-          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
-          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
-          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
-          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
-          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
-          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
-          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
-          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
-        ];
-
-       
-        function renderAside(sortedArray) {
-          const top7 = sortedArray.slice(0, 7);
-          renderAsideStores(top7);
-        }
-        function handleSortAside(criteria) {
-          const sorted = getSortedStores(criteria);
-          renderAside(sorted);
-        }
-
-         //sort 함수(aside2/mainbody 공통)
-        function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
-          if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
-
-          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
-          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
-          return 0;
-        });
-      }
-
-      //asdide렌더링
-        function renderAsideStores(sortedArray) {
-        const top7 = sortedArray.slice(0, 7);
-        const asideEl = document.getElementById("store-sort");
-
-        asideEl.innerHTML = `
-        <ul class="store-list">
-          ${top7.map((store, index) => `
-            <li class="store-item">
-              <div class="store-rank-name">
-                <div class="rank-circle">${index + 1}</div>
-                <span class="store-name-aside">${store.name}</span>
-              </div>
-              <span class="store-rating">
-                <img src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" style="width:20px; height:100%; margin-bottom:3px;" />
-                ${store.rating.toFixed(1)}
-              </span>
-            </li>
-          `).join('')}
-        </ul>
-      `;
-    }
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
-
-    </script>
-
+    
     <!-- 카카오 지도 API -->
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
     <script>
@@ -554,49 +557,10 @@
       });
     </script>
 
-    <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
-    <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabToShow = urlParams.get("tab");
-
-        if (tabToShow) {
-          const tabGroup = document.querySelector("sl-tab-group");
-          if (tabGroup) {
-            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
-          }
-        }
-      });
-    </script>
+    
 
     <script>//해당 식당의 정보 보여주기
-      const store_mainbody = [
-      // 임시 수정 store001 (store_mainbody)
-      { id: "store001",name: "카페 A", rating: 4.7, reviews: 102, favorites: 320, type: "한식", distance: 5, price: 10000 },
-      { id: "store002",name: "카페 B", rating: 1.9, reviews: 85, favorites: 410, type: "양식", distance: 2, price: 12000 },
-      { id: "store003",name: "카페 C", rating: 4.7, reviews: 102, favorites: 295, type: "중식", distance: 7, price: 14000 },
-      { id: "store004",name: "카페 D", rating: 4.5, reviews: 200, favorites: 300, type: "일식", distance: 10, price: 7000 },
-      { id: "store005",name: "카페 E", rating: 2.7, reviews: 102, favorites: 320, type: "간편식", distance: 13, price: 8000 },
-      { id: "store006",name: "카페 F", rating: 2.9, reviews: 85, favorites: 410, type: "양식", distance: 16, price: 11000 },
-      { id: "store007",name: "카페 G", rating: 3.7, reviews: 102, favorites: 295, type: "그 외", distance: 17, price: 15000 },
-      { id: "store008",name: "카페 H", rating: 3.5, reviews: 200, favorites: 300, type: "한식", distance: 4, price: 7000 }
-    ];
-    window.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const storeId = urlParams.get('id');
-    console.log('storeId:', storeId);  // 여기 꼭 찍어봐야 함
-    const store = store_mainbody.find(s => s.id === storeId);
-    // 임시 수정 store001 (store_mainbody)
-    console.log('store:', store);
-
-    if (!store) {
-      alert("해당 가게를 찾을 수 없습니다.");
-    }
-
-
-
-
-
+      
     function renderStars(rating) {
     const fullStar = 'https://c.animaapp.com/kjYfscdy/img/star-63.svg';
     const halfStar = 'https://c.animaapp.com/kjYfscdy/img/star-61.svg'; // 반별 아이콘 예시 (없으면 그냥 fullStar 대체 가능)
@@ -629,13 +593,99 @@
     }
   }
 
-  if (store) {
-    document.querySelector('.store-name').textContent = store.name;
-    document.querySelector('.element').textContent = store.rating.toFixed(1);
-    document.querySelector('.store-simple-info').textContent =
-      `${store.type} | 학교 기준 ${store.distance}분| ${store.price.toLocaleString()}원`;
 
-    renderStars(store.rating);
+
+  
+
+ 
+    </script>
+
+    <script>
+      let store_aside2=[];
+        function renderAside(sortedArray) {
+          const top7 = sortedArray.slice(0, 7);
+          renderAsideStores(top7);
+        }
+        function handleSortAside(criteria) {
+          const sorted = getSortedStores(criteria);
+          renderAside(sorted);
+        }
+
+         //sort 함수(aside2/mainbody 공통)
+        function getSortedStores(criteria = "rating") {
+        return [...store_aside2].sort((a, b) => {
+          if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
+
+          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
+          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          return 0;
+        });
+      }
+
+      //aside렌더링
+        function renderAsideStores(sortedArray) {
+        const top7 = sortedArray.slice(0, 7);
+        const asideEl = document.getElementById("store-sort");
+
+        asideEl.innerHTML = `
+        <ul class="store-list">
+          ${top7.map((store, index) => `
+            <li class="store-item">
+              <div class="store-rank-name">
+                <div class="rank-circle">${index + 1}</div>
+                <span class="store-name-aside">${store.name}</span>
+              </div>
+              <span class="store-rating">
+                <img src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" style="width:20px; height:100%; margin-bottom:3px;" />
+                ${store.rating.toFixed(1)}
+              </span>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    }
+    
+
+    window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+    fetch('stores.json')       
+      .then(res => res.json())
+      .then(data => {
+        store_aside2= data;
+        const sorted = getSortedStores("rating");
+        renderAsideStores(sorted);
+      })
+      .catch(err => console.error('JSON 로딩 실패:', err));
+  });/////////////aside2수정완료///////////////
+    </script>
+
+
+
+
+    <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabToShow = urlParams.get("tab");
+
+        if (tabToShow) {
+          const tabGroup = document.querySelector("sl-tab-group");
+          if (tabGroup) {
+            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
+          }
+        }
+      });
+    console.log(document.querySelector('.store-name'));
+
+    </script>
+
+    <script>//////////////검색 키워드 전달///////////
+document.getElementById("search-btn").addEventListener("click", () => {
+  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
+  if (keyword) {
+    location.href = `SearchPage.html?keyword=${keyword}`;
+  } else {
+    alert("검색어를 입력하세요.");
   }
 });
     </script>

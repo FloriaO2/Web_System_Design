@@ -20,7 +20,7 @@
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-            <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
+            <button type="button" class="btn btn-dark" id="search-btn">검색</button>
           </div>
           <div class="button-group" id="buttonGroup"></div>
 
@@ -164,6 +164,9 @@
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="pill" href="#">단골순</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" id="showAllBtn"data-bs-toggle="pill" href="#" >전체 식당 목록 보기</a>
+              </li>
             </ul>
 
             <div class="cards" id="cards-container"></div>
@@ -303,23 +306,64 @@
     </div>
 
     
-    <script>//필터링 및 렌더링
-      const stores = [
-      { id: "store001", name: "카페 A", rating: 4.7, reviews: 102, favorites: 320, type: "한식", distance: 5, price: 10000 },
-      { id: "store002",name: "카페 B", rating: 1.9, reviews: 85, favorites: 410, type: "양식", distance: 2, price: 12000 },
-      { id: "store003",name: "카페 C", rating: 4.7, reviews: 102, favorites: 295, type: "중식", distance: 7, price: 14000 },
-      { id: "store004",name: "카페 D", rating: 4.5, reviews: 200, favorites: 300, type: "일식", distance: 10, price: 7000 },
-      { id: "store005",name: "카페 E", rating: 2.7, reviews: 102, favorites: 320, type: "간편식", distance: 13, price: 8000 },
-      { id: "store006",name: "카페 F", rating: 2.9, reviews: 85, favorites: 410, type: "양식", distance: 16, price: 11000 },
-      { id: "store007",name: "카페 G", rating: 3.7, reviews: 102, favorites: 295, type: "그 외", distance: 17, price: 15000 },
-      { id: "store008",name: "카페 H", rating: 3.5, reviews: 200, favorites: 300, type: "한식", distance: 4, price: 7000 }
-    ];
+    <script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let searchKeyword = urlParams.get("keyword")?.toLowerCase() || "";
+
+    
+    document.getElementById("search-form").addEventListener("input", function () {
+    searchKeyword = this.value.trim().toLowerCase(); // 검색어 저장
+    console.log("검색어:", searchKeyword);
+    renderStores(); //함수실행
+  });
+
+
+
+
+ // 전체보기 버튼 클릭 시
+    document.getElementById("showAllBtn").addEventListener("click", function(e) {
+  e.preventDefault();  // 링크 기본 이동 막기
+
+  searchKeyword = "";
+  selectedFilters = {
+    type: [],
+    distance: null,
+    price: null
+  };
+  currentSort = "";
+  const searchInput = document.getElementById("search-form");
+  if (searchInput) searchInput.value = "";
+  renderStores();
+});
+
+
+
+  let stores = []; ////////////검색결과렌더링
+    fetch('stores.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('JSON 파일을 불러오지 못했어요.');
+    }
+    return response.json();
+  })
+  .then(data => {
+    stores = data; // 전역 변수에 데이터 저장
+    console.log(stores); // 디버깅용
+    renderStores(); // 초기 렌더링 호출
+  })
+  .catch(error => {
+    console.error('에러 발생:', error);
+  });
+
+
 
 let selectedFilters = {
   type: [],
   distance: null,
   price: null
 };
+
 
 let currentSort = "rating";
 
@@ -370,6 +414,15 @@ function renderStores() {
       filtered = filtered.filter(store => store.price <= selectedFilters.price);
     }
   }
+
+  /* 🔍 검색어 필터 추가 ------------------------------ */
+  if (searchKeyword) {
+    filtered = filtered.filter(store =>
+      store.name.toLowerCase().includes(searchKeyword) ||
+      (store.menu?.some(m => m.name.toLowerCase().includes(searchKeyword)))
+    );
+  }
+  /* ------------------------------------------------ */
 
   // 정렬 적용
   filtered.sort((a, b) => {
@@ -498,12 +551,7 @@ document.querySelectorAll(".search-nav .nav-link").forEach(link => {
 
 // 초기 렌더링
 renderStores();
-
-
-
-
-
-    </script>
+</script>
 
     <script>//aside2
         function renderAside(sortedArray) {
@@ -550,13 +598,22 @@ renderStores();
       `;
     }
 
+    
+         window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+        fetch('stores.json')       
+          .then(res => res.json())
+          .then(data => {
+            store_aside2= data;
+            const sorted = getSortedStores("rating");
+            renderAsideStores(sorted);
+          })
+          .catch(err => console.error('JSON 로딩 실패:', err));
+      });/////////////aside2수정완료///////////////
 
-      //sl-tab 바로가기와 관련한 자바 스크립트 추가 
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
 
+
+      //sl-tab 바로가기와 관련한 자바 스크립트 추가//
+       
       window.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const tabToShow = urlParams.get("tab");
@@ -621,7 +678,24 @@ renderStores();
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));

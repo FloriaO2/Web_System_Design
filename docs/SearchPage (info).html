@@ -20,7 +20,7 @@
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-            <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
+             <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
           </div>
           <div class="button-group" id="buttonGroup"></div>
 
@@ -106,7 +106,7 @@
               <div class="card-text">
                 <div class="text">
                   <div class="text-up-area">
-                    <div class="store-name">식당 A</div>
+                    <div class="store-name"></div>
                     <div class="rating">
                       <div class="rating2">
                         <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
@@ -115,7 +115,7 @@
                         <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
                         <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
                       </div>
-                      <div class="element">4.1</div>
+                      <div class="element"></div>
                     </div>
                   </div>
                   <div class="p">
@@ -138,13 +138,13 @@
           <div class="info-down-area">
             <div class="info-tab-list">
               <div class="tab">
-                <a class="label" href="SearchPage (info).html">정보</a>
+                <a class="label" id="go-to-info" href="SearchPage (info).html">정보</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="SearchPage (menu).html">메뉴</a>
+                <a class="label2" id="go-to-menu" href="SearchPage (menu).html">메뉴</a>
               </div>
               <div class="tab2">
-                <a class="label2" href="SearchPage (review).html">리뷰</a>
+                <a class="label2" id="go-to-review" href="SearchPage (review).html">리뷰</a>
               </div>
             </div>
             <div class="info-main-content">
@@ -265,34 +265,42 @@
 
 
 
+    <script>//!!!해당 식당의 정보 보여주기!!!
+    let store_mainbody =[];
 
-
-
-
-
-    <script>//해당 식당의 정보 보여주기
-      const store_mainbody = [
-      // 임시 수정 store001 (store_mainbody)
-      { id: "store001",name: "카페 A", rating: 4.7, reviews: 102, favorites: 320, type: "한식", distance: 5, price: 10000 },
-      { id: "store002",name: "카페 B", rating: 1.9, reviews: 85, favorites: 410, type: "양식", distance: 2, price: 12000 },
-      { id: "store003",name: "카페 C", rating: 4.7, reviews: 102, favorites: 295, type: "중식", distance: 7, price: 14000 },
-      { id: "store004",name: "카페 D", rating: 4.5, reviews: 200, favorites: 300, type: "일식", distance: 10, price: 7000 },
-      { id: "store005",name: "카페 E", rating: 2.7, reviews: 102, favorites: 320, type: "간편식", distance: 13, price: 8000 },
-      { id: "store006",name: "카페 F", rating: 2.9, reviews: 85, favorites: 410, type: "양식", distance: 16, price: 11000 },
-      { id: "store007",name: "카페 G", rating: 3.7, reviews: 102, favorites: 295, type: "그 외", distance: 17, price: 15000 },
-      { id: "store008",name: "카페 H", rating: 3.5, reviews: 200, favorites: 300, type: "한식", distance: 4, price: 7000 }
-    ];
     window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const storeId = urlParams.get('id');
-    console.log('storeId:', storeId);  // 여기 꼭 찍어봐야 함
-    const store = store_mainbody.find(s => s.id === storeId);
-    // 임시 수정 store001 (store_mainbody)
-    console.log('store:', store);
+    /* 2) 여기서 JSON을 읽어‑온 뒤 기존 로직을 그대로 돌린다 */
+  fetch('stores.json')
+    .then(res => res.json())
+    .then(data => {
+      store_mainbody = data;                       // 배열 채우기
+      const store = store_mainbody.find(s => s.id === storeId);
 
-    if (!store) {
-      alert("해당 가게를 찾을 수 없습니다.");
-    }
+      if (!store) { alert('해당 가게를 찾을 수 없습니다.'); return; }
+
+      // ─── 기존 코드 그대로 유지 ───
+      document.querySelector('#go-to-info'  ).href = `SearchPage (info).html?id=${storeId}`;
+      document.querySelector('#go-to-menu'  ).href = `SearchPage (menu).html?id=${storeId}`;
+      document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
+       document.querySelector('#info-time .info-text').textContent = store.time || '운영 시간 정보 없음';
+        document.querySelector('#info-etc .info-text').textContent = store.etc || '기타 정보 없음';
+
+
+      document.querySelector('.store-name').textContent      = store.name;
+      document.querySelector('.element').textContent         = store.rating.toFixed(1);
+      document.querySelector('.store-simple-info').textContent =
+        `${store.type} | 학교 기준 ${store.distance}분 | ${store.price.toLocaleString()}원`;
+
+      renderStars(store.rating);                 // 별점 이미지
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});
+
+
+ 
+
 
 
 
@@ -330,27 +338,9 @@
     }
   }
 
-  if (store) {
-    document.querySelector('.store-name').textContent = store.name;
-    document.querySelector('.element').textContent = store.rating.toFixed(1);
-    document.querySelector('.store-simple-info').textContent =
-      `${store.type} | 학교 기준 ${store.distance}분| ${store.price.toLocaleString()}원`;
+  
 
-    renderStars(store.rating);
-  }
-});
-    </script>
-
-
-
-
-
-
-
-
-
-
-
+  </script>
 
 
 
@@ -389,25 +379,38 @@
     }
   }
 
+  
     // 이벤트 리스너 등록
     document.querySelector('.heart-button').addEventListener('click', () => {
       console.log('찜 버튼 클릭됨');
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      // 예시로 storeId를 'store123'이라고 가정
-      const store = {
-        id: 'store123',
-        name: '맛있는 김밥집',
-        address: '서울시 강남구',
-        favoritedBy: currentUser.id, // 현재 로그인한 사용자의 ID
-        // 필요한 다른 정보들 추가 가능
-        // 밑에 새로 추가
-        rating: 4.5, // 별점
-        category: '분식', // 음식 종류
-        distance: '5분',  // 도보 거리
-        priceRange: '₩₩'  // 가격대
-      };
+      if (!currentUser) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const storeId = urlParams.get('id');
+
+      fetch('stores.json')
+    .then(res => res.json())
+    .then(data => {
+      const store = data.find(s => s.id === storeId);
+      if (!store) {
+        alert('해당 가게 정보를 찾을 수 없습니다.');
+        return;
+      }
+
+      // store 객체에 사용자의 ID를 추가 (찜 기능용)
+      store.favoritedBy = currentUser.id;
+
       toggleFavorite(store, currentUser.id);
+    })
+    .catch(err => {
+      console.error('식당 정보 로딩 실패:', err);
+      alert('찜 처리 중 오류 발생');
     });
+});
 
     </script>
 
@@ -450,16 +453,7 @@
 
 
     <script>
-       const stores = [
-          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
-          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
-          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
-          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
-          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
-          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
-          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
-          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
-        ];
+       let store_aside2=[];
         function renderAside(sortedArray) {
           const top7 = sortedArray.slice(0, 7);
           renderAsideStores(top7);
@@ -471,7 +465,7 @@
 
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
+        return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
           if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
@@ -503,10 +497,17 @@
         </ul>
       `;
     }
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
+
+    window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+  fetch('stores.json')       
+    .then(res => res.json())
+    .then(data => {
+      store_aside2= data;
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted);
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});/////////////aside2수정완료///////////////
 
     </script>
 
@@ -559,7 +560,24 @@
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -593,6 +611,17 @@
       renderButtonGroup(); // 버튼도 렌더링
     });
     </script>
+
+    <script>//////////////검색 키워드 전달///////////
+document.getElementById("search-btn").addEventListener("click", () => {
+  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
+  if (keyword) {
+    location.href = `SearchPage.html?keyword=${keyword}`;
+  } else {
+    alert("검색어를 입력하세요.");
+  }
+});
+</script>
     <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {

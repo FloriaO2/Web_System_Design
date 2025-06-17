@@ -20,7 +20,7 @@
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-            <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
+             <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
           </div>
           <div class="button-group" id="buttonGroup"></div>
 
@@ -115,7 +115,7 @@
             <div>
               <div class="must-line">
                 <div class="small-question-store">음식점 이름:&nbsp;</div>
-                <div class="review-store-name">식당 A</div>
+                <div class="review-store-name"></div>
               </div>
               <div class="must-line">
                 <div class="small-question-score">나의 별점:&nbsp;</div>
@@ -205,17 +205,7 @@
        
 
     
-      const stores = [
-          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
-          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
-          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
-          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
-          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
-          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
-          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
-          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
-        ];
-
+      let store_aside2=[];
        
         function renderAside(sortedArray) {
           const top7 = sortedArray.slice(0, 7);
@@ -228,7 +218,7 @@
 
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
+        return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
           if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
@@ -260,10 +250,16 @@
         </ul>
       `;
     }
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
+     window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+  fetch('stores.json')       
+    .then(res => res.json())
+    .then(data => {
+      store_aside2= data;
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted);
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});/////////////aside2수정완료///////////////
 
     </script>
 
@@ -423,6 +419,45 @@ if (!rating || parseFloat(rating) === 0) {
 -->
 
 
+<script>
+  let currentStoreName = ''; /////////////수정 미완료ㅜㅜ(식당이름넣기)/////////
+
+  window.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded 실행됨');
+  const urlParams = new URLSearchParams(window.location.search);
+  const storeId = urlParams.get('id');
+  console.log('storeId:', storeId);
+
+  if (!storeId) {
+    alert('식당 정보가 없습니다.');
+    return;
+  }
+
+  fetch('stores.json')
+    .then(res => res.json())
+    .then(data => {
+      const store = data.find(s => s.id === storeId);
+      console.log('store:', store);
+      if (!store) {
+        alert('해당 식당을 찾을 수 없습니다.');
+        return;
+      }
+      console.log('store.name:', store.name);
+
+      // 식당 이름을  렌더링
+      document.querySelectorAll('.review-store-name').textContent = store.name;
+      currentStoreName = store.name;  // ✅ 저장
+
+     
+    })
+    .catch(err => {
+      console.error('식당 데이터 불러오기 실패:', err);
+    });
+});/////////////////////
+</script>
+
+
+
 
 
 
@@ -542,7 +577,7 @@ if (!rating || parseFloat(rating) === 0) {
       title,
       content,
       rating,
-      storeName: '식당 A',
+      storeName: currentStoreName, ///////////////////이거 수정했는데 왜...식당이름이안뜰까요...........
       nickname: currentUser.nickname,
       authorID: currentUser.id,
       images: imageDataUrls
@@ -651,7 +686,24 @@ if (!rating || parseFloat(rating) === 0) {
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -685,6 +737,17 @@ if (!rating || parseFloat(rating) === 0) {
       renderButtonGroup(); // 버튼도 렌더링
     });
     </script>
+
+    <script>//////////////검색 키워드 전달///////////
+document.getElementById("search-btn").addEventListener("click", () => {
+  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
+  if (keyword) {
+    location.href = `SearchPage.html?keyword=${keyword}`;
+  } else {
+    alert("검색어를 입력하세요.");
+  }
+});
+</script>
     <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {

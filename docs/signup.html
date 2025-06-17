@@ -20,7 +20,7 @@
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-            <button type="button" class="btn btn-dark" id="search-btn" onclick="location.href='SearchPage.html'">검색</button>
+             <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
           </div>
           <div class="button-group" id="buttonGroup">
             <button type="button" class="btn btn-light">커뮤니티</button>
@@ -185,6 +185,9 @@
         const nickname = document.getElementById("my_nickname").value.trim();
         const id = document.getElementById("signupId").value.trim();
         const password = document.getElementById("signupPw").value.trim();
+        const postCount=0;
+        const commentCount=0;
+        const reviewCount=0;
 
         const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -193,13 +196,13 @@
           return;
         }
 
-        const newUser = { nickname, id, password };
+        const newUser = { nickname, id, password,postCount,commentCount,reviewCount };
         users.push(newUser);
         localStorage.setItem("users", JSON.stringify(users));
         
 
         alert("회원가입 완료!");
-        localStorage.setItem("currentUser", JSON.stringify({ id: newUser.id, nickname: newUser.nickname }));
+        localStorage.setItem("currentUser", JSON.stringify({ id: newUser.id, nickname: newUser.nickname,postCount:newUser.postCount,commentCount:newUser.commentCount,reviewCount:newUser.reviewCount }));
 
         window.location.href = "signup_done.html";
       });
@@ -214,7 +217,7 @@
         const matchedUser = users.find(user => user.id === loginId && user.password === loginPw);
 
         if (matchedUser) {
-          localStorage.setItem("currentUser", JSON.stringify({ id: matchedUser.id, nickname: matchedUser.nickname }));
+          localStorage.setItem("currentUser", JSON.stringify(matchedUser));
           window.location.href = "Mainpage (user).html";
         } else {
           alert("아이디 또는 비밀번호가 틀렸습니다.");
@@ -227,16 +230,7 @@
 
 
         <script>// asdie2 랭킹 관련 자바스크립트
-          const stores = [
-          { name: "카페 A", rating: 4.7, reviews: 102, favorites: 320 },
-          { name: "카페 B", rating: 1.9, reviews:  85, favorites: 410 },
-          { name: "카페 C", rating: 4.7, reviews: 102, favorites: 295 },
-          { name: "카페 D", rating: 4.5, reviews: 200, favorites: 300 },
-          { name: "카페 E", rating: 2.7, reviews: 102, favorites: 320 },
-          { name: "카페 F", rating: 2.9, reviews:  85, favorites: 410 },
-          { name: "카페 G", rating: 3.7, reviews: 102, favorites: 295 },
-          { name: "카페 H", rating: 3.5, reviews: 200, favorites: 300 },
-        ];
+          let store_aside2=[];
 
        
         function renderAside(sortedArray) {
@@ -250,7 +244,7 @@
 
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
+        return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
           if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
@@ -282,10 +276,17 @@
         </ul>
       `;
     }
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
+      
+     window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+  fetch('stores.json')       
+    .then(res => res.json())
+    .then(data => {
+      store_aside2= data;
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted);
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});/////////////aside2수정완료///////////////
   </script>
 
   <script>////////회원/비회원 전환///////////////////////
@@ -337,7 +338,24 @@
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -371,6 +389,17 @@
       renderButtonGroup(); // 버튼도 렌더링
     });
     </script>
+
+    <script>//////////////검색 키워드 전달///////////
+document.getElementById("search-btn").addEventListener("click", () => {
+  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
+  if (keyword) {
+    location.href = `SearchPage.html?keyword=${keyword}`;
+  } else {
+    alert("검색어를 입력하세요.");
+  }
+});
+</script>
 
 
           
