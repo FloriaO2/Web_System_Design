@@ -143,22 +143,31 @@ a {
 }
 
 .div1 {
-  background: #bcc8fe;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.5);
-  border-width: 1px;
   width: 16.11vw;
   height: 9.06vh;
   position: relative;
   display:flex;
   align-items: center;
   justify-content: center;
+  margin-left:1vw;
+  margin-bottom:1.5vh;
 }
 
 .web-name {
+  background: linear-gradient(
+  0deg,
+  #edf0ff 0%,
+  #ffffff 50%,
+  #edf0ff 100%
+);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* fallback */
   text-decoration: none;
-  color:black;
-  font-size:1.5vw;
+  font-family: "Black Han Sans", sans-serif !important;
+  font-size:3vw;
+  font-weight: 700;
 }
 
 .button {
@@ -845,6 +854,23 @@ footer {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■추가 시작■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+
+@media (max-width: 599.98px) {
+.div1 {
+  margin-bottom:1vh;
+}
+.web-name {
+  font-size:5.12vw;
+}
+}
+@media (min-width: 600px) and (max-width: 1024.98px){
+.div1 {
+  margin-bottom:1vh;
+}
+.web-name {
+  font-size:30.72px;
+}
+}
 
 /* 모바일-태블릿 버전 단일 요소들 */
 @media (max-width: 1024.98px) {

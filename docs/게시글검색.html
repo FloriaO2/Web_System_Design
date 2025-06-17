@@ -15,7 +15,7 @@
 
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="MainPage (user).html">웹사이트 이름</a>
+            <a class="web-name" href="MainPage (user).html">Snowmap</a>
           </div>
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
@@ -102,9 +102,14 @@
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-           <div id="notice">
-            <img src="image/notice.png">
-            <div id="notice-text">이곳은 커뮤니티 페이지입니다. 악성 게시물은 신고될 수 있습니다.</div>
+          <div id="notice">
+            <div style="display:flex; justify-content: center; align-items: center;">
+              <img src="image/notice.png">
+              <div id="notice-text" style="flex-direction: column;">
+                이곳은 커뮤니티 페이지입니다.&nbsp;
+                <div id="br-block"></div>
+                악성 게시물은 신고될 수 있습니다.</div>
+            </div>
           </div>
 
           <div id="button-container">
@@ -122,18 +127,18 @@
           <div id="post-container">
             <table id="post-table">
               <colgroup>
-                <col style="width: 25%;">
-                <col style="width: 40%;">
-              <col style="width: 35%;">
+                <col class="col-category">
+                <col class="col-title">
+                <col class="col-date">
               </colgroup>
               <thead>
                 <tr style="text-align: center;">
                   <th>카테고리</th>
                   <th>제목</th>
-                  <th>작성일</th>
+                  <th class="hide-date">작성일</th>
                 </tr>
-              </thead>
-              <tbody id="post-list"></tbody>
+                </thead>
+            <tbody id="post-list"></tbody>
             </table>
           </div>
           <div id="pagination" style="margin-top: 3vh; margin-bottom: 3vh; text-align:center;">
@@ -234,34 +239,33 @@
             const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
             function renderPage(page) {
-            container.innerHTML = "";
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const pageItems = filtered.slice().reverse().slice(start, end);
+        container.innerHTML = "";
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = posts.slice().reverse().slice(start, end);
 
-            if (pageItems.length === 0) {
-              container.innerHTML = `<tr><td colspan="3">검색 결과가 없습니다.</td></tr>`;
-              return;
-            }
+        if (pageItems.length === 0) {
+          container.innerHTML = `<tr><td colspan="3">게시글이 없습니다.</td></tr>`;
+          return;
+        }
+          
+        const categoryMap = {
+          "기타": 0,
+          "정보글": 1,
+          "눈송이 밥친구": 2,
+          "질문글": 3
+        };
 
-           
-            const categoryMap = {
-              "기타": 0,
-              "정보글": 1,
-              "눈송이 밥친구": 2,
-              "질문글": 3
-            };
-
-            // 댓글 불러오기 및 댓글 수 집계
-            const allComments = JSON.parse(localStorage.getItem("comments")) || [];
-            const commentCountMap = {};
-            allComments.forEach(comment => {
-              if (comment.postID in commentCountMap) {
-                commentCountMap[comment.postID]++;
-              } else {
-                commentCountMap[comment.postID] = 1;
-              }
-            });
+        // 댓글 불러오기 및 댓글 수 집계
+        const allComments = JSON.parse(localStorage.getItem("comments")) || [];
+        const commentCountMap = {};
+        allComments.forEach(comment => {
+          if (comment.postID in commentCountMap) {
+            commentCountMap[comment.postID]++;
+          } else {
+            commentCountMap[comment.postID] = 1;
+          }
+        });
 
         // 최신 글이 위에 오도록 역순으로 보여줌
         pageItems.forEach(post => {
@@ -272,49 +276,35 @@
           const categoryNum = categoryMap[categoryName] || 0;
           tdCategory.textContent = categoryName;
           tdCategory.classList.add(`category${categoryNum}`);
-          tdCategory.style.fontSize="1.2vw";
-          tdCategory.style.paddingLeft="1vw";
-          tdCategory.style.fontWeight = "600";
-          tdCategory.style.textAlign = "center";
 
           const tdTitle = document.createElement("td");
+          tdTitle.classList.add("td-title");
           // 제목 a 태그
           const titleLink = document.createElement("a");
+          titleLink.classList.add("base-title");
           titleLink.textContent = post.title;
           titleLink.href = `게시글열람.html?id=${post.id}`;
-          titleLink.style.textDecoration = "none";
-          titleLink.style.color = "black";
-          titleLink.style.whiteSpace = "nowrap";
-          titleLink.style.overflow = "hidden";
-          titleLink.style.textOverflow = "ellipsis";
-          titleLink.style.display = "inline-block";
-          titleLink.style.maxWidth = "100%"; // 댓글수 태그때문에 조정
-          titleLink.style.verticalAlign = "middle";
 
           // 댓글 수 a 태그 (있는 경우만)
           const commentCount = commentCountMap[post.id] || 0;
           let commentLink;
           if (commentCount > 0) {
-            titleLink.style.maxWidth = "85%";
+            titleLink.classList.add("has-comment");
             commentLink = document.createElement("a");
             commentLink.textContent = ` (${commentCount})`;
             commentLink.href = `게시글열람.html?id=${post.id}#comments`;
-            commentLink.style.textDecoration = "none";
-            commentLink.style.color = "gray";
-            commentLink.style.marginLeft = "0.5vw";
-            commentLink.style.verticalAlign = "middle";
-            commentLink.style.width="auto";
           }
 
-          tdTitle.style.fontSize="1.1vw";
-          tdTitle.style.paddingLeft="1vw";
-          tdTitle.style.fontWeight="300";
-
           tdTitle.appendChild(titleLink);
-          if (commentLink) tdTitle.appendChild(commentLink);
+          if (commentCount > 0) {
+            tdTitle.appendChild(document.createTextNode(" "));
+            tdTitle.appendChild(commentLink);
+          }
             
 
           const tdDate = document.createElement("td");
+          tdDate.classList.add("td-date");
+          tdDate.classList.add("hide-date");
           //tdDate.textContent = new Date(post.createdAt).toLocaleString();
           tdDate.textContent = new Date(post.createdAt).toLocaleString("ko-KR", {
             year: "numeric",
@@ -324,9 +314,6 @@
             minute: "numeric",
             hour12: true // 오전/오후 표기
           });
-          tdDate.style.fontSize="1vw";
-          tdDate.style.textAlign="center";
-          tdDate.style.fontWeight="100";
 
           tr.appendChild(tdCategory);
           tr.appendChild(tdTitle);
@@ -336,7 +323,7 @@
         });
       }
 
-        function renderPagination() {
+      function renderPagination() {
         pagination.innerHTML = "";
 
         const maxVisibleButtons = 7;
@@ -355,7 +342,10 @@
         prevBtn.textContent = "◀ Previous";
         prevBtn.classList.add("prenext-button");
         prevBtn.disabled = currentPage === 1; // 첫 페이지면 비활성화
-        prevBtn.style.marginRight="1.3vw";
+        prevBtn.style.marginRight="1.7vw";
+        prevBtn.style.marginLeft="0";
+        prevBtn.style.PaddingLeft="0";
+        prevBtn.style.textAlign="right";
         prevBtn.addEventListener("click", () => {
           if (currentPage > 1) {
             currentPage--;
@@ -384,10 +374,13 @@
 
         // Next 버튼
         const nextBtn = document.createElement("button");
-        nextBtn.textContent = "Next ▶";
+        nextBtn.textContent = "Next Page ▶";
         nextBtn.classList.add("prenext-button");
         nextBtn.disabled = currentPage === totalPages; // 마지막 페이지면 비활성화
-        nextBtn.style.marginLeft="1.3vw";
+        nextBtn.style.marginLeft="1.7vw";
+        nextBtn.style.PaddingRight="0";
+        nextBtn.style.marginRight="0";
+        nextBtn.style.textAlign="left";
         nextBtn.addEventListener("click", () => {
           if (currentPage < totalPages) {
             currentPage++;
@@ -398,10 +391,10 @@
         pagination.appendChild(nextBtn);
       }
 
-              // --- (변경) 페이지 렌더링과 페이지네이션 함수 실행 ---
-              renderPage(currentPage);
-              renderPagination();
-            });
+      renderPage(currentPage);
+      renderPagination();
+    });
+
           // 글 작성 버튼 이동
             document.getElementById("write").addEventListener("click", () => {
               window.location.href = "게시글업로드.html";
@@ -556,5 +549,18 @@
         </div>
       </div>
     </div>
+    <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const inputs = document.querySelectorAll('input, textarea, [contenteditable]');
+
+      inputs.forEach(el => {
+        el.setAttribute('spellcheck', 'false');
+        el.setAttribute('autocomplete', 'off');
+        el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
+        el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
+      });
+    });
+    </script>
   </body>
 </html>

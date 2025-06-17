@@ -15,7 +15,7 @@
 
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="MainPage (user).html">웹사이트 이름</a>
+            <a class="web-name" href="MainPage (user).html">Snowmap</a>
           </div>
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
@@ -117,8 +117,14 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
           <div id="notice">
-            <img src="image/notice.png">
-            <div id="notice-text">이곳은 커뮤니티 페이지입니다. 악성 게시물은 신고될 수 있습니다.</div>
+            <div style="display:flex; justify-content: center; align-items: center;">
+              <img src="image/notice.png">
+              <div id="notice-text" style="flex-direction: column;">
+                이곳은 커뮤니티 페이지입니다.&nbsp;
+                <div id="br-block"></div>
+                악성 게시물은 신고될 수 있습니다.
+              </div>
+            </div>
           </div>
 
           <div id="button-container">
@@ -138,10 +144,12 @@
             <!-- 상단: 카테고리, 제목 -->
             <div id="post-header">
               <div id="post-category" style="padding-left:0.5vw"></div>
-              <div id="post-title"></div>
+              <div style="height:100%; display:flex; align-items: center; vertical-align: middle;">
+                <div id="post-title"></div>
+              </div>
               <div class="post-account" style="padding-left:0.5vw">
                 <img src="image/avatar.png" id="post-account-img" alt="작성자 프로필 이미지">
-                <span id="post-author" style="font-weight: bold;">닉네임</span>
+                <div id="post-author" style="font-weight: bold;">&nbsp;닉네임</div>
               </div>
             </div>
 
@@ -149,13 +157,17 @@
             <div id="post-body">
               <div id="post-content"></div>
               <div class="comment-section" id="comments">
-                <div id="comment-notice" style="margin-bottom:3vh;">
+                <div id="comment-notice" style="margin-bottom:3vh; display:flex; align-items: center; justify-content: center;">
                   <img src="image/notice.png">
-                  <div id="comment-notice-text">악성 댓글은 삭제될 수 있습니다. 서로 배려하는 커뮤니티를 만듭시다.</div>
+                  <div id="comment-notice-text">
+                    악성 댓글은 삭제될 수 있습니다.&nbsp;
+                    <br id="br-block2"/>
+                    서로 배려하는 커뮤니티를 만듭시다.
+                  </div>
                 </div>
-                <div style="padding-left:1.2vw; margin-bottom:3vh;">
-                  <img src="image/chat.png" style="width:auto; height:3vh;" />
-                  <span class="chat-count" style="font-size:1.1vw;">0</span>
+                <div style="padding-left:1.2vw; margin-bottom:3vh; display:flex; align-items: center;">
+                  <img src="image/chat.png" class="chat-count-image" />
+                  <div class="chat-count">0</div>
                 </div>
                 <ul id="comment-list" style="list-style: none; padding:0; margin:3vh 0;"></ul>
                 <div class="comment-write-area" style="margin-bottom: 10px; margin-top:2vh;">
@@ -172,13 +184,13 @@
             <div id="post-container">
               <table id="post-table">
                 <colgroup>
-                  <col style="width: 20%;">
-                  <col style="width: 80%;">
+                  <col class="simple-category-size">
+                  <col class="simple-title-size">
                 </colgroup>
                 <tbody id="post-list"></tbody>
               </table>
             </div>
-          </div>  
+          </div>
         
 
         <script>////////회원/비회원 전환///////////////////////
@@ -262,8 +274,8 @@
 
         comment_block.innerHTML = `
           <div class="account-inf" style="margin-bottom:1vh">
-            <img src="image/avatar.png" alt="등급" id="grade-img"/>
-            <span class="account-detail-nickname">${currentUser.nickname}</span>
+            <img src="image/avatar.png" alt="등급" id="comment-writer-grade-img"/>
+            <span class="comment-writer-account-detail-nickname">${currentUser.nickname}</span>
           </div>
           <textarea id="comment-input" placeholder="댓글을 입력하세요." rows="3"></textarea>
           <div style="height:auto; display:flex; justify-content: flex-end; margin-right:2vw;">
@@ -341,16 +353,12 @@
 
           // 상단 account-inf 영역 생성
           const accountDiv = document.createElement("div");
-          accountDiv.classList.add("account-inf");
+          accountDiv.classList.add("comment-account-inf");
 
           const img = document.createElement("img");
           img.src = "image/avatar.png";
           img.alt = "등급";
-          img.id = "grade-img";
-          img.style.width="1.3vw";
-          img.style.height="1.3vw";
-          img.style.borderRadius="50%";
-          img.style.marginRight="0.2vw";
+          img.id = "comment-grade-img";
 
           const nicknameSpan = document.createElement("span");
           nicknameSpan.classList.add("comment-content-user");
@@ -496,24 +504,15 @@
           const categoryNum = categoryMap[categoryName] || 0;
           tdCategory.textContent = categoryName;
           tdCategory.classList.add(`category${categoryNum}`);
-          tdCategory.style.textAlign = "center";
-          tdCategory.style.fontSize="1.2vw";
-          tdCategory.style.paddingLeft="1vw";
-          tdCategory.style.fontWeight = "600";
+          tdCategory.classList.add("simple-category");
 
           // 제목 셀
           const tdTitle = document.createElement("td");
+          tdTitle.classList.add("simple-one-line");
           const titleLink = document.createElement("a");
           titleLink.textContent = post.title;
           titleLink.href = `게시글열람.html?id=${post.id}`;
-          titleLink.style.textDecoration = "none";
-          titleLink.style.color = "black";
-          titleLink.style.whiteSpace = "nowrap";
-          titleLink.style.overflow = "hidden";
-          titleLink.style.textOverflow = "ellipsis";
-          titleLink.style.display = "inline-block";
-          titleLink.style.maxWidth = "100%"; // 댓글수 태그때문에 조정
-          titleLink.style.verticalAlign = "middle";
+          titleLink.classList.add("simple-title");
 
           // 댓글 수 표시 (있는 경우)
           const commentCount = commentCountMap[post.id] || 0;
@@ -522,20 +521,12 @@
             const commentLink = document.createElement("a");
             commentLink.textContent = ` (${commentCount})`;
             commentLink.href = `게시글열람.html?id=${post.id}#comments`;
-            commentLink.style.color = "gray";
-            commentLink.style.marginLeft = "0.5vw";
-            commentLink.style.textDecoration = "none";
-            commentLink.style.verticalAlign = "middle";
-            commentLink.style.width="auto";
+            commentLink.classList.add("simple-comment");
             tdTitle.appendChild(titleLink);
             tdTitle.appendChild(commentLink);
           } else {
             tdTitle.appendChild(titleLink);
           }
-
-          tdTitle.style.fontSize="1.1vw";
-          tdTitle.style.paddingLeft="2vw";
-          tdTitle.style.fontWeight="300";
 
           tr.appendChild(tdCategory);
           tr.appendChild(tdTitle);
@@ -549,7 +540,15 @@
             const commentAnchor = document.getElementById("comments");
             if (commentAnchor) {
               const elementPosition = commentAnchor.getBoundingClientRect().top + window.scrollY;
-              const offset = window.innerHeight * 0.24;
+              let offset;
+              const width = window.innerWidth;
+
+              if (width >= 1024) {
+                offset = window.innerHeight * 0.24;
+              }
+              else {
+                offset = window.innerHeight * 0.12;
+              }
 
               window.scrollTo({
                 top: elementPosition - offset,
@@ -658,5 +657,18 @@
         </div>
       </div>
     </div>
+    <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const inputs = document.querySelectorAll('input, textarea, [contenteditable]');
+
+      inputs.forEach(el => {
+        el.setAttribute('spellcheck', 'false');
+        el.setAttribute('autocomplete', 'off');
+        el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
+        el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
+      });
+    });
+    </script>
   </body>
 </html>

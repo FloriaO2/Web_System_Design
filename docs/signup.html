@@ -15,7 +15,7 @@
 
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="MainPage (user).html">웹사이트 이름</a>
+            <a class="web-name" href="MainPage (user).html">Snowmap</a>
           </div>
           <div class="bottom-app-bar">
             <img id="search-img" src="image/search.png" />
@@ -411,5 +411,18 @@
         </div>
       </div>
     </div>
+    <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const inputs = document.querySelectorAll('input, textarea, [contenteditable]');
+
+      inputs.forEach(el => {
+        el.setAttribute('spellcheck', 'false');
+        el.setAttribute('autocomplete', 'off');
+        el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
+        el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
+      });
+    });
+    </script>
   </body>
 </html>
