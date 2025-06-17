@@ -650,7 +650,24 @@ window.addEventListener("DOMContentLoaded", () => {
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));

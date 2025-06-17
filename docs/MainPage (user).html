@@ -118,7 +118,7 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
            
-          <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs">
           <li class="nav-item"><a class="nav-link active" href="#" onclick="filterByCategory('전체', this)">전체</a></li>
           <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('한식', this)">한식</a></li>
           <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('양식', this)">양식</a></li>
@@ -399,7 +399,26 @@ function makeStars(rating) {
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
+
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -434,7 +453,7 @@ function makeStars(rating) {
     });
 
 
-    /////////모바일 닉네임 렌더링(이거만 추가하면됩니닷)///////
+    /////////모바일 닉네임 렌더링(이 코드만 추가하면됩니닷)///////
     document.addEventListener("DOMContentLoaded", () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (currentUser && currentUser.nickname) {

@@ -164,6 +164,9 @@
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="pill" href="#">단골순</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" id="showAllBtn"data-bs-toggle="pill" href="#" >전체 식당 목록 보기</a>
+              </li>
             </ul>
 
             <div class="cards" id="cards-container"></div>
@@ -306,15 +309,34 @@
     <script>
 
     const urlParams = new URLSearchParams(window.location.search);
-    const searchKeyword = urlParams.get("keyword")?.toLowerCase() || "";
+    let searchKeyword = urlParams.get("keyword")?.toLowerCase() || "";
 
     
-    document.getElementById("search-form")
-  .addEventListener("input", function () {
+    document.getElementById("search-form").addEventListener("input", function () {
     searchKeyword = this.value.trim().toLowerCase(); // 검색어 저장
     console.log("검색어:", searchKeyword);
     renderStores(); //함수실행
   });
+
+
+
+
+ // 전체보기 버튼 클릭 시
+    document.getElementById("showAllBtn").addEventListener("click", function(e) {
+  e.preventDefault();  // 링크 기본 이동 막기
+
+  searchKeyword = "";
+  selectedFilters = {
+    type: [],
+    distance: null,
+    price: null
+  };
+  currentSort = "";
+  const searchInput = document.getElementById("search-form");
+  if (searchInput) searchInput.value = "";
+  renderStores();
+});
+
 
 
   let stores = []; ////////////검색결과렌더링
@@ -576,13 +598,22 @@ renderStores();
       `;
     }
 
+    
+         window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+        fetch('stores.json')       
+          .then(res => res.json())
+          .then(data => {
+            store_aside2= data;
+            const sorted = getSortedStores("rating");
+            renderAsideStores(sorted);
+          })
+          .catch(err => console.error('JSON 로딩 실패:', err));
+      });/////////////aside2수정완료///////////////
 
-      //sl-tab 바로가기와 관련한 자바 스크립트 추가 
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
 
+
+      //sl-tab 바로가기와 관련한 자바 스크립트 추가//
+       
       window.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
         const tabToShow = urlParams.get("tab");
@@ -647,7 +678,24 @@ renderStores();
           <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
         </div>
       `;
-    }
+
+      ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const nicknameEls = document.querySelectorAll(".account-detail-nickname");
+      nicknameEls.forEach(el => {
+        el.textContent = "비회원 접속 중입니다.";
+      });
+      const logoutContainer = document.querySelector("#logout-button")?.parentElement;
+      if (logoutContainer) {
+        logoutContainer.innerHTML = `
+         
+          <button id="logout-button" class="button" onclick="location.href='signup.html'">
+            <img class="logout-img" src="image/logout.png">
+            <span class="logout-text">로그인</span>
+          </button>
+        `;
+      }///////////~여기까지 추가//////////////
+  }
+
 
       function renderButtonGroup() {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
