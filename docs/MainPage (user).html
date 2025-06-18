@@ -400,14 +400,17 @@ function makeStars(rating) {
         let gradeImgSrc = "image/avatar.png"; // 기본
 
         if (postCount >= 40) {
+          gradeImgSrc = "image/avatar_level4.png";
+        } else if (postCount >= 25) {
           gradeImgSrc = "image/avatar_level3.png";
-        } else if (postCount > 25) {
-          gradeImgSrc = "image/avatar_level2.png";
         } else if (postCount >= 10) {
-          gradeImgSrc = "image/avatar.png"; // 있으면 넣고, 없으면 기본으로
+          gradeImgSrc = "image/avatar_level2.png"; // 있으면 넣고, 없으면 기본으로
         } else {
           gradeImgSrc = "image/avatar.png";
         }
+
+        const gradeImgMobile = document.getElementById("grade-img-mobile");
+        if (gradeImgMobile) gradeImgMobile.src = gradeImgSrc;
 
         aside.innerHTML = `
           <div class="account" style="height: 38.69vh;">

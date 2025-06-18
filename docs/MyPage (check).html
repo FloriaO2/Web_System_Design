@@ -105,7 +105,7 @@
             <div class="account-image-big"></div>
             <div class="account-detail-text">
               <div class="account-detail-first-line">
-                <img class="account-detail-grade" src="image/avatar.png" />
+                <img class="account-detail-grade" id="my-check-grade" src="image/avatar.png" />
                 <div class="account-detail-nickname-main">닉네임</div>
                 <sl-icon-button class="account-detail-setting" name="gear" label="Settings" href="MyPage (change).html"></sl-icon-button>
               </div>
@@ -223,16 +223,7 @@
   document.getElementById('activity-counts').textContent =
     `게시물 ${postCount}개 | 댓글 ${commentCount}개 | 리뷰 ${reviewCount}개`;
 
-  /* ---------- ⇩ 등급 이미지 교체 ⇩ ---------- */
-  const gradeImgEl = document.querySelectorAll(".account-detail-grade");
-  if (gradeImgEl) {
-    let gradeSrc = "image/avatar.png";                // 0~9
-    if (postCount >= 40)      gradeSrc = "image/avatar_level3.png";
-    else if (postCount >= 25) gradeSrc = "image/avatar_level3.png";
-    else if (postCount >= 10) gradeSrc = "image/avatar_level2.png";
-    gradeImgEl.src = gradeSrc;
-  }
-  /* ------------------------------------------- */
+ 
 
 
 
@@ -625,12 +616,28 @@ window.addEventListener("DOMContentLoaded", () => {
       function updateAsideToMember(currentUser) {
         const aside = document.querySelector(".aside");
         if (!aside) return;
+        // postCount 기준으로 등급 이미지 결정
+        const postCount = currentUser.postCount || 0;
+        let gradeImgSrc = "image/avatar.png"; // 기본
+
+        if (postCount >= 40) {
+          gradeImgSrc = "image/avatar_level4.png";
+        } else if (postCount >= 25) {
+          gradeImgSrc = "image/avatar_level3.png";
+        } else if (postCount >= 10) {
+          gradeImgSrc = "image/avatar_level2.png"; // 있으면 넣고, 없으면 기본으로
+        } else {
+          gradeImgSrc = "image/avatar.png";
+        }
+
+
+        
 
         aside.innerHTML = `
           <div class="account" style="height: 38.69vh;">
             <div class="account-image"></div>
             <div class="account-inf">
-                <img src="image/avatar.png" alt="등급" id="grade-img"/>
+                <img src="${gradeImgSrc}" alt="등급" id="grade-img"/>
                 <span class="account-detail-nickname">${currentUser.nickname}</span>
             </div>
             <div class="account-description">
@@ -647,6 +654,12 @@ window.addEventListener("DOMContentLoaded", () => {
             <span id="heart">찜한 가게</span>
           </a>
         `;
+
+        
+        const gradeImgMobile = document.getElementById("grade-img-mobile");
+        const gradeImgEl = document.getElementById("my-check-grade");
+        if (gradeImgMobile) gradeImgMobile.src = gradeImgSrc;
+        if (gradeImgEl) gradeImgEl.src=gradeImgSrc;
       }
 
       // 비회원 aside UI
