@@ -1,5 +1,9 @@
-.MainPage_non-user,
-.MainPage_non-user * {
+/*font-family: var(--m3-title-medium-font-family, "Roboto-Medium", sans-serif);
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);*/
+
+.MainPage_user,
+.MainPage_user * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -23,7 +27,7 @@ a {
   box-sizing: border-box;
 }
 
-.MainPage_non-user {
+.MainPage_user {
   position:relative;
   background-color: #ffffff;
   min-height: 100vh;
@@ -325,6 +329,7 @@ a {
   justify-content: end;
   margin-right:0.2vw;
 }
+
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -454,7 +459,6 @@ a {
   align-self: stretch;
   display: flex;
   align-items: center;
-  /*justify-content: flex-start;*/
   font-style: normal;
   letter-spacing: 0;
   justify-content: space-between;
@@ -498,6 +502,99 @@ a {
   background-position: 50% 50%;
 }
 
+/* ---------------------------------- */
+.account-inf {
+  position: relative;
+  width: 11.11vw;
+  height: 20px;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.95rem;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding:0.1vh 0.5vw;
+  margin-top:1vh;
+  gap:0.5vw;
+}
+
+#grade-img {
+  width:20px;
+  height:20px;
+}
+
+.account-description {
+  position: relative;
+  width: 90%;
+  height: 7vh;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: var(--body-base-font-family, "Inter", Helvetica);
+  color: #000000;
+  font-size: 0.7rem;
+  text-align: left;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: column;
+  align-items: left;
+  padding-left: 1.1vw;
+  gap:0.5vw;
+}
+/* ---------------------------------- */
+
+.move-inf {
+  text-decoration: none;
+  color:black;
+}
+
+.view-heart {
+  position: sticky;
+  width: 13.68vw;
+  height: 5vh;
+  top: 63.69vh;
+  margin-left: 1.84vw;
+  background-color: #f1f1ff;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* ---------------------------------- */
+#heart-img {
+  width:16px;
+  height:2.6vh;
+}
+/* ---------------------------------- */
+
+#heart {
+  position: relative;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.9rem;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding:0 0.5vw;
+  gap:0.5vw;
+  margin-top:0.2vw;
+}
+
 .div3 {
   position: relative;
   width: 10.9vw;
@@ -524,6 +621,50 @@ a {
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
+
+/* 선택된 메뉴의 영역 */
+.tab {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+/* 선택된 메뉴의 텍스트 */
+.label {
+  color: #303030;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
+
+/* 선택되지 않은 메뉴의 영역 */
+.tab2 {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* 선택되지 않은 메뉴의 텍스트 */
+.label2 {
+  color: #767676;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
 
 /* mainbody에서의 전체/한식/양식/일식... 등 음식 종류 분류 */
 .nav-tabs {
@@ -560,7 +701,7 @@ a {
   height: auto;
   align-items: flex-start;
   gap: 20px;
-  padding: 0px 3vw;
+  padding: 0px 5vw;
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -576,8 +717,8 @@ a {
   flex-wrap: wrap;
   min-width: 240px;
   align-items: center;
-  gap: 3vw;
-  padding: 24px;
+  gap: 1.8vw;
+  padding: 3vh 2.2vw;
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -593,7 +734,7 @@ a {
 .card-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 11.11vw;
+  width: 200px;
   height: 20.67vh;
   background-size: cover;
   background-position: 50% 50%;
@@ -722,7 +863,7 @@ p {
 footer {
   position: relative;
   width:55.28vw;
-  height: 35vh;
+  height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -788,10 +929,9 @@ footer {
 .text-link-list-item {
   position: relative;
   width: 15vw;
-  /*height: 2.29vh;*/
   text-decoration: none;
   color:black;
-  font-size: 0.8rem;
+  font-size: 1vw;
   white-space: normal;
 }
 
@@ -803,6 +943,15 @@ footer {
   flex-shrink: 0;
 }
 
+.horizontal-line {
+  display:flex;
+  width: 80vw !important;
+  height: 0.05vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+
 
 
 
@@ -810,6 +959,23 @@ footer {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■추가 시작■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+
+@media (max-width: 599.98px) {
+.div1 {
+  margin-bottom:1vh;
+}
+.web-name {
+  font-size:5.12vw;
+}
+}
+@media (min-width: 600px) and (max-width: 1024.98px){
+.div1 {
+  margin-bottom:1vh;
+}
+.web-name {
+  font-size:30.72px;
+}
+}
 
 @media (max-width: 599.98px) {
 .div1 {
@@ -840,7 +1006,7 @@ footer {
 .aside2 {
   display: none !important;
 }
-.MainPage_non-user {
+.MainPage_user {
   background-color: #ffffff;
   min-height: 100vh;
   height:auto;
@@ -877,7 +1043,7 @@ footer {
   display:none;
 }
 .bottom-app-bar {
-  width:60vw;
+  width: 60vw;
   height:40px;
   background-color:#f2ecfb;
   border:1px solid black;
@@ -914,19 +1080,6 @@ footer {
   height:auto;
   left:0 !important;
 }
-.nav-tabs {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 1vw;
-}
-.div4 {
-  display: flex;
-  flex-direction: column;
-  width:100% !important;
-  gap: 48px;
-  position: relative;
-  background-color: rgba(255, 255, 255, 1);
-}
 }
 
 /* 모바일 버전 요소들 */
@@ -944,9 +1097,6 @@ footer {
   width:5vw;
   height:2vh;
   border:none !important;
-}
-.card {
-  flex-direction: column !important;
 }
 }
 
@@ -1069,7 +1219,7 @@ footer {
 }
 
 /* 모바일 등급 정보 */
-@media  (max-width: 499.98px){
+@media  (max-width: 500px){
 #grade-img-mobile {
   width:20px;
   height:20px;
@@ -1092,7 +1242,7 @@ footer {
 }
 
 /* 모바일 계정 정보 */
-@media  (max-width: 499.98px){
+@media  (max-width: 500px){
 .account-inf-mobile {
   position: relative;
   width: 50vw;
@@ -1178,7 +1328,7 @@ footer {
 }
 
 /* 모바일 메뉴 객체 */
-@media  (max-width: 349.98px){
+@media  (max-width: 350px){
 .list-unstyled > li > a {
   color:black !important;
   font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
@@ -1187,7 +1337,7 @@ footer {
   font-size: 14px;
 }
 }
-@media (min-width: 350px) and (max-width: 549.98px) {
+@media (min-width: 350px) and (max-width: 550px) {
 .list-unstyled > li > a {
   color:black !important;
   font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
@@ -1269,50 +1419,7 @@ footer {
 }
 }
 
-/* aside2 별점순/리뷰순/단골순 */
-@media (min-width: 1025px) {
-.nav {
-  padding:1vh 0 !important;
-}
-}
-
-/* aside2 별점순/리뷰순/단골순 하나씩 */
-@media (min-width: 1025px) and (max-width: 1089.98px) {
-.nav-pills > li > a {
-  padding:0.5vh 0.1vw;
-  margin:0 2px !important;
-}
-}
-@media (min-width: 1090px) and (max-width: 1169.98px) {
-.nav-pills > li > a {
-  padding:0.5vh 0.2vw;
-  margin:0 2px !important;
-}
-}
-@media (min-width: 1170px) and (max-width: 1220px) {
-.nav-pills > li > a {
-  padding:0.5vh 0.2vw;
-  margin:0 4px !important;
-}
-}
-
-/* aside2 관련 */
-@media (max-width: 1170px) {
-.store-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f1f1ff;
-  border-radius: 8px;
-  padding: 0.5vh 0.3vw !important;
-  margin-bottom: 8px;
-}
-.store-rank-name {
-  gap: 0.5vw !important;
-}
-}
-
-/* 계정 설명 */
+/* aside 관련 */
 @media (max-width: 1119.98px){
 .account-description {
   position: relative;
@@ -1354,25 +1461,85 @@ footer {
 }
 }
 
-/* mainbody 음식 종류 바로가기 */
-@media (max-width: 329.98px) {
-.nav-tabs > li > a {
-  font-size:0.7rem;
+/* aside2 별점순/리뷰순/단골순 */
+@media (min-width: 1025px) {
+.nav {
+  padding:1vh 0 !important;
 }
 }
-@media (min-width: 330px) and (max-width: 767.98px) {
-.nav-tabs > li > a {
-  font-size:0.9rem;
+
+/* aside2 별점순/리뷰순/단골순 하나씩 */
+@media (min-width: 1025px) and (max-width: 1090px) {
+.nav-pills > li > a {
+  padding:0.5vh 0.1vw;
+  margin:0 2px !important;
 }
+}
+@media (min-width: 1025px) and (max-width: 1170px) {
+.nav-pills > li > a {
+  padding:0.5vh 0.2vw;
+  margin:0 2px !important;
+}
+}
+@media (min-width: 1170px) and (max-width: 1220px) {
+.nav-pills > li > a {
+  padding:0.5vh 0.2vw;
+  margin:0 4px !important;
+}
+}
+
+/* aside2 관련 */
+@media (max-width: 1169.98px) {
+.store-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1f1ff;
+  border-radius: 8px;
+  padding: 0.5vh 0.3vw !important;
+  margin-bottom: 8px;
+}
+.store-rank-name {
+  gap: 0.5vw !important;
+}
+}
+
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* 여기부터 수정 시작 */
+
+@media (max-width: 599.98px) {
+
+}
+@media (min-width: 600px) and (max-width: 767.98px) {
+
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
-.nav-tabs > li > a {
-  font-size:1.2rem;
+
+}
+
+
+
+/* 모바일-태블릿 버전 단일 요소들 (mainbody 부분) */
+@media (max-width: 1024.98px) {
+.nav-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1vw;
+}
+.div4 {
+  display: flex;
+  flex-direction: column;
+  width:100% !important;
+  gap: 48px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
 }
 }
-@media (min-width: 1025px) and (max-width: 1070px) {
-.nav-tabs > li > a {
-  font-size:0.8rem;
+
+/* 모바일 버전 요소들 (mainbody 부분) */
+@media (max-width: 767.98px) {
+.card {
+  flex-direction: column !important;
 }
 }
 
@@ -1381,8 +1548,8 @@ footer {
 .card-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  max-width: 300px;
-  width: 38.11vw;
+  min-height:200px;
+  width: clamp(200px, 52vw, 400px);
   height: 30.67vh;
   background-size: cover;
   background-position: 50% 50%;
@@ -1394,7 +1561,7 @@ footer {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
   max-width: 200px;
-  width: 35.11vw;
+  width: 400px;
   height: 23.67vh;
   background-size: cover;
   background-position: 50% 50%;
@@ -1404,7 +1571,12 @@ footer {
 }
 
 /* 식당 카드 & 랭킹 이름 보기 */
-@media (min-width: 768px) and (max-width: 1024.98px) {
+@media (max-width: 599.98px) {
+.store-name {
+    font-size:clamp(18px, 4vw, 24px);
+  }
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
 .store-name {
     font-size:1.5rem;
   }
@@ -1416,45 +1588,41 @@ footer {
 }
 }
 /* 식당 카드 내 별점 점수 보기 */
-@media (min-width: 768px) and (max-width: 1024.98px) {
+@media (max-width: 599.98px) {
 .element {
-  font-size:1.9rem;
+  font-size:clamp(15px, 4vw, 24px);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom:2px;
+  height:auto;
+  vertical-align: middle;
+}
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
+.element {
+  font-size:1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  vertical-align: middle;
 }
 }
 
 /* 식당 카드 간단정보 보기 */
-@media  (max-width: 259.98px){
+@media  (max-width: 599.98px) {
 .store-simple-info {
-  font-size: 10px;
+  font-size: clamp(14px, 3vw, 18px);
 }
 }
-@media  (min-width: 260px) and (max-width: 349.98px) {
-.store-simple-info {
-  font-size: 12px;
-}
-}
-@media  (min-width: 350px) and (max-width: 499.98px) {
-.store-simple-info {
-  font-size: 14px;
-}
-}
-@media  (min-width: 500px) and (max-width: 569.98px) {
-.store-simple-info {
-  font-size: 16px;
-}
-}
-@media  (min-width: 570px) and (max-width: 767.98px) {
+@media  (min-width: 600px) and (max-width: 767.98px) {
 .store-simple-info {
   font-size: 18px;
 }
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
 .store-simple-info {
-  font-size: 20px;
+  font-size: clamp(18px, 1.95vw, 20px);
 }
 }
 @media (min-width: 1025px) {
@@ -1464,34 +1632,19 @@ footer {
 }
 
 /* 식당 카드 상세정보 보기 */
-@media  (max-width: 259.98px){
+@media  (max-width: 599.98px) {
 .go-to-searchPage {
-  font-size: 10px;
+  font-size: clamp(14px, 3vw, 18px);
 }
 }
-@media  (min-width: 260px) and (max-width: 349.98px) {
-.go-to-searchPage {
-  font-size: 12px;
-}
-}
-@media  (min-width: 350px) and (max-width: 499.98px) {
-.go-to-searchPage {
-  font-size: 14px;
-}
-}
-@media  (min-width: 500px) and (max-width: 569.98px) {
-.go-to-searchPage {
-  font-size: 16px;
-}
-}
-@media  (min-width: 570px) and (max-width: 767.98px) {
+@media  (min-width: 600px) and (max-width: 767.98px) {
 .go-to-searchPage {
   font-size: 18px;
 }
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
 .go-to-searchPage {
-  font-size: 20px;
+  font-size: clamp(18px, 1.95vw, 20px);
 }
 }
 @media (min-width: 1025px) {
@@ -1499,6 +1652,9 @@ footer {
   font-size: 13px;
 }
 }
+
+/* 여기까지 수정 완료 */
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
 /* footer */
 @media (max-width: 767.98px){
