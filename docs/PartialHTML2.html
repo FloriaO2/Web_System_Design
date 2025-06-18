@@ -1,243 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="SearchPage (info).css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
-  </head>
-  <body>
-    <div class="SearchPage_info">
-      <div class="entire-area">
 
-        <div class="header">
-          <div class="div1">
-            <a class="web-name" href="MainPage (user).html">Snowmap</a>
-          </div>
-          <div class="bottom-app-bar">
-            <img id="search-img" src="image/search.png" />
-            <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
-             <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
-          </div>
-          <div class="button-group" id="buttonGroup"></div>
-
-          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-          <div class="mobile-button-group">
-            <!-- 햄버거 버튼 -->
-            <button class="mobile-button btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-              <div class="navbar-toggler-icon"></div>
-            </button>
-
-            <!-- Offcanvas 메뉴 -->
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-              <div class="offcanvas-close-area">
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-              <div class="offcanvas-header">
-                <div class="offcanvas-title" id="mobileMenuLabel">
-                  <a class="account-inf-mobile" href="MyPage (check).html">
-                    <img src="image/avatar.png" alt="등급" id="grade-img-mobile"/>
-                    <div class="account-detail-nickname">닉네임&nbsp;</div>
-                    <div>&nbsp;&gt;</div>
-                  </a>
-                </div>
-              </div>
-              
-              <div class="offcanvas-body">
-                <ul class="list-unstyled">
-                  <hr/>
-                  <li><a href="커뮤니티.html">커뮤니티</a></li>
-                  <hr/>
-                  <li><a href="랭킹.html">랭킹</a></li>
-                  <hr/>
-                  <li><a href="MyPage (check)?tab=wishlist">찜한 가게</a></li>
-                  <hr/>
-                </ul>
-              </div>
-              <div style="text-align: right;">
-                <button id="logout-button" class="button" onclick="logout()">
-                  <img class="logout-img" src="image/logout.png">
-                  <span class="logout-text">로그아웃</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-        </div>
-  
-        <div class="aside"></div>
-
-       <!--여기부터 복붙시작-->
-        <div class="aside2">
-          <div class="simple-ranking">
-            <ul class="nav nav-pills">
-              <li class="nav-item">
-                <a class="nav-link active"  data-bs-toggle="pill" aria-current="page" href="#" onclick="handleSortAside('rating')">
-                  별점순</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
-              </li>
-              
-            </ul>
-            <ul id="itemList">
-            </ul>
-            <div id="store-sort"> <!--여기에 간단 랭킹 정렬해서 삽입-->
-            </div>
-          </div>
-        </div>
-        <!--여기까지 복붙완료-->
-        <div class="mainbody">
-        <!-- 여기까지는 고정 -->
-
-          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-          <!-- 여기부터 수정 시작 -->
-          <div class="info-up-area">
-            <div class="card">
-              <div class="card-image"></div>
-              <div class="card-text">
-                <div class="text">
-                  <div class="text-up-area">
-                    <div class="store-name"></div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element"></div>
-                    </div>
-                  </div>
-                  <div class="p">
-                    <div class="store-simple-info"></div>
-                    <div class="personal-check search-margin-bottom">
-                      <button type="button" class="heart-button" >
-                        <!--<img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>-->
-                        <div id="personal-heart-img">🤍</div>
-                        <span id="personal-heart">찜한 가게</span>
-                      </button>
-                      <button type="button" class="bookmark-button">
-                        <img src="image/empty-bookmark.png" alt="단골 가게" id="bookmark-img"/>
-                        <span id="bookmark">단골 가게</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="info-down-area">
+          <main class="info-down-area">
             <div class="info-tab-list">
-              <div class="tab">
-                <a class="label" id="go-to-info" href="SearchPage (info).html">정보</a>
-              </div>
               <div class="tab2">
-                <a class="label2" id="go-to-menu" href="SearchPage (menu).html">메뉴</a>
+                <a class="label2" id="go-to-info" href="SearchPage (info).html">정보</a>
+              </div>
+              <div class="tab">
+                <a class="label" id="go-to-menu" href="SearchPage (menu).html">메뉴</a>
               </div>
               <div class="tab2">
                 <a class="label2" id="go-to-review" href="SearchPage (review).html">리뷰</a>
               </div>
             </div>
-            <div class="info-main-content">
-              <div id="map"></div>
-              <div class="info-right">
-                <div id="info-navigation">
-                  <img class="info-image" src="image/navigation.png" />
-                  <div class="info-text">길찾기</div>
-                  <a target="_blank" aria-label="길찾기">
-                    <sl-icon-button 
-                      class="pin-map" 
-                      name="link-45deg" 
-                      label="pin-map" 
-                      style="width: 60px;">
-                    </sl-icon-button>
-                  </a>
-                </div>
-                <div id="info-time">
-                  <img class="info-image" src="image/time.png" />
-                  <div class="info-text">운영 시간</div>
-                </div>
-                <div id="info-etc">
-                  <img class="info-image" src="image/information.png" />
-                  <div class="info-text etc-text">기타 정보</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- 여기까지 수정 완료 -->
-          <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-
-          <!-- 여기부터는 고정 -->
-          <footer>
-            <div class="text-link-list">
-              <div class="top-area-in-footer">
-                <div class="text-strong">
-                  <div class="text-strong2">Web assistant</div>
-                </div>
-              </div>
-              <div class="text-link-list-item">
-                <a class="text-link-list-item" href="개발자정보.html">개발자정보</a>
-              </div>
-              <div class="text-link-list-item">
-                <div class="list-item2">웹사이트 이용 방법</div>
-              </div>
-              <a class="text-link-list-item" href="ReportPage.html">
-                <div class="list-item2">악성 유저 신고</div>
-              </a>
-            </div>
-            <div class="vertical-line"></div>
-            <div class="horizontal-line"></div>
-            <div class="text-link-list">
-              <div class="top-area-in-footer">
-                <div class="text-strong">
-                  <div class="text-strong2">Sookmyung University</div>
-                </div>
-              </div>
-              <a class="text-link-list-item" href="https://www.sookmyung.ac.kr/kr/index.do">숙명여자대학교 홈페이지</a>
-              <a class="text-link-list-item" href="https://snowboard.sookmyung.ac.kr/login/index.php">스노우보드</a>
-              <a class="text-link-list-item" href="https://portal.sookmyung.ac.kr/irj/portal">숙명포털</a>
-            </div>
-          </footer>
-        </div>
-      </div>
-    </div>
-
-    <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
-    <script>
-
-      window.addEventListener("DOMContentLoaded", () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabToShow = urlParams.get("tab");
-
-        if (tabToShow) {
-          const tabGroup = document.querySelector("sl-tab-group");
-          if (tabGroup) {
-            tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
-          }
-        }
-      });
-    </script>
-
-    <script>
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (currentUser && currentUser.nickname) {
-      document.querySelector('.account-detail-nickname').innerHTML = currentUser.nickname;
-      }
-    </script>
+            <div class="menu-main-content"></div>
+          </main>
 
 
+<script>
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (currentUser && currentUser.nickname) {
+  document.querySelector('.account-detail-nickname').innerHTML = currentUser.nickname;
+  }
+</script>
 
-
-    <script>//!!!해당 식당의 정보 보여주기!!!
+<script>//해당 식당의 정보 보여주기
+      //
     let store_mainbody =[];
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -258,54 +44,6 @@
       document.querySelector('#go-to-info'  ).href = `SearchPage (info).html?id=${storeId}`;
       document.querySelector('#go-to-menu'  ).href = `SearchPage (menu).html?id=${storeId}`;
       document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
-      document.querySelector('#info-time .info-text').textContent = store.time || '운영 시간 정보 없음';
-      document.querySelector('#info-etc .info-text').textContent = store.etc || '기타 정보 없음';
-
-      if (storeId === "13133901" || storeId === "1007703563")
-      {
-        const etcContainer = document.querySelector('#info-etc .info-text');
-        etcContainer.textContent = '';
-
-        // 링크 요소 생성
-        const link = document.createElement("a");
-        link.href = store.etc;
-        link.target = "_blank"; // 새 창에서 열기
-        link.setAttribute("aria-label", "설정 페이지로 이동");
-
-        // 아이콘 버튼 생성
-        const iconButton = document.createElement("sl-icon-button");
-        iconButton.classList.add("global");
-        iconButton.setAttribute("name", "globe2");
-        iconButton.setAttribute("label", "globe2");
-        iconButton.style.width="60px";
-
-        // 링크 안에 아이콘 넣기
-        link.appendChild(iconButton);
-        etcContainer.appendChild(link);
-      }
-
-      if (storeId === "27189950")
-      {
-        const etcContainer = document.querySelector('#info-etc .info-text');
-        etcContainer.textContent = '';
-
-        // 링크 요소 생성
-        const link = document.createElement("a");
-        link.href = store.etc;
-        link.target = "_blank"; // 새 창에서 열기
-        link.setAttribute("aria-label", "설정 페이지로 이동");
-
-        // 아이콘 버튼 생성
-        const iconButton = document.createElement("sl-icon-button");
-        iconButton.classList.add("instagram");
-        iconButton.setAttribute("name", "instagram");
-        iconButton.setAttribute("label", "instagram");
-        iconButton.style.width="60px";
-
-        // 링크 안에 아이콘 넣기
-        link.appendChild(iconButton);
-        etcContainer.appendChild(link);
-      }
 
       document.querySelector('.store-name').textContent      = store.name;
       document.querySelector('.element').textContent         = store.rating.toFixed(1);
@@ -313,14 +51,34 @@
         `${store.type} | 학교 기준 도보 ${store.distance}분 | ${store.price.toLocaleString()}원`;
 
       renderStars(store.rating);                 // 별점 이미지
+      renderMenu(store.menu);
     })
     .catch(err => console.error('JSON 로딩 실패:', err));
 });
 
 
- 
 
+  // 메뉴 렌더링 함수
+function renderMenu(menuArray) {
+  const menuContainer = document.querySelector('.menu-main-content');
+  menuContainer.innerHTML = ''; // 기존 내용 초기화
 
+  menuArray.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'menu-card';
+
+    card.innerHTML = `
+      <div class="menu-left">
+        <div class="menu-text">${item.name}</div>
+      </div>
+      <div class="menu-right">
+        <div class="menu-price">${item.price.toLocaleString()}원</div>
+      </div>
+    `;
+
+    menuContainer.appendChild(card);
+  });
+}
 
 
 
@@ -380,11 +138,8 @@ function isFavorited(storeId, userId) {
 function updateHeartIcon(isFav) {
   const heartImg = document.getElementById('personal-heart-img');
   if (!heartImg) return;
-  if (isFav) {
-    heartImg.innerHTML = "❤️";
-  } else {
-    heartImg.innerHTML = "🤍";
-  }
+
+  heartImg.textContent = isFav ? "❤️" : "🤍";
 }
 
 // 찜 추가/제거 함수
@@ -414,17 +169,11 @@ function toggleFavorite(store, userId) {
 
 // 찜 버튼 클릭 이벤트 리스너 등록
 document.querySelector('.heart-button').addEventListener('click', () => {
-  console.log("찜버튼클릭됨")
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  
   if (!currentUser) {
     alert('로그인이 필요합니다.');
     return;
   }
-
-
-  
-
 
   const urlParams = new URLSearchParams(window.location.search);
   const storeId = urlParams.get('id');
@@ -457,11 +206,12 @@ window.addEventListener('DOMContentLoaded', () => {
     updateHeartIcon(isFav); // 페이지 로드시 찜 이미지 초기화
   }
 });
-</script>
+
+  </script>
 
 
 
-<script>
+  <script>
   const DB_NAME = 'MyStoreDB';
   const STORE_NAME = 'stores';
   const DB_VERSION = 1;
@@ -554,23 +304,24 @@ window.addEventListener('DOMContentLoaded', () => {
   function getBookmarks() {
     const bookmarks = localStorage.getItem('bookmarks');
     return bookmarks ? JSON.parse(bookmarks) : [];
+    
   }
   function getUserBookmarks(userId) {//특정 사용자의 북마크만 반환
   const bookmarks = getBookmarks();
   return bookmarks.filter(bm => bm.userId === userId).map(bm => bm.storeId);
 }
+
   // localStorage에 단골 가게 배열 저장하기
   function saveBookmarks(bookmarks) {
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   }
 
   // 단골 여부 확인 함수
-  function isBookmarked(storeId) {
+ function isBookmarked(storeId) {
     const userId=currentUser.id;
     const bookmarks = getBookmarks();
     return bookmarks.some(bm => bm.userId === userId && bm.storeId === storeId);
 }
-
   // 북마크 아이콘 업데이트 함수 (채운/테두리)
   function updateBookmarkIcon(isBookmarked) {
     const img = document.getElementById('bookmark-img');
@@ -597,8 +348,7 @@ window.addEventListener('DOMContentLoaded', () => {
     await updateStore(store);
   }
 
-  
- async function toggleBookmark(storeId) {// 클릭 시 단골 가게 추가/제거 토글 함수 (async)
+  async function toggleBookmark(storeId) {// 클릭 시 단골 가게 추가/제거 토글 함수 (async)
   const userId = currentUser.id;
   let bookmarks = getBookmarks(); // [{ userId, storeId }, ...]
 
@@ -641,6 +391,7 @@ window.addEventListener('DOMContentLoaded', () => {
 }
 
 
+
   // 페이지 로드 시 현재 단골 여부에 따라 아이콘 초기화
   async function initBookmark(storeId) {
     updateBookmarkIcon(isBookmarked(storeId));
@@ -664,7 +415,7 @@ window.addEventListener('DOMContentLoaded', () => {
       await initBookmark(storeId);
 
       // 클릭 이벤트 등록 (id='bookmark' 버튼 또는 img에)
-      const bookmarkElem = document.getElementById('bookmark-img');
+      const bookmarkElem = document.getElementById('bookmark');
       if (bookmarkElem) {
         bookmarkElem.addEventListener('click', async () => {
           await toggleBookmark(storeId);
@@ -680,31 +431,32 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-
+    <!-- aside2렌더링-->
     <script>
-       let store_aside2=[];
-        function renderAside(sortedArray) {
-          const top7 = sortedArray.slice(0, 7);
-          renderAsideStores(top7);
-        }
-        function handleSortAside(criteria) {
-          const sorted = getSortedStores(criteria);
-          renderAside(sorted);
-        }
-
-         //sort 함수(aside2/mainbody 공통)
-        function getSortedStores(criteria = "rating") {
-        return [...store_aside2].sort((a, b) => {
-          if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
-
-          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
-          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
-          return 0;
-        });
+      let store_aside2 = []; // (1) 하드코딩 빼고 이걸로 대체
+      
+      function renderAside(sortedArray) {
+        const top7 = sortedArray.slice(0, 7);
+        renderAsideStores(top7);
+      }
+      function handleSortAside(criteria) {
+        const sorted = getSortedStores(criteria);
+        renderAside(sorted);
       }
 
-      //asdide렌더링
+        //sort 함수(aside2/mainbody 공통)
+      function getSortedStores(criteria = "rating") {
+      return [...store_aside2].sort((a, b) => {//////////(2)여기도 수정
+        if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
+
+        if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
+        if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
+        if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
+        return 0;
+      });
+    }
+
+     
         function renderAsideStores(sortedArray) {
         const top7 = sortedArray.slice(0, 7);
         const asideEl = document.getElementById("store-sort");
@@ -726,8 +478,8 @@ window.addEventListener('DOMContentLoaded', () => {
         </ul>
       `;
     }
-
-    window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+    
+  window.addEventListener('DOMContentLoaded', () => {/////////////(3) onload빼고 이거
   fetch('stores.json')       
     .then(res => res.json())
     .then(data => {
@@ -738,69 +490,24 @@ window.addEventListener('DOMContentLoaded', () => {
     .catch(err => console.error('JSON 로딩 실패:', err));
 });/////////////aside2수정완료///////////////
 
-    </script>
 
-<!-- 카카오 지도 API -->
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services&autoload=false"></script>
 
-<!-- 지도 생성 코드는 모두 아래 script 안에 넣기 -->
-<script>
-  // 모든 코드는 이 안에서 실행되어야 함
-  kakao.maps.load(function () {
-    console.log("✅ Kakao SDK 로드 완료");
 
-    // 이제 안전하게 kakao 객체 사용 가능
-    const mapContainer = document.getElementById('map');
-    const mapOption = {
-      center: new kakao.maps.LatLng(37.5665, 126.9780),
-      level: 3
-    };
-    const map = new kakao.maps.Map(mapContainer, mapOption);
 
+  window.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const storeId = urlParams.get('id');
+    const tabToShow = urlParams.get("tab");
 
-    fetch('stores.json')
-      .then(res => res.json())
-      .then(data => {
-        const store = data.find(s => s.id === storeId);
-        if (!store) {
-          alert('해당 가게를 찾을 수 없습니다.');
-          return;
-        }
-
-        document.querySelector('.store-name').textContent = store.name;
-
-        const infoLink = document.querySelector('#info-navigation a');
-        if (infoLink) {
-          infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
-          infoLink.target = '_blank';
-        }
-
-        const ps = new kakao.maps.services.Places();
-        const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
-
-        ps.keywordSearch(keyword, function (data, status) {
-          if (status === kakao.maps.services.Status.OK && data.length > 0) {
-            const place = data[0];
-            const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
-
-            new kakao.maps.Marker({
-              map: map,
-              position: coords
-            });
-            map.setCenter(coords);
-          } else {
-            console.warn('장소 검색 결과가 없습니다.');
-          }
-        });
-      })
-      .catch(err => {
-        console.error('가게 데이터를 불러오는 중 오류:', err);
-      });
+    if (tabToShow) {
+      const tabGroup = document.querySelector("sl-tab-group");
+      if (tabGroup) {
+        tabGroup.show(tabToShow); // 해당 panel ID를 보여줌
+      }
+    }
   });
-</script>
+  </script>
 
+    
 
     <script>////////회원/비회원 전환///////////////////////
       function logout() {
@@ -948,6 +655,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     </script>
 
+
     <script>
   // 공통 검색 함수
   function handleSearch() {
@@ -993,7 +701,17 @@ window.addEventListener('DOMContentLoaded', () => {
   });
     </script>
 
-    
+    <script>
+      document.querySelector('.bookmark-button').addEventListener('click', () => {
+      console.log("북마크버튼클릭됨")
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      
+      if (!currentUser) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
+    });
+    </script>
      
   </body>
 </html>
