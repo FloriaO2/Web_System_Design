@@ -211,8 +211,9 @@
 
   if (currentUser && currentUser.nickname) {
    document.querySelector('.account-detail-nickname-main').innerHTML = currentUser.nickname;
-
   }
+
+
 
 
   const postCount = currentUser.postCount || 0;
@@ -221,6 +222,18 @@
 
   document.getElementById('activity-counts').textContent =
     `게시물 ${postCount}개 | 댓글 ${commentCount}개 | 리뷰 ${reviewCount}개`;
+
+  /* ---------- ⇩ 등급 이미지 교체 ⇩ ---------- */
+  const gradeImgEl = document.querySelectorAll(".account-detail-grade");
+  if (gradeImgEl) {
+    let gradeSrc = "image/avatar.png";                // 0~9
+    if (postCount >= 40)      gradeSrc = "image/avatar_level3.png";
+    else if (postCount >= 25) gradeSrc = "image/avatar_level3.png";
+    else if (postCount >= 10) gradeSrc = "image/avatar_level2.png";
+    gradeImgEl.src = gradeSrc;
+  }
+  /* ------------------------------------------- */
+
 
 
 
@@ -762,6 +775,8 @@ window.addEventListener("DOMContentLoaded", () => {
       });
   });
     </script>
+
+   
      
   </body>
 </html>
