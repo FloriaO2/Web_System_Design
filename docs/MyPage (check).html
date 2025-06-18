@@ -528,7 +528,7 @@ window.addEventListener("DOMContentLoaded", () => {
  
 
   return loveListDiv;
-},item => String(item.favoritedBy) === String(currentUser.id));
+},item => String(item.userId) === String(currentUser.id));
 });
 
   // 페이지네이션 관련 코드는 따로 구현하거나, 기존 nav 유지*/
