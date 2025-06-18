@@ -305,9 +305,13 @@
         const gradeImgMobile = document.getElementById("grade-img-mobile");
         if (gradeImgMobile) gradeImgMobile.src = gradeImgSrc;
 
+        let profileImgSrc = '';
+        profileImgSrc = localStorage.getItem(`profileImage_${currentUser.id}`) || 'https://c.animaapp.com/kjYfscdy/img/image.svg';//두줄추가
         aside.innerHTML = `
           <div class="account" style="height: 38.69vh;">
-            <div class="account-image"></div>
+            <div class="account-image">
+              <img src="${profileImgSrc}" alt="프로필 사진" style="width:100%; height:100%;  object-fit:cover;"/>
+            </div>
             <div class="account-inf">
                 <img src="${gradeImgSrc}" alt="등급" id="grade-img"/>
                 <span class="account-detail-nickname">${currentUser.nickname}</span>

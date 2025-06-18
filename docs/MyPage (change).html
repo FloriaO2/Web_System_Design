@@ -70,7 +70,7 @@
         </div>
   
         <div class="aside">
-          
+
         </div>
 
        <!--여기부터 복붙시작-->
@@ -103,24 +103,24 @@
           <!-- 여기부터 수정 시작 -->
 
           <div class="change-title">내정보 수정</div>
-          <!--<button type="button" class="change-button btn btn-dark">
-            <div class="change-button-text">수정 완료</div>
-          </button>-->
+          
           <button type="button" onclick="updateUser()" class="change-button btn btn-dark">
             수정 완료
           </button>
           <div class="change-body">
             <div class="change-body-left">
               <div class="account-image-area">
-                <img class="account-image-change" src="https://c.animaapp.com/kjYfscdy/img/image.svg" />
+                <input type="file" class="form-control" id="profile-image-upload" multiple accept="image/*" style="display: none;" />
+                <img class="account-image-change" id="profile-image-preview" src="https://c.animaapp.com/kjYfscdy/img/image.svg" />
               </div>
                 <div class="account-image-change-button">
                 <sl-button variant="text">
                   <sl-icon name="pencil" slot="prefix" id="account-image-change-icon"></sl-icon>
-                  <span id="account-image-change-text">프로필 사진 변경</span>
+                  <span id="account-image-change-text" >프로필 사진 변경</span>
                 </sl-button>
               </div>
             </div>
+          
             <div class="change-body-right">
               <div class="input-field">
                 <div class="nickname-text">&nbsp;Nickname</div>
@@ -175,7 +175,59 @@
       </div>
     </div>
 
+    <script>
+      
+      const profileImageInput = document.getElementById('profile-image-upload');
+      let profileImagePreview = document.getElementById('profile-image-preview'); 
+      const profileImageChangeBtn = document.getElementById('account-image-change-text'); // 기존 id 유지
+      profileImageChangeBtn.style.cursor = 'pointer'; // 마우스 포인터 변경
+      
 
+      // 버튼(연필 아이콘) 클릭 시 파일 선택창 열기
+      profileImageChangeBtn.addEventListener('click', () => {
+        profileImageInput.click();
+      });
+
+      // 파일 선택 후 미리보기 이미지 변경
+      profileImageInput.addEventListener('change', () => {
+        const file = profileImageInput.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+          alert('이미지 파일만 업로드 가능합니다.');
+          profileImageInput.value = '';
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = e => {
+          const newImageSrc = e.target.result;
+
+          profileImagePreview.src = newImageSrc;
+          const asideImage = document.getElementById('aside-profile-image');
+          if (asideImage) {
+            asideImage.src = newImageSrc;
+          }
+
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          if (currentUser && currentUser.id) {
+            localStorage.setItem(`profileImage_${currentUser.id}`, e.target.result);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      window.addEventListener('DOMContentLoaded', () => {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.id) {
+        const savedImage = localStorage.getItem(`profileImage_${currentUser.id}`);
+        if (savedImage) {
+          profileImagePreview.src = savedImage;
+        }
+      }
+    });
+
+    </script>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -241,7 +293,7 @@
 
       // ✅ localStorage 저장
       localStorage.setItem("users", JSON.stringify(users));
-      localStorage.setItem("currentUser", JSON.stringify({ id: currentUser.id, nickname: newNickname }));
+      localStorage.setItem("currentUser", JSON.stringify({ id: currentUser.id, nickname: newNickname,postCount:currentUser.postCount, commentCount:currentUser.commentCount,reviewCount:currentUser.reviewCount }));
 
       // ✅ 닉네임 반영
       const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
@@ -250,6 +302,7 @@
       });
 
       alert("정보가 수정되었습니다!");
+      window.location.href="MyPage (check).html";
     }
     </script>
 
@@ -358,9 +411,14 @@
         const gradeImgMobile = document.getElementById("grade-img-mobile");
         if (gradeImgMobile) gradeImgMobile.src = gradeImgSrc;
 
+
+        let profileImgSrc = '';
+        profileImgSrc = localStorage.getItem(`profileImage_${currentUser.id}`) || 'https://c.animaapp.com/kjYfscdy/img/image.svg';//두줄추가
         aside.innerHTML = `
           <div class="account" style="height: 38.69vh;">
-            <div class="account-image"></div>
+            <div class="account-image">
+              <img src="${profileImgSrc}" alt="프로필 사진" style="width:100%; height:100%;  object-fit:cover;"/>
+            </div>
             <div class="account-inf">
                 <img src="${gradeImgSrc}" alt="등급" id="grade-img"/>
                 <span class="account-detail-nickname">${currentUser.nickname}</span>
@@ -379,6 +437,12 @@
             <span id="heart">찜한 가게</span>
           </a>
         `;
+
+        profileImagePreview.src=profileImgSrc;
+
+
+
+        
       }
 
       // 비회원 aside UI
