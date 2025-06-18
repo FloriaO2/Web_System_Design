@@ -423,21 +423,42 @@
 
       <script>////////회원/비회원 전환///////////////////////
       function logout() {
+       const confirmed = confirm("정말 로그아웃하시겠습니까?");
+      if (!confirmed) return;
+
       localStorage.removeItem("currentUser");
       updateAsideToGuest();
       renderButtonGroup(); // 버튼 그룹도 업데이트
+      window.location.href = "index.html";
+
     }
 
       // 회원 UI
       function updateAsideToMember(currentUser) {
         const aside = document.querySelector(".aside");
         if (!aside) return;
+        // postCount 기준으로 등급 이미지 결정
+        const postCount = currentUser.postCount || 0;
+        let gradeImgSrc = "image/avatar.png"; // 기본
+
+        if (postCount >= 40) {
+          gradeImgSrc = "image/avatar_level4.png";
+        } else if (postCount >= 25) {
+          gradeImgSrc = "image/avatar_level3.png";
+        } else if (postCount >= 10) {
+          gradeImgSrc = "image/avatar_level2.png"; // 있으면 넣고, 없으면 기본으로
+        } else {
+          gradeImgSrc = "image/avatar.png";
+        }
+
+        const gradeImgMobile = document.getElementById("grade-img-mobile");
+        if (gradeImgMobile) gradeImgMobile.src = gradeImgSrc;
 
         aside.innerHTML = `
           <div class="account" style="height: 38.69vh;">
             <div class="account-image"></div>
             <div class="account-inf">
-                <img src="image/avatar.png" alt="등급" id="grade-img"/>
+                <img src="${gradeImgSrc}" alt="등급" id="grade-img"/>
                 <span class="account-detail-nickname">${currentUser.nickname}</span>
             </div>
             <div class="account-description">
@@ -575,7 +596,7 @@
                 </div>
               </div>
               <div class="text-link-list-item">
-                <div class="list-item2">개발자 정보</div>
+                <a class="text-link-list-item" href="개발자정보.html">개발자정보</a>
               </div>
               <div class="text-link-list-item">
                 <div class="list-item2">웹사이트 이용 방법</div>
