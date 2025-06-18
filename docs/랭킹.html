@@ -356,16 +356,36 @@
       `;
 
       ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const listContainer = document.querySelector("ul.list-unstyled");
+      if (listContainer) {
+        listContainer.innerHTML = `
+          <hr/>
+          <li><a href="커뮤니티.html">커뮤니티</a></li>
+          <hr/>
+          <li><a href="랭킹.html">랭킹</a></li>
+          <hr/>
+          <li><a href="signup.html">로그인 / 회원가입</a></li>
+          <hr/>
+        `;
+      }
       const nicknameEls = document.querySelectorAll(".account-detail-nickname");
       nicknameEls.forEach(el => {
         el.textContent = "비회원 접속 중입니다.";
       });
+      const accountLink = document.querySelector(".account-inf-mobile");
+      if (accountLink) {
+        accountLink.href = "signup.html";
+      }
+      const gradeImg = document.getElementById("grade-img-mobile");
+      if (gradeImg) {
+        gradeImg.remove();
+      }
       const logoutContainer = document.querySelector("#logout-button")?.parentElement;
       if (logoutContainer) {
         logoutContainer.innerHTML = `
          
           <button id="logout-button" class="button" onclick="location.href='signup.html'">
-            <img class="logout-img" src="image/logout.png">
+            <img class="logout-img" src="image/login.png">
             <span class="logout-text">로그인</span>
           </button>
         `;

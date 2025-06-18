@@ -276,14 +276,14 @@
 
      
       
-      // ✅ 기존 currentUser.id로 해당 유저 찾기
+      // 기존 currentUser.id로 해당 유저 찾기
       const userIndex = users.findIndex(user => user.id === currentUser.id);
       if (userIndex === -1) {
         alert("사용자 정보를 찾을 수 없습니다.");
         return;
       }
 
-      // ✅ 사용자 정보 업데이트
+      // 사용자 정보 업데이트
       users[userIndex] = {
         ...users[userIndex],
         nickname: newNickname,
@@ -291,11 +291,11 @@
         password: newPassword ? newPassword : users[userIndex].password
       };
 
-      // ✅ localStorage 저장
+      // localStorage 저장
       localStorage.setItem("users", JSON.stringify(users));
       localStorage.setItem("currentUser", JSON.stringify({ id: currentUser.id, nickname: newNickname,postCount:currentUser.postCount, commentCount:currentUser.commentCount,reviewCount:currentUser.reviewCount }));
 
-      // ✅ 닉네임 반영
+      // 닉네임 반영
       const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
       nicknameDivs.forEach(div => {
         div.textContent = newNickname;
@@ -461,16 +461,36 @@
       `;
 
       ////////////////////(수정:모바일일때 비회원 적용) 이부분부터~ ///////////////
+      const listContainer = document.querySelector("ul.list-unstyled");
+      if (listContainer) {
+        listContainer.innerHTML = `
+          <hr/>
+          <li><a href="커뮤니티.html">커뮤니티</a></li>
+          <hr/>
+          <li><a href="랭킹.html">랭킹</a></li>
+          <hr/>
+          <li><a href="signup.html">로그인 / 회원가입</a></li>
+          <hr/>
+        `;
+      }
       const nicknameEls = document.querySelectorAll(".account-detail-nickname");
       nicknameEls.forEach(el => {
         el.textContent = "비회원 접속 중입니다.";
       });
+      const accountLink = document.querySelector(".account-inf-mobile");
+      if (accountLink) {
+        accountLink.href = "signup.html";
+      }
+      const gradeImg = document.getElementById("grade-img-mobile");
+      if (gradeImg) {
+        gradeImg.remove();
+      }
       const logoutContainer = document.querySelector("#logout-button")?.parentElement;
       if (logoutContainer) {
         logoutContainer.innerHTML = `
          
           <button id="logout-button" class="button" onclick="location.href='signup.html'">
-            <img class="logout-img" src="image/logout.png">
+            <img class="logout-img" src="image/login.png">
             <span class="logout-text">로그인</span>
           </button>
         `;
