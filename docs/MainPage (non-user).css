@@ -1,5 +1,9 @@
-.MainPage_non-user,
-.MainPage_non-user * {
+/*font-family: var(--m3-title-medium-font-family, "Roboto-Medium", sans-serif);
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);*/
+
+.MainPage_user,
+.MainPage_user * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -23,7 +27,7 @@ a {
   box-sizing: border-box;
 }
 
-.MainPage_non-user {
+.MainPage_user {
   position:relative;
   background-color: #ffffff;
   min-height: 100vh;
@@ -325,6 +329,7 @@ a {
   justify-content: end;
   margin-right:0.2vw;
 }
+
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -454,7 +459,6 @@ a {
   align-self: stretch;
   display: flex;
   align-items: center;
-  /*justify-content: flex-start;*/
   font-style: normal;
   letter-spacing: 0;
   justify-content: space-between;
@@ -496,6 +500,99 @@ a {
   height: 20.67vh;
   background-size: cover;
   background-position: 50% 50%;
+}
+
+/* ---------------------------------- */
+.account-inf {
+  position: relative;
+  width: 11.11vw;
+  height: 20px;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.95rem;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding:0.1vh 0.5vw;
+  margin-top:1vh;
+  gap:0.5vw;
+}
+
+#grade-img {
+  width:20px;
+  height:20px;
+}
+
+.account-description {
+  position: relative;
+  width: 90%;
+  height: 7vh;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: var(--body-base-font-family, "Inter", Helvetica);
+  color: #000000;
+  font-size: 0.7rem;
+  text-align: left;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: column;
+  align-items: left;
+  padding-left: 1.1vw;
+  gap:0.5vw;
+}
+/* ---------------------------------- */
+
+.move-inf {
+  text-decoration: none;
+  color:black;
+}
+
+.view-heart {
+  position: sticky;
+  width: 13.68vw;
+  height: 5vh;
+  top: 63.69vh;
+  margin-left: 1.84vw;
+  background-color: #f1f1ff;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* ---------------------------------- */
+#heart-img {
+  width:16px;
+  height:2.6vh;
+}
+/* ---------------------------------- */
+
+#heart {
+  position: relative;
+  font-family: var(--body-strong-font-family, "Inter", Helvetica);
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.9rem;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 139.9999976158142%;
+  font-style: normal;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding:0 0.5vw;
+  gap:0.5vw;
+  margin-top:0.2vw;
 }
 
 .div3 {
@@ -766,7 +863,7 @@ p {
 footer {
   position: relative;
   width:55.28vw;
-  height: 35vh;
+  height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -832,10 +929,9 @@ footer {
 .text-link-list-item {
   position: relative;
   width: 15vw;
-  /*height: 2.29vh;*/
   text-decoration: none;
   color:black;
-  font-size: 0.8rem;
+  font-size: 1vw;
   white-space: normal;
 }
 
@@ -847,6 +943,15 @@ footer {
   flex-shrink: 0;
 }
 
+.horizontal-line {
+  display:flex;
+  width: 80vw !important;
+  height: 0.05vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+
 
 
 
@@ -854,6 +959,23 @@ footer {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■추가 시작■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+
+@media (max-width: 599.98px) {
+.div1 {
+  margin-bottom:1vh;
+}
+.web-name {
+  font-size:5.12vw;
+}
+}
+@media (min-width: 600px) and (max-width: 1024.98px){
+.div1 {
+  margin-bottom:1vh;
+}
+.web-name {
+  font-size:30.72px;
+}
+}
 
 @media (max-width: 599.98px) {
 .div1 {
@@ -884,7 +1006,7 @@ footer {
 .aside2 {
   display: none !important;
 }
-.MainPage_non-user {
+.MainPage_user {
   background-color: #ffffff;
   min-height: 100vh;
   height:auto;
@@ -921,7 +1043,7 @@ footer {
   display:none;
 }
 .bottom-app-bar {
-  width:60vw;
+  width: 60vw;
   height:40px;
   background-color:#f2ecfb;
   border:1px solid black;
@@ -958,19 +1080,6 @@ footer {
   height:auto;
   left:0 !important;
 }
-.nav-tabs {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 1vw;
-}
-.div4 {
-  display: flex;
-  flex-direction: column;
-  width:100% !important;
-  gap: 48px;
-  position: relative;
-  background-color: rgba(255, 255, 255, 1);
-}
 }
 
 /* 모바일 버전 요소들 */
@@ -988,9 +1097,6 @@ footer {
   width:5vw;
   height:2vh;
   border:none !important;
-}
-.card {
-  flex-direction: column !important;
 }
 }
 
@@ -1113,7 +1219,7 @@ footer {
 }
 
 /* 모바일 등급 정보 */
-@media  (max-width: 499.98px){
+@media  (max-width: 500px){
 #grade-img-mobile {
   width:20px;
   height:20px;
@@ -1136,7 +1242,7 @@ footer {
 }
 
 /* 모바일 계정 정보 */
-@media  (max-width: 499.98px){
+@media  (max-width: 500px){
 .account-inf-mobile {
   position: relative;
   width: 50vw;
@@ -1222,7 +1328,7 @@ footer {
 }
 
 /* 모바일 메뉴 객체 */
-@media  (max-width: 349.98px){
+@media  (max-width: 350px){
 .list-unstyled > li > a {
   color:black !important;
   font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
@@ -1231,7 +1337,7 @@ footer {
   font-size: 14px;
 }
 }
-@media (min-width: 350px) and (max-width: 549.98px) {
+@media (min-width: 350px) and (max-width: 550px) {
 .list-unstyled > li > a {
   color:black !important;
   font-family: var(--heading-font-family, "Inter-SemiBold", sans-serif);
@@ -1313,63 +1419,7 @@ footer {
 }
 }
 
-/* aside2 별점순/리뷰순/단골순 */
-@media (min-width: 1025px) {
-.nav {
-  padding:1vh 0 !important;
-}
-}
-
-/* aside2 별점순/리뷰순/단골순 하나씩 */
-@media (min-width: 1025px) and (max-width: 1089.98px) {
-.nav-pills > li > a {
-  padding:0.5vh 0.1vw;
-  margin:0 2px !important;
-}
-}
-@media (min-width: 1090px) and (max-width: 1169.98px) {
-.nav-pills > li > a {
-  padding:0.5vh 0.2vw;
-  margin:0 2px !important;
-}
-}
-@media (min-width: 1170px) and (max-width: 1220px) {
-.nav-pills > li > a {
-  padding:0.5vh 0.2vw;
-  margin:0 4px !important;
-}
-}
-
-/* aside2 관련 */
-@media (max-width: 1170px) {
-.store-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f1f1ff;
-  border-radius: 8px;
-  padding: 0.5vh 0.3vw !important;
-  margin-bottom: 8px;
-}
-.store-rank-name {
-  gap: 0.5vw !important;
-}
-}
-
-/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-/* 여기부터 수정 시작 */
-
-@media (max-width: 599.98px) {
-
-}
-@media (min-width: 600px) and (max-width: 767.98px) {
-
-}
-@media (min-width: 768px) and (max-width: 1024.98px) {
-
-}
-
-/* 계정 설명 */
+/* aside 관련 */
 @media (max-width: 1119.98px){
 .account-description {
   position: relative;
@@ -1408,6 +1458,88 @@ footer {
   align-items: left;
   padding:0 0.7vw;
   gap:0.5vw;
+}
+}
+
+/* aside2 별점순/리뷰순/단골순 */
+@media (min-width: 1025px) {
+.nav {
+  padding:1vh 0 !important;
+}
+}
+
+/* aside2 별점순/리뷰순/단골순 하나씩 */
+@media (min-width: 1025px) and (max-width: 1090px) {
+.nav-pills > li > a {
+  padding:0.5vh 0.1vw;
+  margin:0 2px !important;
+}
+}
+@media (min-width: 1025px) and (max-width: 1170px) {
+.nav-pills > li > a {
+  padding:0.5vh 0.2vw;
+  margin:0 2px !important;
+}
+}
+@media (min-width: 1170px) and (max-width: 1220px) {
+.nav-pills > li > a {
+  padding:0.5vh 0.2vw;
+  margin:0 4px !important;
+}
+}
+
+/* aside2 관련 */
+@media (max-width: 1169.98px) {
+.store-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1f1ff;
+  border-radius: 8px;
+  padding: 0.5vh 0.3vw !important;
+  margin-bottom: 8px;
+}
+.store-rank-name {
+  gap: 0.5vw !important;
+}
+}
+
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* 여기부터 수정 시작 */
+
+@media (max-width: 599.98px) {
+
+}
+@media (min-width: 600px) and (max-width: 767.98px) {
+
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+
+}
+
+
+
+/* 모바일-태블릿 버전 단일 요소들 (mainbody 부분) */
+@media (max-width: 1024.98px) {
+.nav-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1vw;
+}
+.div4 {
+  display: flex;
+  flex-direction: column;
+  width:100% !important;
+  gap: 48px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+}
+}
+
+/* 모바일 버전 요소들 (mainbody 부분) */
+@media (max-width: 767.98px) {
+.card {
+  flex-direction: column !important;
 }
 }
 
