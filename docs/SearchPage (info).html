@@ -421,11 +421,17 @@ function toggleFavorite(store, userId) {
 
 // 찜 버튼 클릭 이벤트 리스너 등록
 document.querySelector('.heart-button').addEventListener('click', () => {
+  console.log("찜버튼클릭됨")
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  
   if (!currentUser) {
     alert('로그인이 필요합니다.');
     return;
   }
+
+
+  
+
 
   const urlParams = new URLSearchParams(window.location.search);
   const storeId = urlParams.get('id');
@@ -464,6 +470,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   <script>
+
+  
   const DB_NAME = 'MyStoreDB';
   const STORE_NAME = 'stores';
   const DB_VERSION = 1;
@@ -890,6 +898,18 @@ window.addEventListener('DOMContentLoaded', () => {
         el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
       });
   });
+    </script>
+    
+    <script>
+      document.querySelector('.bookmark-button').addEventListener('click', () => {
+      console.log("북마크버튼클릭됨")
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      
+      if (!currentUser) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
+    });
     </script>
      
   </body>
