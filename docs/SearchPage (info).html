@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services&autoload=false"></script>
   </head>
   <body>
     <div class="SearchPage_info">
@@ -211,6 +210,77 @@
         </div>
       </div>
     </div>
+
+    
+
+
+    <!-- 카카오 지도 API -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services&autoload=false"></script>
+    <script>
+      kakao.maps.load(function () {
+        const mapContainer = document.getElementById('map');
+    const mapOption = {
+      center: new kakao.maps.LatLng(37.5665, 126.9780), // 기본 좌표
+      level: 3
+    };
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // URL 파라미터에서 storeId 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const storeId = urlParams.get('id');
+
+    // stores.json에서 해당 가게 찾기
+    fetch('stores.json')
+      .then(res => res.json())
+      .then(data => {
+        const store = data.find(s => s.id === storeId);
+        if (!store) {
+          alert('해당 가게를 찾을 수 없습니다.');
+          return;
+        }
+
+        // 가게 이름 표시
+        document.getElementsByClassName('store-name').textContent = store.name;
+
+        // 카카오 지도 링크 설정 (store.id가 Kakao 지도 ID라고 가정)
+        const targetPlace = data.find(place => place.id === '18577297');
+        if (targetPlace) {
+          const lat = parseFloat(targetPlace.y);
+          const lng = parseFloat(targetPlace.x);
+          console.log("위도:", lat, "경도:", lng);
+        }
+        const infoLink = document.querySelector('#info-navigation a');
+        if (infoLink) {
+          infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
+          infoLink.target = '_blank';
+        }
+
+        // 장소 검색으로 좌표 찾기
+        const ps = new kakao.maps.services.Places();
+        const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
+
+        ps.keywordSearch(keyword, function (data, status) {
+          if (status === kakao.maps.services.Status.OK && data.length > 0) {
+            const place = data[0];
+            const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
+
+            // 마커 생성 및 지도 중심 이동
+            new kakao.maps.Marker({
+              map: map,
+              position: coords
+            });
+            map.setCenter(coords);
+          } else {
+            console.warn('장소 검색 결과가 없습니다.');
+          }
+        });
+      })
+      .catch(err => {
+        console.error('가게 데이터를 불러오는 중 오류:', err);
+      });
+  });
+    
+  </script>
 
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>
@@ -458,11 +528,14 @@ window.addEventListener('DOMContentLoaded', () => {
     updateHeartIcon(isFav); // 페이지 로드시 찜 이미지 초기화
   }
 });
-</script>
+
+    </script>
 
 
 
-<script>
+  <script>
+
+  
   const DB_NAME = 'MyStoreDB';
   const STORE_NAME = 'stores';
   const DB_VERSION = 1;
@@ -665,7 +738,7 @@ window.addEventListener('DOMContentLoaded', () => {
       await initBookmark(storeId);
 
       // 클릭 이벤트 등록 (id='bookmark' 버튼 또는 img에)
-      const bookmarkElem = document.getElementById('bookmark-img');
+      const bookmarkElem = document.getElementById('bookmark');
       if (bookmarkElem) {
         bookmarkElem.addEventListener('click', async () => {
           await toggleBookmark(storeId);
@@ -740,75 +813,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });/////////////aside2수정완료///////////////
 
     </script>
-
-<!-- 카카오 지도 API -->
-
-<script>
-  function waitForKakao(callback) {
-    const interval = setInterval(() => {
-      if (window.kakao && kakao.maps && kakao.maps.load) {
-        clearInterval(interval);
-        callback();
-      }
-    }, 50);
-  }
-
-  waitForKakao(() => {
-    kakao.maps.load(function () {
-      console.log("✅ Kakao SDK 로드 완료");
-
-      const mapContainer = document.getElementById('map');
-      const mapOption = {
-        center: new kakao.maps.LatLng(37.5665, 126.9780),
-        level: 3
-      };
-      const map = new kakao.maps.Map(mapContainer, mapOption);
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const storeId = urlParams.get('id');
-
-      fetch('stores.json')
-        .then(res => res.json())
-        .then(data => {
-          const store = data.find(s => s.id === storeId);
-          if (!store) {
-            alert('해당 가게를 찾을 수 없습니다.');
-            return;
-          }
-
-          document.querySelector('.store-name').textContent = store.name;
-
-          const infoLink = document.querySelector('#info-navigation a');
-          if (infoLink) {
-            infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
-            infoLink.target = '_blank';
-          }
-
-          const ps = new kakao.maps.services.Places();
-          const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
-
-          ps.keywordSearch(keyword, function (data, status) {
-            if (status === kakao.maps.services.Status.OK && data.length > 0) {
-              const place = data[0];
-              const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
-
-              new kakao.maps.Marker({
-                map: map,
-                position: coords
-              });
-              map.setCenter(coords);
-            } else {
-              console.warn('장소 검색 결과가 없습니다.');
-            }
-          });
-        })
-        .catch(err => {
-          console.error('가게 데이터를 불러오는 중 오류:', err);
-        });
-    });
-  });
-</script>
-
 
     <script>////////회원/비회원 전환///////////////////////
       function logout() {
@@ -1001,7 +1005,17 @@ window.addEventListener('DOMContentLoaded', () => {
   });
     </script>
 
-    
+    <script>
+      document.querySelector('.bookmark-button').addEventListener('click', () => {
+      console.log("북마크버튼클릭됨")
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      
+      if (!currentUser) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
+    });
+    </script>
      
   </body>
 </html>
