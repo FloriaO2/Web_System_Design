@@ -59,7 +59,7 @@
                 </ul>
               </div>
               <div style="text-align: right;">
-                <button id="logout-button" class="button">
+                <button id="logout-button" class="button" onclick="logout()">
                   <img class="logout-img" src="image/logout.png">
                   <span class="logout-text">로그아웃</span>
                 </button>
@@ -387,6 +387,7 @@ function makeStars(rating) {
 
 
     <script>////////회원/비회원 전환///////////////////////
+
       function logout() {
        const confirmed = confirm("정말 로그아웃하시겠습니까?");
       if (!confirmed) return;
