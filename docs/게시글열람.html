@@ -205,6 +205,10 @@
 
     }
 
+
+      const posts = JSON.parse(localStorage.getItem("posts")) || [];//전역변수
+      let store_aside2 = [];//전역변수
+
       // 회원 UI
       function updateAsideToMember(currentUser) {
         const aside = document.querySelector(".aside");
@@ -339,18 +343,8 @@
       `;
     }
 
-    // 페이지 로드 시 UI 초기화
-    document.addEventListener("DOMContentLoaded", () => {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser && currentUser.nickname) {
-        updateAsideToMember(currentUser);
-        updateCommentToMember(currentUser)
-      } else {
-        updateAsideToGuest();
-        updateCommentToGuest()
-      }
-      renderButtonGroup(); // 버튼도 렌더링
-    });
+    
+
     </script>
 
 
@@ -361,7 +355,7 @@
 
 
       <script>
-      let store_aside2 = [];
+      
       
       function renderComments() {
           const urlParams = new URLSearchParams(window.location.search);
@@ -416,10 +410,8 @@
           // 최종 구조 조립
           commentDiv.appendChild(accountDiv);  // 닉네임 + 이미지
           commentDiv.appendChild(contentDiv); // 댓글 본문
-
           container.appendChild(commentDiv);
         });
-
         const chatCountSpan = document.querySelector(".chat-count");
         if (chatCountSpan) {
           chatCountSpan.textContent = `${commentsForThisPost.length}`;
@@ -427,33 +419,134 @@
         }
       }
 
-                  
+
+    function renderLatest(posts) {
+        // 추가용
+        // 게시글 목록 보여주기
+        const container = document.getElementById("post-list"); // 게시글 목록 담을 요소
+         const categoryMap = {
+          "기타": 0,
+          "정보글": 1,
+          "눈송이 밥친구": 2,
+          "질문글": 3
+        };
+
+        // 최신 글 5개만 추출
+        const latestPosts = posts.slice().reverse().slice(0, 5); // 최신순 정렬 후 5개만
+
+        // 댓글 불러오기 및 댓글 수 집계
+        const allComments = JSON.parse(localStorage.getItem("comments")) || [];
+        const commentCountMap = {};
+        allComments.forEach(comment => {
+          commentCountMap[comment.postID] = (commentCountMap[comment.postID] || 0) + 1;
+        });
+
+        if (latestPosts.length === 0) {
+          container.innerHTML = `<tr><td colspan="2">게시글이 없습니다.</td></tr>`;
+          return;
+        }
+        container.innerHTML = ""; // 기존 글 초기화
+
+        // 게시글 렌더링
+        latestPosts.forEach(post => {
+          const tr = document.createElement("tr");
+
+          // 카테고리 셀
+          const tdCategory = document.createElement("td");
+          const categoryName = post.category || "기타";
+          const categoryNum = categoryMap[categoryName] || 0;
+          tdCategory.textContent = categoryName;
+          tdCategory.classList.add(`category${categoryNum}`);
+          tdCategory.classList.add("simple-category");
+
+          // 제목 셀
+          const tdTitle = document.createElement("td");
+          tdTitle.classList.add("simple-one-line");
+          const titleLink = document.createElement("a");
+          titleLink.textContent = post.title;
+          titleLink.href = `게시글열람.html?id=${post.id}`;
+          titleLink.classList.add("simple-title");
+
+          // 댓글 수 표시 (있는 경우)
+          const commentCount = commentCountMap[post.id] || 0;
+          if (commentCount > 0) {
+            titleLink.style.maxWidth = "85%";
+            const commentLink = document.createElement("a");
+            commentLink.textContent = ` (${commentCount})`;
+            commentLink.href = `게시글열람.html?id=${post.id}#comments`;
+            commentLink.classList.add("simple-comment");
+            tdTitle.appendChild(titleLink);
+            tdTitle.appendChild(commentLink);
+          } else {
+            tdTitle.appendChild(titleLink);
+          }
+
+          tr.appendChild(tdCategory);
+          tr.appendChild(tdTitle);
+          container.appendChild(tr);
+        });
+        }
+
+
+
+
+
+
+
+
+
+
+
+      ///////////////////////하나로합칩//////////////////
       document.addEventListener("DOMContentLoaded", () => {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            if (currentUser && currentUser.nickname) {
+              updateAsideToMember(currentUser);
+              updateCommentToMember(currentUser);
+            } else {
+              updateAsideToGuest();
+              updateCommentToGuest();
+            }
+            renderButtonGroup();
+
+
+            renderLatest(posts);
+
+
+
+            fetch("stores.json")
+            .then(r => r.json())
+            .then(data => {
+              store_aside2.push(...data);
+              renderAsideStores(getSortedStores("rating"));
+            })
+            .catch(err => console.error("stores.json 로드 실패:", err));
+
+
+
             const params = new URLSearchParams(window.location.search);
             const postId = params.get("id");
             if (!postId) {
               // id 없을 때 처리 (예: 기본 게시글 보여주기, 경고창, 페이지 이동 등)
               alert("게시글이 없습니다. 커뮤니티 페이지로 이동합니다.");
-             
-              const sorted = getSortedStores("rating");
-              renderAsideStores(sorted);
+              //const sorted = getSortedStores("rating");
+              //renderAsideStores(sorted);
               window.location.href = "커뮤니티.html";
               return;
               // 또는 id가 없을 때도 aside2 보이도록 처리
             } 
-            console.log("받은 postId:", postId);
+            //console.log("받은 postId:", postId);
 
          
-            const posts = JSON.parse(localStorage.getItem("posts")) || [];
+            //const posts = JSON.parse(localStorage.getItem("posts")) || [];
             console.log("posts 배열:", posts);
 
             const post = posts.find(p => String(p.id) === postId);
-            console.log("찾은 post:", post);
-
+            //console.log("찾은 post:", post);
             if (!post) {
               document.getElementById("post-detail-container").innerHTML = "<p>게시글을 찾을 수 없습니다.</p>";
               const sorted = getSortedStores("rating");
-              renderAsideStores(sorted);
+              //renderAsideStores(sorted);
               return;
             }
             
@@ -534,72 +627,21 @@
           renderComments();
         });
 
-
-
-
-
-
-
-
-
-
-        // 추가용
-        // 게시글 목록 보여주기
-        const container = document.getElementById("post-list"); // 게시글 목록 담을 요소
-
-        // 최신 글 5개만 추출
-        const latestPosts = posts.slice().reverse().slice(0, 5); // 최신순 정렬 후 5개만
-
-        // 댓글 불러오기 및 댓글 수 집계
-        const allComments = JSON.parse(localStorage.getItem("comments")) || [];
-        const commentCountMap = {};
-        allComments.forEach(comment => {
-          commentCountMap[comment.postID] = (commentCountMap[comment.postID] || 0) + 1;
+      // 글 작성 버튼 이동
+        document.getElementById("write").addEventListener("click", () => {
+          window.location.href = "게시글업로드.html";
+        });
+        // 게시물 목록 버튼 이동 (커뮤니티 메인 페이지로)
+        document.getElementById("postlist").addEventListener("click", () => {
+          window.location.href = "커뮤니티.html"; // 커뮤니티 메인 페이지 주소로 변경
         });
 
-        if (latestPosts.length === 0) {
-          container.innerHTML = `<tr><td colspan="2">게시글이 없습니다.</td></tr>`;
-          return;
-        }
+      });
 
-        // 게시글 렌더링
-        latestPosts.forEach(post => {
-          const tr = document.createElement("tr");
 
-          // 카테고리 셀
-          const tdCategory = document.createElement("td");
-          const categoryName = post.category || "기타";
-          const categoryNum = categoryMap[categoryName] || 0;
-          tdCategory.textContent = categoryName;
-          tdCategory.classList.add(`category${categoryNum}`);
-          tdCategory.classList.add("simple-category");
 
-          // 제목 셀
-          const tdTitle = document.createElement("td");
-          tdTitle.classList.add("simple-one-line");
-          const titleLink = document.createElement("a");
-          titleLink.textContent = post.title;
-          titleLink.href = `게시글열람.html?id=${post.id}`;
-          titleLink.classList.add("simple-title");
+        
 
-          // 댓글 수 표시 (있는 경우)
-          const commentCount = commentCountMap[post.id] || 0;
-          if (commentCount > 0) {
-            titleLink.style.maxWidth = "85%";
-            const commentLink = document.createElement("a");
-            commentLink.textContent = ` (${commentCount})`;
-            commentLink.href = `게시글열람.html?id=${post.id}#comments`;
-            commentLink.classList.add("simple-comment");
-            tdTitle.appendChild(titleLink);
-            tdTitle.appendChild(commentLink);
-          } else {
-            tdTitle.appendChild(titleLink);
-          }
-
-          tr.appendChild(tdCategory);
-          tr.appendChild(tdTitle);
-          container.appendChild(tr);
-        });
 
 
         // 게시글 열람에서 댓글 선택 시 스크롤해서 이동
@@ -625,41 +667,12 @@
             }
           }
         });
-
     
-        // 글 작성 버튼 이동
-          document.getElementById("write").addEventListener("click", () => {
-            window.location.href = "게시글업로드.html";
-          });
-          // 게시물 목록 버튼 이동 (커뮤니티 메인 페이지로)
-          document.getElementById("postlist").addEventListener("click", () => {
-            window.location.href = "커뮤니티.html"; // 커뮤니티 메인 페이지 주소로 변경
-          });
-
-          
-
-
-
-     
-
-      fetch('stores.json')
-        .then(res => res.json())
-        .then(data => {
-          store_aside2 = data;
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted);
-        })
-        .catch(err => {
-          console.error('식당 데이터를 불러오는데 실패했습니다:', err);
-        });
-});
-
         function renderAside(sortedArray) {
                   const top7 = sortedArray.slice(0, 7);
                   renderAsideStores(top7);
           }
         
-
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
         return [...store_aside2].sort((a, b) => {
