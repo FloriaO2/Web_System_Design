@@ -72,23 +72,7 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
-        <div class="aside">
-          <div class="account">
-            <div class="account-image"></div>
-            <div class="account-inf">
-                <img src="image/avatar.png" alt="등급" id="grade-img"/>
-                <span class="account-detail-nickname">닉네임</span>
-              </div>
-            <div class="account-description">
-              <div><a class="move-inf" href="MyPage (check).html?tab=post">내게시물</a> | <a class="move-inf" href="MyPage (check).html?tab=chat">내댓글</a> | <a class="move-inf" href="MyPage (check).html?tab=review">내리뷰</a></div>
-              <a class="move-inf" href="MyPage (check).html">내정보 확인</a>
-            </div>
-          </div>
-          <a class="view-heart" href="MyPage (check).html?tab=wishlist">
-            <img src="image/heart.png" alt="찜한 가게" id="heart-img"/>
-            <span id="heart">찜한 가게</span>
-          </a>
-        </div>
+        <div class="aside"></div>
 
         <div class="aside2">
           <div class="simple-ranking">
@@ -424,7 +408,13 @@
         el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
         el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
       });
-    });
+  });
+    </script>
+    <script>
+      window.onload = function () {
+        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
+        renderCards(stores); // 예시 함수
+      };
     </script>
   </body>
 </html>

@@ -81,7 +81,7 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('favorites')">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
               
             </ul>
@@ -108,7 +108,7 @@
               <a class="nav-link" href="#" onclick="handleSortMain('reviews')">리뷰순</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="handleSortMain('favorites')">단골순</a>
+              <a class="nav-link" href="#" onclick="handleSortMain('bookmark')">단골순</a>
             </li>
           </ul>
           <div class="div4">
@@ -135,9 +135,9 @@
         return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
-          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
-          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
+          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
           return 0;
         });
       }
@@ -186,11 +186,17 @@
         // mainbody 렌더링함수
         function renderCards(list) {
           const box = document.getElementById("cards-container");
-          box.innerHTML = "";                       // 기존 카드 제거
+          box.innerHTML = ""; // 초기화
+
+          if (list.length === 0) {
+            box.innerHTML = `<p>해당 카테고리에 식당이 없습니다.</p>`;
+            return;
+          }
+
           list.forEach(store => {
             box.insertAdjacentHTML("beforeend", `
               <div class="card">
-                <div class="card-image"></div>
+                <div class="card-image"></div> <!-- 여기 -->
                 <div class="body">
                   <div class="text">
                     <div class="store-name">${store.name}</div>
@@ -199,13 +205,23 @@
                       <div class="element">${store.rating.toFixed(1)}</div>
                     </div>
                     <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br><br></span>
+                      <span class="store-simple-info">${store.type} | 도보 ${store.distance}분 | 가격대 ${store.price}원<br><br></span>
                       <a class="go-to-searchPage" href="SearchPage (info).html?id=${store.id}">상세정보 보기</a>
                     </p>
                   </div>
                 </div>
               </div>
             `);
+
+            // 🔽 삽입된 카드 중 마지막 것의 이미지 div에 배경 설정
+            const lastCardImage = box.querySelectorAll(".card .card-image");
+            const currentImage = lastCardImage[lastCardImage.length - 1];
+
+            if (currentImage && store.image) {
+              currentImage.style.backgroundImage = `url(${store.image})`;
+              currentImage.style.backgroundSize = "cover";
+              currentImage.style.backgroundPosition = "center";
+            }
           });
         }
 
@@ -401,7 +417,13 @@ document.getElementById("search-btn").addEventListener("click", () => {
         el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
         el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
       });
-    });
+  });
+    </script>
+    <script>
+      window.onload = function () {
+        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
+        renderCards(stores); // 예시 함수
+      };
     </script>
   </body>
 </html>

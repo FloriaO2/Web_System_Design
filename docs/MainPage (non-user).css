@@ -267,7 +267,7 @@ a {
   background-repeat: no-repeat;
   background-size: contain;
 }
-/* aside 2 랭킹정렬 관련 css 추가. 여기부터 추가 전까지 복붙하면돼여*/
+/*///////// aside 2 랭킹정렬 관련 css 추가. 여기부터 추가 전까지 복붙하면돼여/////////*/
 .store-list {
   list-style: none;
   padding: 0;
@@ -275,16 +275,6 @@ a {
 }
 
 .store-item {
-  /*
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f1f1ff;
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-bottom: 8px;
-  */
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -315,13 +305,22 @@ a {
 }
 
 .store-name-aside {
+  width:calc(8.96vw - 30px);
   font-weight: 600;
-  font-size:18px !important;
+  font-size:clamp(8px, 1.25vw, 18px) !important;
+  white-space: nowrap;       /* 한 줄로 유지 */
+  overflow: hidden;          /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;   /* 넘칠 때 말줄임표 표시 */
 }
 
 .store-rating {
   color: black;
   font-weight: bold;
+  font-size:clamp(8px, 1.3vw, 14px);
+  min-width:4vw;
+  display: flex;
+  justify-content: end;
+  margin-right:0.2vw;
 }
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -565,6 +564,7 @@ a {
   min-height: 100%;
   flex-grow: 1;
   overflow: auto;
+  margin-bottom:5vh;
 }
 
 /* mainbody에서의 식당 소개 카드 */
@@ -659,10 +659,12 @@ p {
 /* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 별점 (점수) */
 .element {
   position: relative;
-  width: 6.8vw;
+  width: auto;
+  flex:1;
   height: auto;
   margin-top: -3.50px;
   margin-bottom: -1.50px;
+  margin-left:1vw;
   font-weight: var(--subtitle-font-weight);
   color: #000000;
   font-size: 1.3rem;
@@ -671,7 +673,8 @@ p {
   font-family: var(--subtitle-font-family);
   letter-spacing: var(--subtitle-letter-spacing);
   font-style: var(--subtitle-font-style);
-  text-align:center;
+  text-align:left;
+  align-self:center;
 }
 
 /* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 */
@@ -700,13 +703,14 @@ p {
 /* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 (상세 페이지 이동) */
 .go-to-searchPage {
   color: #757575;
-  text-decoration: underline;
   font-family: var(--body-link-font-family, "Inter", Helvetica);
   font-style: normal;
   font-weight: 400;
   letter-spacing: 400;
   line-height: 139.9999976158142%;
   font-size: 16px;
+  width:auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 /* 여기까지 수정 완료 */

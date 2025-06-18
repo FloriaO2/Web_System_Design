@@ -83,7 +83,7 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('favorites')">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
               
             </ul>
@@ -221,9 +221,9 @@
         return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
-          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
-          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
+          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
           return 0;
         });
       }
@@ -269,7 +269,7 @@
 확정
 <script>///////리뷰 업로드 로컬스토리지
             
-          const saveBtn = document.getElementById('saveReviewBtn');
+const saveBtn = document.getElementById('saveReviewBtn');
 
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
@@ -420,14 +420,10 @@ if (!rating || parseFloat(rating) === 0) {
 
 
 <script>
-  let currentStoreName = ''; /////////////수정 미완료ㅜㅜ(식당이름넣기)/////////
-
   window.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded 실행됨');
   const urlParams = new URLSearchParams(window.location.search);
-  const storeId = urlParams.get('id');
-  console.log('storeId:', storeId);
-
+  window.storeId = urlParams.get('id');
+  
   if (!storeId) {
     alert('식당 정보가 없습니다.');
     return;
@@ -436,19 +432,19 @@ if (!rating || parseFloat(rating) === 0) {
   fetch('stores.json')
     .then(res => res.json())
     .then(data => {
+      // data가 배열이라 가정
       const store = data.find(s => s.id === storeId);
-      console.log('store:', store);
       if (!store) {
         alert('해당 식당을 찾을 수 없습니다.');
         return;
       }
-      console.log('store.name:', store.name);
 
-      // 식당 이름을  렌더링
-      document.querySelectorAll('.review-store-name').textContent = store.name;
-      currentStoreName = store.name;  // ✅ 저장
+      window.storeName = store.name;
 
-     
+      // 식당 이름 렌더링 (모든 review-store-name 클래스 요소에 적용)
+      document.querySelectorAll('.review-store-name').forEach(el => {
+        el.textContent = store.name;
+      });
     })
     .catch(err => {
       console.error('식당 데이터 불러오기 실패:', err);
@@ -505,16 +501,6 @@ if (!rating || parseFloat(rating) === 0) {
       fileInput.value = "";
       return;
     }
-
-    /*const estimatedBase64Size = files.reduce((sum, file) => sum + Math.ceil(file.size * 1.37), 0);
-    if (estimatedBase64Size > 4000000) {
-      alert("이미지 총 용량이 너무 큽니다.\n4MB 이하로 줄여주세요.");
-      fileInput.value = "";
-      uploadTrigger.style.display = "block";
-      carouselContainer.style.display = "none";
-      carouselInner.innerHTML = "";
-      return;
-    }*/
 
     carouselInner.innerHTML = "";
     files.forEach((file, index) => {
@@ -577,7 +563,8 @@ if (!rating || parseFloat(rating) === 0) {
       title,
       content,
       rating,
-      storeName: currentStoreName, ///////////////////이거 수정했는데 왜...식당이름이안뜰까요...........
+      storeId,
+      storeName, ///////////////////이거 수정했는데 왜...식당이름이안뜰까요...........
       nickname: currentUser.nickname,
       authorID: currentUser.id,
       images: imageDataUrls
@@ -595,7 +582,7 @@ if (!rating || parseFloat(rating) === 0) {
     addRequest.onsuccess = () =>
     {
       alert("리뷰가 저장되었습니다.");
-      location.href = 'SearchPage (review).html';
+      location.href = `SearchPage (review).html?id=${storeId}`;
     }
 
     addRequest.onerror = () => alert("리뷰 저장에 실패했습니다.");
@@ -608,19 +595,6 @@ if (!rating || parseFloat(rating) === 0) {
     if (uploadTrigger) uploadTrigger.style.display = 'block';
   });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>
@@ -759,7 +733,13 @@ document.getElementById("search-btn").addEventListener("click", () => {
         el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
         el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
       });
-    });
+  });
+    </script>
+    <script>
+      window.onload = function () {
+        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
+        renderCards(stores); // 예시 함수
+      };
     </script>
   </body>
 </html>

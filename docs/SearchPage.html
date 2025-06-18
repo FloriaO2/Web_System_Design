@@ -83,7 +83,7 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('favorites')">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
               
             </ul>
@@ -124,12 +124,9 @@
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">2분 이내</a></li>
-                <li><a class="dropdown-item" href="#">5분 이내</a></li>
-                <li><a class="dropdown-item" href="#">7분 이내</a></li>
-                <li><a class="dropdown-item" href="#">10분 이내</a></li>
-                <li><a class="dropdown-item" href="#">13분 이내</a></li>
-                <li><a class="dropdown-item" href="#">16분 이내</a></li>
-                <li><a class="dropdown-item" href="#">16분 초과</a></li>
+                <li><a class="dropdown-item" href="#">4분 이내</a></li>
+                <li><a class="dropdown-item" href="#">6분 이내</a></li>
+                <li><a class="dropdown-item" href="#">6분 초과</a></li>
               </ul>
             </div>
             <div class="dropdown">
@@ -154,7 +151,7 @@
           <div class="div4">
             <ul class="search-nav nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="pill" aria-current="page" href="#">
+                <a class="nav-link active" id="default-nav" data-bs-toggle="pill" aria-current="page" href="#">
                   별점순
                 </a>
               </li>
@@ -165,107 +162,11 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#">단골순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="showAllBtn"data-bs-toggle="pill" href="#" >전체 식당 목록 보기</a>
+                <a class="nav-link" id="showAllBtn" data-bs-toggle="pill" href="#" >전체 식당 목록 보기</a>
               </li>
             </ul>
 
             <div class="cards" id="cards-container"></div>
-
-
-
-            <!--
-            <div class="cards">
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 A</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">4.1</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 B</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-58.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">3.2</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 C</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 D</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        -->
 
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -307,11 +208,9 @@
 
     
     <script>
-
     const urlParams = new URLSearchParams(window.location.search);
     let searchKeyword = urlParams.get("keyword")?.toLowerCase() || "";
 
-    
     document.getElementById("search-form").addEventListener("input", function () {
     searchKeyword = this.value.trim().toLowerCase(); // 검색어 저장
     console.log("검색어:", searchKeyword);
@@ -322,9 +221,7 @@
 
 
  // 전체보기 버튼 클릭 시
-    document.getElementById("showAllBtn").addEventListener("click", function(e) {
-  e.preventDefault();  // 링크 기본 이동 막기
-
+  function resetAndRenderAll() {
   searchKeyword = "";
   selectedFilters = {
     type: [],
@@ -332,12 +229,34 @@
     price: null
   };
   currentSort = "";
-  const searchInput = document.getElementById("search-form");
-  if (searchInput) searchInput.value = "";
   renderStores();
+}
+
+// 전체보기 버튼 클릭 시
+document.getElementById("showAllBtn").addEventListener("click", function(e) {
+  e.preventDefault();
+
+  // 페이지 이동
+  window.location.href = "SearchPage.html";
 });
 
+// 페이지 로드 시
+window.addEventListener("DOMContentLoaded", () => {
+  // 초기 렌더링만 전체 목록 active, currentSort는 초기값 유지
+  document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
+  document.getElementById("showAllBtn")?.classList.add("active");
 
+  currentSort = "";  // 새로고침 후 별도 정렬이 지정되어있지 않다는 의미로 초기화
+
+  // URL에서 type 파라미터 읽기
+  const urlParams = new URLSearchParams(window.location.search);
+  const typeParam = urlParams.get("type");
+  if (typeParam) {
+    selectedFilters.type.push(typeParam);
+  }
+
+  renderStores();
+});
 
   let stores = []; ////////////검색결과렌더링
     fetch('stores.json')
@@ -415,7 +334,7 @@ function renderStores() {
     }
   }
 
-  /* 🔍 검색어 필터 추가 ------------------------------ */
+  /* 검색어 필터 추가 ------------------------------ */
   if (searchKeyword) {
     filtered = filtered.filter(store =>
       store.name.toLowerCase().includes(searchKeyword) ||
@@ -428,13 +347,48 @@ function renderStores() {
   filtered.sort((a, b) => {
     if (currentSort === "rating") return b.rating - a.rating;
     if (currentSort === "reviews") return b.reviews - a.reviews;
-    if (currentSort === "favorites") return b.favorites - a.favorites;
+    if (currentSort === "bookmark") return b.bookmark - a.bookmark;
     return 0;
   });
 
   const container = document.getElementById("cards-container");
+  container.style.display="flex";
+  container.style.alignItems="center";
   container.innerHTML = "";
 
+  if (filtered.length === 0) {
+  const noResult = document.createElement("div");
+  noResult.textContent = "검색 결과가 없습니다.";
+  noResult.style.textAlign = "center";
+  noResult.style.padding = "2em";
+  noResult.style.color = "#666";
+  noResult.style.fontSize = "1.3vw";
+
+  container.appendChild(noResult);
+
+  // active 초기화
+  document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
+
+  // currentSort가 비어있으면 전체보기 버튼에 active (초기 상태)
+  if (!currentSort) {
+    document.getElementById("default-nav")?.classList.add("active");
+  } else {
+    // currentSort에 맞는 nav-link에 active 추가
+    const navLinks = document.querySelectorAll(".search-nav .nav-link");
+    navLinks.forEach(link => {
+      const text = link.textContent.trim();
+      if (
+        (text === "별점순" && currentSort === "rating") ||
+        (text === "리뷰순" && currentSort === "reviews") ||
+        (text === "단골순" && currentSort === "bookmark")
+      ) {
+        link.classList.add("active");
+      }
+    });
+  }
+  return;
+}
+else {
   filtered.forEach(store => {
     const card = document.createElement("div");
     card.className = "card";
@@ -454,15 +408,15 @@ function renderStores() {
               ${store.type} | ${store.distance}분 거리 | ${store.price.toLocaleString()}원<br /><br />
             </span>
             <a class="go-to-searchPage" href="SearchPage (info).html?id=${store.id}">상세정보 보기</a>
-
           </p>
         </div>
       </div>
     `;
     container.appendChild(card);
   });
+}
 
-  renderTags();
+renderTags();
 }
 
 
@@ -517,8 +471,8 @@ document.querySelectorAll(".dropdown-menu a").forEach(item => {
         selectedFilters.type.push(value);
       }
     } else if (category === "도보 거리") {
-      if (value === "16분 초과") {
-        selectedFilters.distance = "16+";
+      if (value === "8분 초과") {
+        selectedFilters.distance = "8+";
       } else {
         selectedFilters.distance = parseInt(value);
       }
@@ -543,7 +497,7 @@ document.querySelectorAll(".search-nav .nav-link").forEach(link => {
     const text = this.textContent.trim();
     if (text === "별점순") currentSort = "rating";
     if (text === "리뷰순") currentSort = "reviews";
-    if (text === "단골순") currentSort = "favorites";
+    if (text === "단골순") currentSort = "bookmark";
 
     renderStores();
   });
@@ -568,9 +522,9 @@ renderStores();
         return [...stores].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
-          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
-          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
+          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
           return 0;
         });
       }
@@ -742,7 +696,13 @@ renderStores();
         el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
         el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
       });
-    });
+  });
+    </script>
+    <script>
+      window.onload = function () {
+        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
+        renderCards(stores); // 예시 함수
+      };
     </script>
   </body>
 </html>

@@ -86,7 +86,7 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('favorites')">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
               
             </ul>
@@ -195,7 +195,7 @@ function renderCards(list) {
   list.forEach(store => {
     box.insertAdjacentHTML("beforeend", `
       <div class="card">
-        <div class="card-image"></div>
+        <div class="card-image"></div> <!-- 여기 -->
         <div class="body">
           <div class="text">
             <div class="store-name">${store.name}</div>
@@ -204,13 +204,23 @@ function renderCards(list) {
               <div class="element">${store.rating.toFixed(1)}</div>
             </div>
             <p class="p">
-              <span class="store-simple-info">${store.type} | 도보 ${store.distance}분 | 가격대 ${store.price}<br><br></span>
+              <span class="store-simple-info">${store.type} | 도보 ${store.distance}분 | 가격대 ${store.price}원<br><br></span>
               <a class="go-to-searchPage" href="SearchPage (info).html?id=${store.id}">상세정보 보기</a>
             </p>
           </div>
         </div>
       </div>
     `);
+
+    // 🔽 삽입된 카드 중 마지막 것의 이미지 div에 배경 설정
+    const lastCardImage = box.querySelectorAll(".card .card-image");
+    const currentImage = lastCardImage[lastCardImage.length - 1];
+
+    if (currentImage && store.image) {
+      currentImage.style.backgroundImage = `url(${store.image})`;
+      currentImage.style.backgroundSize = "cover";
+      currentImage.style.backgroundPosition = "center";
+    }
   });
 }
 
@@ -243,9 +253,9 @@ function makeStars(rating) {
         return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
-          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
-          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
+          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
           return 0;
         });
       }

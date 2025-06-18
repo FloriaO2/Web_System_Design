@@ -275,16 +275,6 @@ a {
 }
 
 .store-item {
-  /*
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f1f1ff;
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-bottom: 8px;
-  */
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -314,29 +304,25 @@ a {
   font-weight: bold;
 }
 
-.store-name {
-  font-size:18px !important;
-  position: relative;
-  align-self: stretch;
-  margin-top: -1.00px;
-  font-family: var(--heading-font-family, "Inter", Helvetica);
-  font-weight: 600;
-  color: rgba(30, 30, 30, 1);;
-  /*font-size: 24px;*/
-  letter-spacing: -0.48px;
-  line-height: 120.00000476837158%;
-  font-style: normal;
-}
-
 .store-name-aside {
+  width:calc(8.96vw - 30px);
   font-weight: 600;
-  font-size:18px !important;
+  font-size:clamp(8px, 1.25vw, 18px) !important;
+  white-space: nowrap;       /* 한 줄로 유지 */
+  overflow: hidden;          /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;   /* 넘칠 때 말줄임표 표시 */
 }
 
 .store-rating {
   color: black;
   font-weight: bold;
+  font-size:clamp(8px, 1.3vw, 14px);
+  min-width:4vw;
+  display: flex;
+  justify-content: end;
+  margin-right:0.2vw;
 }
+
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */

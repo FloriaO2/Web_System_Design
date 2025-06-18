@@ -82,7 +82,7 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('favorites')">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
               
             </ul>
@@ -237,7 +237,7 @@
       if (storageKey == "posts") keyword="작성한 게시글이"
       else if (storageKey == "comments") keyword="작성한 댓글이"
       else if (storageKey == "reviews") keyword="작성한 리뷰가"
-      else if (storageKey == "favorites") keyword="찜한 가게가"
+      else if (storageKey == "favorite") keyword="찜한 가게가"
       container.innerHTML = `<p class="error-message">${keyword} 없습니다.</p>`;
       return;
     }
@@ -482,7 +482,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // 찜한 가게
 
-  loadItems("favorites", ".wishlist-list-container", (store) => {
+  loadItems("favorite", ".wishlist-list-container", (store) => {
   const loveListDiv = document.createElement("div");
   loveListDiv.classList.add("love-list");
 
@@ -495,12 +495,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const scoreDiv = document.createElement("div");
   scoreDiv.classList.add("love-score");
-
   const starImg = document.createElement("img");
-  starImg.classList.add("star");
-  starImg.src = "https://c.animaapp.com/kjYfscdy/img/star.svg";
+  starImg.classList.add("check-star");
+  starImg.src = "https://c.animaapp.com/kjYfscdy/img/star-60.svg";
 
-  const scoreSpan = document.createElement("span");
+  const scoreSpan = document.createElement("div");
+  scoreSpan.classList.add("star-score");
   scoreSpan.textContent = `${store.rating || "0.0"} 점`;
 
   scoreDiv.appendChild(starImg);
@@ -508,7 +508,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const contentDiv = document.createElement("div");
   contentDiv.classList.add("love-store-content");
-  contentDiv.textContent = `${store.type || "음식"} | ${store.distance || "거리"} | ${store.price || "가격대"}`;
+  contentDiv.textContent = `${store.type || "음식"} | ${"도보 "+store.distance+"분" || "거리"} | ${store.price+"원" || "가격대"}`;
 
   loveStoreDiv.appendChild(nameDiv);
   loveStoreDiv.appendChild(scoreDiv);
@@ -555,9 +555,9 @@ window.addEventListener("DOMContentLoaded", () => {
         return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
-          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
-          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
+          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
           return 0;
         });
       }
@@ -741,6 +741,12 @@ document.getElementById("search-btn").addEventListener("click", () => {
         el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
       });
   });
+    </script>
+    <script>
+      window.onload = function () {
+        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
+        renderCards(stores); // 예시 함수
+      };
     </script>
   </body>
 </html>

@@ -283,16 +283,6 @@ a {
 }
 
 .store-item {
-  /*
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f1f1ff;
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-bottom: 8px;
-  */
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -322,29 +312,25 @@ a {
   font-weight: bold;
 }
 
-.store-name {
-  font-size:18px !important;
-  position: relative;
-  align-self: stretch;
-  margin-top: -1.00px;
-  font-family: var(--heading-font-family, "Inter", Helvetica);
-  font-weight: 600;
-  color: rgba(30, 30, 30, 1);;
-  /*font-size: 24px;*/
-  letter-spacing: -0.48px;
-  line-height: 120.00000476837158%;
-  font-style: normal;
-}
-
 .store-name-aside {
+  width:calc(8.96vw - 30px);
   font-weight: 600;
-  font-size:18px !important;
+  font-size:clamp(8px, 1.25vw, 18px) !important;
+  white-space: nowrap;       /* 한 줄로 유지 */
+  overflow: hidden;          /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;   /* 넘칠 때 말줄임표 표시 */
 }
 
 .store-rating {
   color: black;
   font-weight: bold;
+  font-size:clamp(8px, 1.3vw, 14px);
+  min-width:4vw;
+  display: flex;
+  justify-content: end;
+  margin-right:0.2vw;
 }
+
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -479,9 +465,21 @@ a {
   justify-content: space-between;
 }
 
+.check-star {
+  position: relative;
+  width:auto;
+  min-width: 0;
+  height:3.5vh;
+  max-height: 100%;
+  object-fit: cover;
+}
+
 .star-score {
   display:inline-flex;
   align-items: center !important;
+  margin-left:0.5vw;
+  vertical-align: middle;
+  font-size:1.1vw;
 }
 
 .star {
@@ -717,7 +715,7 @@ a {
   color:#757575;
   text-align: left;
   font-family: var(--subheading-font-family, "Inter-Regular", sans-serif);
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   line-height: 120%;
   font-weight: 400;
   position: relative;
@@ -910,19 +908,21 @@ sl-tab-panel::part(base) {
   font-weight: 900;
   width:auto;
   margin-right:3vw;
-  font-size:1rem;
+  font-size:1.2vw;
 }
 
 .love-score {
   width:auto;
   margin-right:3vw;
   height:100%;
+  display: flex;
+  align-items: center;
 }
 
 .love-store-content {
   margin-top:0.3vh;
   color:rgb(0, 0, 0);
-  font-size: 0.7rem;
+  font-size: 1.1vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -931,7 +931,7 @@ sl-tab-panel::part(base) {
 .love-store-link {
   text-decoration: none;
   color:rgb(132, 132, 132);
-  font-size: 0.7rem;
+  font-size: 1vw;
 }
 
 .pagination {

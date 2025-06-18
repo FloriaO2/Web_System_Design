@@ -68,9 +68,7 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
-        <div class="aside">
-         
-        </div>
+        <div class="aside"></div>
 
        <!--여기부터 복붙시작-->
         <div class="aside2">
@@ -84,7 +82,7 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('favorites')">단골순</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
               
             </ul>
@@ -122,7 +120,8 @@
                     <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
                     <div class="personal-check search-margin-bottom">
                       <button type="button" class="heart-button" >
-                        <img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>
+                        <!--<img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>-->
+                        <div id="personal-heart-img">🤍</div>
                         <span id="personal-heart">찜한 가게</span>
                       </button>
                       <button type="button" class="bookmark-button">
@@ -210,41 +209,67 @@
     <!-- 카카오 지도 API -->
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
     <script>
-      var mapContainer = document.getElementById('map'),
-      mapOption = {
-        center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 좌표
-        level: 3
-      };
+    const mapContainer = document.getElementById('map');
+    const mapOption = {
+      center: new kakao.maps.LatLng(37.5665, 126.9780), // 기본 좌표
+      level: 3
+    };
+    const map = new kakao.maps.Map(mapContainer, mapOption);
 
-      var map = new kakao.maps.Map(mapContainer, mapOption);
+    // URL 파라미터에서 storeId 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const storeId = urlParams.get('id');
 
-      // 2. 장소 검색 객체 생성
-      var ps = new kakao.maps.services.Places();
-
-      // 3. 원하는 장소
-      var keyword = "숙명여자대학교";
-
-      // 4. 검색 요청
-      ps.keywordSearch(keyword, function(data, status) {
-        if (status === kakao.maps.services.Status.OK) {
-            // 가장 첫 번째 결과를 사용
-            var place = data[0];
-            var lat = parseFloat(place.y);
-            var lng = parseFloat(place.x);
-
-            var coords = new kakao.maps.LatLng(lat, lng);
-
-            // 마커 표시
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: coords
-            });
-
-            // 지도 중심 이동
-            map.setCenter(coords);
+    // stores.json에서 해당 가게 찾기
+    fetch('stores.json')
+      .then(res => res.json())
+      .then(data => {
+        const store = data.find(s => s.id === storeId);
+        if (!store) {
+          alert('해당 가게를 찾을 수 없습니다.');
+          return;
         }
+
+        // 가게 이름 표시
+        document.getElementsByClassName('store-name').textContent = store.name;
+
+        // 카카오 지도 링크 설정 (store.id가 Kakao 지도 ID라고 가정)
+        const targetPlace = data.find(place => place.id === '18577297');
+        if (targetPlace) {
+          const lat = parseFloat(targetPlace.y);
+          const lng = parseFloat(targetPlace.x);
+          console.log("위도:", lat, "경도:", lng);
+        }
+        const infoLink = document.querySelector('#info-navigation .info-text');
+        if (infoLink) {
+          infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
+          infoLink.target = '_blank';
+        }
+
+        // 장소 검색으로 좌표 찾기
+        const ps = new kakao.maps.services.Places();
+        const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
+
+        ps.keywordSearch(keyword, function (data, status) {
+          if (status === kakao.maps.services.Status.OK && data.length > 0) {
+            const place = data[0];
+            const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
+
+            // 마커 생성 및 지도 중심 이동
+            new kakao.maps.Marker({
+              map: map,
+              position: coords
+            });
+            map.setCenter(coords);
+          } else {
+            console.warn('장소 검색 결과가 없습니다.');
+          }
+        });
+      })
+      .catch(err => {
+        console.error('가게 데이터를 불러오는 중 오류:', err);
       });
-    </script>
+  </script>
 
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>
@@ -280,12 +305,14 @@
 
       if (!store) { alert('해당 가게를 찾을 수 없습니다.'); return; }
 
+      document.querySelector('.card-image').style.backgroundImage = `url(${store.image})`;
+
       // ─── 기존 코드 그대로 유지 ───
       document.querySelector('#go-to-info'  ).href = `SearchPage (info).html?id=${storeId}`;
       document.querySelector('#go-to-menu'  ).href = `SearchPage (menu).html?id=${storeId}`;
       document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
-       document.querySelector('#info-time .info-text').textContent = store.time || '운영 시간 정보 없음';
-        document.querySelector('#info-etc .info-text').textContent = store.etc || '기타 정보 없음';
+      document.querySelector('#info-time .info-text').textContent = store.time || '운영 시간 정보 없음';
+      document.querySelector('#info-etc .info-text').textContent = store.etc || '기타 정보 없음';
 
 
       document.querySelector('.store-name').textContent      = store.name;
@@ -337,62 +364,74 @@
       starsContainer.appendChild(img);
     }
   }
-
-  
-
   </script>
 
+<script>
+// 찜 목록 불러오기
+function getfavorite() {
+  const fav = localStorage.getItem('favorite');
+  return fav ? JSON.parse(fav) : [];
+}
 
+// 찜 목록 저장
+function savefavorite(favorite) {
+  localStorage.setItem('favorite', JSON.stringify(favorite));
+}
 
+// 찜 여부 확인 함수
+function isFavorited(storeId, userId) {
+  const favorite = getfavorite();
+  return favorite.some(fav => fav.id === storeId && fav.userId === userId);
+}
 
-    <script>
-      // 찜한 가게 배열 불러오기 (없으면 빈 배열)
-    
-    function getFavorites() {
-      const fav = localStorage.getItem('favorites');
-      return fav ? JSON.parse(fav) : [];
-    }
+// 하트 아이콘 업데이트 함수
+function updateHeartIcon(isFav) {
+  const heartImg = document.getElementById('personal-heart-img');
+  if (!heartImg) return;
+  if (isFav) {
+    heartImg.innerHTML = "❤️";
+  } else {
+    heartImg.innerHTML = "🤍";
+  }
+}
 
-    // 찜한 가게 배열 저장하기
-    function saveFavorites(favorites) {
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-    }
+// 찜 추가/제거 함수
+function toggleFavorite(store, userId) {
+  const favorite = getfavorite();
 
-   // 찜 추가/제거 함수
-  function toggleFavorite(store, userId) {
-    const favorites = getFavorites();
+  const existsIndex = favorite.findIndex(
+    fav => fav.id === store.id && fav.userId === userId
+  );
 
-    const existsIndex = favorites.findIndex(
-      fav => fav.id === store.id && fav.userId === userId
-    );
+  let isFav;
 
-    if (existsIndex === -1) {
-      // 찜 추가
-      favorites.push({ ...store, userId }); // store 객체에 userId 포함시킴
-      saveFavorites(favorites);
-      alert('찜한 가게에 추가되었습니다.');
-    } else {
-      // 찜 제거
-      favorites.splice(existsIndex, 1);
-      saveFavorites(favorites);
-      alert('찜이 취소되었습니다.');
-    }
+  if (existsIndex === -1) {
+    favorite.push({ ...store, userId }); // 찜 추가
+    savefavorite(favorite);
+    alert('찜한 가게에 추가되었습니다.');
+    isFav = true;
+  } else {
+    favorite.splice(existsIndex, 1); // 찜 제거
+    savefavorite(favorite);
+    alert('찜이 취소되었습니다.');
+    isFav = false;
   }
 
-  
-    // 이벤트 리스너 등록
-    document.querySelector('.heart-button').addEventListener('click', () => {
-      console.log('찜 버튼 클릭됨');
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (!currentUser) {
-      alert('로그인이 필요합니다.');
-      return;
-    }
+  updateHeartIcon(isFav); // 이미지 업데이트
+}
+
+// 찜 버튼 클릭 이벤트 리스너 등록
+document.querySelector('.heart-button').addEventListener('click', () => {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (!currentUser) {
+    alert('로그인이 필요합니다.');
+    return;
+  }
 
   const urlParams = new URLSearchParams(window.location.search);
   const storeId = urlParams.get('id');
 
-      fetch('stores.json')
+  fetch('stores.json')
     .then(res => res.json())
     .then(data => {
       const store = data.find(s => s.id === storeId);
@@ -400,9 +439,6 @@
         alert('해당 가게 정보를 찾을 수 없습니다.');
         return;
       }
-
-      // store 객체에 사용자의 ID를 추가 (찜 기능용)
-      store.favoritedBy = currentUser.id;
 
       toggleFavorite(store, currentUser.id);
     })
@@ -412,42 +448,221 @@
     });
 });
 
+// 페이지 로드 시 찜 상태 반영
+window.addEventListener('DOMContentLoaded', () => {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const urlParams = new URLSearchParams(window.location.search);
+  const storeId = urlParams.get('id');
+
+  if (currentUser && storeId) {
+    const isFav = isFavorited(storeId, currentUser.id);
+    updateHeartIcon(isFav); // 페이지 로드시 찜 이미지 초기화
+  }
+});
+
     </script>
 
 
 
   <script>
-  // 단골 가게 배열 불러오기 (없으면 빈 배열)
+  const DB_NAME = 'MyStoreDB';
+  const STORE_NAME = 'stores';
+  const DB_VERSION = 1;
+
+  // IndexedDB 열기 (DB와 objectStore 준비)
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+      };
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  // stores.json에서 데이터 가져와 IndexedDB에 저장 (초기화용)
+  async function initStoresInDB() {
+    const db = await openDB();
+
+    return new Promise(async (resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+
+      // 먼저 데이터가 이미 있는지 확인 (중복 저장 방지)
+      const countRequest = store.count();
+      countRequest.onsuccess = async () => {
+        if (countRequest.result > 0) {
+          // 이미 데이터가 있으니 초기화하지 않음
+          resolve();
+        } else {
+          try {
+            const response = await fetch('stores.json');
+            const stores = await response.json();
+
+            const txWrite = db.transaction(STORE_NAME, 'readwrite');
+            const storeWrite = txWrite.objectStore(STORE_NAME);
+
+            for (const s of stores) {
+              storeWrite.put(s);
+            }
+
+            txWrite.oncomplete = () => resolve();
+            txWrite.onerror = () => reject(txWrite.error);
+          } catch (err) {
+            reject(err);
+          }
+        }
+      };
+      countRequest.onerror = () => reject(countRequest.error);
+    });
+  }
+
+  // IndexedDB에서 특정 상점 데이터 가져오기
+  async function getStore(storeId) {
+    const db = await openDB();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+
+      const request = store.get(storeId);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  // IndexedDB에서 특정 상점 데이터 업데이트
+  async function updateStore(store) {
+  const db = await openDB();
+
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const storeObj = tx.objectStore(STORE_NAME);
+
+    const request = storeObj.put(store);
+    request.onerror = () => reject(request.error);
+
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+  // localStorage에서 단골 가게 배열 불러오기
   function getBookmarks() {
     const bookmarks = localStorage.getItem('bookmarks');
     return bookmarks ? JSON.parse(bookmarks) : [];
   }
 
-  // 단골 가게 배열 저장하기
+  // localStorage에 단골 가게 배열 저장하기
   function saveBookmarks(bookmarks) {
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   }
 
-  // 클릭 시 가게를 단골 목록에 추가하는 함수
-  function addBookmark(storeId) {
+  // 단골 여부 확인 함수
+  function isBookmarked(storeId) {
     const bookmarks = getBookmarks();
-    if (!bookmarks.includes(storeId)) {
+    return bookmarks.includes(storeId);
+  }
+
+  // 북마크 아이콘 업데이트 함수 (채운/테두리)
+  function updateBookmarkIcon(isBookmarked) {
+    const img = document.getElementById('bookmark-img');
+    if (!img) return;
+
+    img.src = isBookmarked ? 'image/full-bookmark.png' : 'image/empty-bookmark.png';
+  }
+
+  // IndexedDB에서 단골 수 +1 해주는 함수
+  async function incrementBookmarkCount(storeId) {
+    const store = await getStore(storeId);
+    if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
+
+    store.bookmark = (store.bookmark || 0) + 1;
+    await updateStore(store);
+  }
+
+  // IndexedDB에서 단골 수 -1 해주는 함수
+  async function decrementBookmarkCount(storeId) {
+    const store = await getStore(storeId);
+    if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
+
+    store.bookmark = Math.max((store.bookmark || 1) - 1, 0);
+    await updateStore(store);
+  }
+
+  // 클릭 시 단골 가게 추가/제거 토글 함수 (async)
+  async function toggleBookmark(storeId) {
+    let bookmarks = getBookmarks();
+
+    if (bookmarks.includes(storeId)) {
+      bookmarks = bookmarks.filter(id => id !== storeId);
+      saveBookmarks(bookmarks);
+      alert('단골 가게에서 제거되었습니다.');
+      updateBookmarkIcon(false);
+
+      try {
+        await decrementBookmarkCount(storeId);
+        console.log('IndexedDB 단골 수 -1 완료');
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
       bookmarks.push(storeId);
       saveBookmarks(bookmarks);
       alert('단골 가게에 추가되었습니다.');
-    } else {
-      alert('이미 단골 가게입니다.');
+      updateBookmarkIcon(true);
+
+      try {
+        await incrementBookmarkCount(storeId);
+        console.log('IndexedDB 단골 수 +1 완료');
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 
-  // 이벤트 리스너 등록
-  document.getElementById('bookmark').addEventListener('click', () => {
-    // 예시로 storeId를 'store456'이라고 가정
-    const storeId = 'store456';
-    addBookmark(storeId);
-  });
-</script>
+  // 페이지 로드 시 현재 단골 여부에 따라 아이콘 초기화
+  async function initBookmark(storeId) {
+    updateBookmarkIcon(isBookmarked(storeId));
+  }
 
+  (async () => {
+    try {
+      // IndexedDB 초기화 (중복 저장 방지)
+      await initStoresInDB();
+
+      // 실제 storeId
+      const params = new URLSearchParams(window.location.search);
+      const storeId = params.get('id');
+
+      if (!storeId) {
+        console.error('URL에 storeId가 없습니다.');
+        return;
+      }
+
+      // 북마크 아이콘 상태 초기화
+      await initBookmark(storeId);
+
+      // 클릭 이벤트 등록 (id='bookmark' 버튼 또는 img에)
+      const bookmarkElem = document.getElementById('bookmark');
+      if (bookmarkElem) {
+        bookmarkElem.addEventListener('click', async () => {
+          await toggleBookmark(storeId);
+        });
+      } else {
+        console.warn('id="bookmark" 요소를 찾을 수 없습니다.');
+      }
+    } catch (e) {
+      console.error('초기화 중 오류:', e);
+    }
+  })();
+</script>
 
 
 
@@ -468,9 +683,9 @@
         return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
-          if (criteria === "rating")    return b.reviews - a.reviews || b.favorites - a.favorites;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.favorites - a.favorites;
-          if (criteria === "favorites") return b.rating  - a.rating  || b.reviews  - a.reviews;
+          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
+          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
+          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
           return 0;
         });
       }
@@ -633,7 +848,13 @@ document.getElementById("search-btn").addEventListener("click", () => {
         el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
         el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
       });
-    });
+  });
+    </script>
+    <script>
+      window.onload = function () {
+        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
+        renderCards(stores); // 예시 함수
+      };
     </script>
   </body>
 </html>

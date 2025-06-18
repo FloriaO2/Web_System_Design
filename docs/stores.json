@@ -2,138 +2,650 @@
 
 [
   {
-    "id": "store001",
+    "id": "24177155",
     "name": "숙대소반",
+    "extraLocation": "숙대",
     "rating": 4.7,
     "reviews": 102,
-    "favorites": 320,
+    "bookmark": 320,
+    "type": "한식",
+    "distance": 5,
+    "price": 9000,
+    "menu": [
+      { "name": "쫄면순두부", "price": 8000 },
+      { "name": "돈까스", "price": 10000 },
+      { "name": "치즈알밥", "price": 9000 }
+    ],
+    "time": "10:30 ~ 20:00",
+    "etc": "02-716-7009",
+    "image": "store-name/숙대소반.png"
+  },
+
+  {
+    "id": "762596335",
+    "name": "아리랑컵밥",
+    "extraLocation": "숙대",
+    "rating": 1.9,
+    "reviews": 85,
+    "bookmark": 410,
+    "type": "한식",
+    "distance": 2,
+    "price": 5000,
+    "menu": [
+      { "name": "두부추컵밥", "price": 4500 },
+      { "name": "참치마요컵밥", "price": 4900 },
+      { "name": "훈제연어컵밥", "price": 5900 },
+      { "name": "묵은지참치컵밥", "price": 5300 }
+    ],
+    "time": "08:00 ~ 19:30",
+    "etc": "02-717-1691",
+    "image": "store-name/아리랑컵밥.png"
+  },
+
+  {
+    "id": "2135993129",
+    "name": "만나칼국수",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "한식",
+    "distance": 7,
+    "price": 9000,
+    "menu": [
+      { "name": "바지락듬뿍칼국수", "price":8000  },
+      { "name": "얼큰알고니칼국수", "price":9000  },
+      { "name": "돼지수육한접시", "price":10000  }
+    ],
+    "time": "11:00 ~ 20:00",
+    "etc": "02-6956-5223",
+    "image": "store-name/만나칼국수.png"
+  },
+ {
+    "id": "1728661754",
+    "name": "청파소국밥",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
     "type": "한식",
     "distance": 5,
     "price": 10000,
     "menu": [
-      { "name": "쫄면순두부", "price": 7000 },
-      { "name": "돈까스", "price": 7500 },
-      { "name": "치즈알밥", "price": 8500 }
+      { "name": "얼큰소국밥", "price":10000  },
+      { "name": "맑은소국밥", "price":10000  },
+      { "name": "직화제육볶음", "price":10000  },
+      { "name": "육전물냉면", "price":9000  },
+      { "name": "육전비빔냉면", "price":9000  }
     ],
-    "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
+    "time": "10:30 ~ 19:30",
+    "etc": "010-5786-8656",
+    "image": "store-name/청파소국밥.png"
   },
-
-  {
-    "id": "store002",
-    "name": "아리랑컵밥",
-    "rating": 1.9,
-    "reviews": 85,
-    "favorites": 410,
-    "type": "한식",
-    "distance": 2,
-    "price": 12000,
-    "menu": [
-      { "name": "두부추컵밥", "price": 7000 },
-      { "name": "참치마요컵밥", "price": 7500 },
-      { "name": "연어컵밥", "price": 8500 }
-    ],
-    "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
-  },
-  {
-    "id": "store003",
-    "name": "마시앤바시",
+ {
+    "id": "991228339",
+    "name": "보미해장국",
+    "extraLocation": "숙대",
     "rating": 4.7,
     "reviews": 102,
-    "favorites": 295,
-    "type": "양식",
-    "distance": 7,
-    "price": 14000,
-    "menu": [
-      { "name": "토마토파스타", "price": 7000 },
-      { "name": "치킨", "price": 7500 },
-      { "name": "바질파스타", "price": 8500 }
-    ],
-    "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
-  },
-  {
-    "id": "store004",
-    "name": "돈카춘",
-    "rating": 4.5,
-    "reviews": 200,
-    "favorites": 300,
-    "type": "일식",
-    "distance": 10,
-    "price": 7000,
-    "menu": [
-      { "name": "돈까스", "price": 7000 },
-      { "name": "치즈돈까스", "price": 7500 },
-      { "name": "규동", "price": 8500 }
-    ],
-    "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
-  },
-  {
-    "id": "store005",
-    "name": "탕화쿵푸",
-    "rating": 2.7,
-    "reviews": 102,
-    "favorites": 320,
-    "type": "중식",
-    "distance": 13,
-    "price": 8000,
-    "menu": [
-      { "name": "마라탕", "price": 7000 },
-      { "name": "마라샹궈", "price": 7500 },
-      { "name": "꿔바로우", "price": 8500 }
-    ],
-    "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
-  },
-  {
-    "id": "store006",
-    "name": "버거리",
-    "rating": 2.9,
-    "reviews": 85,
-    "favorites": 410,
-    "type": "간편식",
-    "distance": 16,
-    "price": 11000,
-    "menu": [
-      { "name": "햄버거", "price": 7000 }
-     
-    ],
-    "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
-  },
-  {
-    "id": "store007",
-    "name": "리또리또",
-    "rating": 3.7,
-    "reviews": 102,
-    "favorites": 295,
-    "type": "그 외",
-    "distance": 17,
+    "bookmark": 320,
+    "type": "한식",
+    "distance": 5,
     "price": 15000,
     "menu": [
-      { "name": "부리또", "price": 7000 }
-     
+      { "name": "뼈해장국", "price":10500  },
+      { "name": "감자탕(소)", "price":28000  },
+      { "name": "감자탕(대)", "price":38000  },
+      { "name": "명태회냉면", "price":9500  }
     ],
-    "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
+    "time": "11:00 ~ 20:00",
+    "etc": "정보 없음",
+    "image": "store-name/보미해장국.png"
   },
-  {
-    "id": "store008",
-    "name": "김밥천국",
-    "rating": 3.5,
-    "reviews": 200,
-    "favorites": 300,
+ {
+    "id": "1007703563",
+    "name": "백채김치찌개",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "한식",
+    "distance": 6,
+    "price": 12500,
+    "menu": [
+      { "name": "백채김치찌개", "price":12500  },
+      { "name": "달걀말이", "price":7000  },
+      { "name": "만두탕수", "price":19500  },
+      { "name": "햄구이", "price":7000  }
+    ],
+    "time": "11:00 ~ 21:30",
+    "etc": "https://100chae.com/",
+    "image": "store-name/백채김치찌개.png"
+  },
+ {
+    "id": "13133901",
+    "name": "육쌈냉면",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
     "type": "한식",
     "distance": 4,
-    "price": 7000,
+    "price": 9000,
     "menu": [
-      { "name": "김밥", "price": 7000 },
-      { "name": "쫄면", "price": 7500 },
-      { "name": "제육볶음", "price": 8500 }
+      { "name": "물냉면 세트", "price":8500  },
+      { "name": "비빔냉면 세트", "price":8500  },
+      { "name": "비빔밥 세트", "price":7900  }
+    ],
+    "time": "11:00 ~ 21:00",
+    "etc": "http://www.yookssam.com",
+    "image": "store-name/육쌈냉면.png"
+  },
+ {
+    "id": "27189950",
+    "name": "마시앤바시",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "양식",
+    "distance": 5,
+    "price": 12000,
+    "menu": [
+      { "name": "야끼크림파스타", "price":12000  },
+      { "name": "올리브오일쉬림프", "price":10000  },
+      { "name": "시금치크림파스타", "price":13000  }
+    ],
+    "time": "12:00 ~ 21:00",
+    "etc": "https://www.instagram.com/masibasi2015/",
+    "image": "store-name/마시앤바시.png"
+  },
+ {
+    "id": "1188095220",
+    "name": "비일",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "양식",
+    "distance": 5,
+    "price": 16000,
+    "menu": [
+      { "name": "바질리코타토마토", "price":16000  },
+      { "name": "뒥셀", "price":16000  },
+      { "name": "화이트라구", "price":16000  },
+      { "name": "치킨매콤로제리조또", "price":18000  },
+      { "name": "시저샐러드", "price":13000  }
+    ],
+    "time": "11:50 ~ 22:00",
+    "etc": "010-7551-7174",
+    "image": "store-name/비일.png"
+  },
+ {
+    "id": "1893726087",
+    "name": "버거리",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "양식",
+    "distance": 7,
+    "price": 11000,
+    "menu": [
+      { "name": "크리스피치킨버거세트", "price":11800  },
+      { "name": "클래식치즈버거세트", "price":11200  },
+      { "name": "버거리버거세트", "price":12000  },
+      { "name": "프레쉬버거", "price":5600  },
+      { "name": "소불고기버거세트", "price":10300  }
+    ],
+    "time": "11:00 ~ 22:00",
+    "etc": "070-7760-1000",
+    "image": "store-name/버거리.png"
+  },
+ {
+    "id": "693789198",
+    "name": "프랭크버거",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "양식",
+    "distance": 4,
+    "price": 8000,
+    "menu": [
+      { "name": "불고기버거세트", "price":7600  },
+      { "name": "치즈버거세트", "price":8900  },
+      { "name": "프랭크버거세트", "price":8000  },
+      { "name": "쉬림프버거세트", "price":8400  }
+    ],
+    "time": "11:00 ~ 21:00",
+    "etc": "02-706-0704",
+    "image": "store-name/프랭크버거.png"
+  },
+ {
+    "id": "2112655441",
+    "name": "돈카춘",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "일식",
+    "distance": 7,
+    "price": 11000,
+    "menu": [
+      { "name": "사각치즈돈까스", "price":12000  },
+      { "name": "경양식돈까스", "price":9900  },
+      { "name": "더블등심돈까스", "price":10500  },
+      { "name": "생선까스", "price":11000  }
+    ],
+    "time": "11:00 ~ 21:00",
+    "etc": "02-711-3249",
+    "image": "store-name/돈카춘.png"
+  },
+ {
+    "id": "1375784496",
+    "name": "달콤유부",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "일식",
+    "distance": 3,
+    "price": 5000,
+    "menu": [
+      { "name": "달달타마고 유부초밥", "price":2500  },
+      { "name": "참치마요 유부초밥", "price":2800  },
+      { "name": "쌈장삼겹 유부초밥", "price":2700  },
+      { "name": "생연어 유부초밥", "price":4100  },
+      { "name": "우육우동", "price":8500  }
+    ],
+    "time": "09:00 ~ 21:15",
+    "etc": "정보 없음",
+    "image": "store-name/달콤유부.png"
+  },
+ {
+    "id": "95749797",
+    "name": "네코노스시",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "일식",
+    "distance": 4,
+    "price": 17000,
+    "menu": [
+      { "name": "연어초밥", "price":22000  },
+      { "name": "활어초밥", "price":22000  },
+      { "name": "치킨가라아게", "price":11000  },
+      { "name": "모듬초밥", "price":13000  },
+      { "name": "네코스시", "price":17000  }
+    ],
+    "time": "11:00 ~ 22:00",
+    "etc": "02-712-2165",
+    "image": "store-name/네코노스시.png"
+  },
+ {
+    "id": "933180556",
+    "name": "긴자료코",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "일식",
+    "distance": 5,
+    "price": 11000,
+    "menu": [
+      { "name": "데미그라스 돈까스", "price":11000  },
+      { "name": "가츠동", "price":8500  },
+      { "name": "새우붓카게우동", "price":12000  },
+      { "name": "사케동", "price":14000  }
+    ],
+    "time": "11:30 ~ 21:30",
+    "etc": "02-711-0476",
+    "image": "store-name/긴자료코.png"
+  },
+ {
+    "id": "42111125",
+    "name": "이자와",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "일식",
+    "distance": 5,
+    "price": 15000,
+    "menu": [
+      { "name": "규카츠정식", "price":17000  },
+      { "name": "마제소바", "price":11000  },
+      { "name": "스테키동", "price":16000  }
+    ],
+    "time": "11:00 ~ 22:00",
+    "etc": "02-711-7277",
+    "image": "store-name/이자와.png"
+  },
+ {
+    "id": "1089408508",
+    "name": "탕화쿵푸",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "중식",
+    "distance": 3,
+    "price": 13000,
+    "menu": [
+      { "name": "꿔바로우", "price":18000  },
+      { "name": "마라탕", "price":10000  },
+      { "name": "마라샹궈", "price":16000  },
+      { "name": "마라반", "price":14000  }
+    ],
+    "time": "11:00 ~ 21:00",
+    "etc": "02-6015-7888",
+    "image": "store-name/탕화쿵푸.png"
+  },
+ {
+    "id": "1349459793",
+    "name": "신룽푸마라탕",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "중식",
+    "distance": 4,
+    "price": 11000,
+    "menu": [
+      { "name": "마라탕", "price":7000  },
+      { "name": "마라샹궈", "price":15000  },
+      { "name": "꿔바로우(소)", "price":9900  },
+      { "name": "마라반", "price":10000  }
+    ],
+    "time": "11:00 ~ 21:00",
+    "etc": "정보 없음",
+    "image": "store-name/신룽푸마라탕.png"
+  },
+ {
+    "id": "8059248",
+    "name": "정",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "중식",
+    "distance": 4,
+    "price": 9000,
+    "menu": [
+      { "name": "옛날짬뽕", "price":8000  },
+      { "name": "굴짬뽕", "price":11000  },
+      { "name": "짜장면", "price":6500  },
+      { "name": "볶음밥", "price":7500  }
+    ],
+    "time": "11:00 ~ 21:00",
+    "etc": "02-719-8719",
+    "image": "store-name/정.png"
+  },
+ {
+    "id": "169208208",
+    "name": "베브릿지",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "간편식",
+    "distance": 4,
+    "price": 9000,
+    "menu": [
+      { "name": "망고 요거트 스무디볼", "price":10800  },
+      { "name": "닭가슴살 통밀 그릭토스트 샌드위치", "price":7800  },
+      { "name": "훈제연어 통밀 그릭토스트 샌드위치", "price":8800  },
+      { "name": "플레인그릭베이글", "price":7500  },
+      { "name": "사과&바나나 그릭요거트 샌드위치랩", "price":7500  }
+    ],
+    "time": "09:00 ~ 23:00",
+    "etc": "02-701-9171",
+    "image": "store-name/베브릿지.png"
+  },
+ {
+    "id": "15893184",
+    "name": "서브웨이",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "간편식",
+    "distance": 5,
+    "price": 10000,
+    "menu": [
+      { "name": "이탈리안비엠티 세트", "price":11600  },
+      { "name": "에그마요 세트", "price":10300  },
+      { "name": "참치 세트", "price":10600  },
+      { "name": "로스트치킨", "price":8700  }
+    ],
+    "time": "08:00 ~ 22:00",
+    "etc": "02-702-2454",
+    "image": "store-name/서브웨이.png"
+  },
+ {
+    "id": "1782296453",
+    "name": "아삽샌드위치",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "간편식",
+    "distance": 4,
+    "price": 8000,
+    "menu": [
+      { "name": "바질샌드위치", "price":7400  },
+      { "name": "리코타치즈샌드위치", "price":7900  },
+      { "name": "데리야끼닭가슴살샌드위치", "price":7900  },
+      { "name": "매콤크랩샌드위치", "price":7900  }
+    ],
+    "time": "11:00 ~ 19:00",
+    "etc": "0502-5552-3449",
+    "image": "store-name/아삽샌드위치.png"
+  },
+ {
+    "id": "663844424",
+    "name": "포케올데이",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "간편식",
+    "distance": 7,
+    "price": 11000,
+    "menu": [
+      { "name": "곡물밥포케", "price":11900  },
+      { "name": "통들깨 들기름 메밀면 샐러드", "price":10900  },
+      { "name": "메밀면포케", "price":11900  }
+    ],
+    "time": "10:30 ~ 21:00",
+    "etc": "02-8876-8581",
+    "image": "store-name/포케올데이.png"
+  },
+ {
+    "id": "1007558757",
+    "name": "리또리또",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "그 외",
+    "distance": 3,
+    "price": 5000,
+    "menu": [
+      { "name": "믹스", "price":4800  },
+      { "name": "비건", "price":4500  },
+      { "name": "치킨텐더", "price":5200  },
+      { "name": "프렌치후라이", "price":2000  },
+      { "name": "닭", "price":5200  },
+      { "name": "소소", "price":5500  }
+    ],
+    "time": "11:00 ~ 19:00",
+    "etc": "02-707-1906",
+    "image": "store-name/리또리또.png"
+  },
+ {
+    "id": "23279410",
+    "name": "사이공마켓",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "그 외",
+    "distance": 3,
+    "price": 9000,
+    "menu": [
+      { "name": "월남뽕", "price":8500  },
+      { "name": "분짜", "price":10000  },
+      { "name": "돼지고기덮밥", "price":9500  }
+    ],
+    "time": "11:00 ~ 20:00",
+    "etc": "02-717-4201",
+    "image": "store-name/사이공마켓.png"
+  },
+ {
+    "id": "1818032899",
+    "name": "신머이쌀국수",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "그 외",
+    "distance": 7,
+    "price": 11000,
+    "menu": [
+      { "name": "닭반마리 쌀국수", "price":10900  },
+      { "name": "소고기 쌀국수", "price":10900  },
+      { "name": "분짜", "price":15900  },
+      { "name": "훈제오리고기 반미", "price":8000  },
+      { "name": "짜조", "price":6900  }
     ],
     "time": "10:00 ~ 22:00",
-    "etc": "혼밥하기 좋은 곳"
+    "etc": "0507-1332-6175",
+    "image": "store-name/신머이쌀국수.png"
+  },
+ {
+    "id": "15176921",
+    "name": "베나레스",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "그 외",
+    "distance": 6,
+    "price": 10000,
+    "menu": [
+      { "name": "탄두리 스페셜", "price":13000  },
+      { "name": "프라운 마크니", "price":9800  },
+      { "name": "치킨 티카 마살라", "price":9800  },
+      { "name": "샐러드 크림 프라타", "price":9000  }
+    ],
+    "time": "11:00 ~ 20:30",
+    "etc": "02-714-9982",
+    "image": "store-name/베나레스.png"
+  },
+ {
+    "id": "24546118",
+    "name": "와우신내떡",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "한식",
+    "distance": 7,
+    "price": 15000,
+    "menu": [
+      { "name": "와우홀릭세트", "price":16500  },
+      { "name": "와우떡볶이", "price":4500  },
+      { "name": "갈릭후라이", "price":4900  }
+    ],
+    "time": "11:00 ~ 21:00",
+    "etc": "02-704-8485",
+    "image": "store-name/와우신내떡.png"
+  },
+ {
+    "id": "648271542",
+    "name": "샤브로21",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "그 외",
+    "distance": 6,
+    "price": 9000,
+    "menu": [
+      { "name": "샤브로21 샤브샤브", "price":7500  },
+      { "name": "얼큰 샤브샤브", "price":8500  },
+      { "name": "미소 샤브샤브", "price":8500  },
+      { "name": "마라 샤브샤브", "price":8500  },
+      { "name": "반반 샤브샤브", "price":9000  }
+    ],
+    "time": "11:00 ~ 22:00",
+    "etc": "0507-1373-7936",
+    "image": "store-name/샤브로21.png"
+  },
+ {
+    "id": "23493638",
+    "name": "어바웃샤브",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "그 외",
+    "distance": 6,
+    "price": 30000,
+    "menu": [
+      { "name": "소고기 샤브세트", "price":27000  },
+      { "name": "한우 샤브세트", "price":37000  },
+      { "name": "돈등심 샤브세트", "price":25000  }
+    ],
+    "time": "10:30 ~ 22:00",
+    "etc": "02-711-5792",
+    "image": "store-name/어바웃샤브.png"
+  },
+ {
+    "id": "8301349",
+    "name": "달볶이",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "한식",
+    "distance": 2,
+    "price": 4000,
+    "menu": [
+      { "name": "떡볶이", "price":4000  },
+      { "name": "순대", "price":4000  },
+      { "name": "꼬마김밥", "price":3500  },
+      { "name": "어묵", "price":3000  },
+      { "name": "모듬튀김", "price":3500  },
+      { "name": "감자튀김", "price":5000  }
+    ],
+    "time": "11:00 ~ 20:50",
+    "etc": "02-715-6137",
+    "image": "store-name/달볶이.png"
+  },
+ {
+    "id": "14589166",
+    "name": "엽기떡볶이",
+    "extraLocation": "숙대",
+    "rating": 4.7,
+    "reviews": 102,
+    "bookmark": 320,
+    "type": "한식",
+    "distance": 8,
+    "price": 15000,
+    "menu": [
+      { "name": "실속세트", "price":17500  },
+      { "name": "엽기떡볶이", "price":14000  },
+      { "name": "로제떡볶이", "price":16000  },
+      { "name": "마라떡볶이", "price":16000  },
+      { "name": "마라로제떡볶이", "price":18000  },
+      { "name": "엽기닭볶음탕", "price":24000  }
+    ],
+    "time": "11:00 ~ 22:00",
+    "etc": "02-3272-5252",
+    "image": "store-name/엽기떡볶이.png"
   }
 ]
