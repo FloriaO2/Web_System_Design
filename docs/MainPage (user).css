@@ -622,6 +622,50 @@ a {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
 
+/* 선택된 메뉴의 영역 */
+.tab {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+/* 선택된 메뉴의 텍스트 */
+.label {
+  color: #303030;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
+
+/* 선택되지 않은 메뉴의 영역 */
+.tab2 {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* 선택되지 않은 메뉴의 텍스트 */
+.label2 {
+  color: #767676;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
+
 /* mainbody에서의 전체/한식/양식/일식... 등 음식 종류 분류 */
 .nav-tabs {
   display: flex;

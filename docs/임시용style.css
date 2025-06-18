@@ -122,6 +122,7 @@ a {
   background-color: #d8dfff;
 }
 
+/* ------------------------- */
 .account {
   position: sticky;
   width: 13.68vw;
@@ -134,8 +135,10 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap:1.3vh 0;
+  gap:1.4vh 0;
+  padding-top:0 !important;
 }
+/* ------------------------- */
 
 .div1 {
   width: 16.11vw;

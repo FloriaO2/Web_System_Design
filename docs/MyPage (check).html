@@ -375,7 +375,7 @@ function createReviewElement(review, finalContainer) {
   const tempMeasure = document.createElement("div");
   tempMeasure.style.position = "absolute";
   tempMeasure.style.visibility = "hidden";
-  tempMeasure.style.whiteSpace = "nowrap"; // 줄바꿈 금지
+  tempMeasure.style.whiteSpace = "nowrap";
   tempMeasure.className = "review-store";
   tempMeasure.textContent = `[${review.storeName}]`;
 
@@ -399,7 +399,7 @@ function createReviewElement(review, finalContainer) {
 
     const storeDiv = document.createElement("div");
     storeDiv.classList.add("review-store");
-    storeDiv.textContent = `[${review.storeName}]`;
+    storeDiv.textContent = `${review.storeName}`;
 
     const starDiv = document.createElement("div");
     starDiv.classList.add("review-star");

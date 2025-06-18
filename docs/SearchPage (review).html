@@ -225,6 +225,7 @@
     window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const storeId = urlParams.get('id');
+
     /* 2) 여기서 JSON을 읽어‑온 뒤 기존 로직을 그대로 돌린다 */
   fetch('stores.json')
     .then(res => res.json())
@@ -247,22 +248,21 @@
       document.querySelector('.store-simple-info').textContent =
         `${store.type} | 학교 기준 ${store.distance}분 | ${store.price.toLocaleString()}원`;
 
-      renderStars(store.rating);        
-    })
-    .catch(err => console.error('JSON 로딩 실패:', err));
-    
-});
-const reviewLink = document.getElementById('review-link');
-/*const urlParams = new URLSearchParams(window.location.search);
-const storeId = urlParams.get('id');*/
+      const reviewLink = document.getElementById('review-link');
 
-reviewLink.addEventListener('click', () => {
-  if (storeId) {
-    window.location.href = `SearchPage (review-upload).html?id=${storeId}`;
-  } else {
-    alert('식당 ID가 없습니다.');
-  }
-});
+      reviewLink.addEventListener('click', () => {
+        if (storeId) {
+          window.location.href = `SearchPage (review-upload).html?id=${storeId}`;
+        } else {
+          alert('식당 ID가 없습니다.');
+        }
+      });
+            renderStars(store.rating);        
+          })
+          .catch(err => console.error('JSON 로딩 실패:', err));
+    
+      });
+
 
 
 // 리뷰 생성하기

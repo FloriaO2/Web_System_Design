@@ -151,7 +151,7 @@
           <div class="div4">
             <ul class="search-nav nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link active" id="default-nav" data-bs-toggle="pill" aria-current="page" href="#">
+                <a class="nav-link" id="default-nav" data-bs-toggle="pill" aria-current="page" href="#">
                   별점순
                 </a>
               </li>
@@ -162,7 +162,7 @@
                 <a class="nav-link" data-bs-toggle="pill" href="#">단골순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="showAllBtn" data-bs-toggle="pill" href="#" >전체 식당 목록 보기</a>
+                <a class="nav-link active" id="showAllBtn" data-bs-toggle="pill" href="#" >전체 식당 목록 보기</a>
               </li>
             </ul>
 
@@ -242,10 +242,6 @@ document.getElementById("showAllBtn").addEventListener("click", function(e) {
 
 // 페이지 로드 시
 window.addEventListener("DOMContentLoaded", () => {
-  // 초기 렌더링만 전체 목록 active, currentSort는 초기값 유지
-  document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
-  document.getElementById("showAllBtn")?.classList.add("active");
-
   currentSort = "";  // 새로고침 후 별도 정렬이 지정되어있지 않다는 의미로 초기화
 
   // URL에서 type 파라미터 읽기
@@ -253,6 +249,22 @@ window.addEventListener("DOMContentLoaded", () => {
   const typeParam = urlParams.get("type");
   if (typeParam) {
     selectedFilters.type.push(typeParam);
+  }
+
+  const hasQuery = window.location.search.length > 0;
+
+  // nav-link의 active 초기화
+  document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
+
+  if (hasQuery) {
+    currentSort = "rating"; // 정렬 상태도 바꿔줘야 실제 정렬 작동
+    const ratingNav = Array.from(document.querySelectorAll(".search-nav .nav-link")).find(link =>
+      link.textContent.trim() === "별점순"
+    );
+    ratingNav?.classList.add("active");
+  } else {
+    // 아무 쿼리 없음 → 전체보기 활성화
+    document.getElementById("showAllBtn")?.classList.add("active");
   }
 
   renderStores();
@@ -442,6 +454,23 @@ function renderTags() {
     const tag = createTagElement(text, "price");
     tagContainer.appendChild(tag);
   }
+
+  // 모든 필터가 제거되었을 때 URL도 초기화
+if (
+  selectedFilters.type.length === 0 &&
+  selectedFilters.distance === null &&
+  selectedFilters.price === null
+) {
+  // 검색어도 비어 있는지 확인 (원한다면)
+  const searchParams = new URLSearchParams(window.location.search);
+  const hasKeyword = searchParams.has("keyword");
+  const hasTypeParam = searchParams.has("type");
+
+  // URL 완전히 초기화 (파라미터 및 해시 제거)
+  if (!hasKeyword && !hasTypeParam) {
+    history.replaceState(null, "", "SearchPage.html");
+  }
+}
 }
 
 function createTagElement(text, category) {

@@ -564,7 +564,7 @@ if (!rating || parseFloat(rating) === 0) {
       content,
       rating,
       storeId,
-      storeName, ///////////////////이거 수정했는데 왜...식당이름이안뜰까요...........
+      storeName,
       nickname: currentUser.nickname,
       authorID: currentUser.id,
       images: imageDataUrls
@@ -582,6 +582,16 @@ if (!rating || parseFloat(rating) === 0) {
     addRequest.onsuccess = () =>
     {
       alert("리뷰가 저장되었습니다.");
+
+      // IndexedDB에서 리뷰 수 +1 해주는 함수
+      async function incrementReviewCount(storeId) {
+        const store = await getStore(storeId);
+        if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
+
+        store.reviews = (store.reviews || 0) + 1;
+        await updateStore(store);
+      }
+
       location.href = `SearchPage (review).html?id=${storeId}`;
     }
 
