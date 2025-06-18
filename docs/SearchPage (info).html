@@ -746,62 +746,61 @@ window.addEventListener('DOMContentLoaded', () => {
 <!-- 카카오 지도 API -->
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services&autoload=false"></script>
 
-<!-- 지도 생성 코드는 모두 아래 script 안에 넣기 -->
 <script>
-  // 모든 코드는 이 안에서 실행되어야 함
-  kakao.maps.load(function () {
-    console.log("✅ Kakao SDK 로드 완료");
+  window.onload = function () {
+    kakao.maps.load(function () {
+      console.log("✅ Kakao SDK 로드 완료");
 
-    // 이제 안전하게 kakao 객체 사용 가능
-    const mapContainer = document.getElementById('map');
-    const mapOption = {
-      center: new kakao.maps.LatLng(37.5665, 126.9780),
-      level: 3
-    };
-    const map = new kakao.maps.Map(mapContainer, mapOption);
+      const mapContainer = document.getElementById('map');
+      const mapOption = {
+        center: new kakao.maps.LatLng(37.5665, 126.9780),
+        level: 3
+      };
+      const map = new kakao.maps.Map(mapContainer, mapOption);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const storeId = urlParams.get('id');
+      const urlParams = new URLSearchParams(window.location.search);
+      const storeId = urlParams.get('id');
 
-    fetch('stores.json')
-      .then(res => res.json())
-      .then(data => {
-        const store = data.find(s => s.id === storeId);
-        if (!store) {
-          alert('해당 가게를 찾을 수 없습니다.');
-          return;
-        }
-
-        document.querySelector('.store-name').textContent = store.name;
-
-        const infoLink = document.querySelector('#info-navigation a');
-        if (infoLink) {
-          infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
-          infoLink.target = '_blank';
-        }
-
-        const ps = new kakao.maps.services.Places();
-        const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
-
-        ps.keywordSearch(keyword, function (data, status) {
-          if (status === kakao.maps.services.Status.OK && data.length > 0) {
-            const place = data[0];
-            const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
-
-            new kakao.maps.Marker({
-              map: map,
-              position: coords
-            });
-            map.setCenter(coords);
-          } else {
-            console.warn('장소 검색 결과가 없습니다.');
+      fetch('stores.json')
+        .then(res => res.json())
+        .then(data => {
+          const store = data.find(s => s.id === storeId);
+          if (!store) {
+            alert('해당 가게를 찾을 수 없습니다.');
+            return;
           }
+
+          document.querySelector('.store-name').textContent = store.name;
+
+          const infoLink = document.querySelector('#info-navigation a');
+          if (infoLink) {
+            infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
+            infoLink.target = '_blank';
+          }
+
+          const ps = new kakao.maps.services.Places();
+          const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
+
+          ps.keywordSearch(keyword, function (data, status) {
+            if (status === kakao.maps.services.Status.OK && data.length > 0) {
+              const place = data[0];
+              const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
+
+              new kakao.maps.Marker({
+                map: map,
+                position: coords
+              });
+              map.setCenter(coords);
+            } else {
+              console.warn('장소 검색 결과가 없습니다.');
+            }
+          });
+        })
+        .catch(err => {
+          console.error('가게 데이터를 불러오는 중 오류:', err);
         });
-      })
-      .catch(err => {
-        console.error('가게 데이터를 불러오는 중 오류:', err);
-      });
-  });
+    });
+  };
 </script>
 
 
