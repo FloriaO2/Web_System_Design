@@ -786,6 +786,7 @@ p {
   -0.5px 0.5px 0 rgba(0, 0, 0, 0.4),
   0 0.5px 0 rgba(0, 0, 0, 0.4),
   0.5px 0.5px 0 rgba(0, 0, 0, 0.4);
+  margin-bottom:0.4vh;
 }
 
 #personal-heart {

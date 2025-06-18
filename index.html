@@ -15,10 +15,10 @@
 
         <div class="header">
           <div class="div1">
-            <a class="web-name" href="docs/MainPage (user).html">Snowmap</a>
+            <a class="web-name" href="MainPage (user).html">Snowmap</a>
           </div>
           <div class="bottom-app-bar">
-            <img id="search-img" src="docs/image/search.png" />
+            <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
              <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
           </div>
@@ -41,7 +41,7 @@
               </div>
               <div class="offcanvas-header">
                 <div class="offcanvas-title" id="mobileMenuLabel">
-                  <a class="account-inf-mobile" href="docs/signup.html">
+                  <a class="account-inf-mobile" href="signup.html">
                     <div class="account-detail-nickname">로그인 / 회원가입 하러 가기&nbsp;</div>
                     <!-- 아이디랑 클래스명 일단 안 바꿨음 ... -->
                     <div>&nbsp;&gt;</div>
@@ -52,9 +52,9 @@
               <div class="offcanvas-body">
                 <ul class="list-unstyled">
                   <hr/>
-                  <li><a href="docs/커뮤니티.html">커뮤니티</a></li>
+                  <li><a href="커뮤니티.html">커뮤니티</a></li>
                   <hr/>
-                  <li><a href="docs/랭킹.html">랭킹</a></li>
+                  <li><a href="랭킹.html">랭킹</a></li>
                   <hr/>
                 </ul>
               </div>
@@ -63,7 +63,16 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 완료 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
   
-        <div class="aside"></div>
+        <div class="aside">
+          <div class="account">
+            <div style="display:flex; flex-direction:column; align-items: center;">
+              <div class="account-image"></div>
+              <br />
+              <div class="div3">비회원 접속 중입니다.</div>
+            </div>
+            <button type="button" class="button btn btn-dark" onclick="location.href='signup.html'">로그인/회원가입</button>
+          </div>
+        </div>
 
       <!--여기부터 복붙시작-->
         <div class="aside2">
@@ -96,120 +105,19 @@
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
           <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" aria-current="page" href="#">전체</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">한식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">양식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">일식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">중식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">간편식</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#">그 외</a>
-            </li>
-          </ul>
-          <div class="div4">
-            <div class="cards">
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 A</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">4.1</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="docs/SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 B</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-58.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                      </div>
-                      <div class="element">3.2</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="docs/SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 C</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="docs/SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-image"></div>
-                <div class="body">
-                  <div class="text">
-                    <div class="store-name">식당 D</div>
-                    <div class="rating">
-                      <div class="rating2">
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                        <img class="star" src="https://c.animaapp.com/kjYfscdy/img/star-64.svg" />
-                      </div>
-                      <div class="element">4.9</div>
-                    </div>
-                    <p class="p">
-                      <span class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대<br /><br /></span>
-                      <a class="go-to-searchPage" href="docs/SearchPage (info).html">상세정보 보기</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <li class="nav-item"><a class="nav-link active" href="#" onclick="filterByCategory('전체', this)">전체</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('한식', this)">한식</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('양식', this)">양식</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('일식', this)">일식</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('중식', this)">중식</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('간편식', this)">간편식</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="filterByCategory('그 외', this)">그 외</a></li>
+        </ul>
+
+        <div class="div4">
+          <div class="cards" id="cards-container"></div>
+        </div>
+
             <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 
@@ -247,7 +155,90 @@
         </div>
       </div>
     </div>
+    <script>////////////음식종류별 필터링//////////////
+  let stores = [];
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('stores.json')
+    .then(response => response.json())
+    .then(data => {
+      stores = data;
+      renderCards(stores);
+    })
+    .catch(error => console.error('JSON 불러오기 실패:', error));
+});
+
+
+function filterByCategory(type, clickedTab) {
+  // 탭 active 관리
+  document.querySelectorAll(".nav-link").forEach(tab => tab.classList.remove("active"));
+  if (clickedTab) clickedTab.classList.add("active");
+
+  const filtered = type === "전체"
+    ? stores
+    : stores.filter(store => store.type === type);
+
+  renderCards(filtered);
+}
+
+// 기존 renderCards 함수 참고해서 작성
+function renderCards(list) {
+  const box = document.getElementById("cards-container");
+  box.innerHTML = ""; // 초기화
+
+  if (list.length === 0) {
+    box.innerHTML = `<p>해당 카테고리에 식당이 없습니다.</p>`;
+    return;
+  }
+
+  list.forEach(store => {
+    box.insertAdjacentHTML("beforeend", `
+      <div class="card">
+        <div class="card-image"></div> <!-- 여기 -->
+        <div class="body">
+          <div class="text">
+            <div class="store-name">${store.name}</div>
+            <div class="rating">
+              <div class="rating2">${makeStars(store.rating)}</div>
+              <div class="element">${store.rating.toFixed(1)}</div>
+            </div>
+            <p class="p">
+              <span class="store-simple-info">${store.type} | 도보 ${store.distance}분 | 가격대 ${store.price}원<br><br></span>
+              <a class="go-to-searchPage" href="SearchPage (info).html?id=${store.id}">상세정보 보기</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    `);
+
+    // 삽입된 카드 중 마지막 것의 이미지 div에 배경 설정
+    const lastCardImage = box.querySelectorAll(".card .card-image");
+    const currentImage = lastCardImage[lastCardImage.length - 1];
+
+    if (currentImage && store.image) {
+      currentImage.style.backgroundImage = `url(${store.image})`;
+      currentImage.style.backgroundSize = "cover";
+      currentImage.style.backgroundPosition = "center";
+    }
+  });
+}
+
+function makeStars(rating) {
+  const full = Math.round(rating);
+  return Array.from({ length: 5 }, (_, i) =>
+    `<img class="star" src="https://c.animaapp.com/kjYfscdy/img/${i < full ? "star-60" : "star-59"}.svg">`
+  ).join("");
+}
+
+
+</script>
+
+
     <script>
+       let store_aside2=[];
+
+       
         function renderAside(sortedArray) {
           const top7 = sortedArray.slice(0, 7);
           renderAsideStores(top7);
@@ -259,7 +250,7 @@
 
          //sort 함수(aside2/mainbody 공통)
         function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
+        return [...store_aside2].sort((a, b) => {
           if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
 
           if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
@@ -291,31 +282,48 @@
         </ul>
       `;
     }
-        window.onload = () => {
-          const sorted = getSortedStores("rating");
-          renderAsideStores(sorted); 
-        };///////////////여기까지복붙
+        window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
+  fetch('stores.json')       
+    .then(res => res.json())
+    .then(data => {
+      store_aside2= data;
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted);
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});/////////////aside2수정완료///////////////
 
     </script>
 
-    <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const inputs = document.querySelectorAll('input, textarea, [contenteditable]');
+    // 공통 검색 함수
+    function handleSearch() {
+      const keywordInput = document.getElementById("search-form");
+      const keyword = encodeURIComponent(keywordInput.value.trim());
 
-      inputs.forEach(el => {
-        el.setAttribute('spellcheck', 'false');
-        el.setAttribute('autocomplete', 'off');
-        el.setAttribute('autocorrect', 'off');       // iOS Safari 등에서 유용
-        el.setAttribute('autocapitalize', 'off');    // 첫 글자 자동 대문자 방지
-      });
-  });
-    </script>
-    <script>
-      window.onload = function () {
-        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
-        renderCards(stores); // 예시 함수
-      };
+      if (keyword) {
+        location.href = `SearchPage.html?keyword=${keyword}`;
+      } else {
+        alert("검색어를 입력하세요.");
+      }
+    }
+
+    // 버튼 클릭 시
+    document.getElementById("search-btn").addEventListener("click", handleSearch);
+
+    // 이미지 클릭 시 (작은 화면에서만)
+    document.getElementById("search-img").addEventListener("click", () => {
+      if (window.innerWidth <= 1024.98) {
+        handleSearch();
+      }
+    });
+
+    // Enter 키로도 검색되게 (선택 사항)
+    document.getElementById("search-form").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    });
     </script>
   </body>
 </html>

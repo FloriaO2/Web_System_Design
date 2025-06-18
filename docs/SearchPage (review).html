@@ -122,8 +122,9 @@
                   <div class="p">
                     <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
                     <div class="personal-check search-margin-bottom">
-                      <button type="button" class="heart-button">
-                        <img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>
+                      <button type="button" class="heart-button" >
+                        <!--<img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>-->
+                        <div id="personal-heart-img">🤍</div>
                         <span id="personal-heart">찜한 가게</span>
                       </button>
                       <button type="button" class="bookmark-button">
@@ -152,66 +153,7 @@
               <button type="button" id="review-link" class="review-upload-button btn btn-dark">
                 <div class="review-upload-button-text" >리뷰 업로드</div>
               </button>
-              <div class="review-card">
-                <div class="review-left">
-                  <div class="review-left-up">
-                    <div class="small-rating">
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                    </div>
-                    <div class="review-text">리뷰 제목 1</div>
-                  </div>
-                  <div class="review-left-down">
-                    <div id="review-writer">작성자명</div>
-                  </div>
-                </div>
-                <div class="review-right">
-                  <div class="review-image"></div>
-                </div>
-              </div>
-              <div class="review-card">
-                <div class="review-left">
-                  <div class="review-left-up">
-                    <div class="small-rating">
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                    </div>
-                    <div class="review-text">리뷰 제목 2</div>
-                  </div>
-                  <div class="review-left-down">
-                    <div id="review-writer">작성자명</div>
-                  </div>
-                </div>
-                <div class="review-right">
-                  <div class="review-image"></div>
-                  <div class="review-image"></div>
-                </div>
-              </div>
-              <div class="review-card">
-                <div class="review-left">
-                  <div class="review-left-up">
-                    <div class="small-rating">
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-61.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-62.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-63.svg" />
-                      <img class="small-star" src="https://c.animaapp.com/kjYfscdy/img/star-59.svg" />
-                    </div>
-                    <div class="review-text">리뷰 제목 3</div>
-                  </div>
-                  <div class="review-left-down">
-                    <div id="review-writer">작성자명</div>
-                  </div>
-                </div>
-                <div class="review-right">
-                </div>
-              </div>
+              <div class="review-card"></div>
             </div>
           </div>
 
@@ -242,7 +184,6 @@
       document.querySelector('#go-to-menu').href = `SearchPage (menu).html?id=${storeId}`;
       document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
       
-
       document.querySelector('.store-name').textContent      = store.name;
       document.querySelector('.element').textContent         = store.rating.toFixed(1);
       document.querySelector('.store-simple-info').textContent =
@@ -255,6 +196,7 @@
           window.location.href = `SearchPage (review-upload).html?id=${storeId}`;
         } else {
           alert('식당 ID가 없습니다.');
+          window.location.href = `SearchPage.html`
         }
       });
             renderStars(store.rating);        
@@ -449,12 +391,12 @@ function showModal(imgSrc, allImgs, currentIndex) {
   // DOMContentLoaded 시점에 실행
   window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
-    const storeId = params.get('storeId');
+    const storeId = params.get('id');
 
     const container = document.querySelector('.review-main-content');
     const uploadButton = container.querySelector('.review-upload-button');
 
-    // 기존 내용 초기화 후 업로드 버튼만 다시 붙이기
+    // 초기화 후 업로드 버튼만 다시 붙이기
     container.innerHTML = '';
     container.appendChild(uploadButton);
 
@@ -471,21 +413,17 @@ function showModal(imgSrc, allImgs, currentIndex) {
       getAllRequest.onsuccess = () => {
         let reviews = getAllRequest.result;
 
-        // storeId로 필터링
         if (storeId) {
           reviews = reviews.filter(review => review.storeId === storeId);
         }
-
-        // 기존 리뷰카드 제거 (uploadButton은 남김)
-        const reviewCards = container.querySelectorAll('.review-card');
-        reviewCards.forEach(card => card.remove());
 
         if (reviews.length === 0) {
           // 리뷰 없을 때 메시지 출력
           const noReviewMsg = document.createElement('div');
           noReviewMsg.textContent = "작성된 리뷰가 없습니다.";
+          noReviewMsg.classList.add('no-review-msg');
           noReviewMsg.style.textAlign = 'center';
-          noReviewMsg.style.padding = '2rem 0';
+          noReviewMsg.style.padding = '2rem 0 3rem 0';
           container.appendChild(noReviewMsg);
         } else {
           // 리뷰 카드 렌더링
@@ -1145,16 +1083,37 @@ window.addEventListener('DOMContentLoaded', () => {
 
     </script>
 
-    <script>//////////////검색 키워드 전달///////////
-document.getElementById("search-btn").addEventListener("click", () => {
-  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
-  if (keyword) {
-    location.href = `SearchPage.html?keyword=${keyword}`;
-  } else {
-    alert("검색어를 입력하세요.");
+    <script>
+  // 공통 검색 함수
+  function handleSearch() {
+    const keywordInput = document.getElementById("search-form");
+    const keyword = encodeURIComponent(keywordInput.value.trim());
+
+    if (keyword) {
+      location.href = `SearchPage.html?keyword=${keyword}`;
+    } else {
+      alert("검색어를 입력하세요.");
+    }
   }
-});
-    </script>
+
+  // 버튼 클릭 시
+  document.getElementById("search-btn").addEventListener("click", handleSearch);
+
+  // 이미지 클릭 시 (작은 화면에서만)
+  document.getElementById("search-img").addEventListener("click", () => {
+    if (window.innerWidth <= 1024.98) {
+      handleSearch();
+    }
+  });
+
+  // Enter 키로도 검색되게 (선택 사항)
+  document.getElementById("search-form").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  });
+</script>
+
     <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -1168,11 +1127,6 @@ document.getElementById("search-btn").addEventListener("click", () => {
       });
   });
     </script>
-    <script>
-      window.onload = function () {
-        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
-        renderCards(stores); // 예시 함수
-      };
-    </script>
+     
   </body>
 </html>
