@@ -457,14 +457,11 @@ window.addEventListener('DOMContentLoaded', () => {
     updateHeartIcon(isFav); // 페이지 로드시 찜 이미지 초기화
   }
 });
-
-    </script>
-
+</script>
 
 
-  <script>
 
-  
+<script>
   const DB_NAME = 'MyStoreDB';
   const STORE_NAME = 'stores';
   const DB_VERSION = 1;
@@ -667,7 +664,7 @@ window.addEventListener('DOMContentLoaded', () => {
       await initBookmark(storeId);
 
       // 클릭 이벤트 등록 (id='bookmark' 버튼 또는 img에)
-      const bookmarkElem = document.getElementById('bookmark');
+      const bookmarkElem = document.getElementById('bookmark-img');
       if (bookmarkElem) {
         bookmarkElem.addEventListener('click', async () => {
           await toggleBookmark(storeId);
@@ -995,17 +992,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
     </script>
 
-    <script>
-      document.querySelector('.bookmark-button').addEventListener('click', () => {
-      console.log("북마크버튼클릭됨")
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      
-      if (!currentUser) {
-        alert('로그인이 필요합니다.');
-        return;
-      }
-    });
-    </script>
+    
      
   </body>
 </html>
