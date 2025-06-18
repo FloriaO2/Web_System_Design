@@ -400,6 +400,26 @@
       return;
     }
 
+    // IndexedDB에서 특정 상점 데이터 업데이트
+  
+
+
+function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+      };
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
     
 
     
@@ -423,6 +443,31 @@
         request.onerror = () => reject(request.error);
       });
     }
+
+    function updateStore(store) {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("MyStoreDB");
+
+    request.onsuccess = () => {
+      const db = request.result;
+      const tx = db.transaction("stores", "readwrite");
+      const storeObj = tx.objectStore("stores");
+
+      const updateRequest = storeObj.put(store);
+
+      updateRequest.onsuccess = () => {
+        resolve();
+      };
+      updateRequest.onerror = () => {
+        reject(updateRequest.error);
+      };
+    };
+    request.onerror = () => {
+      reject(request.error);
+    };
+  });
+}
+
 
     const matchedStore = await getStoreById(storeId);
     /*if (!store || !store.name) {
@@ -453,19 +498,21 @@
     const store = tx.objectStore("reviews");
 
     const addRequest = store.add(reviewObj);
-    addRequest.onsuccess = () =>
+    addRequest.onsuccess =async () =>
     {
       alert("리뷰가 저장되었습니다.");
 
       // IndexedDB에서 리뷰 수 +1 해주는 함수
       async function incrementReviewCount(storeId) {
-        const store = await getStore(storeId);
+        console.log('incrementReviewCount 호출됨', storeId);
+        const store = await getStoreById(storeId);
         if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
 
         store.reviews = (store.reviews || 0) + 1;
-        await updateStore(store);
+        await updateStore(store);/////////////////수상하다...
       }
       
+
       // 사용자의 리뷰수+1 해주는 함수
       let users = JSON.parse(localStorage.getItem('users')) || [];
       // 3. 해당 유저 찾아서 reviewCount 증가
@@ -479,10 +526,18 @@
       // 4. localStorage에 업데이트
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
       localStorage.setItem('users', JSON.stringify(users));
-     
+
+      // 2. ✅ 가게 리뷰 수 증가 → 꼭 기다려야 함!
+      try {
+        await incrementReviewCount(storeId);
+      } catch (e) {
+        console.error('가게 리뷰 수 증가 실패:', e);
+        alert('가게 리뷰 수 업데이트에 실패했습니다.');
+      }
+        
      
       
-
+     
       location.href = `SearchPage (review).html?id=${storeId}`;
     }
 
