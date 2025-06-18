@@ -293,7 +293,7 @@
 
       // ✅ localStorage 저장
       localStorage.setItem("users", JSON.stringify(users));
-      localStorage.setItem("currentUser", JSON.stringify({ id: currentUser.id, nickname: newNickname }));
+      localStorage.setItem("currentUser", JSON.stringify({ id: currentUser.id, nickname: newNickname,postCount:currentUser.postCount, commentCount:currentUser.commentCount,reviewCount:currentUser.reviewCount }));
 
       // ✅ 닉네임 반영
       const nicknameDivs = document.querySelectorAll(".account-detail-nickname");
