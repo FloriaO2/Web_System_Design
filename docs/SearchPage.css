@@ -259,48 +259,20 @@ a {
 
 /* 활성화된 상태의 버튼에 체크 이미지 추가 */
 .nav-pills .nav-link.active::before {
-  content: "";
+  content: "✓";
   position: absolute;
-  left: 0.2vw;
-  top: 50%;
+  left: 0.4vw;
+  top: 48%;
   transform: translateY(-50%);
-  width: 1.7vw;
-  height: 2.5vh;
-  background-image: url('image/check.png');
-  background-repeat: no-repeat;
-  background-size: contain;
+  font-size: 1.2vw;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
 }
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
-/* 마우스를 갖다 댔을 때의 a 태그 */
-.nav-pills .nav-link:hover {
-  background-color: #a389ff41;
-  color: #000;
-}
-
-/* 활성화된 상태의 버튼 */
-.nav-pills .nav-link.active {
-  position: relative;
-  padding-left: 1.3vw !important;
-  background-color: #000 !important;
-}
-
-/* 활성화된 상태의 버튼에 체크 이미지 추가 */
-.nav-pills .nav-link.active::before {
-  content: "";
-  position: absolute;
-  left: 0.2vw;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.7vw;
-  height: 2.5vh;
-  background-image: url('image/check.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-}
 /*///////// aside 2 랭킹정렬 관련 css 추가. 여기부터 추가 전까지 복붙하면돼여/////////*/
 .store-list {
   list-style: none;
@@ -617,6 +589,19 @@ a {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
 
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown > button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .dropdown-list {
   display:flex;
   width:55.28vw;
@@ -673,18 +658,18 @@ button.dropdown-toggle {
   }
 
 .dropdown-img1 {
-  width:3vw;
-  height:3.2vh;
+  width:45px;
+  height:21.44px;
 }
 
 .dropdown-img2 {
-  width:1.3vw;
-  height:3.5vh;
+  width:17px;
+  height:23.45px;
 }
 
 .dropdown-img3 {
-  width:1.3vw;
-  height:3.6vh;
+  width:19px;
+  height:23.45px;
 }
 
 .dropdown-text {
@@ -711,12 +696,52 @@ sl-tag::part(base) {
 
 .search-tag {
   margin-left:2vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap:3px;
+}
+
+.AllList-area {
+  width:100%; 
+  height:30px; 
+  display: flex; 
+  justify-content: end; 
+  padding-right:2.9vw;
+}
+
+.AllList {
+  border-radius: 8px;
+  border-color: rgba(0, 0, 0, 0.0);
+  background-color: rgba(255, 255, 255, 0.655);
+  width:auto;
+  height:auto;
+  display: flex;
+  align-items: right;
+  justify-content: center;
+}
+
+.AllList-img {
+  display: flex; 
+  justify-content: center; 
+  height:2.1vh;
+  width:auto; 
+  vertical-align: middle;
+  align-items: center;
+
+}
+
+#showAllBtn {
+  font-size:clamp(13px, 0.895vw, 15px);
+  display: flex;
+  font-family: var(--m3-title-medium-font-family, "Roboto-Medium", sans-serif);
+  align-items: center;
 }
 
 .search-nav {
   display: flex;
   justify-content: flex-end;
   padding-right:3vh;
+  gap:2px;
 }
 
 .search-nav > li > a {
@@ -735,6 +760,13 @@ sl-tag::part(base) {
   padding-bottom: 32px;
   position: relative;
   background-color: rgba(255, 255, 255, 1);
+}
+
+.no-result {
+  text-align: center;
+  padding:2em;
+  color:#666;
+  font-size:1.3vw;
 }
 
 /* mainbody에서의 식당 소개 카드 모음 전체 영역 -> 정말로 카드 있는 부분만 */
@@ -838,7 +870,6 @@ p {
 .rating2 {
   display: flex;
   width: auto;
-  min-height:17px;
   height:100%;
   align-items: center !important;
   gap:4px;
@@ -1495,7 +1526,7 @@ footer {
 }
 
 .search-nav {
-  padding:2.5vh 3vw !important;
+  padding:2vh 3vw 2.5vh 3vw !important;
 }
 }
 
@@ -1539,13 +1570,951 @@ footer {
 /* 여기부터 수정 시작 */
 
 @media (max-width: 599.98px) {
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.dropdown > button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-list {
+  display:flex;
+  width:100%;
+  padding:4vh 4vw;
+  padding-bottom:1vh;
+}
+
+button.dropdown-toggle {
+  border-radius: 0 !important;
+  border:1px solid rgba(0, 0, 0, 0.15) !important;
+  background-color: white !important;
+  color:black !important;
+  width:90px;
+  height:70px;
+}
+
+/* 드롭다운을 클릭했을 때 상위 메뉴 */
+.dropdown:hover > button.dropdown-toggle {
+  background-color: rgba(85, 79, 251, 0.2) !important;
+  color: black;
+}
+
+/* 드롭다운 전체 하위메뉴 */
+.dropdown-menu {
+    box-shadow: var(
+    --m3-elevation-light-2-box-shadow,
+    0px 2px 6px 2px rgba(0, 0, 0, 0.15),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.3)
+  );
+  border-radius: 4px;
+  background-color:#f3edf7 !important;
+  color:black;
+  padding: 8px 0px 8px 0px;
+}
+
+/* 드롭다운 하위메뉴를 클릭했을 때 해당 하위 메뉴 */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:active {
+  background-color: #e8def8;
+  color: #4a0072;
+}
+
+.dropdown-menu .dropdown-item {
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.dropdown-menu li:last-child .dropdown-item {
+  border-bottom: none !important;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+  }
+
+.dropdown-img1 {
+  width:45px;
+  height:21.44px;
+}
+
+.dropdown-img2 {
+  width:17px;
+  height:23.45px;
+}
+
+.dropdown-img3 {
+  width:19px;
+  height:23.45px;
+}
+
+.dropdown-text {
+  color: #49454f;
+  text-align: center;
+  font-family: var(
+    --m3-label-large-prominent-font-family,
+    "Roboto-SemiBold",
+    sans-serif
+  );
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+
+sl-tag::part(base) {
+  background-color: #8c70c8;
+  color: white;
+  border-radius: 8px;
+}
+
+.search-tag {
+  margin-left:10vw;
+  width:100%;
+  display: flex;
+  align-items: flex-start;
+  gap:4px;
+  flex-wrap: wrap;
+}
+
+.AllList-area {
+  width:100%; 
+  height:30px; 
+  display: flex; 
+  justify-content: end; 
+  padding-right:6vw;
+}
+
+.AllList {
+  border-radius: 8px;
+  border-color: rgba(0, 0, 0, 0.0);
+  background-color: rgba(255, 255, 255, 0.655);
+  width:auto;
+  height:auto;
+  display: flex;
+  align-items: right;
+  justify-content: center;
+}
+
+.AllList-img {
+  display: flex; 
+  justify-content: center; 
+  height:2.1vh;
+  width:auto; 
+  vertical-align: middle;
+  align-items: center;
+
+}
+
+#showAllBtn {
+  font-size:15px;
+  display: flex;
+  font-family: var(--m3-title-medium-font-family, "Roboto-Medium", sans-serif);
+  align-items: center;
+}
+
+.search-nav {
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right:6vw;
+  gap:2px;
+
+}
+
+.search-nav > li > a {
+  border:0vw solid rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(191, 191, 191, 0.15) !important;
+}
+
+/* 간단랭킹 별점순/리뷰순/단골순 */
+.nav-pills .nav-link {
+  border:0.1vw solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.537);
+  color: #000;
+  border-radius: 5px;
+  margin-right: 4px;
+  font-size:15px;
+  padding:3px 7px;
+}
+
+/* 활성화된 상태의 버튼 */
+.nav-pills .nav-link.active {
+  position: relative;
+  padding-left: 17px !important;
+  background-color: #000 !important;
+}
+
+/* 마우스를 갖다 댔을 때의 a 태그 */
+.nav-pills .nav-link:hover {
+  background-color: #a389ff41;
+  color: #000;
+}
+
+/* 활성화된 상태의 버튼에 체크 이미지 추가 */
+.nav-pills .nav-link.active::before {
+  content: "✓";
+  position: absolute;
+  left: 0.4vw;
+  top: 48%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: bold; /* 굵기 설정 (선택) */
+}
+
+/* mainbody에서의 식당 소개 카드 모음 전체 영역 */
+.div4 {
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height:auto;
+  align-items: flex-start;
+  gap: 0;
+  padding-bottom: 32px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.no-result {
+  text-align: center;
+  padding:2em;
+  color:#666;
+  font-size:18px;
+}
+
+p {
+  margin:0 !important;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  align-items: flex-start;
+  gap: var(--size-space-400);
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 전체 영역 */
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.rating2 {
+  display: flex;
+  width: auto;
+  min-height:17px;
+  height:100%;
+  align-items: center !important;
+  gap:4px;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 */
+.p {
+  position: relative;
+  align-self: stretch;
+  font-weight: 400;
+  color: var(--color-text-default-secondary);
+  font-size: 16px;
+  line-height: 22.4px;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+}
 }
 @media (min-width: 600px) and (max-width: 767.98px) {
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown > button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-list {
+  display:flex;
+  width:100%;
+  padding:4vh 4vw;
+  padding-bottom:1vh;
+}
+
+button.dropdown-toggle {
+  border-radius: 0 !important;
+  border:1px solid rgba(0, 0, 0, 0.15) !important;
+  background-color: white !important;
+  color:black !important;
+  width:15vw;
+  height:70px;
+}
+
+/* 드롭다운을 클릭했을 때 상위 메뉴 */
+.dropdown:hover > button.dropdown-toggle {
+  background-color: rgba(85, 79, 251, 0.2) !important;
+  color: black;
+}
+
+/* 드롭다운 전체 하위메뉴 */
+.dropdown-menu {
+    box-shadow: var(
+    --m3-elevation-light-2-box-shadow,
+    0px 2px 6px 2px rgba(0, 0, 0, 0.15),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.3)
+  );
+  border-radius: 4px;
+  background-color:#f3edf7 !important;
+  color:black;
+  padding: 8px 0px 8px 0px;
+}
+
+/* 드롭다운 하위메뉴를 클릭했을 때 해당 하위 메뉴 */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:active {
+  background-color: #e8def8;
+  color: #4a0072;
+}
+
+.dropdown-menu .dropdown-item {
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.dropdown-menu li:last-child .dropdown-item {
+  border-bottom: none !important;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+  }
+
+.dropdown-img1 {
+  width:45px;
+  height:21.44px;
+}
+
+.dropdown-img2 {
+  width:17px;
+  height:23.45px;
+}
+
+.dropdown-img3 {
+  width:19px;
+  height:23.45px;
+}
+
+.dropdown-text {
+  color: #49454f;
+  text-align: center;
+  font-family: var(
+    --m3-label-large-prominent-font-family,
+    "Roboto-SemiBold",
+    sans-serif
+  );
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+
+sl-tag::part(base) {
+  background-color: #8c70c8;
+  color: white;
+  border-radius: 8px;
+}
+
+.search-tag {
+  margin-left:10vw;
+  width:100%;
+  display: flex;
+  align-items: flex-start;
+  gap:4px;
+  flex-wrap: wrap;
+}
+
+.AllList-area {
+  width:100%; 
+  height:30px; 
+  display: flex; 
+  justify-content: end; 
+  padding-right:6vw;
+}
+
+.AllList {
+  border-radius: 8px;
+  border-color: rgba(0, 0, 0, 0.0);
+  background-color: rgba(255, 255, 255, 0.655);
+  width:auto;
+  height:auto;
+  display: flex;
+  align-items: right;
+  justify-content: center;
+}
+
+.AllList-img {
+  display: flex; 
+  justify-content: center; 
+  height:2.1vh;
+  width:auto; 
+  vertical-align: middle;
+  align-items: center;
 
 }
-@media (min-width: 768px) and (max-width: 1024.98px) {
 
+#showAllBtn {
+  font-size:15px;
+  display: flex;
+  font-family: var(--m3-title-medium-font-family, "Roboto-Medium", sans-serif);
+  align-items: center;
+}
+
+.search-nav {
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right:6vw;
+  gap:2px;
+
+}
+
+.search-nav > li > a {
+  border:0vw solid rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(191, 191, 191, 0.15) !important;
+}
+
+/* 간단랭킹 별점순/리뷰순/단골순 */
+.nav-pills .nav-link {
+  border:0.1vw solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.537);
+  color: #000;
+  border-radius: 5px;
+  margin-right: 4px;
+  font-size:15px;
+  padding:3px 7px;
+}
+
+/* 활성화된 상태의 버튼 */
+.nav-pills .nav-link.active {
+  position: relative;
+  padding-left: 17px !important;
+  background-color: #000 !important;
+}
+
+/* 마우스를 갖다 댔을 때의 a 태그 */
+.nav-pills .nav-link:hover {
+  background-color: #a389ff41;
+  color: #000;
+}
+
+/* 활성화된 상태의 버튼에 체크 이미지 추가 */
+.nav-pills .nav-link.active::before {
+  content: "✓";
+  position: absolute;
+  left: 0.4vw;
+  top: 48%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: bold; /* 굵기 설정 (선택) */
+}
+
+/* mainbody에서의 식당 소개 카드 모음 전체 영역 */
+.div4 {
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height:auto;
+  align-items: flex-start;
+  gap: 0;
+  padding-bottom: 32px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.no-result {
+  text-align: center;
+  padding:2em;
+  color:#666;
+  font-size:18px;
+}
+
+p {
+  margin:0 !important;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  align-items: flex-start;
+  gap: var(--size-space-400);
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 전체 영역 */
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.rating2 {
+  display: flex;
+  width: auto;
+  min-height:17px;
+  height:100%;
+  align-items: center !important;
+  gap:4px;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 */
+.p {
+  position: relative;
+  align-self: stretch;
+  font-weight: 400;
+  color: var(--color-text-default-secondary);
+  font-size: 16px;
+  line-height: 22.4px;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+}
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown > button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-list {
+  display:flex;
+  width:100%;
+  padding:4vh 4vw;
+  padding-bottom:1vh;
+}
+
+button.dropdown-toggle {
+  border-radius: 0 !important;
+  border:1px solid rgba(0, 0, 0, 0.15) !important;
+  background-color: white !important;
+  color:black !important;
+  width:15vw;
+  height:70px;
+}
+
+/* 드롭다운을 클릭했을 때 상위 메뉴 */
+.dropdown:hover > button.dropdown-toggle {
+  background-color: rgba(85, 79, 251, 0.2) !important;
+  color: black;
+}
+
+/* 드롭다운 전체 하위메뉴 */
+.dropdown-menu {
+    box-shadow: var(
+    --m3-elevation-light-2-box-shadow,
+    0px 2px 6px 2px rgba(0, 0, 0, 0.15),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.3)
+  );
+  border-radius: 4px;
+  background-color:#f3edf7 !important;
+  color:black;
+  padding: 8px 0px 8px 0px;
+}
+
+/* 드롭다운 하위메뉴를 클릭했을 때 해당 하위 메뉴 */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:active {
+  background-color: #e8def8;
+  color: #4a0072;
+}
+
+.dropdown-menu .dropdown-item {
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.dropdown-menu li:last-child .dropdown-item {
+  border-bottom: none !important;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+  }
+
+.dropdown-img1 {
+  width:45px;
+  height:21.44px;
+}
+
+.dropdown-img2 {
+  width:17px;
+  height:23.45px;
+}
+
+.dropdown-img3 {
+  width:19px;
+  height:23.45px;
+}
+
+.dropdown-text {
+  color: #49454f;
+  text-align: center;
+  font-family: var(
+    --m3-label-large-prominent-font-family,
+    "Roboto-SemiBold",
+    sans-serif
+  );
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+
+sl-tag::part(base) {
+  background-color: #8c70c8;
+  color: white;
+  border-radius: 8px;
+}
+
+.search-tag {
+  margin-left:10vw;
+  width:100%;
+  display: flex;
+  align-items: flex-start;
+  gap:4px;
+  flex-wrap: wrap;
+}
+
+.AllList-area {
+  width:100%; 
+  height:30px; 
+  display: flex; 
+  justify-content: end; 
+  padding-right:6vw;
+}
+
+.AllList {
+  border-radius: 8px;
+  border-color: rgba(0, 0, 0, 0.0);
+  background-color: rgba(255, 255, 255, 0.655);
+  width:auto;
+  height:auto;
+  display: flex;
+  align-items: right;
+  justify-content: center;
+}
+
+.AllList-img {
+  display: flex; 
+  justify-content: center; 
+  height:2.1vh;
+  width:auto; 
+  vertical-align: middle;
+  align-items: center;
+
+}
+
+#showAllBtn {
+  font-size:15px;
+  display: flex;
+  font-family: var(--m3-title-medium-font-family, "Roboto-Medium", sans-serif);
+  align-items: center;
+}
+
+.search-nav {
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right:6vw;
+  gap:2px;
+
+}
+
+.search-nav > li > a {
+  border:0vw solid rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(191, 191, 191, 0.15) !important;
+}
+
+/* 간단랭킹 별점순/리뷰순/단골순 */
+.nav-pills .nav-link {
+  border:0.1vw solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.537);
+  color: #000;
+  border-radius: 5px;
+  margin-right: 4px;
+  font-size:15px;
+  padding:3px 7px;
+}
+
+/* 활성화된 상태의 버튼 */
+.nav-pills .nav-link.active {
+  position: relative;
+  padding-left: 17px !important;
+  background-color: #000 !important;
+}
+
+/* 마우스를 갖다 댔을 때의 a 태그 */
+.nav-pills .nav-link:hover {
+  background-color: #a389ff41;
+  color: #000;
+}
+
+/* 활성화된 상태의 버튼에 체크 이미지 추가 */
+.nav-pills .nav-link.active::before {
+  content: "✓";
+  position: absolute;
+  left: 0.4vw;
+  top: 48%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: bold; /* 굵기 설정 (선택) */
+}
+
+/* mainbody에서의 식당 소개 카드 모음 전체 영역 */
+.div4 {
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height:auto;
+  align-items: flex-start;
+  gap: 0;
+  padding-bottom: 32px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.no-result {
+  text-align: center;
+  padding:2em;
+  color:#666;
+  font-size:18px;
+}
+
+p {
+  margin:0 !important;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 */
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  align-items: flex-start;
+  gap: var(--size-space-400);
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 전체 영역 */
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.rating2 {
+  display: flex;
+  width: auto;
+  min-height:17px;
+  height:100%;
+  align-items: center !important;
+  gap:4px;
+}
+
+/* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 */
+.p {
+  position: relative;
+  align-self: stretch;
+  font-weight: 400;
+  color: var(--color-text-default-secondary);
+  font-size: 16px;
+  line-height: 22.4px;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+}
+}
+
+/* 모바일-태블릿 버전 단일 요소들 (mainbody 부분) */
+@media (max-width: 1024.98px) {
+.nav-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1vw;
+}
+.div4 {
+  display: flex;
+  flex-direction: column;
+  width:100% !important;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+}
+}
+
+/* 모바일 버전 요소들 (mainbody 부분) */
+@media (max-width: 767.98px) {
+.card {
+  flex-direction: column !important;
+  padding-top:4vh;
+}
+}
+
+/* 식당 카드 이미지 */
+@media (max-width: 767.98px){
+.card-image {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
+  min-height:200px;
+  width: clamp(200px, 52vw, 400px);
+  height: 30.67vh;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom:2vh;
+}
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+.card-image {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
+  max-width: 200px;
+  width: 400px;
+  height: 23.67vh;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-right:2vh;
+  margin-left:3vw;
+}
+}
+
+/* 식당 카드 & 랭킹 이름 보기 */
+@media (max-width: 599.98px) {
+.store-name {
+    font-size:clamp(18px, 4vw, 24px);
+  }
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
+.store-name {
+    font-size:1.5rem;
+  }
+}
+/* 식당 카드 내 별점 보기 */
+@media (max-width: 1024.98px) {
+.rating {
+  gap:2.6vw;
+}
+}
+/* 식당 카드 내 별점 점수 보기 */
+@media (max-width: 599.98px) {
+.element {
+  font-size:clamp(15px, 4vw, 24px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  vertical-align: middle;
+}
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
+.element {
+  font-size:1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  vertical-align: middle;
+}
+}
+
+/* 식당 카드 간단정보 보기 */
+@media  (max-width: 599.98px) {
+.store-simple-info {
+  font-size: clamp(14px, 3vw, 18px);
+}
+}
+@media  (min-width: 600px) and (max-width: 767.98px) {
+.store-simple-info {
+  font-size: 18px;
+}
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+.store-simple-info {
+  font-size: clamp(18px, 1.95vw, 20px);
+}
+}
+@media (min-width: 1025px) {
+.store-simple-info {
+  font-size: 13px;
+}
+}
+
+/* 식당 카드 상세정보 보기 */
+@media  (max-width: 599.98px) {
+.go-to-searchPage {
+  font-size: clamp(14px, 3vw, 18px);
+}
+}
+@media  (min-width: 600px) and (max-width: 767.98px) {
+.go-to-searchPage {
+  font-size: 18px;
+}
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+.go-to-searchPage {
+  font-size: clamp(18px, 1.95vw, 20px);
+}
+}
+@media (min-width: 1025px) {
+.go-to-searchPage {
+  font-size: 13px;
+}
 }
 
 /* 여기까지 수정 완료 */

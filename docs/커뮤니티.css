@@ -259,16 +259,14 @@ a {
 
 /* 활성화된 상태의 버튼에 체크 이미지 추가 */
 .nav-pills .nav-link.active::before {
-  content: "";
+  content: "✓";
   position: absolute;
-  left: 0.2vw;
-  top: 50%;
+  left: 0.4vw;
+  top: 48%;
   transform: translateY(-50%);
-  width: 1.7vw;
-  height: 2.5vh;
-  background-image: url('image/check.png');
-  background-repeat: no-repeat;
-  background-size: contain;
+  font-size: 1.2vw;
+  color: rgb(255, 255, 255);
+  font-weight: bold; /* 굵기 설정 (선택) */
 }
 
 
