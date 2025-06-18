@@ -674,7 +674,12 @@
       });
     </script>
 
-
+    <script>
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser && currentUser.nickname) {
+      document.querySelector('.account-detail-nickname').innerHTML = currentUser.nickname;
+      }
+    </script>
 
     <script>//해당 식당의 정보 보여주기
       
