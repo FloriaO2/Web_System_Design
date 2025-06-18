@@ -572,7 +572,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const bookmarks = localStorage.getItem('bookmarks');
     return bookmarks ? JSON.parse(bookmarks) : [];
   }
-
+  function getUserBookmarks(userId) {//특정 사용자의 북마크만 반환
+  const bookmarks = getBookmarks();
+  return bookmarks.filter(bm => bm.userId === userId).map(bm => bm.storeId);
+}
   // localStorage에 단골 가게 배열 저장하기
   function saveBookmarks(bookmarks) {
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
@@ -580,9 +583,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 단골 여부 확인 함수
   function isBookmarked(storeId) {
+    const userId=currentUser.id;
     const bookmarks = getBookmarks();
-    return bookmarks.includes(storeId);
-  }
+    return bookmarks.some(bm => bm.userId === userId && bm.storeId === storeId);
+}
 
   // 북마크 아이콘 업데이트 함수 (채운/테두리)
   function updateBookmarkIcon(isBookmarked) {
@@ -610,36 +614,43 @@ window.addEventListener('DOMContentLoaded', () => {
     await updateStore(store);
   }
 
-  // 클릭 시 단골 가게 추가/제거 토글 함수 (async)
-  async function toggleBookmark(storeId) {
-    let bookmarks = getBookmarks();
+  
+ async function toggleBookmark(storeId) {// 클릭 시 단골 가게 추가/제거 토글 함수 (async)
+  const userId = currentUser.id;
+  let bookmarks = getBookmarks(); // [{ userId, storeId }, ...]
 
-    if (bookmarks.includes(storeId)) {
-      bookmarks = bookmarks.filter(id => id !== storeId);
-      saveBookmarks(bookmarks);
-      alert('단골 가게에서 제거되었습니다.');
-      updateBookmarkIcon(false);
+  // 현재 사용자의 북마크 중 해당 storeId가 있는지 검사
+  const exists = bookmarks.some(bm => bm.userId === userId && bm.storeId === storeId);
 
-      try {
-        await decrementBookmarkCount(storeId);
-        console.log('IndexedDB 단골 수 -1 완료');
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      bookmarks.push(storeId);
-      saveBookmarks(bookmarks);
-      alert('단골 가게에 추가되었습니다.');
-      updateBookmarkIcon(true);
+  if (exists) {
+    // 제거
+    bookmarks = bookmarks.filter(bm => !(bm.userId === userId && bm.storeId === storeId));
+    saveBookmarks(bookmarks);
+    alert('단골 가게에서 제거되었습니다.');
+    updateBookmarkIcon(false);
 
-      try {
-        await incrementBookmarkCount(storeId);
-        console.log('IndexedDB 단골 수 +1 완료');
-      } catch (err) {
-        console.error(err);
-      }
+    try {
+      await decrementBookmarkCount(storeId);
+      console.log('IndexedDB 단골 수 -1 완료');
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+    // 추가
+    bookmarks.push({ userId, storeId });
+    saveBookmarks(bookmarks);
+    alert('단골 가게에 추가되었습니다.');
+    updateBookmarkIcon(true);
+
+    try {
+      await incrementBookmarkCount(storeId);
+      console.log('IndexedDB 단골 수 +1 완료');
+    } catch (err) {
+      console.error(err);
     }
   }
+}
+
 
   // 페이지 로드 시 현재 단골 여부에 따라 아이콘 초기화
   async function initBookmark(storeId) {

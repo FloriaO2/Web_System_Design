@@ -230,23 +230,26 @@
 
 
   function loadItems(storageKey, listContainerClass, createItem,filterFn = null) {
-    const allItems = JSON.parse(localStorage.getItem(storageKey)) || [];
-    const myItems = filterFn? allItems.filter(filterFn) : allItems;
     const container = document.querySelector(listContainerClass);
     if (!container) return;
 
     container.innerHTML = "";
+  
+    
+
+    
+
+  const allItems = JSON.parse(localStorage.getItem(storageKey)) || [];
+  const myItems = filterFn? allItems.filter(filterFn) : allItems;
 
     if (myItems.length === 0) {
       let keyword="";
       if (storageKey == "posts") keyword="작성한 게시글이"
       else if (storageKey == "comments") keyword="작성한 댓글이"
-      else if (storageKey == "reviews") keyword="작성한 리뷰가"
       else if (storageKey == "favorite") keyword="찜한 가게가"
       container.innerHTML = `<p class="error-message">${keyword} 없습니다.</p>`;
       return;
     }
-
     myItems.forEach(item => {
       const el = createItem(item);
       container.appendChild(el);
@@ -364,6 +367,11 @@ async function loadDBItems(storeName, containerSelector, renderFn, filterFn = nu
     if (typeof filterFn === 'function') {
       items = items.filter(filterFn);
     }
+    if (items.length === 0) {
+      container.innerHTML = `<p class="error-message">작성한 리뷰가 없습니다.</p>`;
+      return;
+    }
+
 
     items.forEach(item => {
       renderFn(item, container);
