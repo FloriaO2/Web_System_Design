@@ -617,6 +617,51 @@ a {
   margin-top: 3vh;
 }
 
+.center-ranking-area {
+  display:flex; 
+  width:90%; 
+  margin:0 auto; 
+  justify-content: space-around; 
+  padding-bottom:0 !important;
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.0) !important;
+}
+.nav-tabs .nav-link {
+  border:1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.537);
+  color: #000;
+  border-radius: 5px;
+  margin-right: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.center-ranking {
+  flex:1;
+  text-align: center;
+  border-bottom: 0.2px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+.center-ranking > .nav-link {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  padding:1.5vh 0 !important;
+  padding-top:2vh !important;
+}
+
+/* 마우스를 갖다 댔을 때의 a 태그 */
+.center-ranking .nav-link:hover {
+  background-color: #a389ff41;
+  color: #000;
+  border:1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 활성화된 상태의 버튼 */
+.center-ranking .nav-link.active {
+  background-color: #a389ff41 !important;
+  color: #000;
+  border:1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
 /* mainbody에서의 식당 소개 카드 모음 전체 영역 */
 .div4 {
   display: flex;
@@ -625,7 +670,7 @@ a {
   height:auto;
   align-items: flex-start;
   gap: 48px;
-  padding: 32px 0px;
+  padding: 5vh 0px;
   position: relative;
   background-color: rgba(255, 255, 255, 1);
 }
@@ -653,8 +698,8 @@ a {
   flex-wrap: wrap;
   min-width: 240px;
   align-items: center;
-  gap: 24px;
-  padding: 24px;
+  gap: 1.8vw;
+  padding: 3vh 2.2vw;
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -670,7 +715,7 @@ a {
 .card-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 11.11vw;
+  width: 200px;
   height: 20.67vh;
   background-size: cover;
   background-position: 50% 50%;
@@ -777,7 +822,7 @@ p {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 139.9999976158142%;
-  font-size: 16px;
+  font-size: 1.2vw;
 }
 
 /* mainbody에서의 식당 소개 카드 -> 식당 소개 텍스트 영역 -> 하위 정보 영역 (상세 페이지 이동) */
@@ -1000,6 +1045,7 @@ footer {
   flex: 1;
   height:auto;
   left:0 !important;
+  align-items: center;
 }
 }
 
@@ -1427,6 +1473,140 @@ footer {
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
+
+/* 모바일-태블릿 버전 단일 요소들 (mainbody 부분) */
+@media (max-width: 1024.98px) {
+.nav-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1vw;
+}
+.div4 {
+  display: flex;
+  flex-direction: column;
+  width:100% !important;
+  gap: 48px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+}
+}
+
+/* 모바일 버전 요소들 (mainbody 부분) */
+@media (max-width: 767.98px) {
+.card {
+  flex-direction: column !important;
+}
+}
+
+/* 식당 카드 이미지 */
+@media (max-width: 767.98px){
+.card-image {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
+  min-height:200px;
+  width: clamp(200px, 52vw, 400px);
+  height: 30.67vh;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom:2vh;
+}
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+.card-image {
+  position: relative;
+  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
+  max-width: 200px;
+  width: 400px;
+  height: 23.67vh;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-right:2vh;
+  margin-left:3vw;
+}
+}
+
+/* 식당 카드 & 랭킹 이름 보기 */
+@media (max-width: 599.98px) {
+.store-name {
+    font-size:clamp(18px, 4vw, 24px);
+  }
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
+.store-name {
+    font-size:1.5rem;
+  }
+}
+/* 식당 카드 내 별점 보기 */
+@media (max-width: 1024.98px) {
+.rating {
+  gap:2.6vw;
+}
+}
+/* 식당 카드 내 별점 점수 보기 */
+@media (max-width: 599.98px) {
+.element {
+  font-size:clamp(15px, 4vw, 24px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  vertical-align: middle;
+}
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
+.element {
+  font-size:1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  vertical-align: middle;
+}
+}
+
+/* 식당 카드 간단정보 보기 */
+@media  (max-width: 599.98px) {
+.store-simple-info {
+  font-size: clamp(14px, 3vw, 18px);
+}
+}
+@media  (min-width: 600px) and (max-width: 767.98px) {
+.store-simple-info {
+  font-size: 18px;
+}
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+.store-simple-info {
+  font-size: clamp(18px, 1.95vw, 20px);
+}
+}
+@media (min-width: 1025px) {
+.store-simple-info {
+  font-size: 13px;
+}
+}
+
+/* 식당 카드 상세정보 보기 */
+@media  (max-width: 599.98px) {
+.go-to-searchPage {
+  font-size: clamp(14px, 3vw, 18px);
+}
+}
+@media  (min-width: 600px) and (max-width: 767.98px) {
+.go-to-searchPage {
+  font-size: 18px;
+}
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+.go-to-searchPage {
+  font-size: clamp(18px, 1.95vw, 20px);
+}
+}
+@media (min-width: 1025px) {
+.go-to-searchPage {
+  font-size: 13px;
+}
+}
 
 @media (max-width: 599.98px) {
 

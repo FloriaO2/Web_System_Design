@@ -56,6 +56,7 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 90vw;
+  min-height:60px;
   height: 19.17vh;
   top: 0;
   left: 0;
@@ -265,7 +266,7 @@ a {
   transform: translateY(-50%);
   width: 1.7vw;
   height: 2.5vh;
-  background-image: url('check.png');
+  background-image: url('image/check.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -310,9 +311,9 @@ a {
   width:calc(8.96vw - 30px);
   font-weight: 600;
   font-size:clamp(8px, 1.25vw, 18px) !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;       /* 한 줄로 유지 */
+  overflow: hidden;          /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;   /* 넘칠 때 말줄임표 표시 */
 }
 
 .store-rating {
@@ -324,7 +325,6 @@ a {
   justify-content: end;
   margin-right:0.2vw;
 }
-
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
@@ -351,7 +351,7 @@ a {
   transform: translateY(-50%);
   width: 1.7vw;
   height: 2.5vh;
-  background-image: url('check.png');
+  background-image: url('image/check.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -525,6 +525,50 @@ a {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* 여기부터 수정 시작 */
 
+/* 선택된 메뉴의 영역 */
+.tab {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+/* 선택된 메뉴의 텍스트 */
+.label {
+  color: #303030;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
+
+/* 선택되지 않은 메뉴의 영역 */
+.tab2 {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* 선택되지 않은 메뉴의 텍스트 */
+.label2 {
+  color: #767676;
+  text-align: left;
+  font-family: var(--body-base-font-family, "Inter-Regular", sans-serif);
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  position: relative;
+  text-decoration: none;
+}
+
 /* mainbody에서의 전체/한식/양식/일식... 등 음식 종류 분류 */
 .nav-tabs {
   display: flex;
@@ -560,13 +604,14 @@ a {
   height: auto;
   align-items: flex-start;
   gap: 20px;
-  padding: 0px 3vw;
+  padding: 0px 5vw;
   position: relative;
   align-self: stretch;
   width: 100%;
   min-height: 100%;
   flex-grow: 1;
   overflow: auto;
+  margin-bottom:5vh;
 }
 
 /* mainbody에서의 식당 소개 카드 */
@@ -575,8 +620,8 @@ a {
   flex-wrap: wrap;
   min-width: 240px;
   align-items: center;
-  gap: 3vw;
-  padding: 24px;
+  gap: 1.8vw;
+  padding: 3vh 2.2vw;
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -592,7 +637,7 @@ a {
 .card-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 11.11vw;
+  width: 200px;
   height: 20.67vh;
   background-size: cover;
   background-position: 50% 50%;
@@ -810,17 +855,6 @@ footer {
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■추가 시작■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
-@media (max-width: 767.98px) {
-.web-name {
-  font-size:4vw;
-}
-}
-@media (min-width: 768px) and (max-width: 1024.98px){
-.web-name {
-  font-size:30.72px;
-}
-}
-
 @media (max-width: 599.98px) {
 .div1 {
   margin-bottom:1vh;
@@ -948,7 +982,7 @@ footer {
 }
 .navbar-toggler-icon {
   background-color:rgba(216, 223, 255, 1) !important;
-  background-image: url('menu.png') !important;
+  background-image: url('image/menu.png') !important;
   background-size:5vw 2vh;
   border-radius: 0 !important;
   width:5vw;
@@ -969,7 +1003,7 @@ footer {
 }
 .navbar-toggler-icon {
   background-color:rgba(216, 223, 255, 1) !important;
-  background-image: url('menu.png') !important;
+  background-image: url('image/menu.png') !important;
   background-size:5vw 2vh;
   border-radius: 0 !important;
   width:30px !important;
@@ -987,7 +1021,7 @@ footer {
 }
 .navbar-toggler-icon {
   background-color:rgba(216, 223, 255, 1) !important;
-  background-image: url('menu.png') !important;
+  background-image: url('image/menu.png') !important;
   background-size:5vw 2vh;
   border-radius: 0 !important;
   width:4.5vw !important;
@@ -1004,7 +1038,7 @@ footer {
 }
 
 /* 모바일 창 영역 */
-@media (max-width: 768.98px) {
+@media (max-width: 767.98px) {
 .offcanvas.offcanvas-start {
   width: 100% !important;
   max-width: 70vw !important;
@@ -1293,13 +1327,13 @@ footer {
   margin:0 2px !important;
 }
 }
-@media (min-width: 1025px) and (max-width: 1169.98px) {
+@media (min-width: 1090px) and (max-width: 1169.98px) {
 .nav-pills > li > a {
   padding:0.5vh 0.2vw;
   margin:0 2px !important;
 }
 }
-@media (min-width: 1170px) and (max-width: 1219.98px) {
+@media (min-width: 1170px) and (max-width: 1220px) {
 .nav-pills > li > a {
   padding:0.5vh 0.2vw;
   margin:0 4px !important;
@@ -1307,7 +1341,7 @@ footer {
 }
 
 /* aside2 관련 */
-@media (max-width: 1169.98px) {
+@media (max-width: 1170px) {
 .store-item {
   display: flex;
   align-items: center;
@@ -1320,6 +1354,19 @@ footer {
 .store-rank-name {
   gap: 0.5vw !important;
 }
+}
+
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* 여기부터 수정 시작 */
+
+@media (max-width: 599.98px) {
+
+}
+@media (min-width: 600px) and (max-width: 767.98px) {
+
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+
 }
 
 /* 계정 설명 */
@@ -1343,7 +1390,7 @@ footer {
   gap:0.5vw;
 }
 }
-@media (min-width: 1120px) and (max-width: 1199.98px) {
+@media (min-width: 1120px) and (max-width: 1200px) {
 .account-description {
   position: relative;
   width: 90%;
@@ -1364,35 +1411,13 @@ footer {
 }
 }
 
-/* mainbody 음식 종류 바로가기 */
-@media (max-width: 329.98px) {
-.nav-tabs > li > a {
-  font-size:0.7rem;
-}
-}
-@media (min-width: 330px) and (max-width: 767.98px) {
-.nav-tabs > li > a {
-  font-size:0.9rem;
-}
-}
-@media (min-width: 768px) and (max-width: 1024.98px) {
-.nav-tabs > li > a {
-  font-size:1.2rem;
-}
-}
-@media (min-width: 1025px) and (max-width: 1069.98px) {
-.nav-tabs > li > a {
-  font-size:0.8rem;
-}
-}
-
 /* 식당 카드 이미지 */
 @media (max-width: 767.98px){
 .card-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  max-width: 300px;
-  width: 38.11vw;
+  min-height:200px;
+  width: clamp(200px, 52vw, 400px);
   height: 30.67vh;
   background-size: cover;
   background-position: 50% 50%;
@@ -1404,7 +1429,7 @@ footer {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
   max-width: 200px;
-  width: 35.11vw;
+  width: 400px;
   height: 23.67vh;
   background-size: cover;
   background-position: 50% 50%;
@@ -1414,7 +1439,12 @@ footer {
 }
 
 /* 식당 카드 & 랭킹 이름 보기 */
-@media (min-width: 768px) and (max-width: 1024.98px) {
+@media (max-width: 599.98px) {
+.store-name {
+    font-size:clamp(18px, 4vw, 24px);
+  }
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
 .store-name {
     font-size:1.5rem;
   }
@@ -1426,45 +1456,41 @@ footer {
 }
 }
 /* 식당 카드 내 별점 점수 보기 */
-@media (min-width: 768px) and (max-width: 1024.98px) {
+@media (max-width: 599.98px) {
 .element {
-  font-size:1.9rem;
+  font-size:clamp(15px, 4vw, 24px);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom:2px;
+  height:auto;
+  vertical-align: middle;
+}
+}
+@media (min-width: 600px) and (max-width: 1024.98px) {
+.element {
+  font-size:1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  vertical-align: middle;
 }
 }
 
 /* 식당 카드 간단정보 보기 */
-@media  (max-width: 259.98px){
+@media  (max-width: 599.98px) {
 .store-simple-info {
-  font-size: 10px;
+  font-size: clamp(14px, 3vw, 18px);
 }
 }
-@media  (min-width: 260px) and (max-width: 349.98px) {
-.store-simple-info {
-  font-size: 12px;
-}
-}
-@media  (min-width: 350px) and (max-width: 499.98px) {
-.store-simple-info {
-  font-size: 14px;
-}
-}
-@media  (min-width: 500px) and (max-width: 569.98px) {
-.store-simple-info {
-  font-size: 16px;
-}
-}
-@media  (min-width: 570px) and (max-width: 767.98px) {
+@media  (min-width: 600px) and (max-width: 767.98px) {
 .store-simple-info {
   font-size: 18px;
 }
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
 .store-simple-info {
-  font-size: 20px;
+  font-size: clamp(18px, 1.95vw, 20px);
 }
 }
 @media (min-width: 1025px) {
@@ -1474,34 +1500,19 @@ footer {
 }
 
 /* 식당 카드 상세정보 보기 */
-@media  (max-width: 259.98px){
+@media  (max-width: 599.98px) {
 .go-to-searchPage {
-  font-size: 10px;
+  font-size: clamp(14px, 3vw, 18px);
 }
 }
-@media  (min-width: 260px) and (max-width: 349.98px) {
-.go-to-searchPage {
-  font-size: 12px;
-}
-}
-@media  (min-width: 350px) and (max-width: 499.98px) {
-.go-to-searchPage {
-  font-size: 14px;
-}
-}
-@media  (min-width: 500px) and (max-width: 570px) {
-.go-to-searchPage {
-  font-size: 16px;
-}
-}
-@media  (min-width: 570px) and (max-width: 767.98px) {
+@media  (min-width: 600px) and (max-width: 767.98px) {
 .go-to-searchPage {
   font-size: 18px;
 }
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
 .go-to-searchPage {
-  font-size: 20px;
+  font-size: clamp(18px, 1.95vw, 20px);
 }
 }
 @media (min-width: 1025px) {
@@ -1509,6 +1520,9 @@ footer {
   font-size: 13px;
 }
 }
+
+/* 여기까지 수정 완료 */
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
 /* footer */
 @media (max-width: 767.98px){
@@ -1579,7 +1593,7 @@ footer {
   position: relative;
 }
 }
-@media (max-width: 649.999px){
+@media (max-width: 649.98px){
 .text-link-list-item {
   width: auto;
   font-size: 0.7rem;
@@ -1608,6 +1622,11 @@ footer {
 @media (max-width: 767.98px){
 .vertical-line {
   display:none;
+}
+}
+@media (width: 768px){
+.vertical-line {
+  display:flex;
 }
 }
 

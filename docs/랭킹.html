@@ -100,21 +100,46 @@
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
           <!-- 여기부터 수정 시작 -->
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="handleSortMain('rating')">별점순</a>
+          <ul class="nav nav-tabs center-ranking-area">
+            <li class="nav-item center-ranking">
+              <a class="nav-link active" href="#" data-sort="rating">별점순</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="handleSortMain('reviews')">리뷰순</a>
+            <li class="nav-item center-ranking">
+              <a class="nav-link" href="#" data-sort="reviews">리뷰순</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="handleSortMain('bookmark')">단골순</a>
+            <li class="nav-item center-ranking">
+              <a class="nav-link" href="#" data-sort="bookmark">단골순</a>
             </li>
           </ul>
           <div class="div4">
             <div class="cards" id="cards-container"></div>
-            </div>
+          </div>
              
+
+          <script>
+          document.querySelector('.center-ranking-area').addEventListener('click', function (e) {
+          const target = e.target;
+
+          // <a> 요소가 클릭된 경우만 처리
+          if (target.classList.contains('nav-link')) {
+            e.preventDefault(); // 링크 이동 방지
+      
+            // 모든 탭의 active 클래스 제거
+            document.querySelectorAll('.center-ranking-area .nav-link').forEach(link => {
+              link.classList.remove('active');
+            });
+
+            // 클릭한 탭에 active 클래스 추가
+            target.classList.add('active');
+
+            // 정렬 처리
+            const sortType = target.getAttribute('data-sort');
+            console.log("정렬 기준:", sortType);
+
+            handleSortMain(sortType);
+    }
+  });
+</script>
 
       <script>
         ///////////여기부터 심플랭킹 js////////////////////
