@@ -612,7 +612,69 @@
     
     
 
-    
+    <!-- 카카오 지도 API -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
+    <script>
+    // 1. 지도를 생성할 기본 설정
+    const mapContainer = document.getElementById('map');
+    const mapOption = {
+      center: new kakao.maps.LatLng(37.5665, 126.9780), // 임시 중심
+      level: 3
+    };
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 2. 장소 검색 객체 생성
+    const ps = new kakao.maps.services.Places();
+
+    // 3. URL 파라미터에서 storeId 추출
+    const urlParams = new URLSearchParams(window.location.search);
+    const storeId = urlParams.get('id');
+
+    // 4. stores.json 에서 해당 storeId에 해당하는 식당 정보 찾기
+    fetch('stores.json')
+      .then(res => res.json())
+      .then(data => {
+        const store = data.find(s => s.id === storeId);
+        if (!store) {
+          alert('해당 가게를 찾을 수 없습니다.');
+          return;
+        }
+
+        const storeName = `${store.name} ${store.extraLocation}`;
+
+        // 5. 해당 식당 이름으로 카카오 장소 검색
+        ps.keywordSearch(storeName, function (data, status) {
+          if (status === kakao.maps.services.Status.OK) {
+            const place = data[0];
+            const lat = parseFloat(place.y);
+            const lng = parseFloat(place.x);
+            const coords = new kakao.maps.LatLng(lat, lng);
+
+            // 마커 표시
+            const marker = new kakao.maps.Marker({
+              map: map,
+              position: coords
+            });
+
+            // 인포윈도우 표시 (선택 사항)
+            const infowindow = new kakao.maps.InfoWindow({
+              content: `<div style="padding:5px;font-size:14px;">${place.place_name}</div>`
+            });
+            infowindow.open(map, marker);
+
+            // 지도 중심 이동
+            map.setCenter(coords);
+          } else {
+            alert('지도를 불러올 수 없습니다.');
+          }
+        });
+      })
+      .catch(err => {
+        console.error('가게 데이터를 불러오는 중 오류:', err);
+      });
+    </script>
+
+
 
     <script>//해당 식당의 정보 보여주기
       
