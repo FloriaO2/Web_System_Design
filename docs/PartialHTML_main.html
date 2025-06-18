@@ -134,44 +134,7 @@
               </div>
             </div>
           </div>
-          <div class="info-down-area">
-            <div class="info-tab-list">
-              <div class="tab">
-                <a class="label" id="go-to-info" href="SearchPage (info).html">정보</a>
-              </div>
-              <div class="tab2">
-                <a class="label2" id="go-to-menu" href="SearchPage (menu).html">메뉴</a>
-              </div>
-              <div class="tab2">
-                <a class="label2" id="go-to-review" href="SearchPage (review).html">리뷰</a>
-              </div>
-            </div>
-            <div class="info-main-content">
-              <div id="map"></div>
-              <div class="info-right">
-                <div id="info-navigation">
-                  <img class="info-image" src="image/navigation.png" />
-                  <div class="info-text">길찾기</div>
-                  <a target="_blank" aria-label="길찾기">
-                    <sl-icon-button 
-                      class="pin-map" 
-                      name="link-45deg" 
-                      label="pin-map" 
-                      style="width: 60px;">
-                    </sl-icon-button>
-                  </a>
-                </div>
-                <div id="info-time">
-                  <img class="info-image" src="image/time.png" />
-                  <div class="info-text">운영 시간</div>
-                </div>
-                <div id="info-etc">
-                  <img class="info-image" src="image/information.png" />
-                  <div class="info-text etc-text">기타 정보</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="info-down-area"></div>
           
           <!-- 여기까지 수정 완료 -->
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -210,6 +173,74 @@
         </div>
       </div>
     </div>
+
+    
+
+
+    <!-- 카카오 지도 API -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
+    <script>
+    const mapContainer = document.getElementById('map');
+    const mapOption = {
+      center: new kakao.maps.LatLng(37.5665, 126.9780), // 기본 좌표
+      level: 3
+    };
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // URL 파라미터에서 storeId 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const storeId = urlParams.get('id');
+
+    // stores.json에서 해당 가게 찾기
+    fetch('stores.json')
+      .then(res => res.json())
+      .then(data => {
+        const store = data.find(s => s.id === storeId);
+        if (!store) {
+          alert('해당 가게를 찾을 수 없습니다.');
+          return;
+        }
+
+        // 가게 이름 표시
+        document.getElementsByClassName('store-name').textContent = store.name;
+
+        // 카카오 지도 링크 설정 (store.id가 Kakao 지도 ID라고 가정)
+        const targetPlace = data.find(place => place.id === '18577297');
+        if (targetPlace) {
+          const lat = parseFloat(targetPlace.y);
+          const lng = parseFloat(targetPlace.x);
+          console.log("위도:", lat, "경도:", lng);
+        }
+        const infoLink = document.querySelector('#info-navigation a');
+        if (infoLink) {
+          infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
+          infoLink.target = '_blank';
+        }
+
+        // 장소 검색으로 좌표 찾기
+        const ps = new kakao.maps.services.Places();
+        const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
+
+        ps.keywordSearch(keyword, function (data, status) {
+          if (status === kakao.maps.services.Status.OK && data.length > 0) {
+            const place = data[0];
+            const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
+
+            // 마커 생성 및 지도 중심 이동
+            new kakao.maps.Marker({
+              map: map,
+              position: coords
+            });
+            map.setCenter(coords);
+          } else {
+            console.warn('장소 검색 결과가 없습니다.');
+          }
+        });
+      })
+      .catch(err => {
+        console.error('가게 데이터를 불러오는 중 오류:', err);
+      });
+  </script>
 
     <!-- sl-tab 바로가기와 관련한 자바 스크립트 추가 -->
     <script>
@@ -743,68 +774,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     </script>
 
-<!-- 카카오 지도 API -->
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services&autoload=false"></script>
-
-<!-- 지도 생성 코드는 모두 아래 script 안에 넣기 -->
-<script>
-  // 모든 코드는 이 안에서 실행되어야 함
-  kakao.maps.load(function () {
-    console.log("✅ Kakao SDK 로드 완료");
-
-    // 이제 안전하게 kakao 객체 사용 가능
-    const mapContainer = document.getElementById('map');
-    const mapOption = {
-      center: new kakao.maps.LatLng(37.5665, 126.9780),
-      level: 3
-    };
-    const map = new kakao.maps.Map(mapContainer, mapOption);
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const storeId = urlParams.get('id');
-
-    fetch('stores.json')
-      .then(res => res.json())
-      .then(data => {
-        const store = data.find(s => s.id === storeId);
-        if (!store) {
-          alert('해당 가게를 찾을 수 없습니다.');
-          return;
-        }
-
-        document.querySelector('.store-name').textContent = store.name;
-
-        const infoLink = document.querySelector('#info-navigation a');
-        if (infoLink) {
-          infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
-          infoLink.target = '_blank';
-        }
-
-        const ps = new kakao.maps.services.Places();
-        const keyword = store.name + (store.extraLocation ? ' ' + store.extraLocation : '');
-
-        ps.keywordSearch(keyword, function (data, status) {
-          if (status === kakao.maps.services.Status.OK && data.length > 0) {
-            const place = data[0];
-            const coords = new kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x));
-
-            new kakao.maps.Marker({
-              map: map,
-              position: coords
-            });
-            map.setCenter(coords);
-          } else {
-            console.warn('장소 검색 결과가 없습니다.');
-          }
-        });
-      })
-      .catch(err => {
-        console.error('가게 데이터를 불러오는 중 오류:', err);
-      });
-  });
-</script>
-
-
     <script>////////회원/비회원 전환///////////////////////
       function logout() {
        const confirmed = confirm("정말 로그아웃하시겠습니까?");
@@ -1008,5 +977,82 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     </script>
      
+
+
+     <script>
+      function loadCSS(href) {
+  // 기존에 로드된 페이지 CSS 제거
+  const oldLink = document.getElementById('page-style');
+  if (oldLink) oldLink.remove();
+
+  // 새 CSS 로드
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  link.id = 'page-style';
+  document.head.appendChild(link);
+}
+
+async function loadMainBody(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP 오류! 상태: ${res.status}`);
+
+    const text = await res.text();
+
+    // HTML 파싱용 임시 div
+    const temp = document.createElement('div');
+    temp.innerHTML = text;
+
+    // <main> 요소 찾기
+    const newMain = temp.querySelector('main');
+    if (!newMain) {
+      console.warn('<main> 태그를 찾을 수 없습니다.');
+      return;
+    }
+
+    // 기존 mainbody 교체
+    const mainbody = document.getElementById('info-down-area');
+    if (mainbody) {
+      mainbody.innerHTML = newMain.innerHTML;
+    } else {
+      console.error('#mainbody 요소를 찾을 수 없습니다.');
+      return;
+    }
+
+    // URL 변경 (브라우저 주소 표시줄)
+    history.pushState(null, '', url);
+
+    // 페이지별 CSS 로드
+    if (url === 'PartialHTML1.html') {
+      loadCSS('SearchPage (info).css');
+    } else if (url === 'PartialHTML2.html') {
+      loadCSS('SearchPage (menu).css');
+    } else {
+      loadCSS('SearchPage (review).css');
+    }
+
+  } catch (err) {
+    console.error('페이지 로딩 오류:', err);
+  }
+}
+
+// 뒤로/앞 버튼 지원
+window.addEventListener('popstate', () => {
+  loadMainBody(location.pathname);
+});
+
+// 예: 네비게이션 클릭 시 동작 예제
+document.querySelectorAll('a[data-link]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const url = e.target.getAttribute('href');
+    loadMainBody(url);
+  });
+});
+     </script>
+
+
+
   </body>
 </html>
