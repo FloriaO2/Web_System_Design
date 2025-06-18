@@ -431,6 +431,27 @@
         store.reviews = (store.reviews || 0) + 1;
         await updateStore(store);
       }
+      
+      // 사용자의 리뷰수+1 해주는 함수
+      
+      // 업로드 성공 시
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // 3. 해당 유저 찾아서 postCount 증가
+      currentUser.reviewCount = (currentUser.reviewCount || 0) + 1;
+      users = users.map(user => {
+        if (user.id === currentUser.id) {
+          return { ...user, reviewCount: currentUser.reviewCount };
+        }
+        return user;
+      });
+
+      // 4. localStorage에 업데이트
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      localStorage.setItem('users', JSON.stringify(users));
+      // 글 목록 페이지로 이동
+      console.log("저장됨:", post); //디버깅용
+      
 
       location.href = `SearchPage (review).html?id=${storeId}`;
     }
