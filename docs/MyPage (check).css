@@ -525,7 +525,7 @@ a {
   font-family: var(--body-strong-font-family, "Inter", Helvetica);
   font-weight: var(--body-base-font-family, "Inter", Helvetica);
   color: #000000;
-  font-size: 0.7rem;
+  font-size: clamp(9.7px, 0.8vw, 13.4px);
   text-align: left;
   letter-spacing: 0;
   line-height: 139.9999976158142%;
@@ -1469,47 +1469,7 @@ footer {
 }
 }
 
-/* aside 관련 */
-@media (max-width: 1119.98px){
-.account-description {
-  position: relative;
-  width: 90%;
-  height: 5.4vh;
-  font-family: var(--body-strong-font-family, "Inter", Helvetica);
-  font-weight: var(--body-base-font-family, "Inter", Helvetica);
-  color: #000000;
-  font-size: 0.6rem;
-  text-align: left;
-  letter-spacing: 0;
-  line-height: 139.9999976158142%;
-  font-style: normal;
-  display:flex;
-  flex-direction: column;
-  align-items: left;
-  padding:0 0.5vw;
-  gap:0.5vw;
-}
-}
-@media (min-width: 1120px) and (max-width: 1200px) {
-.account-description {
-  position: relative;
-  width: 90%;
-  height: 5.4vh;
-  font-family: var(--body-strong-font-family, "Inter", Helvetica);
-  font-weight: var(--body-base-font-family, "Inter", Helvetica);
-  color: #000000;
-  font-size: 0.7rem;
-  text-align: left;
-  letter-spacing: 0;
-  line-height: 139.9999976158142%;
-  font-style: normal;
-  display:flex;
-  flex-direction: column;
-  align-items: left;
-  padding:0 0.7vw;
-  gap:0.5vw;
-}
-}
+ 
 
 /* aside2 별점순/리뷰순/단골순 */
 @media (min-width: 1025px) {

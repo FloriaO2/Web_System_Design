@@ -120,7 +120,7 @@
                     </div>
                   </div>
                   <div class="p">
-                    <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                    <div class="store-simple-info"></div>
                     <div class="personal-check search-margin-bottom">
                       <button type="button" class="heart-button" >
                         <!--<img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>-->
@@ -204,7 +204,7 @@
         document.querySelector('.store-name').textContent = store.name;
         document.querySelector('.element').textContent = store.rating.toFixed(1);
         document.querySelector('.store-simple-info').textContent =
-          `${store.type} | 학교 기준 ${store.distance}분 | ${store.price.toLocaleString()}원`;
+          `${store.type} | 학교 기준 도보 ${store.distance}분 | ${store.price.toLocaleString()}원`;
 
         renderStars(store.rating);
       })

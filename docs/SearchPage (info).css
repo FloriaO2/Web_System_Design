@@ -500,7 +500,7 @@ a {
   font-family: var(--body-strong-font-family, "Inter", Helvetica);
   font-weight: var(--body-base-font-family, "Inter", Helvetica);
   color: #000000;
-  font-size: 0.7rem;
+  font-size: clamp(9.7px, 0.8vw, 13.4px);
   text-align: left;
   letter-spacing: 0;
   line-height: 139.9999976158142%;
@@ -749,7 +749,7 @@ p {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 139.9999976158142%;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .personal-check {
@@ -955,6 +955,43 @@ p {
   display: flex;
   align-items: center;
   height:2rem;
+}
+
+.pin-map {
+  font-size: 25px;
+  margin-top:5px;
+  font-weight: 900;
+  margin-bottom:5px;
+}
+
+.pin-map::part(base) {
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.global {
+  font-size: 25px;
+  margin-top:5px;
+  font-weight: 900;
+}
+
+.global::part(base) {
+  background: linear-gradient(135deg, #4a90e2, #9013fe);
+  border-radius: 8px;
+  padding: 5px;
+  color: white;
+}
+
+.instagram {
+  font-size: 25px;
+  margin-top:5px;
+}
+
+.instagram::part(base) {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border-radius: 8px;
+  padding: 5px;
+  color: white;
 }
 
 .info-image {
@@ -1519,47 +1556,7 @@ footer {
 }
 }
 
-/* aside 관련 */
-@media (max-width: 1119.98px){
-.account-description {
-  position: relative;
-  width: 90%;
-  height: 5.4vh;
-  font-family: var(--body-strong-font-family, "Inter", Helvetica);
-  font-weight: var(--body-base-font-family, "Inter", Helvetica);
-  color: #000000;
-  font-size: 0.6rem;
-  text-align: left;
-  letter-spacing: 0;
-  line-height: 139.9999976158142%;
-  font-style: normal;
-  display:flex;
-  flex-direction: column;
-  align-items: left;
-  padding:0 0.5vw;
-  gap:0.5vw;
-}
-}
-@media (min-width: 1120px) and (max-width: 1200px) {
-.account-description {
-  position: relative;
-  width: 90%;
-  height: 5.4vh;
-  font-family: var(--body-strong-font-family, "Inter", Helvetica);
-  font-weight: var(--body-base-font-family, "Inter", Helvetica);
-  color: #000000;
-  font-size: 0.7rem;
-  text-align: left;
-  letter-spacing: 0;
-  line-height: 139.9999976158142%;
-  font-style: normal;
-  display:flex;
-  flex-direction: column;
-  align-items: left;
-  padding:0 0.7vw;
-  gap:0.5vw;
-}
-}
+ 
 
 /* aside2 별점순/리뷰순/단골순 */
 @media (min-width: 1025px) {
@@ -1649,7 +1646,7 @@ footer {
 .card-image {
   position: relative;
   background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 130px;
+  width: clamp(140px, 33vw, 200px);
   height: 130px;
   background-size: cover;
   background-position: 50% 50%;
@@ -1954,6 +1951,43 @@ p {
   top:-0.25vh;
   color:black;
   text-decoration: none;
+}
+
+.pin-map {
+  font-size: clamp(10px, 3.8vw, 25px);
+  margin-top:5px;
+  font-weight: 900;
+  margin-bottom:5px;
+}
+
+.pin-map::part(base) {
+  border-radius: 8px;
+  padding: clamp(4px, 1.2vw, 8px);
+}
+
+.global {
+  font-size: clamp(10px, 3.8vw, 25px);
+  margin-top:5px;
+  font-weight: 900;
+}
+
+.global::part(base) {
+  background: linear-gradient(135deg, #4a90e2, #9013fe);
+  border-radius: 8px;
+  padding: clamp(4px, 1.2vw, 8px);
+  color: white;
+}
+
+.instagram {
+  font-size: clamp(10px, 3.8vw, 25px);
+  margin-top:5px;
+}
+
+.instagram::part(base) {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border-radius: 8px;
+  padding: clamp(4px, 1.2vw, 8px);
+  color: white;
 }
 }
 @media (min-width: 660px) and (max-width: 767.98px){
@@ -2438,7 +2472,7 @@ p {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 139.9999976158142%;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .personal-check {

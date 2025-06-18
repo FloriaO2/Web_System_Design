@@ -117,7 +117,7 @@
                     </div>
                   </div>
                   <div class="p">
-                    <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
+                    <div class="store-simple-info"></div>
                     <div class="personal-check search-margin-bottom">
                       <button type="button" class="heart-button" >
                         <!--<img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>-->
@@ -151,7 +151,15 @@
               <div class="info-right">
                 <div id="info-navigation">
                   <img class="info-image" src="image/navigation.png" />
-                  <a class="info-text" href="#">찾아가는 길</a>
+                  <div class="info-text">길찾기</div>
+                  <a target="_blank" aria-label="길찾기">
+                    <sl-icon-button 
+                      class="pin-map" 
+                      name="link-45deg" 
+                      label="pin-map" 
+                      style="width: 60px;">
+                    </sl-icon-button>
+                  </a>
                 </div>
                 <div id="info-time">
                   <img class="info-image" src="image/time.png" />
@@ -159,7 +167,7 @@
                 </div>
                 <div id="info-etc">
                   <img class="info-image" src="image/information.png" />
-                  <div class="info-text">기타 정보</div>
+                  <div class="info-text etc-text">기타 정보</div>
                 </div>
               </div>
             </div>
@@ -240,7 +248,7 @@
           const lng = parseFloat(targetPlace.x);
           console.log("위도:", lat, "경도:", lng);
         }
-        const infoLink = document.querySelector('#info-navigation .info-text');
+        const infoLink = document.querySelector('#info-navigation a');
         if (infoLink) {
           infoLink.href = `https://map.kakao.com/link/from/7813439/to/${store.id}`;
           infoLink.target = '_blank';
@@ -321,10 +329,56 @@
       document.querySelector('#info-time .info-text').textContent = store.time || '운영 시간 정보 없음';
       document.querySelector('#info-etc .info-text').textContent = store.etc || '기타 정보 없음';
 
+      if (storeId === "13133901" || storeId === "1007703563")
+      {
+        const etcContainer = document.querySelector('#info-etc .info-text');
+        etcContainer.textContent = '';
+
+        // 링크 요소 생성
+        const link = document.createElement("a");
+        link.href = store.etc;
+        link.target = "_blank"; // 새 창에서 열기
+        link.setAttribute("aria-label", "설정 페이지로 이동");
+
+        // 아이콘 버튼 생성
+        const iconButton = document.createElement("sl-icon-button");
+        iconButton.classList.add("global");
+        iconButton.setAttribute("name", "globe2");
+        iconButton.setAttribute("label", "globe2");
+        iconButton.style.width="60px";
+
+        // 링크 안에 아이콘 넣기
+        link.appendChild(iconButton);
+        etcContainer.appendChild(link);
+      }
+
+      if (storeId === "27189950")
+      {
+        const etcContainer = document.querySelector('#info-etc .info-text');
+        etcContainer.textContent = '';
+
+        // 링크 요소 생성
+        const link = document.createElement("a");
+        link.href = store.etc;
+        link.target = "_blank"; // 새 창에서 열기
+        link.setAttribute("aria-label", "설정 페이지로 이동");
+
+        // 아이콘 버튼 생성
+        const iconButton = document.createElement("sl-icon-button");
+        iconButton.classList.add("instagram");
+        iconButton.setAttribute("name", "instagram");
+        iconButton.setAttribute("label", "instagram");
+        iconButton.style.width="60px";
+
+        // 링크 안에 아이콘 넣기
+        link.appendChild(iconButton);
+        etcContainer.appendChild(link);
+      }
+
       document.querySelector('.store-name').textContent      = store.name;
       document.querySelector('.element').textContent         = store.rating.toFixed(1);
       document.querySelector('.store-simple-info').textContent =
-        `${store.type} | 학교 기준 ${store.distance}분 | ${store.price.toLocaleString()}원`;
+        `${store.type} | 학교 기준 도보 ${store.distance}분 | ${store.price.toLocaleString()}원`;
 
       renderStars(store.rating);                 // 별점 이미지
     })
