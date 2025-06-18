@@ -122,8 +122,9 @@
                   <div class="p">
                     <div class="store-simple-info">음식 종류 | 학교 기준 도보거리 | 가격대</div>
                     <div class="personal-check search-margin-bottom">
-                      <button type="button" class="heart-button">
-                        <img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>
+                      <button type="button" class="heart-button" >
+                        <!--<img src="image/heart.png" alt="찜한 가게" id="personal-heart-img"/>-->
+                        <div id="personal-heart-img">🤍</div>
                         <span id="personal-heart">찜한 가게</span>
                       </button>
                       <button type="button" class="bookmark-button">
@@ -273,8 +274,6 @@
       document.querySelector('#go-to-info'  ).href = `SearchPage (info).html?id=${storeId}`;
       document.querySelector('#go-to-menu'  ).href = `SearchPage (menu).html?id=${storeId}`;
       document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
-      
-      
 
       document.querySelector('.store-name').textContent      = store.name;
       document.querySelector('.element').textContent         = store.rating.toFixed(1);
@@ -370,11 +369,8 @@ function isFavorited(storeId, userId) {
 function updateHeartIcon(isFav) {
   const heartImg = document.getElementById('personal-heart-img');
   if (!heartImg) return;
-  if (isFav) {
-    heartImg.innerHTML = "❤️";
-  } else {
-    heartImg.innerHTML = "🤍";
-  }
+
+  heartImg.textContent = isFav ? "❤️" : "🤍";
 }
 
 // 찜 추가/제거 함수
@@ -826,16 +822,36 @@ window.addEventListener('DOMContentLoaded', () => {
     </script>
 
 
-    <script>//////////////검색 키워드 전달///////////
-document.getElementById("search-btn").addEventListener("click", () => {
-  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
-  if (keyword) {
-    location.href = `SearchPage.html?keyword=${keyword}`;
-  } else {
-    alert("검색어를 입력하세요.");
+    <script>
+  // 공통 검색 함수
+  function handleSearch() {
+    const keywordInput = document.getElementById("search-form");
+    const keyword = encodeURIComponent(keywordInput.value.trim());
+
+    if (keyword) {
+      location.href = `SearchPage.html?keyword=${keyword}`;
+    } else {
+      alert("검색어를 입력하세요.");
+    }
   }
-});
-    </script>
+
+  // 버튼 클릭 시
+  document.getElementById("search-btn").addEventListener("click", handleSearch);
+
+  // 이미지 클릭 시 (작은 화면에서만)
+  document.getElementById("search-img").addEventListener("click", () => {
+    if (window.innerWidth <= 1024.98) {
+      handleSearch();
+    }
+  });
+
+  // Enter 키로도 검색되게 (선택 사항)
+  document.getElementById("search-form").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  });
+</script>
 
     <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
     <script>
@@ -850,11 +866,6 @@ document.getElementById("search-btn").addEventListener("click", () => {
       });
   });
     </script>
-    <script>
-      window.onload = function () {
-        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
-        renderCards(stores); // 예시 함수
-      };
-    </script>
+     
   </body>
 </html>

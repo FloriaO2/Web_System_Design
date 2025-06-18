@@ -752,7 +752,7 @@ p {
 }
 
 #personal-heart-img {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -760,6 +760,16 @@ p {
   width: 19px;
   height: 19px;
   font-weight: 900;
+  text-shadow:
+  -0.5px -0.5px 0 rgba(0, 0, 0, 0.4),
+  0 -0.5px 0 rgba(0, 0, 0, 0.4),
+  0.5px -0.5px 0 rgba(0, 0, 0, 0.4),
+  -0.5px 0 0 rgba(0, 0, 0, 0.4),
+  0.5px 0 0 rgba(0, 0, 0, 0.4),
+  -0.5px 0.5px 0 rgba(0, 0, 0, 0.4),
+  0 0.5px 0 rgba(0, 0, 0, 0.4),
+  0.5px 0.5px 0 rgba(0, 0, 0, 0.4);
+  margin-bottom:0.4vh;
 }
 
 #personal-heart {

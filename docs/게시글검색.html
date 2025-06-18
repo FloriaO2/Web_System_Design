@@ -524,15 +524,35 @@
     });
     </script>
 
-    <script>//////////////검색 키워드 전달///////////
-document.getElementById("search-btn").addEventListener("click", () => {
-  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
-  if (keyword) {
-    location.href = `SearchPage.html?keyword=${keyword}`;
-  } else {
-    alert("검색어를 입력하세요.");
+    <script>
+  // 공통 검색 함수
+  function handleSearch() {
+    const keywordInput = document.getElementById("search-form");
+    const keyword = encodeURIComponent(keywordInput.value.trim());
+
+    if (keyword) {
+      location.href = `SearchPage.html?keyword=${keyword}`;
+    } else {
+      alert("검색어를 입력하세요.");
+    }
   }
-});
+
+  // 버튼 클릭 시
+  document.getElementById("search-btn").addEventListener("click", handleSearch);
+
+  // 이미지 클릭 시 (작은 화면에서만)
+  document.getElementById("search-img").addEventListener("click", () => {
+    if (window.innerWidth <= 1024.98) {
+      handleSearch();
+    }
+  });
+
+  // Enter 키로도 검색되게 (선택 사항)
+  document.getElementById("search-form").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  });
 </script>
           
           <!-- 여기까지 수정 완료 -->
@@ -585,11 +605,6 @@ document.getElementById("search-btn").addEventListener("click", () => {
       });
   });
     </script>
-    <script>
-      window.onload = function () {
-        // 모든 요소(이미지, 스타일 포함)가 로딩된 후 실행
-        renderCards(stores); // 예시 함수
-      };
-    </script>
+     
   </body>
 </html>

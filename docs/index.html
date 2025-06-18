@@ -212,7 +212,7 @@ function renderCards(list) {
       </div>
     `);
 
-    // 🔽 삽입된 카드 중 마지막 것의 이미지 div에 배경 설정
+    // 삽입된 카드 중 마지막 것의 이미지 div에 배경 설정
     const lastCardImage = box.querySelectorAll(".card .card-image");
     const currentImage = lastCardImage[lastCardImage.length - 1];
 
@@ -295,15 +295,35 @@ function makeStars(rating) {
 
     </script>
 
-    <script>//////////////검색 키워드 전달///////////
-document.getElementById("search-btn").addEventListener("click", () => {
-  const keyword = encodeURIComponent(document.getElementById("search-form").value.trim());
-  if (keyword) {
-    location.href = `SearchPage.html?keyword=${keyword}`;
-  } else {
-    alert("검색어를 입력하세요.");
-  }
-});
-</script>
+    <script>
+    // 공통 검색 함수
+    function handleSearch() {
+      const keywordInput = document.getElementById("search-form");
+      const keyword = encodeURIComponent(keywordInput.value.trim());
+
+      if (keyword) {
+        location.href = `SearchPage.html?keyword=${keyword}`;
+      } else {
+        alert("검색어를 입력하세요.");
+      }
+    }
+
+    // 버튼 클릭 시
+    document.getElementById("search-btn").addEventListener("click", handleSearch);
+
+    // 이미지 클릭 시 (작은 화면에서만)
+    document.getElementById("search-img").addEventListener("click", () => {
+      if (window.innerWidth <= 1024.98) {
+        handleSearch();
+      }
+    });
+
+    // Enter 키로도 검색되게 (선택 사항)
+    document.getElementById("search-form").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    });
+    </script>
   </body>
 </html>
