@@ -161,244 +161,62 @@
 
 
           
-    <script>////해당식당 불러오기///
-    let store_mainbody =[];
+    <script>
+  let store_mainbody = [];
 
-    window.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const storeId = urlParams.get('id');
 
-    /* 2) 여기서 JSON을 읽어‑온 뒤 기존 로직을 그대로 돌린다 */
-  fetch('stores.json')
-    .then(res => res.json())
-    .then(data => {
-      store_mainbody = data;                       
-      const store = store_mainbody.find(s => s.id === storeId);
-
-      if (!store) { alert('해당 가게를 찾을 수 없습니다.'); return; }
-
-      document.querySelector('.card-image').style.backgroundImage = `url(${store.image})`;
-
-      // ─── 기존 코드 그대로 유지 ───
-      document.querySelector('#go-to-info').href = `SearchPage (info).html?id=${storeId}`;
-      document.querySelector('#go-to-menu').href = `SearchPage (menu).html?id=${storeId}`;
-      document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
-      
-      document.querySelector('.store-name').textContent      = store.name;
-      document.querySelector('.element').textContent         = store.rating.toFixed(1);
-      document.querySelector('.store-simple-info').textContent =
-        `${store.type} | 학교 기준 ${store.distance}분 | ${store.price.toLocaleString()}원`;
-
-      const reviewLink = document.getElementById('review-link');
-
+    // review-link 클릭 이벤트 등록 (요소가 있으면)
+    const reviewLink = document.getElementById('review-link');
+    if (reviewLink) {
       reviewLink.addEventListener('click', () => {
         if (storeId) {
           window.location.href = `SearchPage (review-upload).html?id=${storeId}`;
         } else {
           alert('식당 ID가 없습니다.');
-          window.location.href = `SearchPage.html`
+          window.location.href = `SearchPage.html`;
         }
       });
-            renderStars(store.rating);        
-          })
-          .catch(err => console.error('JSON 로딩 실패:', err));
-    
-      });
+    } else {
+      console.warn('review-link 요소를 찾을 수 없습니다.');
+    }
 
+    // 가게 정보 JSON 로드 및 화면 렌더링
+    fetch('stores.json')
+      .then(res => res.json())
+      .then(data => {
+        store_mainbody = data;
+        const store = store_mainbody.find(s => s.id === storeId);
 
+        if (!store) {
+          alert('해당 가게를 찾을 수 없습니다.');
+          return;
+        }
 
-// 리뷰 생성하기
-// 전역에서 createReviewCard 함수 정의
-function createReviewCard(review) {
-  const card = document.createElement('div');
-  card.className = 'review-card';
+        document.querySelector('.card-image').style.backgroundImage = `url(${store.image})`;
 
-  let starsHtml = '';
-  const starCount = Math.round(review.rating);
-  for (let i = 1; i <= 5; i++) {
-    const starSrc = i <= starCount
-      ? "https://c.animaapp.com/kjYfscdy/img/star-60.svg"
-      : "https://c.animaapp.com/kjYfscdy/img/star-59.svg";
-    starsHtml += `<img class="small-star" src="${starSrc}" />`;
-  }
+        document.querySelector('#go-to-info').href = `SearchPage (info).html?id=${storeId}`;
+        document.querySelector('#go-to-menu').href = `SearchPage (menu).html?id=${storeId}`;
+        document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
 
-  let imagesHtml = '';
-  if (review.images && review.images.length > 0) {
-    imagesHtml = review.images
-      .map(src => `<div class="review-image"><img class="review-img" src="${src}" alt="리뷰 이미지" data-src="${src}" style="cursor:pointer" /></div>`)
-      .join('');
-  }
+        document.querySelector('.store-name').textContent = store.name;
+        document.querySelector('.element').textContent = store.rating.toFixed(1);
+        document.querySelector('.store-simple-info').textContent =
+          `${store.type} | 학교 기준 ${store.distance}분 | ${store.price.toLocaleString()}원`;
 
-  let innerHtml = '';
+        renderStars(store.rating);
+      })
+      .catch(err => console.error('JSON 로딩 실패:', err));
 
-  if (review.title && review.content) {
-    innerHtml = `
-      <div class="review-left-up">
-        <div class="small-rating">${starsHtml}</div>
-        <div class="review-text">${review.title}</div>
-      </div>
-      <div class="review-left-down" style="display:flex; align-items:flex-start; gap:0.5rem;">
-        <div id="review-writer" style="width: calc(20vh + 1vw);">${review.nickname}</div>
-        <div class="review-content">${review.content}</div>
-      </div>
-    `;
-  } else if (review.title && !review.content) {
-    innerHtml = `
-      <div class="review-left-up">
-        <div class="small-rating">${starsHtml}</div>
-        <div class="review-text">${review.title}</div>
-      </div>
-      <div class="review-left-down" style="display:flex; align-items:center; gap:0.5rem;">
-        <div id="review-writer" style="width: calc(20vh + 1.4vw);">${review.nickname}</div>
-      </div>
-    `;
-  } else if (!review.title && review.content) {
-    innerHtml = `
-      <div class="review-left-up" style="display:flex; align-items:flex-start; gap:0.5rem;">
-        <div class="small-rating">${starsHtml}</div>
-        <div class="review-content">${review.content}</div>
-      </div>
-      <div class="review-left-down" style="display:flex; align-items:center; gap:0.5rem;">
-        <div id="review-writer" style="width: calc(20vh + 1.4vw);">${review.nickname}</div>
-      </div>
-    `;
-  } else {
-    innerHtml = `
-      <div class="review-left-up" style="display:flex; align-items:center; gap:0.5rem;">
-        <div class="small-rating">${starsHtml}</div>
-      </div>
-      <div class="review-left-down" style="display:flex; align-items:center; gap:0.5rem;">
-        <div id="review-writer" style="width: calc(20vh + 1.4vw);">${review.nickname}</div>
-      </div>
-    `;
-  }
-
-  card.innerHTML = `
-    <div class="review-left">
-      ${innerHtml}
-    </div>
-    <div class="review-right">
-      ${imagesHtml}
-    </div>
-  `;
-
-  // 이미지 클릭 이벤트 붙이기 (여러 이미지 넘김 위해 배열과 인덱스 전달)
-  const imgs = card.querySelectorAll('.review-img');
-  const imageSrcs = review.images || [];
-
-  imgs.forEach((img, idx) => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => {
-      showModal(imageSrcs[idx], imageSrcs, idx);
-    });
-  });
-
-  return card;
-}
-
-// 모달 생성 및 표시 함수 (여러 이미지 지원 + 좌우 화살표)
-function showModal(imgSrc, allImgs, currentIndex) {
-  // 기존 모달 있으면 제거 (중복 방지)
-  let existingModal = document.getElementById('image-modal');
-  if (existingModal) {
-    existingModal.remove();
-  }
-
-  const modal = document.createElement('div');
-  modal.id = 'image-modal';
-  Object.assign(modal.style, {
-    position: 'fixed',
-    top: 0, left: 0,
-    width: '100vw', height: '100vh',
-    backgroundColor: 'rgba(0,0,0,0.8)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 10000,
-    cursor: 'zoom-out',
-  });
-
-  // 이미지 요소
-  const modalImg = document.createElement('img');
-  modalImg.src = imgSrc;
-  Object.assign(modalImg.style, {
-    maxWidth: '90vw',
-    maxHeight: '90vh',
-    borderRadius: '8px',
-    boxShadow: '0 0 15px rgba(0,0,0,0.5)',
-    cursor: 'default',
-  });
-  modal.appendChild(modalImg);
-
-  // 좌우 화살표 버튼 만들기
-  const leftArrow = document.createElement('div');
-  leftArrow.textContent = '◀';
-  Object.assign(leftArrow.style, {
-    position: 'absolute',
-    left: '2rem',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    fontSize: '3rem',
-    color: 'white',
-    userSelect: 'none',
-    cursor: 'pointer',
-    zIndex: 10001,
-  });
-  modal.appendChild(leftArrow);
-
-  const rightArrow = document.createElement('div');
-  rightArrow.textContent = '▶';
-  Object.assign(rightArrow.style, {
-    position: 'absolute',
-    right: '2rem',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    fontSize: '3rem',
-    color: 'white',
-    userSelect: 'none',
-    cursor: 'pointer',
-    zIndex: 10001,
-  });
-  modal.appendChild(rightArrow);
-
-  // 이미지 변경 함수
-  function updateImage(index) {
-    if (index < 0) index = allImgs.length - 1;
-    if (index >= allImgs.length) index = 0;
-    currentIndex = index;
-    modalImg.src = allImgs[currentIndex];
-  }
-
-  // 화살표 클릭 이벤트
-  leftArrow.addEventListener('click', (e) => {
-    e.stopPropagation(); // 모달 닫힘 방지
-    updateImage(currentIndex - 1);
-  });
-
-  rightArrow.addEventListener('click', (e) => {
-    e.stopPropagation();
-    updateImage(currentIndex + 1);
-  });
-
-  // 모달 클릭 시 닫기 (화살표 제외)
-  modal.addEventListener('click', () => {
-    modal.remove();
-  });
-
-  document.body.appendChild(modal);
-}
-
-  // DOMContentLoaded 시점에 실행
-  window.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const storeId = params.get('id');
-
+    // IndexedDB에서 리뷰 불러와 렌더링
     const container = document.querySelector('.review-main-content');
     const uploadButton = container.querySelector('.review-upload-button');
 
-    // 초기화 후 업로드 버튼만 다시 붙이기
+    // 리뷰 영역 초기화 후 업로드 버튼 다시 추가
     container.innerHTML = '';
-    container.appendChild(uploadButton);
+    if (uploadButton) container.appendChild(uploadButton);
 
     const request = indexedDB.open("ReviewDB", 1);
 
@@ -418,7 +236,6 @@ function showModal(imgSrc, allImgs, currentIndex) {
         }
 
         if (reviews.length === 0) {
-          // 리뷰 없을 때 메시지 출력
           const noReviewMsg = document.createElement('div');
           noReviewMsg.textContent = "작성된 리뷰가 없습니다.";
           noReviewMsg.classList.add('no-review-msg');
@@ -426,7 +243,6 @@ function showModal(imgSrc, allImgs, currentIndex) {
           noReviewMsg.style.padding = '2rem 0 3rem 0';
           container.appendChild(noReviewMsg);
         } else {
-          // 리뷰 카드 렌더링
           reviews.forEach(review => {
             const card = createReviewCard(review);
             container.appendChild(card);
@@ -436,8 +252,179 @@ function showModal(imgSrc, allImgs, currentIndex) {
     };
   });
 
+  // --- 이하 리뷰 카드 생성, 모달 등 함수는 기존 그대로 유지 ---
 
-          </script>
+  function createReviewCard(review) {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+
+    let starsHtml = '';
+    const starCount = Math.round(review.rating);
+    for (let i = 1; i <= 5; i++) {
+      const starSrc = i <= starCount
+        ? "https://c.animaapp.com/kjYfscdy/img/star-60.svg"
+        : "https://c.animaapp.com/kjYfscdy/img/star-59.svg";
+      starsHtml += `<img class="small-star" src="${starSrc}" />`;
+    }
+
+    let imagesHtml = '';
+    if (review.images && review.images.length > 0) {
+      imagesHtml = review.images
+        .map(src => `<div class="review-image"><img class="review-img" src="${src}" alt="리뷰 이미지" data-src="${src}" style="cursor:pointer" /></div>`)
+        .join('');
+    }
+
+    let innerHtml = '';
+
+    if (review.title && review.content) {
+      innerHtml = `
+        <div class="review-left-up">
+          <div class="small-rating">${starsHtml}</div>
+          <div class="review-text">${review.title}</div>
+        </div>
+        <div class="review-left-down" style="display:flex; align-items:flex-start; gap:0.5rem;">
+          <div id="review-writer" style="width: calc(20vh + 1vw);">${review.nickname}</div>
+          <div class="review-content">${review.content}</div>
+        </div>
+      `;
+    } else if (review.title && !review.content) {
+      innerHtml = `
+        <div class="review-left-up">
+          <div class="small-rating">${starsHtml}</div>
+          <div class="review-text">${review.title}</div>
+        </div>
+        <div class="review-left-down" style="display:flex; align-items:center; gap:0.5rem;">
+          <div id="review-writer" style="width: calc(20vh + 1.4vw);">${review.nickname}</div>
+        </div>
+      `;
+    } else if (!review.title && review.content) {
+      innerHtml = `
+        <div class="review-left-up" style="display:flex; align-items:flex-start; gap:0.5rem;">
+          <div class="small-rating">${starsHtml}</div>
+          <div class="review-content">${review.content}</div>
+        </div>
+        <div class="review-left-down" style="display:flex; align-items:center; gap:0.5rem;">
+          <div id="review-writer" style="width: calc(20vh + 1.4vw);">${review.nickname}</div>
+        </div>
+      `;
+    } else {
+      innerHtml = `
+        <div class="review-left-up" style="display:flex; align-items:center; gap:0.5rem;">
+          <div class="small-rating">${starsHtml}</div>
+        </div>
+        <div class="review-left-down" style="display:flex; align-items:center; gap:0.5rem;">
+          <div id="review-writer" style="width: calc(20vh + 1.4vw);">${review.nickname}</div>
+        </div>
+      `;
+    }
+
+    card.innerHTML = `
+      <div class="review-left">
+        ${innerHtml}
+      </div>
+      <div class="review-right">
+        ${imagesHtml}
+      </div>
+    `;
+
+    const imgs = card.querySelectorAll('.review-img');
+    const imageSrcs = review.images || [];
+
+    imgs.forEach((img, idx) => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        showModal(imageSrcs[idx], imageSrcs, idx);
+      });
+    });
+
+    return card;
+  }
+
+  function showModal(imgSrc, allImgs, currentIndex) {
+    let existingModal = document.getElementById('image-modal');
+    if (existingModal) {
+      existingModal.remove();
+    }
+
+    const modal = document.createElement('div');
+    modal.id = 'image-modal';
+    Object.assign(modal.style, {
+      position: 'fixed',
+      top: 0, left: 0,
+      width: '100vw', height: '100vh',
+      backgroundColor: 'rgba(0,0,0,0.8)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 10000,
+      cursor: 'zoom-out',
+    });
+
+    const modalImg = document.createElement('img');
+    modalImg.src = imgSrc;
+    Object.assign(modalImg.style, {
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      borderRadius: '8px',
+      boxShadow: '0 0 15px rgba(0,0,0,0.5)',
+      cursor: 'default',
+    });
+    modal.appendChild(modalImg);
+
+    const leftArrow = document.createElement('div');
+    leftArrow.textContent = '◀';
+    Object.assign(leftArrow.style, {
+      position: 'absolute',
+      left: '2rem',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      fontSize: '3rem',
+      color: 'white',
+      userSelect: 'none',
+      cursor: 'pointer',
+      zIndex: 10001,
+    });
+    modal.appendChild(leftArrow);
+
+    const rightArrow = document.createElement('div');
+    rightArrow.textContent = '▶';
+    Object.assign(rightArrow.style, {
+      position: 'absolute',
+      right: '2rem',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      fontSize: '3rem',
+      color: 'white',
+      userSelect: 'none',
+      cursor: 'pointer',
+      zIndex: 10001,
+    });
+    modal.appendChild(rightArrow);
+
+    function updateImage(index) {
+      if (index < 0) index = allImgs.length - 1;
+      if (index >= allImgs.length) index = 0;
+      currentIndex = index;
+      modalImg.src = allImgs[currentIndex];
+    }
+
+    leftArrow.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateImage(currentIndex - 1);
+    });
+
+    rightArrow.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateImage(currentIndex + 1);
+    });
+
+    modal.addEventListener('click', () => {
+      modal.remove();
+    });
+
+    document.body.appendChild(modal);
+  }
+</script>
 
      
 
@@ -623,67 +610,7 @@ function showModal(imgSrc, allImgs, currentIndex) {
     </div>
 
     
-    <!-- 카카오 지도 API -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0856d7f727e2cd5260da55ddd552d769&libraries=services"></script>
-    <script>
-    // 1. 지도를 생성할 기본 설정
-    const mapContainer = document.getElementById('map');
-    const mapOption = {
-      center: new kakao.maps.LatLng(37.5665, 126.9780), // 임시 중심
-      level: 3
-    };
-    const map = new kakao.maps.Map(mapContainer, mapOption);
-
-    // 2. 장소 검색 객체 생성
-    const ps = new kakao.maps.services.Places();
-
-    // 3. URL 파라미터에서 storeId 추출
-    const urlParams = new URLSearchParams(window.location.search);
-    const storeId = urlParams.get('id');
-
-    // 4. stores.json 에서 해당 storeId에 해당하는 식당 정보 찾기
-    fetch('stores.json')
-      .then(res => res.json())
-      .then(data => {
-        const store = data.find(s => s.id === storeId);
-        if (!store) {
-          alert('해당 가게를 찾을 수 없습니다.');
-          return;
-        }
-
-        const storeName = `${store.name} ${store.extraLocation}`;
-
-        // 5. 해당 식당 이름으로 카카오 장소 검색
-        ps.keywordSearch(storeName, function (data, status) {
-          if (status === kakao.maps.services.Status.OK) {
-            const place = data[0];
-            const lat = parseFloat(place.y);
-            const lng = parseFloat(place.x);
-            const coords = new kakao.maps.LatLng(lat, lng);
-
-            // 마커 표시
-            const marker = new kakao.maps.Marker({
-              map: map,
-              position: coords
-            });
-
-            // 인포윈도우 표시 (선택 사항)
-            const infowindow = new kakao.maps.InfoWindow({
-              content: `<div style="padding:5px;font-size:14px;">${place.place_name}</div>`
-            });
-            infowindow.open(map, marker);
-
-            // 지도 중심 이동
-            map.setCenter(coords);
-          } else {
-            alert('지도를 불러올 수 없습니다.');
-          }
-        });
-      })
-      .catch(err => {
-        console.error('가게 데이터를 불러오는 중 오류:', err);
-      });
-    </script>
+    
 
     
 
