@@ -252,32 +252,6 @@ a {
   margin-right: 4px;
 }
 
-/* 마우스를 갖다 댔을 때의 a 태그 */
-.nav-pills .nav-link:hover {
-  background-color: #a389ff41;
-  color: #000;
-}
-
-/* 활성화된 상태의 버튼 */
-.nav-pills .nav-link.active {
-  position: relative;
-  padding-left: 1.3vw !important;
-  background-color: #000 !important;
-}
-
-/* 활성화된 상태의 버튼에 체크 이미지 추가 */
-.nav-pills .nav-link.active::before {
-  content: "";
-  position: absolute;
-  left: 0.2vw;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.7vw;
-  height: 2.5vh;
-  background-image: url('image/check.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-}
 /*///////// aside 2 랭킹정렬 관련 css 추가. 여기부터 추가 전까지 복붙하면돼여/////////*/
 .store-list {
   list-style: none;
@@ -353,16 +327,14 @@ a {
 
 /* 활성화된 상태의 버튼에 체크 이미지 추가 */
 .nav-pills .nav-link.active::before {
-  content: "";
+  content: "✓";
   position: absolute;
-  left: 0.2vw;
-  top: 50%;
+  left: 0.4vw;
+  top: 48%;
   transform: translateY(-50%);
-  width: 1.7vw;
-  height: 2.5vh;
-  background-image: url('image/check.png');
-  background-repeat: no-repeat;
-  background-size: contain;
+  font-size: 1.2vw;
+  color: rgb(255, 255, 255);
+  font-weight: bold; /* 굵기 설정 (선택) */
 }
 
 .div2 {

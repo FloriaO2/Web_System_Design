@@ -85,7 +85,6 @@
               <li class="nav-item">
                 <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
-              
             </ul>
             <ul id="itemList">
             </ul>
@@ -123,10 +122,10 @@
                 <div class="dropdown-text">도보 거리</div>
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">2분 이내</a></li>
-                <li><a class="dropdown-item" href="#">4분 이내</a></li>
-                <li><a class="dropdown-item" href="#">6분 이내</a></li>
-                <li><a class="dropdown-item" href="#">6분 초과</a></li>
+                <li><a class="dropdown-item" href="#" data-type="time" data-value="2">2분 이내</a></li>
+                <li><a class="dropdown-item" href="#" data-type="time" data-value="4">4분 이내</a></li>
+                <li><a class="dropdown-item" href="#" data-type="time" data-value="6">6분 이내</a></li>
+                <li><a class="dropdown-item" href="#" data-type="time" data-value="6+">전체 도보거리</a></li>
               </ul>
             </div>
             <div class="dropdown">
@@ -135,34 +134,34 @@
                 <div class="dropdown-text">가격대</div>
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">7천원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1만원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1.2만원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1.4만원 이내</a></li>
-                <li><a class="dropdown-item" href="#">1.4만원 초과</a></li>
+                <li><a class="dropdown-item" href="#" data-type="price" data-value="6000">6천원 이내</a></li>
+                <li><a class="dropdown-item" href="#" data-type="price" data-value="9000">9천원 이내</a></li>
+                <li><a class="dropdown-item" href="#" data-type="price" data-value="12000">1.2만원 이내</a></li>
+                <li><a class="dropdown-item" href="#" data-type="price" data-value="15000">1.5만원 이내</a></li>
+                <li><a class="dropdown-item" href="#" data-type="price" data-value="15000+">전체 가격대</a></li>
               </ul>
             </div>
           </div>
           <div class="search-tag tags-removable" id="filter-tags"></div>
-            <!--<sl-tag size="medium" removable>양식</sl-tag>
-            <sl-tag size="medium" removable>간편식</sl-tag>
-            <sl-tag size="medium" removable>16분 이내</sl-tag>-->
-          
           <div class="div4">
+            <div class="AllList-area">
+              <button class="AllList">
+                <a id="showAllBtn">
+                  <img src="image/menu.png" class="AllList-img"/>
+                  <span style="margin-left:0.5vw; vertical-align: middle;">전체 식당 목록</span>
+                </a>
+              </button>
+            </div>
             <ul class="search-nav nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link" id="default-nav" data-bs-toggle="pill" aria-current="page" href="#">
-                  별점순
-                </a>
+                <a class="nav-link active"  data-bs-toggle="pill" aria-current="page" href="#" onclick="handleSortAside('rating')">
+                  별점순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#">리뷰순</a>
+                <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#">단골순</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" id="showAllBtn" data-bs-toggle="pill" href="#" >전체 식당 목록 보기</a>
+                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
               </li>
             </ul>
 
@@ -212,359 +211,342 @@
     let searchKeyword = urlParams.get("keyword")?.toLowerCase() || "";
 
     document.getElementById("search-form").addEventListener("input", function () {
-    searchKeyword = this.value.trim().toLowerCase(); // 검색어 저장
-    console.log("검색어:", searchKeyword);
-    renderStores(); //함수실행
-  });
-
-
-
-
- // 전체보기 버튼 클릭 시
-  function resetAndRenderAll() {
-  searchKeyword = "";
-  selectedFilters = {
-    type: [],
-    distance: null,
-    price: null
-  };
-  currentSort = "";
-  renderStores();
-}
-
-// 전체보기 버튼 클릭 시
-document.getElementById("showAllBtn").addEventListener("click", function(e) {
-  e.preventDefault();
-
-  // 페이지 이동
-  window.location.href = "SearchPage.html";
-});
-
-// 페이지 로드 시
-window.addEventListener("DOMContentLoaded", () => {
-  currentSort = "";  // 새로고침 후 별도 정렬이 지정되어있지 않다는 의미로 초기화
-
-  // URL에서 type 파라미터 읽기
-  const urlParams = new URLSearchParams(window.location.search);
-  const typeParam = urlParams.get("type");
-  if (typeParam) {
-    selectedFilters.type.push(typeParam);
-  }
-
-  const hasQuery = window.location.search.length > 0;
-
-  // nav-link의 active 초기화
-  document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
-
-  if (hasQuery) {
-    currentSort = "rating"; // 정렬 상태도 바꿔줘야 실제 정렬 작동
-    const ratingNav = Array.from(document.querySelectorAll(".search-nav .nav-link")).find(link =>
-      link.textContent.trim() === "별점순"
-    );
-    ratingNav?.classList.add("active");
-  } else {
-    // 아무 쿼리 없음 → 전체보기 활성화
-    document.getElementById("showAllBtn")?.classList.add("active");
-  }
-
-  renderStores();
-});
-
-  let stores = []; ////////////검색결과렌더링
-    fetch('stores.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('JSON 파일을 불러오지 못했어요.');
-    }
-    return response.json();
-  })
-  .then(data => {
-    stores = data; // 전역 변수에 데이터 저장
-    console.log(stores); // 디버깅용
-    renderStores(); // 초기 렌더링 호출
-  })
-  .catch(error => {
-    console.error('에러 발생:', error);
-  });
-
-
-
-let selectedFilters = {
-  type: [],
-  distance: null,
-  price: null
-};
-
-
-let currentSort = "rating";
-
-function generateStarImages(rating) {
-  const stars = [];
-  const fullStars = Math.floor(rating);
-  const half = rating - fullStars >= 0.5;
-  const emptyStars = 5 - fullStars - (half ? 1 : 0);
-
-  const fullSrc = "https://c.animaapp.com/kjYfscdy/img/star-60.svg";
-  const halfSrc = "https://c.animaapp.com/kjYfscdy/img/star-58.svg";
-  const emptySrc = "https://c.animaapp.com/kjYfscdy/img/star-59.svg";
-
-  for (let i = 0; i < fullStars; i++) {
-    stars.push(`<img class="star" src="${fullSrc}" />`);
-  }
-  if (half) {
-    stars.push(`<img class="star" src="${halfSrc}" />`);
-  }
-  for (let i = 0; i < emptyStars; i++) {
-    stars.push(`<img class="star" src="${emptySrc}" />`);
-  }
-
-  return stars.join("");
-}
-
-
-function renderStores() {
-  let filtered = [...stores];
-
-  // 필터 적용
-  if (selectedFilters.type.length > 0) {
-    filtered = filtered.filter(store => selectedFilters.type.includes(store.type));
-  }
-
-  if (selectedFilters.distance !== null) {
-    if (selectedFilters.distance === "16+") {
-      filtered = filtered.filter(store => store.distance > 16);
-    } else {
-      filtered = filtered.filter(store => store.distance <= selectedFilters.distance);
-    }
-  }
-
-  if (selectedFilters.price !== null) {
-    if (selectedFilters.price === "14000+") {
-      filtered = filtered.filter(store => store.price > 14000);
-    } else {
-      filtered = filtered.filter(store => store.price <= selectedFilters.price);
-    }
-  }
-
-  /* 검색어 필터 추가 ------------------------------ */
-  if (searchKeyword) {
-    filtered = filtered.filter(store =>
-      store.name.toLowerCase().includes(searchKeyword) ||
-      (store.menu?.some(m => m.name.toLowerCase().includes(searchKeyword)))
-    );
-  }
-  /* ------------------------------------------------ */
-
-  // 정렬 적용
-  filtered.sort((a, b) => {
-    if (currentSort === "rating") return b.rating - a.rating;
-    if (currentSort === "reviews") return b.reviews - a.reviews;
-    if (currentSort === "bookmark") return b.bookmark - a.bookmark;
-    return 0;
-  });
-
-  const container = document.getElementById("cards-container");
-  container.style.display="flex";
-  container.style.alignItems="center";
-  container.innerHTML = "";
-
-  if (filtered.length === 0) {
-  const noResult = document.createElement("div");
-  noResult.textContent = "검색 결과가 없습니다.";
-  noResult.style.textAlign = "center";
-  noResult.style.padding = "2em";
-  noResult.style.color = "#666";
-  noResult.style.fontSize = "1.3vw";
-
-  container.appendChild(noResult);
-
-  // active 초기화
-  document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
-
-  // currentSort가 비어있으면 전체보기 버튼에 active (초기 상태)
-  if (!currentSort) {
-    document.getElementById("default-nav")?.classList.add("active");
-  } else {
-    // currentSort에 맞는 nav-link에 active 추가
-    const navLinks = document.querySelectorAll(".search-nav .nav-link");
-    navLinks.forEach(link => {
-      const text = link.textContent.trim();
-      if (
-        (text === "별점순" && currentSort === "rating") ||
-        (text === "리뷰순" && currentSort === "reviews") ||
-        (text === "단골순" && currentSort === "bookmark")
-      ) {
-        link.classList.add("active");
-      }
+        searchKeyword = this.value.trim().toLowerCase();
+        console.log("검색어:", searchKeyword);
+        renderStores();
     });
-  }
-  return;
-}
-else {
-  filtered.forEach(store => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <div class="card-image"></div>
-      <div class="body">
-        <div class="text">
-          <div class="store-name">${store.name}</div>
-          <div class="rating">
-            <div class="rating2">
-              ${generateStarImages(store.rating)}
-            </div>
-            <div class="element">${store.rating.toFixed(1)}</div>
-          </div>
-          <p class="p">
-            <span class="store-simple-info">
-              ${store.type} | ${store.distance}분 거리 | ${store.price.toLocaleString()}원<br /><br />
-            </span>
-            <a class="go-to-searchPage" href="SearchPage (info).html?id=${store.id}">상세정보 보기</a>
-          </p>
-        </div>
-      </div>
-    `;
 
-    // .card-image에 배경 이미지 설정
-    const imageDiv = card.querySelector(".card-image");
-    if (imageDiv && store.image) {
-      imageDiv.style.backgroundImage = `url(${store.image})`;
-      imageDiv.style.backgroundSize = "cover";
-      imageDiv.style.backgroundPosition = "center";
+    function resetAndRenderAll() {
+        searchKeyword = "";
+        selectedFilters = {
+            type: [],
+            distance: null,
+            price: null
+        };
+        currentSort = "";
+        renderStores();
     }
 
-    container.appendChild(card);
-  });
+    document.getElementById("showAllBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        window.location.href = "SearchPage.html";
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+        currentSort = "rating";
+
+    // '별점순' 탭만 active로 만들기
+    document.querySelectorAll(".search-nav .nav-link").forEach(link => {
+        const text = link.textContent.trim();
+        if (text === "별점순") {
+            link.classList.add("active");
+        } else {
+            link.classList.remove("active");
+        }
+    });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const typeParam = urlParams.get("type");
+        if (typeParam) {
+            selectedFilters.type.push(typeParam);
+        }
+
+        renderStores();
+    });
+
+    let stores = [];
+    fetch('stores.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('JSON 파일을 불러오지 못했어요.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            stores = data;
+            console.log(stores);
+            renderStores();
+        })
+        .catch(error => {
+            console.error('에러 발생:', error);
+        });
+
+    let selectedFilters = {
+        type: [],
+        distance: null,
+        price: null
+    };
+
+    let currentSort = "rating";
+
+    function generateStarImages(rating) {
+        const stars = [];
+        const fullStars = Math.floor(rating);
+        const half = rating - fullStars >= 0.5;
+        const emptyStars = 5 - fullStars - (half ? 1 : 0);
+
+        const fullSrc = "https://c.animaapp.com/kjYfscdy/img/star-60.svg";
+        const halfSrc = "https://c.animaapp.com/kjYfscdy/img/star-58.svg";
+        const emptySrc = "https://c.animaapp.com/kjYfscdy/img/star-59.svg";
+
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(`<img class="star" src="${fullSrc}" />`);
+        }
+        if (half) {
+            stars.push(`<img class="star" src="${halfSrc}" />`);
+        }
+        for (let i = 0; i < emptyStars; i++) {
+            stars.push(`<img class="star" src="${emptySrc}" />`);
+        }
+
+        return stars.join("");
+    }
+
+    function renderStores() {
+    let filtered = [...stores];
+
+    if (selectedFilters.type.length > 0) {
+        filtered = filtered.filter(store => selectedFilters.type.includes(store.type));
+    }
+
+    if (selectedFilters.distance !== null) {
+        if (selectedFilters.distance === "16+" || selectedFilters.distance === "8+") {
+            filtered = filtered.filter(store => store.distance > parseInt(selectedFilters.distance));
+        } else if (selectedFilters.distance === "6+") {
+            // 전체 도보거리: 필터링 없음
+        } else {
+            filtered = filtered.filter(store => store.distance <= selectedFilters.distance);
+        }
+    }
+
+    if (selectedFilters.price !== null) {
+        if (selectedFilters.price === "14000+" || selectedFilters.price === "15000+") {
+            filtered = filtered.filter(store => store.price > 14000);
+        } else {
+            filtered = filtered.filter(store => store.price <= selectedFilters.price);
+        }
+    }
+
+    if (searchKeyword) {
+        filtered = filtered.filter(store =>
+            store.name.toLowerCase().includes(searchKeyword) ||
+            (store.menu?.some(m => m.name.toLowerCase().includes(searchKeyword)))
+        );
+    }
+
+    filtered.sort((a, b) => {
+        if (currentSort === "rating") return b.rating - a.rating;
+        if (currentSort === "reviews") return b.reviews - a.reviews;
+        if (currentSort === "bookmark") return b.bookmark - a.bookmark;
+        return 0;
+    });
+
+    // 태그는 항상 먼저 렌더링
+    renderTags();
+
+    const container = document.getElementById("cards-container");
+    container.style.display = "flex";
+    container.style.alignItems = "center";
+    container.innerHTML = "";
+
+    if (filtered.length === 0) {
+        const noResult = document.createElement("div");
+        noResult.className = "no-result";
+        noResult.textContent = "검색 결과가 없습니다.";
+
+        container.appendChild(noResult);
+
+        document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
+        if (!currentSort) {
+            document.getElementById("default-nav")?.classList.add("active");
+        } else {
+            const navLinks = document.querySelectorAll(".search-nav .nav-link");
+            navLinks.forEach(link => {
+                const text = link.textContent.trim();
+                if (
+                    (text === "별점순" && currentSort === "rating") ||
+                    (text === "리뷰순" && currentSort === "reviews") ||
+                    (text === "단골순" && currentSort === "bookmark")
+                ) {
+                    link.classList.add("active");
+                }
+            });
+        }
+
+        return; // 여기서 종료되더라도 위에서 이미 renderTags() 호출됨
+    }
+
+    // 결과 있으면 카드 출력
+    filtered.forEach(store => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <div class="card-image"></div>
+            <div class="body">
+                <div class="text">
+                    <div class="store-name">${store.name}</div>
+                    <div class="rating">
+                        <div class="rating2">
+                            ${generateStarImages(store.rating)}
+                        </div>
+                        <div class="element">${store.rating.toFixed(1)}</div>
+                    </div>
+                    <p class="p">
+                        <span class="store-simple-info">
+                            ${store.type} | ${store.distance}분 거리 | ${store.price.toLocaleString()}원<br /><br />
+                        </span>
+                        <a class="go-to-searchPage" href="SearchPage (info).html?id=${store.id}">상세정보 보기</a>
+                    </p>
+                </div>
+            </div>`;
+
+        const imageDiv = card.querySelector(".card-image");
+        if (imageDiv && store.image) {
+            imageDiv.style.backgroundImage = `url(${store.image})`;
+            imageDiv.style.backgroundSize = "cover";
+            imageDiv.style.backgroundPosition = "center";
+        }
+
+        container.appendChild(card);
+    });
 }
-renderTags();
-}
-
-
-
 
 function renderTags() {
-  const tagContainer = document.getElementById("filter-tags");
-  tagContainer.innerHTML = "";
+    const tagContainer = document.getElementById("filter-tags");
+    tagContainer.innerHTML = "";
 
-  selectedFilters.type.forEach(type => {
-    const tag = createTagElement(type, "type");
-    tagContainer.appendChild(tag);
-  });
+    selectedFilters.type.forEach(type => {
+        const tag = createTagElement(type, "type");
+        tagContainer.appendChild(tag);
+    });
 
-  if (selectedFilters.distance !== null) {
-    const text = selectedFilters.distance === "16+" ? "16분 초과" : `${selectedFilters.distance}분 이내`;
-    const tag = createTagElement(text, "distance");
-    tagContainer.appendChild(tag);
-  }
+    if (selectedFilters.distance !== null) {
+        let text;
+        if (selectedFilters.distance === "6+") {
+            text = "전체 도보거리";
+        } else if (selectedFilters.distance === "16+" || selectedFilters.distance === "8+") {
+            text = `${selectedFilters.distance.replace('+', '')}분 초과`;
+        } else {
+            text = `${selectedFilters.distance}분 이내`;
+        }
+        const tag = createTagElement(text, "distance");
+        tagContainer.appendChild(tag);
+    }
 
-  if (selectedFilters.price !== null) {
-    const text = selectedFilters.price === "14000+" ? "1.4만원 초과" : `${(selectedFilters.price / 10000).toFixed(1)}만원 이내`;
+    if (selectedFilters.price !== null) {
+    let text;
+    if (selectedFilters.price === 1000000) {
+        text = "전체 가격대";
+    } else if (selectedFilters.price === "15000+" || selectedFilters.price === "14000+") {
+        text = "1.4만원 초과";
+    } else {
+        text = `${(selectedFilters.price / 10000).toFixed(1)}만원 이내`;
+    }
     const tag = createTagElement(text, "price");
     tagContainer.appendChild(tag);
-  }
-
-  // 모든 필터가 제거되었을 때 URL도 초기화
-if (
-  selectedFilters.type.length === 0 &&
-  selectedFilters.distance === null &&
-  selectedFilters.price === null
-) {
-  // 검색어도 비어 있는지 확인 (원한다면)
-  const searchParams = new URLSearchParams(window.location.search);
-  const hasKeyword = searchParams.has("keyword");
-  const hasTypeParam = searchParams.has("type");
-
-  // URL 완전히 초기화 (파라미터 및 해시 제거)
-  if (!hasKeyword && !hasTypeParam) {
-    history.replaceState(null, "", "SearchPage.html");
-  }
 }
+
+    if (
+        selectedFilters.type.length === 0 &&
+        selectedFilters.distance === null &&
+        selectedFilters.price === null
+    ) {
+        const searchParams = new URLSearchParams(window.location.search);
+        const hasKeyword = searchParams.has("keyword");
+        const hasTypeParam = searchParams.has("type");
+
+        if (!hasKeyword && !hasTypeParam) {
+            history.replaceState(null, "", "SearchPage.html");
+        }
+    }
 }
 
 function createTagElement(text, category) {
-  const tag = document.createElement("sl-tag");
-  tag.setAttribute("size", "medium");
-  tag.setAttribute("removable", "");
-  tag.innerText = text;
-  tag.addEventListener("sl-remove", () => {
-    if (category === "type") {
-      selectedFilters.type = selectedFilters.type.filter(t => t !== text);
+    const tag = document.createElement("sl-tag");
+    tag.setAttribute("size", "medium");
+    tag.setAttribute("removable", "");
+
+    // 전체 도보거리, 전체 가격대 텍스트 처리
+    if (category === "distance" && text.includes("전체 도보거리")) {
+        tag.innerText = "전체 도보거리";
+    } else if (category === "price" && text.includes("전체 가격대")) {
+        tag.innerText = "전체 가격대";
     } else {
-      selectedFilters[category] = null;
+        tag.innerText = text;
     }
-    renderStores();
-  });
-  return tag;
+
+    tag.addEventListener("sl-remove", () => {
+        if (category === "type") {
+            selectedFilters.type = selectedFilters.type.filter(t => t !== text);
+        } else {
+            selectedFilters[category] = null;
+        }
+        renderStores();
+    });
+    return tag;
 }
 
-// 드롭다운 클릭 이벤트
 document.querySelectorAll(".dropdown-menu a").forEach(item => {
-  item.addEventListener("click", function () {
-    const category = this.closest(".dropdown").querySelector(".dropdown-text").textContent.trim();
-    const value = this.textContent.trim();
+    item.addEventListener("click", function () {
+        const category = this.closest(".dropdown").querySelector(".dropdown-text").textContent.trim();
+        const value = this.textContent.trim();
 
-    if (category === "음식 종류") {
-      if (!selectedFilters.type.includes(value)) {
-        selectedFilters.type.push(value);
-      }
-    } else if (category === "도보 거리") {
-      if (value === "8분 초과") {
-        selectedFilters.distance = "8+";
-      } else {
-        selectedFilters.distance = parseInt(value);
-      }
-    } else if (category === "가격대") {
-      if (value === "1.4만원 초과") {
-        selectedFilters.price = "14000+";
-      } else {
-        selectedFilters.price = parseInt(value.replace("만원 이내", "").replace("천원 이내", "").replace(",", "").replace("원", "")) * (value.includes("만원") ? 10000 : 1000);
-      }
+        if (category === "음식 종류") {
+            if (!selectedFilters.type.includes(value)) {
+                selectedFilters.type.push(value);
+            }
+        } else if (category === "도보 거리") {
+            if (value === "전체 도보거리") {
+                selectedFilters.distance = "6+";
+            } else {
+                selectedFilters.distance = parseInt(value);
+            }
+        } else if (category === "가격대") {
+          if (value === "전체 가격대") {
+            selectedFilters.price = 1000000;
+          } else {
+            selectedFilters.price = Math.round(parseFloat(value.replace("만원 이내", "").replace("천원 이내", "").replace(",", "").replace("원", "")) * (value.includes("만원") ? 10000 : 1000));
+          }
+        }
+
+        renderStores();
+    });
+});
+
+    document.querySelectorAll(".search-nav .nav-link").forEach(link => {
+        link.addEventListener("click", function () {
+            document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
+            this.classList.add("active");
+
+            const text = this.textContent.trim();
+            if (text === "별점순") currentSort = "rating";
+            if (text === "리뷰순") currentSort = "reviews";
+            if (text === "단골순") currentSort = "bookmark";
+
+            renderStores();
+        });
+    });
+
+    function renderAside(sortedArray) {
+        const top7 = sortedArray.slice(0, 7);
+        renderAsideStores(top7);
     }
 
-    renderStores();
-  });
-});
+    function handleSortAside(criteria) {
+        const sorted = getSortedStores(criteria);
+        renderAside(sorted);
+    }
 
-// 정렬 버튼 이벤트
-document.querySelectorAll(".search-nav .nav-link").forEach(link => {
-  link.addEventListener("click", function () {
-    document.querySelectorAll(".search-nav .nav-link").forEach(l => l.classList.remove("active"));
-    this.classList.add("active");
-
-    const text = this.textContent.trim();
-    if (text === "별점순") currentSort = "rating";
-    if (text === "리뷰순") currentSort = "reviews";
-    if (text === "단골순") currentSort = "bookmark";
-
-    renderStores();
-  });
-});
-
-// 초기 렌더링
-renderStores();
-</script>
-
-    <script>//aside2
-        function renderAside(sortedArray) {
-          const top7 = sortedArray.slice(0, 7);
-          renderAsideStores(top7);
-        }
-        function handleSortAside(criteria) {
-          const sorted = getSortedStores(criteria);
-          renderAside(sorted);
-        }
-
-         //sort 함수(aside2/mainbody 공통)
-        function getSortedStores(criteria = "rating") {
+    function getSortedStores(criteria = "rating") {
         return [...stores].sort((a, b) => {
-          if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
-
-          if (criteria === "rating")    return b.reviews - a.reviews || b.bookmark - a.bookmark;
-          if (criteria === "reviews")   return b.rating  - a.rating  || b.bookmark - a.bookmark;
-          if (criteria === "bookmark") return b.rating  - a.rating  || b.reviews  - a.reviews;
-          return 0;
+            if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
+            if (criteria === "rating") return b.reviews - a.reviews || b.bookmark - a.bookmark;
+            if (criteria === "reviews") return b.rating - a.rating || b.bookmark - a.bookmark;
+            if (criteria === "bookmark") return b.rating - a.rating || b.reviews - a.reviews;
+            return 0;
         });
-      }
+    }
+
 
       //asdide렌더링
         function renderAsideStores(sortedArray) {
@@ -760,7 +742,7 @@ renderStores();
     }
   });
 
-  // Enter 키로도 검색되게 (선택 사항)
+  // Enter 키로도 검색되게
   document.getElementById("search-form").addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       handleSearch();
