@@ -928,15 +928,6 @@ p {
   display: flex;
 }
 
-.menu-image {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 8.11vw;
-  height: 9.67vh;
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
 .menu-text {
   display: flex;
   flex-direction: column;
@@ -1907,15 +1898,6 @@ p {
   display: flex;
 }
 
-.menu-image {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 55px;
-  height: 50px;
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
 .menu-text {
   display: flex;
   flex-direction: column;
@@ -2244,15 +2226,6 @@ p {
   display: flex;
 }
 
-.menu-image {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 8.11vw;
-  height: 9.67vh;
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
 .menu-text {
   display: flex;
   flex-direction: column;
@@ -2578,15 +2551,6 @@ p {
 
 .menu-left {
   display: flex;
-}
-
-.menu-image {
-  position: relative;
-  background-image: url(https://c.animaapp.com/kjYfscdy/img/image-1.svg);
-  width: 8.11vw;
-  height: 9.67vh;
-  background-size: cover;
-  background-position: 50% 50%;
 }
 
 .menu-text {

@@ -396,7 +396,7 @@ function showModal(imgSrc, allImgs, currentIndex) {
     const container = document.querySelector('.review-main-content');
     const uploadButton = container.querySelector('.review-upload-button');
 
-    // 기존 내용 초기화 후 업로드 버튼만 다시 붙이기
+    // 초기화 후 업로드 버튼만 다시 붙이기
     container.innerHTML = '';
     container.appendChild(uploadButton);
 
@@ -413,21 +413,17 @@ function showModal(imgSrc, allImgs, currentIndex) {
       getAllRequest.onsuccess = () => {
         let reviews = getAllRequest.result;
 
-        // storeId로 필터링
         if (storeId) {
           reviews = reviews.filter(review => review.storeId === storeId);
         }
-
-        // 기존 리뷰카드 제거 (uploadButton은 남김)
-        const reviewCards = container.querySelectorAll('.review-card');
-        reviewCards.forEach(card => card.remove());
 
         if (reviews.length === 0) {
           // 리뷰 없을 때 메시지 출력
           const noReviewMsg = document.createElement('div');
           noReviewMsg.textContent = "작성된 리뷰가 없습니다.";
+          noReviewMsg.classList.add('no-review-msg');
           noReviewMsg.style.textAlign = 'center';
-          noReviewMsg.style.padding = '2rem 0';
+          noReviewMsg.style.padding = '2rem 0 3rem 0';
           container.appendChild(noReviewMsg);
         } else {
           // 리뷰 카드 렌더링
