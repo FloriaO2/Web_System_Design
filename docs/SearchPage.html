@@ -76,14 +76,13 @@
           <div class="simple-ranking">
             <ul class="nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link active"  data-bs-toggle="pill" aria-current="page" href="#" onclick="handleSortAside('rating')">
-                  별점순</a>
+                <a class="nav-link active" href="#" onclick="handleAsideSort(this, 'rating')">별점순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
+                <a class="nav-link" href="#" onclick="handleAsideSort(this, 'reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
+                <a class="nav-link" href="#" onclick="handleAsideSort(this, 'bookmark')">단골순</a>
               </li>
             </ul>
             <ul id="itemList">
@@ -154,14 +153,13 @@
             </div>
             <ul class="search-nav nav nav-pills">
               <li class="nav-item">
-                <a class="nav-link active"  data-bs-toggle="pill" aria-current="page" href="#" onclick="handleSortAside('rating')">
-                  별점순</a>
+                <a class="nav-link active" href="#" onclick="handleMainSort(this, 'rating')">별점순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="pill" href="#" onclick="handleSortAside('reviews')">리뷰순</a>
+                <a class="nav-link" href="#" onclick="handleMainSort(this, 'reviews')">리뷰순</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  data-bs-toggle="pill" href="#" onclick="handleSortAside('bookmark')">단골순</a>
+                <a class="nav-link" href="#" onclick="handleMainSort(this, 'bookmark')">단골순</a>
               </li>
             </ul>
 
@@ -536,56 +534,91 @@ document.querySelectorAll(".dropdown-menu a").forEach(item => {
         renderAsideStores(top7);
     }
 
-    function handleSortAside(criteria) {
-        const sorted = getSortedStores(criteria);
-        renderAside(sorted);
+    function handleAsideSort(clickedElement, criteria) {
+  // aside 쪽 nav-link들 active 제어
+  document.querySelectorAll('.simple-ranking .nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  clickedElement.classList.add('active');
+
+  // 정렬 로직 실행 및 렌더링
+  const sorted = getSortedStores(criteria);
+  renderAsideStores(sorted);
+}
+
+function handleMainSort(clickedElement, criteria) {
+  // search-nav 정렬 버튼만 active 클래스를 바꿈
+  document.querySelectorAll('.search-nav .nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  clickedElement.classList.add('active');
+
+  // 정렬 로직 실행
+  const sorted = getSortedStores(criteria);
+  renderStores(sorted); // 메인 영역용 렌더링
+}
+
+function getSortedStores(criteria = "rating") {
+  return [...store_aside2].sort((a, b) => {
+    if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
+
+    if (criteria === "rating") {
+      if (b.reviews !== a.reviews) return b.reviews - a.reviews;
+      if (b.bookmark !== a.bookmark) return b.bookmark - a.bookmark;
+    }
+    if (criteria === "reviews") {
+      if (b.rating !== a.rating) return b.rating - a.rating;
+      if (b.bookmark !== a.bookmark) return b.bookmark - a.bookmark;
+    }
+    if (criteria === "bookmark") {
+      if (b.rating !== a.rating) return b.rating - a.rating;
+      if (b.reviews !== a.reviews) return b.reviews - a.reviews;
     }
 
-    function getSortedStores(criteria = "rating") {
-        return [...stores].sort((a, b) => {
-            if (b[criteria] !== a[criteria]) return b[criteria] - a[criteria];
-            if (criteria === "rating") return b.reviews - a.reviews || b.bookmark - a.bookmark;
-            if (criteria === "reviews") return b.rating - a.rating || b.bookmark - a.bookmark;
-            if (criteria === "bookmark") return b.rating - a.rating || b.reviews - a.reviews;
-            return 0;
-        });
-    }
+    // id가 숫자라면 오름차순 정렬
+    return a.id - b.id;
+  });
+}
 
 
       //asdide렌더링
-        function renderAsideStores(sortedArray) {
-        const top7 = sortedArray.slice(0, 7);
-        const asideEl = document.getElementById("store-sort");
+      function renderAsideStores(sortedArray) {
+  const itemList = document.getElementById('store-sort'); // simple-ranking 내 ul#itemList
 
-        asideEl.innerHTML = `
-        <ul class="store-list">
-          ${top7.map((store, index) => `
-            <li class="store-item">
-              <div class="store-rank-name">
-                <div class="rank-circle">${index + 1}</div>
-                <span class="store-name-aside">${store.name}</span>
-              </div>
-              <span class="store-rating">
-                <img src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" style="width:20px; height:100%; margin-bottom:3px;" />
-                ${store.rating.toFixed(1)}
-              </span>
-            </li>
-          `).join('')}
-        </ul>
-      `;
-    }
+  if (!itemList) {
+    console.error('itemList 요소를 찾을 수 없습니다.');
+    return;
+  }
+
+  itemList.innerHTML = ''; // 기존 내용 비우기
+
+  const top7 = sortedArray.slice(0, 7);
+
+  itemList.innerHTML = top7.map((store, index) => `
+    <li class="store-item">
+      <div class="store-rank-name">
+        <div class="rank-circle">${index + 1}</div>
+        <span class="store-name-aside">${store.name}</span>
+      </div>
+      <span class="store-rating">
+        <img src="https://c.animaapp.com/kjYfscdy/img/star-60.svg" style="width:20px; height:100%; margin-bottom:3px;" />
+        ${store.rating.toFixed(1)}
+      </span>
+    </li>
+  `).join('');
+}
 
     
-         window.addEventListener('DOMContentLoaded', () => {/////////////(2) onload빼고 이거
-        fetch('stores.json')       
-          .then(res => res.json())
-          .then(data => {
-            store_aside2= data;
-            const sorted = getSortedStores("rating");
-            renderAsideStores(sorted);
-          })
-          .catch(err => console.error('JSON 로딩 실패:', err));
-      });/////////////aside2수정완료///////////////
+window.addEventListener('DOMContentLoaded', () => {
+  fetch('stores.json')
+    .then(res => res.json())
+    .then(data => {
+      store_aside2 = data;
+      const sorted = getSortedStores("rating");
+      renderAsideStores(sorted);
+    })
+    .catch(err => console.error('JSON 로딩 실패:', err));
+});/////////////aside2수정완료///////////////
 
 
 
