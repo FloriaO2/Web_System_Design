@@ -1569,7 +1569,7 @@ footer {
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  width: 60%;
+  width: auto;
   height: auto;
   min-width: 20.83vw;
   position: relative;
