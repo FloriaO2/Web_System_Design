@@ -387,23 +387,23 @@ window.addEventListener('DOMContentLoaded', () => {
   <script>
   const DB_NAME = 'MyStoreDB';
   const STORE_NAME = 'stores';
-  const DB_VERSION = 1;
+  const DB_VERSION = 2;
 
   // IndexedDB 열기 (DB와 objectStore 준비)
-  function openDB() {
+  // IndexedDB 열기 (DB와 objectStore 준비)
+function openDB() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("ReviewDB", 2); // 버전은 꼭 증가시켜야 함
-
-    request.onerror = () => reject(request.error);
-
-    request.onsuccess = () => resolve(request.result);
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      if (!db.objectStoreNames.contains("reviews")) {
-        db.createObjectStore("reviews", { keyPath: "id" });
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
       }
     };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
   });
 }
 
