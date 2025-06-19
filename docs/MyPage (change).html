@@ -594,6 +594,73 @@
       });
   });
     </script>
-     
+     <script>
+      // stores.json에서 데이터 가져와 IndexedDB에 저장 (초기화용)
+  async function initStoresInDB() {
+    const db = await openDB();
+
+    return new Promise(async (resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+
+      // 먼저 데이터가 이미 있는지 확인 (중복 저장 방지)
+      const countRequest = store.count();
+      countRequest.onsuccess = async () => {
+        if (countRequest.result > 0) {
+          // 이미 데이터가 있으니 초기화하지 않음
+          resolve();
+        } else {
+          try {
+            const response = await fetch('stores.json');
+            const stores = await response.json();
+
+            const txWrite = db.transaction(STORE_NAME, 'readwrite');
+            const storeWrite = txWrite.objectStore(STORE_NAME);
+
+            for (const s of stores) {
+              storeWrite.put(s);
+            }
+
+            txWrite.oncomplete = () => resolve();
+            txWrite.onerror = () => reject(txWrite.error);
+          } catch (err) {
+            reject(err);
+          }
+        }
+      };
+      countRequest.onerror = () => reject(countRequest.error);
+    });
+  }
+
+  // IndexedDB에서 특정 상점 데이터 가져오기
+  async function getStore(storeId) {
+    const db = await openDB();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+
+      const request = store.get(storeId);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  // IndexedDB에서 특정 상점 데이터 업데이트
+  async function updateStore(store) {
+  const db = await openDB();
+
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const storeObj = tx.objectStore(STORE_NAME);
+
+    const request = storeObj.put(store);
+    request.onerror = () => reject(request.error);
+
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+    </script>
   </body>
 </html>
