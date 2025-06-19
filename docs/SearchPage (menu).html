@@ -475,132 +475,114 @@ window.addEventListener('DOMContentLoaded', () => {
 }
 
   // localStorage에서 단골 가게 배열 불러오기
-  function getBookmarks() {
-    const bookmarks = localStorage.getItem('bookmarks');
-    return bookmarks ? JSON.parse(bookmarks) : [];
-    
-  }
-  function getUserBookmarks(userId) {//특정 사용자의 북마크만 반환
+function getBookmarks() {
+  const bookmarks = localStorage.getItem('bookmarks');
+  return bookmarks ? JSON.parse(bookmarks) : [];
+}
+
+// localStorage에 단골 가게 배열 저장하기
+function saveBookmarks(bookmarks) {
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+}
+
+// 단골 여부 확인 함수
+function isBookmarked(storeId) {
   const bookmarks = getBookmarks();
-  return bookmarks.filter(bm => bm.userId === userId).map(bm => bm.storeId);
+  return bookmarks.includes(storeId);
 }
 
-  // localStorage에 단골 가게 배열 저장하기
-  function saveBookmarks(bookmarks) {
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-  }
+// 북마크 아이콘 업데이트 함수 (채운/테두리)
+function updateBookmarkIcon(isBookmarked) {
+  const img = document.getElementById('bookmark-img');
+  if (!img) return;
 
-  // 단골 여부 확인 함수
- function isBookmarked(storeId) {
-    const userId=currentUser.id;
-    const bookmarks = getBookmarks();
-    return bookmarks.some(bm => bm.userId === userId && bm.storeId === storeId);
+  img.src = isBookmarked ? 'image/full-bookmark.png' : 'image/empty-bookmark.png';
 }
-  // 북마크 아이콘 업데이트 함수 (채운/테두리)
-  function updateBookmarkIcon(isBookmarked) {
-    const img = document.getElementById('bookmark-img');
-    if (!img) return;
 
-    img.src = isBookmarked ? 'image/full-bookmark.png' : 'image/empty-bookmark.png';
-  }
+// IndexedDB에서 단골 수 +1 해주는 함수
+async function incrementBookmarkCount(storeId) {
+  const store = await getStore(storeId);
+  if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
 
-  // IndexedDB에서 단골 수 +1 해주는 함수
-  async function incrementBookmarkCount(storeId) {
-    const store = await getStore(storeId);
-    if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
+  store.bookmark = (store.bookmark || 0) + 1;
+  await updateStore(store);
+}
 
-    store.bookmark = (store.bookmark || 0) + 1;
-    await updateStore(store);
-  }
+// IndexedDB에서 단골 수 -1 해주는 함수
+async function decrementBookmarkCount(storeId) {
+  const store = await getStore(storeId);
+  if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
 
-  // IndexedDB에서 단골 수 -1 해주는 함수
-  async function decrementBookmarkCount(storeId) {
-    const store = await getStore(storeId);
-    if (!store) throw new Error('가게 정보를 찾을 수 없습니다.');
+  store.bookmark = Math.max((store.bookmark || 1) - 1, 0);
+  await updateStore(store);
+}
 
-    store.bookmark = Math.max((store.bookmark || 1) - 1, 0);
-    await updateStore(store);
-  }
+// 클릭 시 단골 가게 추가/제거 토글 함수 (async)
+async function toggleBookmark(storeId) {
+  let bookmarks = getBookmarks();
 
-  async function toggleBookmark(storeId) {// 클릭 시 단골 가게 추가/제거 토글 함수 (async)
-  const userId = currentUser.id;
-  let bookmarks = getBookmarks(); // [{ userId, storeId }, ...]
-
-  // 현재 사용자의 북마크 중 해당 storeId가 있는지 검사
-  const exists = bookmarks.some(bm => bm.userId === userId && bm.storeId === storeId);
-
-  if (exists) {
-    // 제거
-    bookmarks = bookmarks.filter(bm => !(bm.userId === userId && bm.storeId === storeId));
+  if (bookmarks.includes(storeId)) {
+    bookmarks = bookmarks.filter(id => id !== storeId);
     saveBookmarks(bookmarks);
     alert('단골 가게에서 제거되었습니다.');
     updateBookmarkIcon(false);
-    console.log(`단골 제거됨 - userId: ${userId}, storeId: ${storeId}`);
-    console.log('현재 bookmarks:', bookmarks);
 
     try {
       await decrementBookmarkCount(storeId);
-      const updatedStore = await getStore(storeId);
-      console.log(`제거 후 IndexedDB 단골 수: ${updatedStore.bookmark}`);
+      console.log('IndexedDB 단골 수 -1 완료');
     } catch (err) {
       console.error(err);
     }
   } else {
-    // 추가
-    bookmarks.push({ userId, storeId });
+    bookmarks.push(storeId);
     saveBookmarks(bookmarks);
     alert('단골 가게에 추가되었습니다.');
     updateBookmarkIcon(true);
-    console.log(`단골 추가됨 - userId: ${userId}, storeId: ${storeId}`);
-    console.log('현재 bookmarks:', bookmarks);
 
     try {
       await incrementBookmarkCount(storeId);
-      const updatedStore = await getStore(storeId);
-      console.log(`추가 후 IndexedDB 단골 수: ${updatedStore.bookmark}`);
+      console.log('IndexedDB 단골 수 +1 완료');
     } catch (err) {
       console.error(err);
     }
   }
 }
 
+// 페이지 로드 시 현재 단골 여부에 따라 아이콘 초기화
+async function initBookmark(storeId) {
+  updateBookmarkIcon(isBookmarked(storeId));
+}
 
+(async () => {
+  try {
+    // IndexedDB 초기화 (중복 저장 방지)
+    await initStoresInDB();
 
-  // 페이지 로드 시 현재 단골 여부에 따라 아이콘 초기화
-  async function initBookmark(storeId) {
-    updateBookmarkIcon(isBookmarked(storeId));
-  }
+    // 실제 storeId
+    const params = new URLSearchParams(window.location.search);
+    const storeId = params.get('id');
 
-  (async () => {
-    try {
-      // IndexedDB 초기화 (중복 저장 방지)
-      await initStoresInDB();
-
-      // 실제 storeId
-      const params = new URLSearchParams(window.location.search);
-      const storeId = params.get('id');
-
-      if (!storeId) {
-        console.error('URL에 storeId가 없습니다.');
-        return;
-      }
-
-      // 북마크 아이콘 상태 초기화
-      await initBookmark(storeId);
-
-      // 클릭 이벤트 등록 (id='bookmark' 버튼 또는 img에)
-      const bookmarkElem = document.getElementById('bookmark-img');
-      if (bookmarkElem) {
-        bookmarkElem.addEventListener('click', async () => {
-          await toggleBookmark(storeId);
-        });
-      } else {
-        console.warn('id="bookmark" 요소를 찾을 수 없습니다.');
-      }
-    } catch (e) {
-      console.error('초기화 중 오류:', e);
+    if (!storeId) {
+      console.error('URL에 storeId가 없습니다.');
+      return;
     }
-  })();
+
+    // 북마크 아이콘 상태 초기화
+    await initBookmark(storeId);
+
+    // 클릭 이벤트 등록 (id='bookmark' 버튼 또는 img에)
+    const bookmarkElem = document.getElementById('bookmark');
+    if (bookmarkElem) {
+      bookmarkElem.addEventListener('click', async () => {
+        await toggleBookmark(storeId);
+      });
+    } else {
+      console.warn('id="bookmark" 요소를 찾을 수 없습니다.');
+    }
+  } catch (e) {
+    console.error('초기화 중 오류:', e);
+  }
+})();
 </script>
 
 
