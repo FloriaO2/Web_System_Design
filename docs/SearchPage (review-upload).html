@@ -314,7 +314,7 @@
 
   // IndexedDB 초기화
   let db;
-  const request = indexedDB.open("ReviewDB", 1);
+  const request = indexedDB.open("ReviewDB", 2);
 
   request.onerror = () => alert("IndexedDB 초기화 실패");
 
@@ -472,20 +472,21 @@
 }
 
 function openDB() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("ReviewDB", 2); // 버전은 꼭 증가시켜야 함
 
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-        if (!db.objectStoreNames.contains(STORE_NAME)) {
-          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
-        }
-      };
+    request.onerror = () => reject(request.error);
 
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
+    request.onsuccess = () => resolve(request.result);
+
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("reviews")) {
+        db.createObjectStore("reviews", { keyPath: "id" });
+      }
+    };
+  });
+}
 
     
 
