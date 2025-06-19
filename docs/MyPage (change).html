@@ -533,6 +533,17 @@
       }
       renderButtonGroup(); // 버튼도 렌더링
     });
+
+    /////////모바일 닉네임 렌더링(이 코드만 추가하면됩니닷)///////
+    document.addEventListener("DOMContentLoaded", () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (currentUser && currentUser.nickname) {
+    const nicknameDiv = document.querySelector(".account-detail-nickname");
+    if (nicknameDiv) {
+      nicknameDiv.textContent = currentUser.nickname;
+    }
+  }
+});
     </script>
 
     <script>

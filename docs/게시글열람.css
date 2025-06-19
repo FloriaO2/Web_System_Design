@@ -1772,7 +1772,7 @@ footer {
   font-weight: 600;
   position: relative;
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
   margin-left:2vw;
 }
 
@@ -2259,7 +2259,7 @@ textarea {
   font-weight: 600;
   position: relative;
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 #button-container {
@@ -2738,7 +2738,7 @@ textarea {
   font-weight: 600;
   position: relative;
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 #button-container {
