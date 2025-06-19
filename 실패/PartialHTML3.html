@@ -1,23 +1,10 @@
 
-          <main class="info-down-area">
-            <div class="info-tab-list">
-              <div class="tab2">
-                <a class="label2" id="go-to-info" href="SearchPage (info).html">정보</a>
-              </div>
-              <div class="tab2">
-                <a class="label2" id="go-to-menu" href="SearchPage (menu).html">메뉴</a>
-              </div>
-              <div class="tab">
-                <a class="label" id="go-to-review" href="SearchPage (review).html">리뷰</a>
-              </div>
-            </div>
-            <div class="review-main-content">
+            <main class="review-main-content">
               <button type="button" id="review-link" class="review-upload-button btn btn-dark">
                 <div class="review-upload-button-text" >리뷰 업로드</div>
               </button>
               <div class="review-card"></div>
-            </div>
-          </main>
+            </main>
 
 
 
@@ -57,18 +44,9 @@
           return;
         }
 
-        document.querySelector('.card-image').style.backgroundImage = `url(${store.image})`;
-
         document.querySelector('#go-to-info').href = `SearchPage (info).html?id=${storeId}`;
         document.querySelector('#go-to-menu').href = `SearchPage (menu).html?id=${storeId}`;
         document.querySelector('#go-to-review').href = `SearchPage (review).html?id=${storeId}`;
-
-        document.querySelector('.store-name').textContent = store.name;
-        document.querySelector('.element').textContent = store.rating.toFixed(1);
-        document.querySelector('.store-simple-info').textContent =
-          `${store.type} | 학교 기준 도보 ${store.distance}분 | ${store.price.toLocaleString()}원`;
-
-        renderStars(store.rating);
       })
       .catch(err => console.error('JSON 로딩 실패:', err));
 
@@ -924,6 +902,21 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.key === "Enter") {
       handleSearch();
     }
+  });
+</script>
+
+    <script>
+  // DOM이 완전히 로드된 후 실행
+  document.addEventListener('DOMContentLoaded', function () {
+    const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
+      new bootstrap.Popover(popoverTriggerEl, {
+        placement: 'right',
+        offset: [10, 15],
+        content: '<h6>나만의 식당을 찾아보세요!</h6><p>찜으로 나만의 식당을 찾고, <br />단골로 나만의 식당을 공유하세요!</p>',
+        html: true,
+        trigger: 'hover' })
+    })
   });
 </script>
 

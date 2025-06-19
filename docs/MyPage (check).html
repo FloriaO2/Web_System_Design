@@ -158,10 +158,14 @@
                 </div>
               </div>
               <div class="text-link-list-item">
-                <a class="text-link-list-item" href="개발자정보.html">개발자정보</a>
+                <div class="list-item2">
+                  <a class="text-link-list-item" href="개발자 정보.html" target="_blank" rel="noopener noreferrer">개발자 정보</a>
+                </div>
               </div>
               <div class="text-link-list-item">
-                <div class="list-item2">웹사이트 이용 방법</div>
+                <button type="button" class="web-way list-item2 btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Right popover">
+                  웹사이트 이용 방법
+                </button>
               </div>
               <a class="text-link-list-item" href="ReportPage.html">
                 <div class="list-item2">악성 유저 신고</div>
@@ -817,6 +821,21 @@ window.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       handleSearch();
     }
+  });
+</script>
+
+    <script>
+  // DOM이 완전히 로드된 후 실행
+  document.addEventListener('DOMContentLoaded', function () {
+    const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
+      new bootstrap.Popover(popoverTriggerEl, {
+        placement: 'right',
+        offset: [10, 15],
+        content: '<h6>나만의 식당을 찾아보세요!</h6><p>찜으로 나만의 식당을 찾고, <br />단골로 나만의 식당을 공유하세요!</p>',
+        html: true,
+        trigger: 'hover' })
+    })
   });
 </script>
 

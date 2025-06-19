@@ -17,16 +17,16 @@
           <div class="div1">
             <a class="web-name" href="MainPage (user).html">Snowmap</a>
           </div>
-          <div class="bottom-app-bar">
+          <div class="bottom-app-bar loading">
             <img id="search-img" src="image/search.png" />
             <input type="text" placeholder="검색어를 입력하세요" id="search-form"></input>
             <button type="button" class="btn btn-dark" id="search-btn" >검색</button>
           </div>
           
-          <div class="button-group" id="buttonGroup"></div>
+          <div class="button-group loading" id="buttonGroup"></div>
 
           <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-          <div class="mobile-button-group">
+          <div class="mobile-button-group loading">
             <!-- 햄버거 버튼 -->
             <button class="mobile-button btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
               <div class="navbar-toggler-icon"></div>
@@ -138,11 +138,13 @@
               </div>
               <div class="text-link-list-item">
                 <div class="list-item2">
-                  <a class="text-link-list-item" href="개발자정보.html">개발자정보</a>
+                  <a class="text-link-list-item" href="개발자 정보.html" target="_blank" rel="noopener noreferrer">개발자 정보</a>
                 </div>
               </div>
               <div class="text-link-list-item">
-                <div class="list-item2">웹사이트 이용 방법</div>
+                <button type="button" class="web-way list-item2 btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Right popover">
+                  웹사이트 이용 방법
+                </button>
               </div>
               <a class="text-link-list-item" href="ReportPage.html">
                 <div class="list-item2">악성 유저 신고</div>
@@ -255,7 +257,7 @@ function renderCards(list) {
             </div>
             <p class="p">
               <span class="store-simple-info">${store.type} | 도보 ${store.distance}분 | 가격대 ${store.price}원<br><br></span>
-              <a class="go-to-searchPage" href="PartialHTML_main.html?id=${store.id}">상세정보 보기</a>
+              <a class="go-to-searchPage" href="SearchPage (info).html?id=${store.id}">상세정보 보기</a>
             </p>
           </div>
         </div>
@@ -412,7 +414,7 @@ function makeStars(rating) {
         let profileImgSrc = '';
         profileImgSrc = localStorage.getItem(`profileImage_${currentUser.id}`) || 'https://c.animaapp.com/kjYfscdy/img/image.svg';//두줄추가
         aside.innerHTML = `
-          <div class="account" style="height: 38.69vh;">
+          <div class="account loading" style="height: 38.69vh;">
             <div class="account-image">
               <img src="${profileImgSrc}" alt="프로필 사진" style="width:100%; height:100%;  object-fit:cover;"/>
             </div>
@@ -533,10 +535,22 @@ function makeStars(rating) {
     }
   }
 });
-
-
-    
     </script>
+
+<script>
+  // DOM이 완전히 로드된 후 실행
+  document.addEventListener('DOMContentLoaded', function () {
+    const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
+      new bootstrap.Popover(popoverTriggerEl, {
+        placement: 'right',
+        offset: [10, 15],
+        content: '<h6>나만의 식당을 찾아보세요!</h6><p>찜으로 나만의 식당을 찾고, <br />단골로 나만의 식당을 공유하세요!</p>',
+        html: true,
+        trigger: 'hover' })
+    })
+  });
+</script>
 
     <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
     <script>
@@ -551,5 +565,65 @@ function makeStars(rating) {
       });
   });
     </script>
+
+    <script>
+      function waitForElements(selectors, callback, timeout = 5000) {
+  const start = Date.now();
+
+  function check() {
+    const allExist = selectors.every(sel => document.querySelector(sel));
+    if (allExist) {
+      callback(); // 모든 요소가 존재하면 콜백 실행
+    } else if (Date.now() - start < timeout) {
+      requestAnimationFrame(check); // 계속 감시
+    } else {
+      console.warn('일부 요소가 시간 내 로딩되지 않았습니다.');
+    }
+  }
+
+  check();
+}
+    </script>
+
+    <!-- 추가ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+  waitForElements(
+    ['.bottom-app-bar', '.button-group', '.mobile-button-group', '.account', '.store-list'],
+    () => {
+      console.log('모든 요소 로딩 완료 ✅');
+
+      const A = document.querySelector('.bottom-app-bar');
+      const B = document.querySelector('.button-group');
+      const C = document.querySelector('.mobile-button-group');
+      const D = document.querySelector('.account');
+
+      if (A) {
+        A.classList.remove('loading');
+      }
+      if (B) {
+        B.classList.remove('loading');
+      }
+      if (C) {
+        C.classList.remove('loading');
+      }
+      if (D) {
+        D.classList.remove('loading');
+      }
+
+      document.body.classList.remove('loading');
+      renderPage(); // 여기서 렌더링 시작
+    }
+  );
+});
+
+function renderPage() {
+  // ⭐ 여기서 페이지 렌더링 작업 시작
+  console.log('페이지 렌더링 시작!');
+  // ex) loadMainBody(), initBookmark(), loadStoreData() 등
+}
+    </script>
+    <!-- 추가ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ -->
+
   </body>
 </html>

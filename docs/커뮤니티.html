@@ -228,7 +228,7 @@
         const pageItems = posts.slice().reverse().slice(start, end);
 
         if (pageItems.length === 0) {
-          container.innerHTML = `<tr><td colspan="3">게시글이 없습니다.</td></tr>`;
+          container.innerHTML = `<tr><td colspan="3" class="non-post">게시글이 없습니다.</td></tr>`;
           return;
         }
           
@@ -312,6 +312,36 @@
         const maxVisibleButtons = 7;
         const half = Math.floor(maxVisibleButtons / 2);
 
+        if (totalPages === 0) {
+    // 게시글이 하나도 없는 경우: 기본 비활성화된 페이지네이션 표시
+
+    const prevBtn = document.createElement("button");
+    prevBtn.textContent = "◀ Previous";
+    prevBtn.classList.add("prenext-button");
+    prevBtn.disabled = true;
+    pagination.appendChild(prevBtn);
+
+    const pageBtn = document.createElement("div");
+    pageBtn.classList.add("none-select");
+    pageBtn.textContent = "1";
+    pageBtn.style.fontWeight = "bold";
+    pageBtn.style.width="3vw";
+    pageBtn.style.height="auto";
+    pageBtn.style.display="flex";
+    pageBtn.style.alignItems="center";
+    pageBtn.style.justifyContent="center";
+    pageBtn.style.color="rgba(0,0,0,0.2)";
+    pagination.appendChild(pageBtn);
+
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next Page ▶";
+    nextBtn.classList.add("prenext-button");
+    nextBtn.disabled = true;
+    pagination.appendChild(nextBtn);
+
+    return; // 더 이상 진행하지 않음
+  }
+  
         let startPage = Math.max(1, currentPage - half);
         let endPage = startPage + maxVisibleButtons - 1;
 
@@ -606,7 +636,7 @@
     const keyword = encodeURIComponent(keywordInput.value.trim());
 
     if (keyword) {
-      location.href = `커뮤니티.html?query=${keyword}`;
+      location.href = `게시글검색.html?query=${keyword}`;
     } else {
       alert("검색어를 입력하세요.");
     }
@@ -644,10 +674,14 @@
                 </div>
               </div>
               <div class="text-link-list-item">
-                <a class="text-link-list-item" href="개발자정보.html">개발자정보</a>
+                <div class="list-item2">
+                  <a class="text-link-list-item" href="개발자 정보.html" target="_blank" rel="noopener noreferrer">개발자 정보</a>
+                </div>
               </div>
               <div class="text-link-list-item">
-                <div class="list-item2">웹사이트 이용 방법</div>
+                <button type="button" class="web-way list-item2 btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Right popover">
+                  웹사이트 이용 방법
+                </button>
               </div>
               <a class="text-link-list-item" href="ReportPage.html">
                 <div class="list-item2">악성 유저 신고</div>
@@ -669,6 +703,21 @@
         </div>
       </div>
     </div>
+    <script>
+  // DOM이 완전히 로드된 후 실행
+  document.addEventListener('DOMContentLoaded', function () {
+    const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
+      new bootstrap.Popover(popoverTriggerEl, {
+        placement: 'right',
+        offset: [10, 15],
+        content: '<h6>나만의 식당을 찾아보세요!</h6><p>찜으로 나만의 식당을 찾고, <br />단골로 나만의 식당을 공유하세요!</p>',
+        html: true,
+        trigger: 'hover' })
+    })
+  });
+</script>
+
     <!-- 입력창에 특정 문구 입력했을 때 나오는 빨간 밑줄 제거 -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
